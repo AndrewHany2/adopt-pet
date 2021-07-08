@@ -10,69 +10,80 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 function SignIn() {
   return (
     <>
-      <div class="container-fluid bg-img">
-        <div class=" row justify-content-center  align-content-center">
-          <div class="box col-lg-4 col-md-8 mb-3 mt-5">
-            <form class="px-4 py-1 ">
-              <div class="form-group mt-5">
-                <label for="login-email">Email address</label>
+      <div className="container-fluid bg-img">
+        <div className=" row justify-content-center  align-content-center">
+          <div className="box col-lg-4 col-md-8 mb-3 mt-5">
+            <form className="px-4 py-1 ">
+              <div className="form-group mt-5">
+                <label htmlFor="login-email">Email address</label>
                 <input
                   type="email"
-                  class="form-control theme-border"
+                  className="form-control theme-border"
+
                   id="login-email"
                   placeholder="email@example.com"
                 />
               </div>
-              <div class="form-group ">
-                <label for="login-pss">Password</label>
+
+              <div className="form-group ">
+                <label htmlFor="login-pss">Password</label>
                 <input
                   type="password"
-                  class="form-control theme-border"
-                  id="login-pass"
+                  className="form-control theme-border"
+
+   id="login-pass"
                   placeholder="Password"
                 />
               </div>
-              <div class="form-group p-2">
-                <div class="form-check">
+
+              <div className="form-group p-2">
+                <div className="form-check">
                   <input
                     type="checkbox"
-                    class="form-check-input"
+                    className="form-check-input"
                     id="remember-me-check"
                   />
-                  <label class="form-check-label" for="remember-me-check">
+                  <label className="form-check-label" htmlFor="remember-me-check">
+
                     Remember me
                   </label>
                 </div>
                 <button
                   type="submit"
-                  class="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
+
+                  className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
+
                 >
                   Sign in
                 </button>
               </div>
             </form>
-            <div class="dropdown-divider p-1"></div>
-            <div class="col-md-12  mb-3">
-              <button class="form-control theme-border btn mb-2 fb-btn font-weight-normal">
+
+            <div className="dropdown-divider p-1"></div>
+            <div className="col-md-12  mb-3">
+              <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
                 <FontAwesomeIcon icon={faFacebook} className="mr-2" />
                 Sign In with Facebook
               </button>
-              <button class="form-control theme-border btn google-btn mb-2 font-weight-normal">
+              <button className="form-control theme-border btn google-btn mb-2 font-weight-normal">
+
                 <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                 Sign In With Google
               </button>
             </div>
 
-            <div class="dropdown-divider p-1"></div>
-            <p class="text-inverse text-center">
+            <div className="dropdown-divider p-1"></div>
+            <p className="text-inverse text-center">
+
               Already have an account?{" "}
               <Link to="<?= base_url() ?>auth/login" data-abc="true">
                 Login
               </Link>
             </p>
-            <p class="text-inverse text-center mb-2">
+            <p className="text-inverse text-center mb-2">
               <Link
-                class="active"
+                className="active"
+
                 to="<?= base_url() ?>auth/login"
                 data-abc="true"
               >
