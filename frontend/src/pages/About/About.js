@@ -1,13 +1,9 @@
 import React from "react";
 import "./about.css";
 import 'font-awesome/css/font-awesome.min.css';
-import {Carousel} from 'react-bootstrap'
 import AboutUs from "../../components/AboutUs";
 import Counter from './../../components/Counter';
 import Slider from "../../components/Slider";
-import Footer from "../../components/Footer";
-
-
 
 
 
@@ -31,7 +27,6 @@ function About() {
     <AboutUs/>
     <Counter/>
     <Slider/>
-    <Footer/>
     </div>
   );
 }
