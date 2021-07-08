@@ -1,0 +1,66 @@
+@import url("http://fonts.cdnfonts.com/css/quicksand");
+.header{
+    background-size: cover;
+    background-position: center center;
+    text-align: center;
+    box-shadow: inset 0 0 0 1000px rgb(41 41 41 / 42%);
+    background-color: #e9ecef;
+}
+.myFont {
+    font-family: "Quicksand", sans-serif;
+}
+.contactForm{
+    background-color:#FBF4DE;
+    border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
+    padding: 40px;
+}
+#contactUs input[type="text"], #contactUs input[type="email"]{
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    width: 100%;
+    border: 2px solid #675444;
+    outline: none;
+    padding: 5px 15px;
+}
+#contactUs input[type="number"], #size,#gender,#vaccinated{
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    border: 2px solid #675444;
+    outline: none;
+    padding: 5px 15px;
+}
+#contactUs input[type="number"]{
+    width: 114px;
+}
+#contactUs textarea{
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    width: 100%;
+    border: 2px solid #675444;
+    outline: none;
+    padding: 5px 15px;
+}
+#contactUs input[type="button"]{
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    outline: none;
+    color: #fff;
+    background-color: #F9575C;
+    border:none;
+    transition: all .3s ease;
+}
+.input-group {
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    border: 2px solid #675444;
+    outline: none;
+    padding: 3px 8px;
+}
+#contactUs .sendMessage:hover{
+    background-color: #F9BE4F;
+}
+
+
+/* // Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { ... }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { ... }
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { ... } */

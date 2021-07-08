@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const app = express();
 db.connectDB();
 
-app.use(morgan("dev"));
+app.use(morgan("common"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

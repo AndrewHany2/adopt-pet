@@ -14,6 +14,7 @@ export const petListReducer = (state = {}, action) => {
   }
 };
 
+
 export const petInfoReducer = (state = {}, action) => {
   switch (action.type) {
     case "PET_INFO_REQUEST":
