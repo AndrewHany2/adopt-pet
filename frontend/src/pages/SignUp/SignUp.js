@@ -51,7 +51,7 @@ return(
               Agree to terms and conditions
             </label>
           </div>
-        </div>
+
         <button className="btn btn-danger theme-border ml-4 mb-3 font-weight-normal " type="submit">Sign Up</button>
         
       </form>
@@ -69,6 +69,7 @@ return(
       <div className="dropdown-divider p-1 "></div>
       <p className="text-inverse text-center">Already have an account? <Link to="<?= base_url() ?>auth/login" data-abc="true">Login</Link></p>
       <p className="text-inverse text-center mb-5"><Link className="active" to="<?= base_url() ?>auth/login" data-abc="true">Forgot Password ?</Link></p>
+
     </div>
   
     </div>
