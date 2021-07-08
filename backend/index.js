@@ -1,8 +1,8 @@
 require("dotenv").config();
 const db = require("./helpers/dbConnection");
 const petRouter = require("./routes/petRouter");
-const express = require('express')
-const morgan = require('morgan')
+const express = require("express");
+const morgan = require("morgan");
 const app = express();
 db.connectDB();
 
@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/pets", petRouter);
 app.use((err, req, res, next) => {
+  console.log(err);
   res.status(500).json({ msg: err });
 });
 
