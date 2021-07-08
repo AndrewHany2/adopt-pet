@@ -1,9 +1,12 @@
 require("dotenv").config();
 const db = require("./helpers/dbConnection");
 const petRouter = require("./routes/petRouter");
+const express = require('express')
+const morgan = require('morgan')
+const app = express();
 db.connectDB();
 
-app.use(morgan("dev"));
+app.use(morgan("common"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
