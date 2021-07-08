@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getPetInfo } from '../../store/actions/petActions'
 
-function PetsInfo(props) {
+function PetsInfo({match}) {
+  const id=match.params.id
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(getPetInfo(id))
+  },[])
   return (
     <div>
       <div className="container-fluid backgroundImg p-4">

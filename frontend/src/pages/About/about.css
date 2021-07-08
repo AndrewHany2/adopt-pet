@@ -1,0 +1,188 @@
+
+.intro-2 {
+    background: url("resources/download.jpg")no-repeat center center;
+    background-size: cover;
+}
+.header{
+    padding: 3rem;
+}
+h1{
+    font-size:4vw;
+}
+
+h3{
+    font-size:3vw;
+}
+
+.about-img{
+    border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
+}
+.overlay {
+    box-shadow: inset 0 0 0 1000px rgb(41 41 41 / 42%);
+}
+.counter{
+    background: #675444;
+    padding: 30px 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+   
+}
+
+.counter-icon {
+    display: block !important;
+    font-size: 45pt !important;
+    margin: 7px 0;
+    height: 100px;
+    color: #F9BE4F !important;
+    text-align: center;
+}
+
+.counter:before, .counter:after {
+    content: "";
+    width: 10px;
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid #aaaeb1;
+    background: #fff;
+    background-image: repeating-linear-gradient( transparent, transparent 2px, #c9cbcc 2px, #c9cbcc 4px);
+    position: absolute;
+    top: -32px;
+    left: 20%;
+}
+
+.counter:after {
+    left: auto;
+    right: 20%;
+}
+
+.counter-value {
+    display: block;
+    color: #fff;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.counter-value:before {
+    content: "";
+    width: 30%;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+}
+
+.title {
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.icon{
+    vertical-align: top;
+}
+
+.content{
+    background: #fbf4de;
+    padding: 2rem;
+}
+
+.image{
+    float: left;
+}
+
+.image img{
+    max-width: 120px;
+    border-radius: 50%;
+    border: 2px solid #e5e5e5;
+    margin-left: 20px;
+
+}
+
+
+footer{
+    background-color: #675444;
+    padding: 3rem 0;
+
+}
+
+.contact{
+    list-style: none;
+    padding: 0;
+}
+
+ #soliloquy-container-4985 {
+ 
+    display: none !important;
+  } 
+
+  @media only screen and (max-width: 450px) {
+ 
+    /* desktop slider */
+     
+    #soliloquy-container-4986 {
+     
+       display: none !important;
+     } 
+     
+    /*mobile slider */
+     
+     #soliloquy-container-4985 {
+     
+       display: block !important;
+     }
+     
+    }  
+ 
+   .clients{
+    margin: 0 0 2rem 0;
+
+   }
+
+    .carousel-indicators li{
+        background-color: #000;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+
+    }
+
+    .carousel-control-next {
+        right: -114px;
+    }
+
+    .carousel-control-prev {
+        left: -109px;
+    }
+    
+   
+    .carousel-indicators{
+        bottom: -64px;
+    }
+
+    .paw{
+        color: #F9575C;
+        font-size: 46pt !important;
+        margin: 1rem 0 0 0;
+    }
+
+ .about-ul{
+    list-style: none;
+    padding: 0;
+ }   
+
+ .paw-sm{
+    color: #F9575C; 
+    padding : 0 10px 0 0;
+ }
