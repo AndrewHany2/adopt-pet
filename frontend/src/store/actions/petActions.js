@@ -5,7 +5,6 @@ export const getPets = () => async (dispatch) => {
   try {
     dispatch({ type: "PET_LIST_REQUEST" });
     const { data } = await axios.get(baseURL);
-    console.log(data);
     dispatch({
       type: "PET_LIST_SUCCESS",
       payload: data,
@@ -20,3 +19,24 @@ export const getPets = () => async (dispatch) => {
     });
   }
 };
+
+
+export const getPetInfo = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "PET_INFO_REQUEST" });
+    const { data } = await axios.get(baseURL+"/"+id);
+    dispatch({
+      type: "PET_INFO_SUCCESS",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "PET_INFO_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
