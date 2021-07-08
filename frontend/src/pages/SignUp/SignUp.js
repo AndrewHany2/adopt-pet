@@ -53,7 +53,7 @@ return(
           </div>
 
         <button className="btn btn-danger theme-border ml-4 mb-3 font-weight-normal " type="submit">Sign Up</button>
-        
+        </div>
       </form>
       <div className="dropdown-divider p-1 "></div>
       <div className="row mr-3 ml-3">
