@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink as Nav } from "react-router-dom";
 import { getPets } from "../store/actions/petActions";
 
 function PetsCards(props) {
+  const dispatch = useDispatch();
   const pets = [
     {
       id: 1,
@@ -70,7 +72,7 @@ function PetsCards(props) {
     },
   ];
   useEffect(() => {
-    getPets();
+    dispatch(getPets());
   }, []);
   return (
     <div

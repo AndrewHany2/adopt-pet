@@ -1,9 +1,11 @@
 import axios from "axios";
 const baseURL = "/api/pets";
+
 export const getPets = () => async (dispatch) => {
   try {
     dispatch({ type: "PET_LIST_REQUEST" });
-    const { data } = axios.get(baseURL);
+    const { data } = await axios.get(baseURL);
+    console.log(data);
     dispatch({
       type: "PET_LIST_SUCCESS",
       payload: data,
