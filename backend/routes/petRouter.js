@@ -4,6 +4,7 @@ const Pet = require("../models/PetModel");
 petRouter.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log(id);
     const pet = await Pet.findOne({ _id: id });
     if (pet) {
       res.status(200).json(pet);

@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/pets", petRouter);
 app.use((err, req, res, next) => {
+  console.log(err);
   res.status(500).json({ msg: err });
 });
 
