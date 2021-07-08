@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink as Nav } from "react-router-dom";
+import { getPets } from "../store/actions/petActions";
 
 function PetsCards(props) {
   const pets = [
@@ -68,6 +69,9 @@ function PetsCards(props) {
       Image: "./resources/adoption8-185x185.jpg",
     },
   ];
+  useEffect(() => {
+    getPets();
+  }, []);
   return (
     <div
       className="

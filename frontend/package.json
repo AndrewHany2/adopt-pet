@@ -2,23 +2,35 @@
   "name": "adopt-pet",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
+<<<<<<< HEAD
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
+=======
+>>>>>>> dccfb099731015d6b9e8ed6a942eb6223d0fdac1
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+<<<<<<< HEAD
     "jquery": "^3.6.0",
     "popper": "^1.0.1",
     "popper.js": "^1.16.1",
+=======
+    "font-awesome": "^4.7.0",
+>>>>>>> dccfb099731015d6b9e8ed6a942eb6223d0fdac1
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
