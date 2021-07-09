@@ -3,12 +3,15 @@ const db = require("./helpers/dbConnection");
 const petRouter = require("./routes/petRouter");
 const express = require("express");
 const morgan = require("morgan");
+const userRouter = require("./routes/UserRouter");
 const app = express();
 db.connectDB();
 
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/user", userRouter);
 
 app.use("/api/pets", petRouter);
 app.use((err, req, res, next) => {

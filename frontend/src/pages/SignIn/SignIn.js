@@ -19,7 +19,6 @@ function SignIn() {
                 <input
                   type="email"
                   className="form-control theme-border"
-
                   id="login-email"
                   placeholder="email@example.com"
                 />
@@ -30,8 +29,7 @@ function SignIn() {
                 <input
                   type="password"
                   className="form-control theme-border"
-
-   id="login-pass"
+                  id="login-pass"
                   placeholder="Password"
                 />
               </div>
@@ -43,18 +41,18 @@ function SignIn() {
                     className="form-check-input"
                     id="remember-me-check"
                   />
-                  <label className="form-check-label" htmlFor="remember-me-check">
-
+                  <label
+                    className="form-check-label"
+                    htmlFor="remember-me-check"
+                  >
                     Remember me
                   </label>
                 </div>
                 <button
                   type="submit"
-
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
-
                 >
-                  Sign in
+                  Sign In
                 </button>
               </div>
             </form>
@@ -66,7 +64,6 @@ function SignIn() {
                 Sign In with Facebook
               </button>
               <button className="form-control theme-border btn google-btn mb-2 font-weight-normal">
-
                 <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                 Sign In With Google
               </button>
@@ -74,7 +71,6 @@ function SignIn() {
 
             <div className="dropdown-divider p-1"></div>
             <p className="text-inverse text-center">
-
               Already have an account?{" "}
               <Link to="<?= base_url() ?>auth/login" data-abc="true">
                 Login
@@ -83,7 +79,6 @@ function SignIn() {
             <p className="text-inverse text-center mb-2">
               <Link
                 className="active"
-
                 to="<?= base_url() ?>auth/login"
                 data-abc="true"
               >
