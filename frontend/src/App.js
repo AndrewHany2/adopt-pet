@@ -10,7 +10,7 @@ function App() {
       <Switch>
         <Route path="/pets" component={PetsGallery}></Route>
         <Route path="/about" component={About}></Route>
-        <Route path="/profile" component={Profile}></Route>
+        <Route path="/profile/:id" component={Profile}></Route>
 
       </Switch>
       <Footer/>
