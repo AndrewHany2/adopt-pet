@@ -8,12 +8,21 @@ const petSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  neutered: {
+  vaccinated:{
     type: String,
+    required: true,
   },
   age: {
     type: String,
     required: true,
+  },
+  size:{
+    type:String,
+    require:true,
+  },
+  description:{
+    type:String,
+    require:true
   },
   image: {
     type: String,

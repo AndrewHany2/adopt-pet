@@ -7,7 +7,7 @@ const userRouter = require("./routes/UserRouter");
 const app = express();
 db.connectDB();
 
-app.use(morgan("dev"));
+app.use(morgan("common"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -15,6 +15,7 @@ app.use("/api/user", userRouter);
 
 app.use("/api/pets", petRouter);
 app.use((err, req, res, next) => {
+  console.log(err);
   res.status(500).json({ msg: err });
 });
 
