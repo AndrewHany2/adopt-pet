@@ -52,8 +52,15 @@ return(
             </label>
           </div>
 
-        <button className="btn btn-danger theme-border ml-4 mb-3 font-weight-normal " type="submit">Sign Up</button>
-        </div>
+          <button
+                  type="submit"
+
+                  className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
+
+                >
+                  Sign Up
+                </button>        </div>
+
       </form>
       <div className="dropdown-divider p-1 "></div>
       <div className="row mr-3 ml-3">
