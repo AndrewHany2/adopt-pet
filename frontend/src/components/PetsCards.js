@@ -1,103 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getPets } from "../store/actions/petActions";
 
 function PetsCards(props) {
-  const pets = [
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption1-185x185.jpg",
-    },
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption2-185x185.jpg",
-    },
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption3-185x185.jpg",
-    },
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption4-185x185.jpg",
-    },
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption5-185x185.jpg",
-    },
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption6-185x185.jpg",
-    },
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption7-185x185.jpg",
-    },
-    {
-      Name: "pet1",
-      Gender: "female",
-      Neutered: "Yes",
-      Age: "2 years",
-      Image: "./resources/adoption8-185x185.jpg",
-    },
-  ];
+  const dispatch = useDispatch();
+  const pets = useSelector((state) => state.pets);
+
+  useEffect(() => {
+    dispatch(getPets());
+  }, [dispatch]);
   return (
     <div
-      class="
+      className="
             row g-4 text-center
           "
     >
-      {pets.map((pet) => {
-        return (
-          <div class="col m-5 mt-0 m-sm-0 mt-sm-5">
-            <div class="card bg-light-custom">
-              <img
-                class="border-irregular1 img-fluid"
-                src={pet.Image}
-                alt="a"
-              />
-              <div class="card-body">
-                <h5 class="card-title">{pet.Name}</h5>
-                <p class="card-text">
-                  <div>
-                    <b>Gender:</b>
-                    {pet.Gender}
+      {pets.list
+        ? pets.list.map((pet) => {
+            return (
+              <div className="col m-5 mt-0 m-sm-0 mt-sm-5">
+                <div className="card bg-light-custom">
+                  <img
+                    className="border-irregular1 img-fluid"
+                    src={pet.image}
+                    alt="a"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{pet.name}</h5>
+                    <p className="card-text">
+                      <div>
+                        <b>gender:</b>
+                        {pet.gender}
+                      </div>
+                      <div>
+                        <b>age:</b>
+                        {pet.age}
+                      </div>
+                      <div className="mt-4">
+                        <Link
+                          to={`/pets/${pet._id}`}
+                          className="btn btn-primary px-3 py-2"
+                        >
+                          More Info
+                        </Link>
+                      </div>
+                    </p>
                   </div>
-                  <div>
-                    <b>Neutered:</b>
-                    {pet.Neutered}
-                  </div>
-                  <div>
-                    <b>Age:</b>
-                    {pet.Age}
-                  </div>
-                  <div class="mt-4">
-                    <a class="btn btn-primary px-3 py-2">MORE INFO</a>
-                  </div>
-                </p>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })
+        : null}
     </div>
   );
 }
