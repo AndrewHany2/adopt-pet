@@ -6,6 +6,7 @@
             "image":"first.jpg",
             "email":"m@gmail.com",
             "city":"Fayoum",
+            "phone":"01234567891",
             "pet":{
                 "name":"Bella",
                 "image":"adoption6-185x185.jpg",
