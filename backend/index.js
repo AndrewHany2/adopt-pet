@@ -7,7 +7,7 @@ const userRouter = require("./routes/UserRouter");
 const app = express();
 db.connectDB();
 
-app.use(morgan("common"));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
