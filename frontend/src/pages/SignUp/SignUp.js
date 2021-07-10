@@ -82,7 +82,6 @@ function SignUp() {
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
                 >
                   Sign Up
-<<<<<<< HEAD
                 </button>{" "}
               </div>
             </form>
@@ -124,31 +123,4 @@ function SignUp() {
   );
 }
 export default SignUp;
-=======
-                </button>        </div>
 
-      </form>
-      <div className="dropdown-divider p-1 "></div>
-      <div className="row mr-3 ml-3">
-        <div className="col-12 col-lg-6">
-          <button className="form-control theme-border btn fb-btn font-weight-normal"><FontAwesomeIcon icon={faFacebook} className="mr-2"/>Sign Up with Facebook</button>
-
-        </div>
-        <div className="col-12 col-lg-6  mb-3">
-          <button className="form-control theme-border btn google-btn font-weight-normal" ><FontAwesomeIcon icon={faGoogle} className="mr-2"/>Sign Up With Google</button>
-
-        </div>
-      </div>
-      <div className="dropdown-divider p-1 "></div>
-      <p className="text-inverse text-center">Already have an account? <Link to="<?= base_url() ?>auth/login" data-abc="true">Login</Link></p>
-      <p className="text-inverse text-center mb-5"><Link className="active" to="<?= base_url() ?>auth/login" data-abc="true">Forgot Password ?</Link></p>
-
-    </div>
-  
-    </div>
-  </div>
-        </>);
-        }
-        export default SignUp
-    ;
->>>>>>> 926a6fdc141978f9ad8d41a0eac63cbc9d5ec39d
