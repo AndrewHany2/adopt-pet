@@ -140,7 +140,7 @@ function SignUp() {
                   Sign Up
                 </button>        </div>
 
-      </form>
+      </div>
       <div className="dropdown-divider p-1 "></div>
       <div className="row mr-3 ml-3">
         <div className="col-12 col-lg-6">

@@ -12,7 +12,7 @@
   }
   .sign-in-box{
       height: 535px;
-    width: 30vw;
+      width: 30vw;
       left:32vw;
       top:15vh;
   }
@@ -20,8 +20,9 @@
       border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
   }
   .google-btn{
-    background-color:#DB4437;
-    color: white;
+    background-color:#DB4437 !important;
+    color: white !important;
+    padding-left: 6rem!important;
   }
   .fb-btn{
     background-color: #3b5998 ;
