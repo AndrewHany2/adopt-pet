@@ -106,7 +106,7 @@ function SignUp() {
                   <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                   Sign Up With Google
                 </button> */}
-              </div>
+               </div>
             </div>
             <div className="dropdown-divider p-1 "></div>
             <p className="text-inverse text-center">
