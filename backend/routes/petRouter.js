@@ -1,6 +1,6 @@
 const petRouter = require("express").Router();
 const Pet = require("../models/PetModel");
-const upload = require('../helpers/multer')
+const upload = require("../helpers/multer");
 petRouter.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -16,7 +16,28 @@ petRouter.get("/:id", async (req, res, next) => {
 
 petRouter.get("/", async (req, res, next) => {
   try {
-    const pets = await Pet.find({});
+    const queries = req.query;
+    switch (queries.age) {
+      case "young":
+        queries.age = "1 year";
+        break;
+      case "old":
+        queries.age = "2 years";
+        break;
+      case "senior":
+        queries.age = "3 years";
+        break;
+      default:
+        break;
+    }
+    let conditions = {};
+    if (queries.age) {
+      conditions.age = queries.age;
+    }
+    if (queries.gender) {
+      conditions.gender = queries.gender;
+    }
+    const pets = await Pet.find(conditions).exec();
     if (pets) res.status(200).json(pets);
   } catch (err) {
     next(err);
@@ -56,24 +77,25 @@ petRouter.put("/:id", async (req, res, next) => {
     next(e);
   }
 });
-petRouter.post('/adopt',upload,(req,res)=>{
-  const pet =new Pet({
-    name:req.body.name,
-    gender :req.body.gender,
-    vaccinated :req.body.vaccinated,
-    age : req.body.age,
-    size:req.body.size,
-    description:req.body.description,
-    image:`/images/${req.file.filename}`
-  }) 
-  pet.save()
-  .then((result)=>{
-    console.log(result)
-    res.status(201).json({"status":"adoption pet"})
-  })
-  .catch((err)=>{
-    res.status(400).json(err)
-  })
+petRouter.post("/adopt", upload, (req, res) => {
+  const pet = new Pet({
+    name: req.body.name,
+    gender: req.body.gender,
+    vaccinated: req.body.vaccinated,
+    age: req.body.age,
+    size: req.body.size,
+    description: req.body.description,
+    image: `/images/${req.file.filename}`,
+  });
+  pet
+    .save()
+    .then((result) => {
+      console.log(result);
+      res.status(201).json({ status: "adoption pet" });
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
 });
 
 module.exports = petRouter;

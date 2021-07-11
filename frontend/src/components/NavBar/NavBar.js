@@ -29,7 +29,7 @@ function NavBar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link active" to="/pets">
-                  Adobtion Gallery
+                  Adobtion-Gallery
                 </Link>
               </li>
               <li className="nav-item">

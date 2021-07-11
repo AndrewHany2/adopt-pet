@@ -19,7 +19,7 @@ function PetsCards(props) {
       {pets.list
         ? pets.list.map((pet) => {
             return (
-              <div className="col m-5 mt-0 m-sm-0 mt-sm-5">
+              <div key={pet._id} className="col m-5 mt-0 m-sm-0 mt-sm-5">
                 <div className="card bg-light-custom">
                   <img
                     className="border-irregular1 img-fluid"
@@ -28,7 +28,7 @@ function PetsCards(props) {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{pet.name}</h5>
-                    <p className="card-text">
+                    <div className="card-text">
                       <div>
                         <b>gender:</b>
                         {pet.gender}
@@ -45,7 +45,7 @@ function PetsCards(props) {
                           More Info
                         </Link>
                       </div>
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>

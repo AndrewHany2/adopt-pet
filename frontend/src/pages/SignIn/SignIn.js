@@ -31,7 +31,8 @@ function SignIn() {
                   type="password"
                   className="form-control theme-border"
 
-   id="login-pass"
+                  id="login-pass"
+
                   placeholder="Password"
                 />
               </div>
@@ -43,7 +44,11 @@ function SignIn() {
                     className="form-check-input"
                     id="remember-me-check"
                   />
-                  <label className="form-check-label" htmlFor="remember-me-check">
+
+                  <label
+                    className="form-check-label"
+                    htmlFor="remember-me-check"
+                  >
 
                     Remember me
                   </label>
@@ -54,7 +59,7 @@ function SignIn() {
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
 
                 >
-                  Sign in
+                  Sign In
                 </button>
               </div>
             </form>
