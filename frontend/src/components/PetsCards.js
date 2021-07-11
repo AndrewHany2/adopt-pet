@@ -11,16 +11,12 @@ function PetsCards(props) {
     dispatch(getPets());
   }, [dispatch]);
   return (
-    <div
-      className="
-            row g-4 text-center
-          "
-    >
+    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center m-5 m-sm-0">
       {pets.list
         ? pets.list.map((pet) => {
             return (
-              <div key={pet._id} className="col m-5 mt-0 m-sm-0 mt-sm-5">
-                <div className="card bg-light-custom">
+              <div key={pet._id} className="col mb-4 card-animate">
+                <div className="card bg-light-custom border-irregular1">
                   <img
                     className="border-irregular1 img-fluid"
                     src={pet.image}
