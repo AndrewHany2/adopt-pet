@@ -1,9 +1,10 @@
 import React from "react";
 import UserInfo from "../../components/UserInfo";
-import PageHeader from './../../components/PageHeader';
 import { useEffect, useState } from 'react'
 import { useParams } from "react-router"
 import PetInfo from './../../components/PetInfo';
+import PageHeader from "../../components/PageHeader";
+
 
 
 function Profile() {

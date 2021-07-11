@@ -8,10 +8,11 @@ import PageHeader from "../../components/PageHeader";
 
 
 
+
 function About() {
   return (
     <div>
-    <PageHeader title='About us'/>
+    <PageHeader title='About Us'/>
     <AboutUs/>
     <Counter/>
     <Slider/>

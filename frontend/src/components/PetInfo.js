@@ -7,9 +7,14 @@ function PetInfo(props) {
 console.log(props)
   return (
       <>
-      <h3>Pet Info</h3>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3">
+            </div>
+            <div className="col-md-9">
+            <h3 style={{ margin: '0 0 1rem 0'}}>Pet Info</h3>
             <div className="table-responsive">
-            <img src={`../resources/${props.info.image}`} className="img-fluid about-img"/>
+            <img src={`../resources/${props.info.image}`} className="img-fluid about-img m-3"/>
 
               <table className="table">
                 <tbody>
@@ -25,17 +30,14 @@ console.log(props)
                     <th colSpan="3">Type</th>
                     <td>{props.info.type}</td>
                   </tr>
-                  <tr>
-                        <th colSpan="3">Sort </th>
-                        <td>{props.info.sort}</td>
-                  </tr>
-                  <tr>
-                  <th colSpan="3"></th>
-                    <td></td>
-                  </tr>
                 </tbody>
               </table>
+
+
               </div>
+              </div>
+            </div>
+            </div>
         </>
   );
 }
