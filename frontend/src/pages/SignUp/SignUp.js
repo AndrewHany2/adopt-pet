@@ -138,7 +138,9 @@ function SignUp() {
 
                 >
                   Sign Up
-                </button>        </div>
+                </button> 
+                
+             </div>
 
       </div>
       <div className="dropdown-divider p-1 "></div>
@@ -156,4 +158,3 @@ function SignUp() {
   );
 }
 export default SignUp;
-
