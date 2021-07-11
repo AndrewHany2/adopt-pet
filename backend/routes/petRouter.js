@@ -19,23 +19,20 @@ petRouter.get("/", async (req, res, next) => {
     const queries = req.query;
     switch (queries.age) {
       case "young":
-        queries.age = "1 year";
+        queries.age = "1";
         break;
       case "old":
-        queries.age = "2 years";
+        queries.age = "2";
         break;
       case "senior":
-        queries.age = "3 years";
+        queries.age = "3";
         break;
       default:
         break;
     }
     let conditions = {};
-    if (queries.age) {
-      conditions.age = queries.age;
-    }
-    if (queries.gender) {
-      conditions.gender = queries.gender;
+    for (i of Object.keys(queries)) {
+      if (queries[i] !== "") conditions[i] = queries[i];
     }
     const pets = await Pet.find(conditions).exec();
     if (pets) res.status(200).json(pets);
