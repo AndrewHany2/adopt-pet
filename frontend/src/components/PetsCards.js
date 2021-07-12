@@ -1,19 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
-import { getPets } from "../store/actions/petActions";
 
-function PetsCards(props) {
-  const dispatch = useDispatch();
-  const pets = useSelector((state) => state.pets);
-
-  useEffect(() => {
-    dispatch(getPets());
-  }, [dispatch]);
+function PetsCards({ pets }) {
   return (
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 text-center m-5 m-sm-0">
-      {pets.list
-        ? pets.list.map((pet) => {
+      {pets.info
+        ? pets.info.list.map((pet) => {
             return (
               <div key={pet._id} className="col mb-4 card-animate">
                 <div className="card bg-light-custom border-irregular1">
@@ -35,7 +27,7 @@ function PetsCards(props) {
                       </div>
                       <div className="mt-4">
                         <Link
-                          to={`/pets/${pet._id}`}
+                          to={`/pet/${pet._id}`}
                           className="btn btn-primary px-3 py-2"
                         >
                           More Info

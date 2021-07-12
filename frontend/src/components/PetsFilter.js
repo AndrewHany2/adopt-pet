@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPets } from "./../store/actions/petActions";
 
-function PetsFilter() {
+function PetsFilter(props) {
   const [filterByGender, setFilterByGender] = useState("");
   const [filterByPet, setFilterByPet] = useState("");
   const [filterByAge, setFilterByAge] = useState("");
@@ -10,11 +8,7 @@ function PetsFilter() {
   const [genderClicked, setGenderClicked] = useState(false);
   const [ageClicked, setAgeClicked] = useState(false);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPets(filterByGender, filterByPet, filterByAge));
-  });
+  useEffect(() => {}, [filterByGender, filterByPet, filterByAge]);
   return (
     <div className={`bg-light-custom  border-irregular1 py-3`}>
       <p
@@ -30,7 +24,6 @@ function PetsFilter() {
           aria-controls="collapseExample"
           onClick={() => {
             setKindClicked(!kindClicked);
-            console.log(kindClicked);
           }}
         >
           Kind
@@ -67,7 +60,12 @@ function PetsFilter() {
         id="collapseExample"
         style={{ width: "50%", margin: "0px auto" }}
       >
-        <div className="card card-body border-irregular1">
+        <div
+          className="card card-body border-irregular1"
+          onChange={(e) => {
+            props.getPets(filterByGender, filterByPet, filterByAge);
+          }}
+        >
           <div className="custom-control custom-checkbox custom-control-inline">
             <input
               type="checkbox"
@@ -75,6 +73,7 @@ function PetsFilter() {
               id="customCheck1"
               onChange={(e) => {
                 e.target.checked ? setFilterByPet("cat") : setFilterByPet("");
+                props.getPets(filterByGender, filterByPet, filterByAge);
               }}
             />
             <label className="custom-control-label" htmlFor="customCheck1">
@@ -88,6 +87,7 @@ function PetsFilter() {
               id="customCheck2"
               onChange={(e) => {
                 e.target.checked ? setFilterByPet("dog") : setFilterByPet("");
+                props.getPets(filterByGender, filterByPet, filterByAge);
               }}
             />
             <label className="custom-control-label" htmlFor="customCheck2">
@@ -101,7 +101,12 @@ function PetsFilter() {
         id="collapseExample1"
         style={{ width: "50%", margin: "0px auto" }}
       >
-        <div className="card card-body border-irregular1">
+        <div
+          className="card card-body border-irregular1"
+          onChange={(e) => {
+            props.getPets(filterByGender, filterByPet, filterByAge);
+          }}
+        >
           <div>
             <div className="custom-control custom-radio custom-control-inline">
               <input
@@ -161,6 +166,7 @@ function PetsFilter() {
           className="card card-body border-irregular1"
           onChange={(e) => {
             setFilterByAge(e.target.value);
+            props.getPets(filterByGender, filterByPet, filterByAge);
           }}
         >
           <div>

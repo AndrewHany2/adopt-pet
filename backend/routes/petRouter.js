@@ -1,6 +1,7 @@
 const petRouter = require("express").Router();
 const Pet = require("../models/PetModel");
 const upload = require("../helpers/multer");
+
 petRouter.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -17,6 +18,12 @@ petRouter.get("/:id", async (req, res, next) => {
 petRouter.get("/", async (req, res, next) => {
   try {
     const queries = req.query;
+    // const { page = 1, limit = 2 } = req.query;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    delete queries.limit;
+    delete queries.page;
+
     switch (queries.age) {
       case "young":
         queries.age = "1";
@@ -34,8 +41,18 @@ petRouter.get("/", async (req, res, next) => {
     for (i of Object.keys(queries)) {
       if (queries[i] !== "") conditions[i] = queries[i];
     }
-    const pets = await Pet.find(conditions).exec();
-    if (pets) res.status(200).json(pets);
+    console.log(page, limit);
+    const list = await Pet.find(conditions)
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+    const count = await Pet.countDocuments(conditions);
+    if (list)
+      res.status(200).json({
+        list,
+        totalPages: Math.ceil(count / limit),
+        currentPage: page,
+      });
   } catch (err) {
     next(err);
   }

@@ -5,7 +5,7 @@ export const petListReducer = (state = {}, action) => {
     case "PET_LIST_SUCCESS":
       return {
         loading: false,
-        list: action.payload,
+        info: action.payload,
       };
     case "PET_LIST_FAIL":
       return { loading: false, error: action.payload };
