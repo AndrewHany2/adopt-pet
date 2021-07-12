@@ -7,8 +7,7 @@ import AdoptionApp from "./pages/AdoptionApp/adoptionApp";
 import NavBar from "./components/NavBar/NavBar"
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
-
-
+import ContactUs from "./pages/ContactUs/contactUs";
 function App() {
   return (
     <Router>
@@ -20,7 +19,7 @@ function App() {
         <Route path="/signin" component={SignIn}></Route>
         <Route path="/signup" component={SignUp}></Route>
         <Route path="/about" component={About}></Route>
-
+        <Route path="/contactus" component={ContactUs}></Route>
       </Switch>
     </Router>
   );
