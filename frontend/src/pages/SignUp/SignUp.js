@@ -6,6 +6,9 @@ import "./SignUp.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import LoginFacebook from './../../components/LoginFacebook';
+import LoginGoogle from './../../components/LoginGoogle';
+
 
 function SignUp() {
   return (
@@ -88,17 +91,22 @@ function SignUp() {
             <div className="dropdown-divider p-1 "></div>
             <div className="row mr-3 ml-3">
               <div className="col-12 col-lg-6">
-                <button className="form-control theme-border btn fb-btn font-weight-normal">
+              <LoginFacebook/>
+
+
+                {/* <button className="form-control theme-border btn fb-btn font-weight-normal">
                   <FontAwesomeIcon icon={faFacebook} className="mr-2" />
                   Sign Up with Facebook
-                </button>
+                </button> */}
               </div>
               <div className="col-12 col-lg-6  mb-3">
-                <button className="form-control theme-border btn google-btn font-weight-normal">
+              <LoginGoogle/>
+
+                {/* <button className="form-control theme-border btn google-btn font-weight-normal">
                   <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                   Sign Up With Google
-                </button>
-              </div>
+                </button> */}
+               </div>
             </div>
             <div className="dropdown-divider p-1 "></div>
             <p className="text-inverse text-center">

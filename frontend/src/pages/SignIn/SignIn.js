@@ -6,6 +6,9 @@ import "./SignIn.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import LoginFacebook from './../../components/LoginFacebook';
+import LoginGoogle from './../../components/LoginGoogle';
+
 
 function SignIn() {
   return (
@@ -30,9 +33,7 @@ function SignIn() {
                 <input
                   type="password"
                   className="form-control theme-border"
-
                   id="login-pass"
-
                   placeholder="Password"
                 />
               </div>
@@ -63,18 +64,21 @@ function SignIn() {
                 </button>
               </div>
             </form>
-
             <div className="dropdown-divider p-1"></div>
             <div className="col-md-12  mb-3">
+            <LoginFacebook/>
+            <LoginGoogle/>
+
+{/* 
               <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
                 <FontAwesomeIcon icon={faFacebook} className="mr-2" />
                 Sign In with Facebook
               </button>
               <button className="form-control theme-border btn google-btn mb-2 font-weight-normal">
-
                 <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                 Sign In With Google
-              </button>
+              </button> */}
+
             </div>
 
             <div className="dropdown-divider p-1"></div>

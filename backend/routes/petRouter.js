@@ -91,25 +91,27 @@ petRouter.put("/:id", async (req, res, next) => {
     next(e);
   }
 });
-petRouter.post("/adopt", upload, (req, res) => {
-  const pet = new Pet({
-    name: req.body.name,
-    gender: req.body.gender,
-    vaccinated: req.body.vaccinated,
-    age: req.body.age,
-    size: req.body.size,
-    description: req.body.description,
-    image: `/images/${req.file.filename}`,
-  });
-  pet
-    .save()
-    .then((result) => {
-      console.log(result);
-      res.status(201).json({ status: "adoption pet" });
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
+petRouter.post('/adopt',upload,(req,res)=>{
+  const pet =new Pet({
+    name:req.body.name,
+    gender :req.body.gender,
+    vaccinated :req.body.vaccinated,
+    dateOfBirth : req.body.dateOfBirth,
+    petType: req.body.petType,
+    size:req.body.size,
+    description:req.body.description,
+    image:`/images/${req.file.filename}`,
+    status: req.body.status
+  }) 
+  pet.save()
+  .then((result)=>{
+    console.log(result)
+    res.status(201).json({"status":"adoption pet"})
+  })
+  .catch((err)=>{
+    onsole.log(err)
+    res.status(400).json(err)
+  })
 });
 
 module.exports = petRouter;

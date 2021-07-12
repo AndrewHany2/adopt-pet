@@ -24,7 +24,7 @@ function Slider() {
                                         </p>
                                 </div>
                         <div class="image">
-                        <img src={"resources/download1.jpg"} class="img-fluid"/>
+                        <img src={"resources/first.jpg"} class="img-fluid"/>
                         <h4 class="d-md-inline-block">John Sadana</h4>
                         </div>
                         </div>
@@ -33,7 +33,7 @@ function Slider() {
         </Carousel.Item>
         <Carousel.Item>
                     <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-12">
                                 <div class="content">
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Maiores voluptate eligendi molestias iusto expedita saepe
@@ -43,19 +43,6 @@ function Slider() {
                                 </div>
                                 <div class="image">
                                     <img src="./resources/download2.jpg" class="img-fluid"/>
-                                    <h4 class="d-md-inline-block">John Sadana</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="content">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Maiores voluptate eligendi molestias iusto expedita saepe
-                                        necessitatibus! Cupiditate reprehenderit vero eos! Deleniti 
-                                        odio cupiditate pariatur repellat iste nesciunt a facilis aliquid!
-                                    </p>
-                                </div>
-                                <div class="image">
-                                    <img src="./resources/download3.jpg" class="img-fluid"/>
                                     <h4 class="d-md-inline-block">John Sadana</h4>
                                 </div>
                             </div>

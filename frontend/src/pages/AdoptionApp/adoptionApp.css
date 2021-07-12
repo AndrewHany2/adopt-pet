@@ -9,35 +9,36 @@
 .myFont {
     font-family: "Quicksand", sans-serif;
 }
-.contactForm{
+.adpotForm{
     background-color:#FBF4DE;
     border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
-    padding: 40px;
+    padding: 15px;
 }
-#contactUs input[type="text"], #contactUs input[type="email"]{
+#AdoptForm input[type="text"],#petTypes{
     border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
     width: 100%;
     border: 2px solid #675444;
     outline: none;
     padding: 5px 15px;
 }
-#contactUs input[type="number"], #size,#gender,#vaccinated{
+#AdoptForm input[type="date"], #size,#gender,#vaccinated{
     border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
     border: 2px solid #675444;
     outline: none;
-    padding: 5px 15px;
+    padding: 5px 2px;
 }
-#contactUs input[type="number"]{
-    width: 114px;
+#AdoptForm input[type="date"]{
+    width: 150px;
 }
-#contactUs textarea{
+
+#AdoptForm textarea{
     border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
     width: 100%;
     border: 2px solid #675444;
     outline: none;
     padding: 5px 15px;
 }
-#contactUs input[type="button"]{
+#AdoptForm input[type="submit"]{
     border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
     outline: none;
     color: #fff;
@@ -51,16 +52,6 @@
     outline: none;
     padding: 3px 8px;
 }
-#contactUs .sendMessage:hover{
+#AdoptForm .sendMessage:hover{
     background-color: #F9BE4F;
 }
-
-
-/* // Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) { ... }
-
-// Medium devices (tablets, less than 992px)
-@media (max-width: 991.98px) { ... }
-
-// Large devices (desktops, less than 1200px)
-@media (max-width: 1199.98px) { ... } */
