@@ -48,3 +48,22 @@ export const getPetInfo = (id) => async (dispatch) => {
     });
   }
 };
+
+export const adoptpet = (pet) => async (dispatch)=>{
+  try {
+    dispatch({ type: "PET_ADOPT_REQUEST" });
+    const { data } = await axios.post(`${baseURL}/adopt`,pet);
+    dispatch({
+      type: "PET_ADOPT_SUCCESS",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "PET_ADOPT_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
