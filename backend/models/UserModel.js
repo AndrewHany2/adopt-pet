@@ -14,11 +14,9 @@ const userSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
   },
   postedPets: {
     type: [mongoose.Schema.Types.ObjectId],
@@ -28,6 +26,12 @@ const userSchema = mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
   },
+  facebookId:{
+    type: String,
+  },
+  googleId:{
+    type: String,
+  }
 });
 
 const User = mongoose.model('User',userSchema);

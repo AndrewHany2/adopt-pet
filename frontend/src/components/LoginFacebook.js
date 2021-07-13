@@ -10,7 +10,7 @@ function LoginFacebook() {
 //   }
   return (
     <>
-        <a className=" form-control theme-border btn mb-2 fb-btn font-weight-normal" href="http://localhost:8000/auth/facebook/callback" role="button">
+        <a className=" form-control theme-border btn mb-2 fb-btn font-weight-normal" href="http://localhost:8000/api/user/login/facebook/callback" role="button">
         <FontAwesomeIcon icon={faFacebook} className="mr-2" />
           Sign in with Facebook
         </a>
