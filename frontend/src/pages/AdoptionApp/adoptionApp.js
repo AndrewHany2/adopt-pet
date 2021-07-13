@@ -1,7 +1,6 @@
 import React from "react";
 import "./adoptionApp.css";
 import AdoptionForm from "../../components/AdoptionApp";
-import Footer from "../../components/Footer"
 import LoadingScreen from "../../components/Loading/loading";
 import {useState, useEffect}  from 'react'
 function AdoptionApp(){
@@ -26,7 +25,6 @@ function AdoptionApp(){
             </div>
       </div>
       <AdoptionForm/>
-      <Footer/>
       </>
       ):(<LoadingScreen/>
       )}   

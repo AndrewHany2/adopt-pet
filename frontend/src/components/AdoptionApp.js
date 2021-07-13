@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useState,useRef } from 'react';
 import { Form } from "react-bootstrap";
 import { adoptpet } from "../store/actions/petActions";
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 function AdoptionForm({history}){
     const [pet,setpet] = useState({name:"",gender:"",vaccinated:"",dateOfBirth:"",petType:"",size:"",description:"",image:""})
     const dispatch = useDispatch()
@@ -12,10 +13,8 @@ function AdoptionForm({history}){
         const state = {...pet}
         if(key !== "image" ){ 
            state[key] = e.target.value
-           console.log( state[key])
         }else{
-            state[key] = e.target.files[0]
-            console.log( state[key])  
+            state[key] = e.target.files[0] 
         }
         setpet(state)
     }
@@ -23,7 +22,6 @@ function AdoptionForm({history}){
         e.preventDefault()
         let formdata = new FormData()
         formdata.append("name", pet.name)
-        console.log(formdata)
         formdata.append("dateOfBirth",pet.dateOfBirth)
         formdata.append("petType",pet.petType)
         formdata.append("vaccinated",pet.vaccinated)

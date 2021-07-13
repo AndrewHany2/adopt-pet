@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function NavBar() {
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-nav main-nav">
+      <nav className="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-nav main-nav">
         <div className="container">
             <ul className="nav navbar-nav">
             <i><FontAwesomeIcon icon={faPaw} className="m-nav-icon mr-3 mt-1"/></i>
@@ -22,38 +22,38 @@ function NavBar() {
   <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
          
             <ul className="nav navbar-nav mx-auto nav-item-font">
-              <li className="nav-item active">
+              <li className="nav-item active ml-3">
                 <Link className="nav-link active" to="/">
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ml-3">
                 <Link className="nav-link active" to="/pets">
                   Adobtion-Gallery
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ml-3">
                 <Link className="nav-link active" to="#">
                   Services
                 </Link>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item ml-3">
                 <Link className="nav-link active" to="/about">
                   About
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/contactUs">
-                  Contact
+              <li className="nav-item ml-3">
+                <Link className="nav-link active" to="#">
+  Contact
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link active ml-md-5" to="/signin">
+              <li className="nav-item ml-3 ml-lg-5">
+                <Link className="nav-link active" to="/signin">
                   Sign In
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ml-3">
                 <Link className="nav-link active" to="/signup">
                   Sign Up
                 </Link>
