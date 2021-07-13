@@ -34,7 +34,6 @@ userRouter.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(body.password, salt);
     body.password = hashedPassword;
 
-
     const user = new User({
       firstName: body.firstName,
       lastName: body.lastName,
@@ -49,7 +48,6 @@ userRouter.post("/register", async (req, res) => {
   }
 });
 
-
 userRouter.delete("/delete/:id", verifyUser, async (req, res) => {
   try {
     if (req.verified) {
@@ -60,9 +58,9 @@ userRouter.delete("/delete/:id", verifyUser, async (req, res) => {
     res.status(500).json(error);
   }
 });
-userRouter.get("/:id",verifyUser, async (req, res) => {
+userRouter.get("/:id", verifyUser, async (req, res) => {
   try {
-    console.log(req.params.id)
+    console.log(req.params.id);
     if (req.verified) {
       const user = await User.findOne({ _id: req.verified });
       res.status(200).json(user);

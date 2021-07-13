@@ -18,7 +18,6 @@ function App() {
       <Switch>
         <Route path="/pet/:id" component={PetsInfo}></Route>
         <Route exact path="/pets/:page" component={PetsGallery}></Route>
-        <Route path="/pets" component={PetsGallery}></Route>
         <Route path="/Adoption" component={AdoptionApp}></Route>
         <Route path="/signin" component={SignIn}></Route>
         <Route path="/signup" component={SignUp}></Route>

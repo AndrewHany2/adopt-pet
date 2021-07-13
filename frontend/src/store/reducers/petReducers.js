@@ -1,7 +1,7 @@
 export const petListReducer = (state = {}, action) => {
   switch (action.type) {
     case "PET_LIST_REQUEST":
-      return { loading: true, ...state };
+      return { loading: true };
     case "PET_LIST_SUCCESS":
       return {
         loading: false,

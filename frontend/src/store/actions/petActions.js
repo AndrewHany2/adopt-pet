@@ -9,7 +9,7 @@ export const getPets =
       dispatch({ type: "PET_LIST_REQUEST" });
       if (filterByPet || filterByGender || filterByAge) {
         const { data } = await axios.get(
-          `${baseURL}?gender=${filterByGender}&pet=${filterByPet}&age=${filterByAge}&page=${currentPage}`
+          `${baseURL}?gender=${filterByGender}&petType=${filterByPet}&age=${filterByAge}&page=${currentPage}`
         );
         list = data;
       } else {
@@ -50,10 +50,10 @@ export const getPetInfo = (id) => async (dispatch) => {
   }
 };
 
-export const adoptpet = (pet) => async (dispatch)=>{
+export const adoptpet = (pet) => async (dispatch) => {
   try {
     dispatch({ type: "PET_ADOPT_REQUEST" });
-    const { data } = await axios.post(`${baseURL}/adopt`,pet);
+    const { data } = await axios.post(`${baseURL}/adopt`, pet);
     dispatch({
       type: "PET_ADOPT_SUCCESS",
       payload: data,
@@ -67,4 +67,4 @@ export const adoptpet = (pet) => async (dispatch)=>{
           : error.message,
     });
   }
-}
+};

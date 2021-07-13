@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function PetsFilter(props) {
   const [filterByGender, setFilterByGender] = useState("");
-  const [filterByPet, setFilterByPet] = useState("");
+  const [filterByPet, setFilterByPet] = useState([]);
   const [filterByAge, setFilterByAge] = useState("");
   const [kindClicked, setKindClicked] = useState(false);
   const [genderClicked, setGenderClicked] = useState(false);
@@ -10,9 +10,9 @@ function PetsFilter(props) {
 
   useEffect(() => {}, [filterByGender, filterByPet, filterByAge]);
   return (
-    <div className={`bg-light-custom  border-irregular1 py-3`}>
+    <div className={`bg-light-custom  border-irregular1 pt-2`}>
       <p
-        className="m-0"
+        className="m-0 pb-2"
         style={{ display: "flex", justifyContent: "space-around" }}
       >
         <button
@@ -56,15 +56,15 @@ function PetsFilter(props) {
         </button>
       </p>
       <div
-        className="collapse pb-4"
+        className="collapse pb-3"
         id="collapseExample"
         style={{ width: "50%", margin: "0px auto" }}
       >
         <div
           className="card card-body border-irregular1"
-          onChange={(e) => {
-            props.getPets(filterByGender, filterByPet, filterByAge);
-          }}
+          // onChange={(e) => {
+          //   props.getPets(filterByGender, filterByPet, filterByAge);
+          // }}
         >
           <div className="custom-control custom-checkbox custom-control-inline">
             <input
@@ -72,8 +72,20 @@ function PetsFilter(props) {
               className="custom-control-input"
               id="customCheck1"
               onChange={(e) => {
-                e.target.checked ? setFilterByPet("cat") : setFilterByPet("");
-                props.getPets(filterByGender, filterByPet, filterByAge);
+                if (e.target.checked) {
+                  let tempArr = [...filterByPet];
+                  tempArr.push("cat");
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                } else {
+                  const index = filterByPet.findIndex(
+                    (element) => element === "cat"
+                  );
+                  let tempArr = [...filterByPet];
+                  tempArr.splice(index, 1);
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                }
               }}
             />
             <label className="custom-control-label" htmlFor="customCheck1">
@@ -86,8 +98,20 @@ function PetsFilter(props) {
               className="custom-control-input"
               id="customCheck2"
               onChange={(e) => {
-                e.target.checked ? setFilterByPet("dog") : setFilterByPet("");
-                props.getPets(filterByGender, filterByPet, filterByAge);
+                if (e.target.checked) {
+                  let tempArr = [...filterByPet];
+                  tempArr.push("dog");
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                } else {
+                  const index = filterByPet.findIndex(
+                    (element) => element === "dog"
+                  );
+                  let tempArr = [...filterByPet];
+                  tempArr.splice(index, 1);
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                }
               }}
             />
             <label className="custom-control-label" htmlFor="customCheck2">
@@ -97,7 +121,7 @@ function PetsFilter(props) {
         </div>
       </div>
       <div
-        className="collapse pb-4"
+        className="collapse pb-3"
         id="collapseExample1"
         style={{ width: "50%", margin: "0px auto" }}
       >
@@ -158,7 +182,7 @@ function PetsFilter(props) {
         </div>
       </div>
       <div
-        className="collapse pb-4"
+        className="collapse pb-3"
         id="collapseExample3"
         style={{ width: "50%", margin: "0px auto" }}
       >

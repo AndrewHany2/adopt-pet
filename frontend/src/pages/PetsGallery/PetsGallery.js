@@ -4,6 +4,7 @@ import PetsCards from "../../components/PetsCards";
 import PetsFilter from "../../components/PetsFilter";
 import { NavLink as Link } from "react-router-dom";
 import { getPets } from "./../../store/actions/petActions";
+import LoadingScreen from "../../components/Loading/loading";
 import "./petsGallery.css";
 
 function PetsGallery(props) {
@@ -12,7 +13,6 @@ function PetsGallery(props) {
   const currentPage = props.match.params.page || 1;
 
   useEffect(() => {
-    console.log(currentPage);
     handlePetsList();
   }, [currentPage]);
 
@@ -46,51 +46,68 @@ function PetsGallery(props) {
           </p>
         </div>
       </div>
-      {pets.loading ? (
-        ""
-      ) : (
-        <div className="container">
-          <PetsFilter getPets={handlePetsList}></PetsFilter>
-          <div className="mt-5">
+
+      <div className="container">
+        <PetsFilter getPets={handlePetsList}></PetsFilter>
+        <div className="mt-5">
+          {pets.loading ? (
+            <LoadingScreen></LoadingScreen>
+          ) : (
             <PetsCards pets={pets}></PetsCards>
-          </div>
+          )}
+        </div>
+        {pets.info ? (
           <nav className="mt-5" aria-label="Page navigation example">
             <ul className="pagination justify-content-end">
-              <li className="page-item disabled">
-                <a
+              <li
+                className={
+                  pets.info.currentPage === 1
+                    ? `page-item disabled`
+                    : `page-item`
+                }
+              >
+                <Link
                   className="page-link"
-                  href="#"
-                  tabindex="-1"
-                  aria-disabled="true"
+                  exact
+                  to={`/pets/${pets.info.currentPage - 1}`}
                 >
                   Previous
-                </a>
+                </Link>
               </li>
-              {pets.info
-                ? [...Array(pets.info.totalPages).keys()].map((x) => (
-                    <li
-                      key={x + 1}
-                      className={
-                        "page-item" + x + 1 === pets.info.currentPage
-                          ? "active"
-                          : ""
-                      }
-                    >
-                      <Link className="page-link" to={`/pets/${x + 1}`}>
-                        {x + 1}
-                      </Link>
-                    </li>
-                  ))
-                : null}
-              <li className="page-item">
-                <a className="page-link" href="#">
+              {[...Array(pets.info.totalPages).keys()].map((x) => (
+                <li
+                  key={x + 1}
+                  className={
+                    "page-item" + x + 1 === pets.info.currentPage
+                      ? "active"
+                      : ""
+                  }
+                >
+                  <Link className="page-link" exact to={`/pets/${x + 1}`}>
+                    {x + 1}
+                  </Link>
+                </li>
+              ))}
+
+              <li
+                className={
+                  pets.info.currentPage === pets.info.totalPages
+                    ? `page-item disabled`
+                    : `page-item`
+                }
+              >
+                <Link
+                  className="page-link"
+                  exact
+                  to={`/pets/${pets.info.currentPage + 1}`}
+                >
                   Next
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
-        </div>
-      )}
+        ) : null}
+      </div>
     </div>
   );
 }

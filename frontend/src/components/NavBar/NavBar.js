@@ -11,16 +11,29 @@ function NavBar() {
     <>
       <nav className="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-nav main-nav">
         <div className="container">
-            <ul className="nav navbar-nav">
-            <i><FontAwesomeIcon icon={faPaw} className="m-nav-icon mr-3 mt-1"/></i>
-                <li className="nav-item active"><Link className="nav-link nav-logo" to="#">WOOF!</Link></li>
-            </ul>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-  
-  <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-         
+          <ul className="nav navbar-nav">
+            <i>
+              <FontAwesomeIcon icon={faPaw} className="m-nav-icon mr-3 mt-1" />
+            </i>
+            <li className="nav-item active">
+              <Link className="nav-link nav-logo" to="#">
+                WOOF!
+              </Link>
+            </li>
+          </ul>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul className="nav navbar-nav mx-auto nav-item-font">
               <li className="nav-item active">
                 <Link className="nav-link active" to="/">
@@ -28,7 +41,7 @@ function NavBar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active" to="/pets">
+                <Link className="nav-link active" to="/pets/1">
                   Adobtion-Gallery
                 </Link>
               </li>

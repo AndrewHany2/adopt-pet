@@ -11,7 +11,7 @@ function PetsCards({ pets }) {
                 <div className="card bg-light-custom border-irregular1">
                   <img
                     className="border-irregular1 img-fluid"
-                    src={pet.image}
+                    src={`../${pet.image}`}
                     alt="a"
                   />
                   <div className="card-body">
