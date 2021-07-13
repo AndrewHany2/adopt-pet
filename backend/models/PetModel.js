@@ -34,7 +34,9 @@ const petSchema = new mongoose.Schema({
   },
   status:{
     type: String,
-    enum:['DONE','INPROGRESS','PENDING']
+    default: "PENDING",
+    required:true,
+    enum:['ACCEPTED','REJECTED','PENDING']
   }
 });
 const Pet = mongoose.model("Pet", petSchema);
