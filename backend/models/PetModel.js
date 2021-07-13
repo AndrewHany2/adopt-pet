@@ -12,8 +12,12 @@ const petSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  age: {
-    type: String,
+  dateOfBirth: {
+    type: Date,
+    required:true,
+  },
+  petType:{
+    type:String,
     required: true,
   },
   size:{
@@ -28,6 +32,12 @@ const petSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status:{
+    type: String,
+    default: "PENDING",
+    required:true,
+    enum:['ACCEPTED','REJECTED','PENDING']
+  }
 });
 const Pet = mongoose.model("Pet", petSchema);
 

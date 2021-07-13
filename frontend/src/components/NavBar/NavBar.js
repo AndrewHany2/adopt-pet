@@ -45,7 +45,7 @@ function NavBar() {
               </li>
               <li className="nav-item ml-3">
                 <Link className="nav-link active" to="#">
-                  Contact
+  Contact
                 </Link>
               </li>
               <li className="nav-item ml-3 ml-lg-5">

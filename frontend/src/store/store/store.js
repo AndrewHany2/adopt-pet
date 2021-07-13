@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { petInfoReducer, petListReducer } from "../reducers/petReducers";
+import { petInfoReducer, petListReducer, postPetReducer } from "../reducers/petReducers";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-const reducer = combineReducers({ pets: petListReducer, pet: petInfoReducer });
+const reducer = combineReducers({ pets: petListReducer, pet: petInfoReducer , petsFrom: postPetReducer });
 
 const intialState = {};
 
