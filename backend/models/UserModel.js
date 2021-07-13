@@ -20,6 +20,11 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    enum: ["ADMIN", "USER"],
+    default: "USER",
+  },
   postedPets: {
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
@@ -30,5 +35,5 @@ const userSchema = mongoose.Schema({
   },
 });
 
-const User = mongoose.model('User',userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;

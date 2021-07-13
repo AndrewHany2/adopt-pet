@@ -3,20 +3,19 @@ const verifyUser = async (req, res, next) => {
     
     const { authorization } = req.headers
     try{
-        debugger
         if (authorization) {
             const payload = await verifyToken(authorization)
             if (payload.id) {
                 req.verified = payload.id;
                 console.log(payload)
-                next()
-                return
+                return next()
+                
             }
         }
-        next (new Error('not authorized'))
+        return next (new Error('not authorized'))
     }
     catch(err){
-        next(new Error('not authorized'))   
+        return next(new Error('not authorized'))   
     }
 }
 
