@@ -1,0 +1,15 @@
+.loadingComponent {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: #f9575c;
+    font-Size: 3.5vw;
+    -webkit-animation: loadingComponent 3s linear infinite;
+    animation: loadingComponent 3s linear infinite;
+}
+@keyframes loadingComponent {
+  25%   { transform: scale(1);}
+  75%  { transform: scale(1.5);} 
+}
