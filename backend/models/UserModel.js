@@ -23,6 +23,11 @@ const userSchema = mongoose.Schema({
     enum: ["ADMIN", "USER"],
     default: "USER",
   },
+  role: {
+    type: String,
+    enum: ["ADMIN", "USER"],
+    default: "USER",
+  },
   postedPets: {
     type: [mongoose.Schema.Types.ObjectId],
     default: [],

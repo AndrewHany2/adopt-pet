@@ -12,8 +12,10 @@ import axios from "axios";
 
 function SignIn() {
 
-  const [credentials, setCredentials] = useState({email:"",password:""});
+
   const [errors, setErrors] = useState({email:"",password:"",loginInvalid:"",credentialsInvalid:""});
+  const [credentials, setCredentials] = useState({email:"",password:""});
+
 
 
 
@@ -52,6 +54,7 @@ function SignIn() {
 
   }
 
+
    const login =async ()=>{
     if(!schema.password.validate(credentials.password).error && !schema.email.validate(credentials.email).error){
       try{
@@ -77,6 +80,7 @@ function SignIn() {
     console.log(myErrors.credentialsInvalid)
    }
   }
+
 
   return (
     <>
@@ -105,7 +109,9 @@ function SignIn() {
                   onChange={validateEmail}
                 />
               </div>
+
               {errors.email && (<div className="alert alert-danger theme-border">{errors.email}</div>)}
+
 
               <div className="form-group ">
                 <label htmlFor="login-pss">Password</label>
@@ -118,7 +124,9 @@ function SignIn() {
                   onChange={validatePassword}
                 />
               </div>
+
               {errors.password && (<div className="alert alert-danger theme-border">{errors.password}</div>)}
+
 
 
               <div className="form-group p-2">
@@ -137,7 +145,9 @@ function SignIn() {
                   </label>
                 </div>
                 <button
+
                   type="button"
+
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
                   onClick={login}
                 >
