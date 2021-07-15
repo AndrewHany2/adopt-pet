@@ -3,13 +3,12 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 import Joi from "joi";
-import LoginFacebook from './../../components/LoginFacebook';
-import LoginGoogle from './../../components/LoginGoogle';
+import LoginFacebook from "./../../components/LoginFacebook";
+import LoginGoogle from "./../../components/LoginGoogle";
+import axios from "axios";
+
 
 function SignUp() {
   const [userInfo, setUserInfo] = useState({
@@ -30,26 +29,62 @@ function SignUp() {
     phone: "",
     password: "",
     repeatPassword: "",
+    formValid:"",
+    registerFailed:"",
   });
 
-  const schema = {
+  const fullSchema = Joi.object({
+    firstName: Joi.string().alphanum().min(3).max(30).required().messages({
+      "string.min": `should have a minimum length of {#limit}`,
+      "string.max": `should have a maximum length of {#limit}`,
+    }),
+
+    lastName: Joi.string().alphanum().min(3).max(30).required(),
+
     email: Joi.string()
       .email({
         minDomainSegments: 2,
         tlds: false,
       })
       .required(),
-    firstName: Joi.string().alphanum().min(3).max(30).required(),
-    lastName: Joi.string().alphanum().min(3).max(30).required(),
+
     phone: Joi.string()
       .length(11)
       .pattern(/^(010|012|011|015)[0-9]{8}$/)
-      .required(),
-  };
+      .required()
+      .messages({
+        "string.pattern.base": `Please enter a valid mobile phone number`,
+        "string.length": `Please enter 11 numbers`,
+      }),
+  });
+  const schema = {
+    firstName: Joi.string().alphanum().min(3).max(30).required().messages({
+      "string.min": `should have a minimum length of {#limit}`,
+      "string.max": `should have a maximum length of {#limit}`,
+    }),
 
+    lastName: Joi.string().alphanum().min(3).max(30).required(),
+
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: false,
+      })
+      .required(),
+
+    phone: Joi.string()
+      .length(11)
+      .pattern(/^(010|012|011|015)[0-9]{8}$/)
+      .required()
+      .messages({
+        "string.pattern.base": `Please enter a valid mobile phone number`,
+        "string.length": `Please enter 11 numbers`,
+      }),
+  };
   const passwordSchema = Joi.object({
     password: Joi.string()
-      .min(8).max(30)
+      .min(8)
+      .max(30)
       .pattern(
         new RegExp(
           "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
@@ -57,41 +92,13 @@ function SignUp() {
       )
       .messages({
         "any.only": `password didn't match`,
-        "string.base": `password should contain Capital, Small letters and Special Char`,
         "string.min": `should have a minimum length of {#limit}`,
-        "string.pattern.base": `Password Must Contain Captial and Small Letters`,
-        "string.max": `should have a maximum length of {#limit}`,
+        "string.pattern.base": `Password Must contain captial and small Letters`,
+        "string.length": `should have a maximum length of {#limit}`,
       }),
     repeatPassword: Joi.any().equal(Joi.ref("password")).messages({
-      "any.only": `password didn't match`,
+      "any.only": `Confirm password didn't match`,
     }),
-  //  password: Joi.string()
-  //   .min(8).max(30)
-  //   .pattern(
-  //     new RegExp(
-  //       "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
-  //     )
-  //   ).error(errors => {
-  //     errors.forEach(err => {
-  //       switch (err.code) {
-  //         case "any.only":
-  //           err.message = "value not allowed";
-  //           break;
-  //         case "string.min":
-  //           err.message = `Value should have at least ${err.local.limit} characters!`;
-  //           break;
-  //           case "string.max":
-  //           err.message = `Value should have at most ${err.local.limit} characters!`;
-  //           break;
-  //         case "string.pattern.base":
-  //           err.message = `Password Must Contain Captial, Small Letters and Special Characters`;
-  //           break;
-  //         default:
-  //           break;
-  //       }
-  //     });
-  //     return errors;
-  //   }),
   });
 
   const validatePassword = (e) => {
@@ -118,13 +125,53 @@ function SignUp() {
     let myErrors = { ...errors };
     myErrors[value] = validate.error ? validate.error.details[0].message : null;
     setErrors(myErrors);
+    console.log(validate);
   };
+
+  const sendData = async () => {
+    const myData = { ...userInfo };
+    const myPassword = myData.passwordObj;
+    delete myData.passwordObj;
+    delete myData.city;
+    delete myData.country;
+    console.log(myData)
+    if (!fullSchema.validate(myData).error && !passwordSchema.validate(myPassword).error) {
+      try{
+        const {data} = await axios.post("api/user/register",userInfo);
+        console.log(data)
+      }catch(error){
+         let myErrors = {...errors}
+          myErrors.registerFailed = error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+          myErrors.credentialsInvalid="";
+          setErrors(myErrors)
+          console.log(myErrors.registerFailed)
+      }
+       }
+       else{
+        let myErrors = {...errors}
+        myErrors.formValid = "Please enter valid info at all fields"
+        setErrors(myErrors)
+        console.log(myErrors.formValid)
+       }
+      };
 
   return (
     <>
       <div className="container-fluid bg-img">
         <div className="row justify-content-center  align-content-center">
           <div className="col-12 col-md-7 box mt-5 px-lg-5">
+          {errors.formValid && (
+                  <div className="alert alert-danger d-block mt-5 theme-border">
+                    {errors.formValid}
+                  </div>
+                )}
+                {errors.registerFailed && (
+                  <div className="alert alert-danger d-block mt-5 theme-border">
+                    {errors.registerFailed}
+                  </div>
+                )}
             <form>
               <div className="form-row mt-4 mr-3 ml-3 pt-5 pb-2">
                 <div className="col-md-6 mb-3">
@@ -133,7 +180,6 @@ function SignUp() {
                     type="text"
                     className="form-control theme-border"
                     id="firstName"
-                    required
                     value={userInfo.firstName}
                     onChange={validateFields}
                   />
@@ -145,16 +191,19 @@ function SignUp() {
                     type="text"
                     className="form-control theme-border"
                     id="lastName"
-                    required
                     value={userInfo.lastName}
                     onChange={validateFields}
                   />
                 </div>
                 {errors.firstName && (
-                  <div className="alert alert-danger">{errors.firstName}</div>
+                  <div className="alert alert-danger d-block theme-border">
+                    {errors.firstName}
+                  </div>
                 )}
                 {errors.lastName && (
-                  <div className="alert alert-danger">{errors.lastName}</div>
+                  <div className="alert alert-danger d-block theme-border">
+                    {errors.lastName}
+                  </div>
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
@@ -171,13 +220,13 @@ function SignUp() {
                 </div>
               </div>
               {errors.email && (
-                <div className="alert alert-danger">{errors.email}</div>
+                <div className="alert alert-danger theme-border">{errors.email}</div>
               )}
               <div className="form-row mr-3 ml-3 pb-2">
                 <div className="col-12 mb-3">
                   <label htmlFor="phone">Phone</label>
                   <input
-                    type="phone"
+                    type="number"
                     className="form-control theme-border"
                     id="phone"
                     value={userInfo.phone}
@@ -185,7 +234,7 @@ function SignUp() {
                   />
                 </div>
                 {errors.phone && (
-                  <div className="alert alert-danger">{errors.phone}</div>
+                  <div className="alert alert-danger theme-border">{errors.phone}</div>
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
@@ -195,7 +244,7 @@ function SignUp() {
                     type="text"
                     className="form-control theme-border"
                     id="country"
-                    required
+      
                   />
                 </div>
                 <div className="col-md-6 mb-3">
@@ -204,7 +253,7 @@ function SignUp() {
                     type="text"
                     className="form-control theme-border"
                     id="city"
-                    required
+                    
                   />
                 </div>
               </div>
@@ -216,7 +265,7 @@ function SignUp() {
                     type="password"
                     className="form-control theme-border"
                     id="password"
-                    required
+                    
                     value={userInfo.password}
                     onChange={validatePassword}
                   />
@@ -227,16 +276,16 @@ function SignUp() {
                     type="password"
                     className="form-control theme-border"
                     id="repeatPassword"
-                    required
+                    
                     value={userInfo.repeatPassword}
                     onChange={validatePassword}
                   />
                 </div>
                 {errors.password && (
-                  <div className="alert alert-danger">{errors.password}</div>
+                  <div className="alert alert-danger theme-border">{errors.password}</div>
                 )}
                 {errors.repeatPassword && (
-                  <div className="alert alert-danger">
+                  <div className="alert alert-danger theme-border">
                     {errors.repeatPassword}
                   </div>
                 )}
@@ -247,25 +296,25 @@ function SignUp() {
                     className="form-check-input theme-border"
                     type="checkbox"
                     id="invalidCheck"
-                    required
+                    
                   />
                   <label className="form-check-label" htmlFor="invalidCheck">
                     Agree to terms and conditions
                   </label>
                 </div>
                 <button
-                  type="submit"
+                  type="button"
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
+                  onClick={sendData}
                 >
                   Sign Up
-                </button>{" "}
+                </button>
               </div>
             </form>
             <div className="dropdown-divider p-1 "></div>
             <div className="row mr-3 ml-3">
               <div className="col-12 col-lg-6">
-              <LoginFacebook/>
-
+                <LoginFacebook />
 
                 {/* <button className="form-control theme-border btn fb-btn font-weight-normal">
                   <FontAwesomeIcon icon={faFacebook} className="mr-2" />
@@ -273,13 +322,13 @@ function SignUp() {
                 </button> */}
               </div>
               <div className="col-12 col-lg-6  mb-3">
-              <LoginGoogle/>
+                <LoginGoogle />
 
                 {/* <button className="form-control theme-border btn google-btn font-weight-normal">
                   <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                   Sign Up With Google
                 </button> */}
-               </div>
+              </div>
             </div>
             <div className="dropdown-divider p-1 "></div>
             <p className="text-inverse text-center">
@@ -298,7 +347,6 @@ function SignUp() {
               </Link>
             </p>
           </div>
-
         </div>
       </div>
     </>

@@ -16,10 +16,10 @@ userRouter.post("/login", async (req, res, next) => {
           const token = await generateToken(user._id);
           res.status(200).json({ token });
         } else {
-          return res.status(400).json({ status: "password invalid" });
+          return res.status(400).json({ message: "password invalid" });
         }
       } else {
-        return res.status(404).json({ status: "user invalid" });
+        return res.status(404).json({ message: "user invalid" });
       }
     }
   } catch (error) {
