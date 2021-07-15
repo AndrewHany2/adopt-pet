@@ -4,17 +4,27 @@ import { useEffect, useState } from 'react'
 import { useParams } from "react-router"
 import PetInfo from './../../components/PetInfo';
 import PageHeader from "../../components/PageHeader";
-
+import axios from "axios";
 
 
 function Profile() {
   const { id } = useParams()
   const [user, setUser] = useState({})
-  useEffect(() => {
-      fetch(`http://localhost:3000/profile/${id}`)
-          .then(response => response.json())
-          .then(data => setUser(data))
-  }, [])
+  useEffect( () => {
+   const getUser = async ()=>{
+
+      const header = {
+        headers: {
+          Authorization: window.localStorage.getItem("token")
+        }
+      }
+        const {data} = await axios.get(`/api/user/profile/${id}`,header);
+        setUser(data);
+
+    }
+    getUser()
+
+    }, [])
 
   return (
     <div>

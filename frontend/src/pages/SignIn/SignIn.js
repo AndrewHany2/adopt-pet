@@ -3,19 +3,18 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SignIn.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Joi from "joi";
 import { useState } from "react";
 import LoginFacebook from './../../components/LoginFacebook';
 import LoginGoogle from './../../components/LoginGoogle';
+import axios from "axios";
 
 
 function SignIn() {
 
-  const [credentials, setCredentials] = useState({email:"",password:""});
-  const [errors, setErrors] = useState({email:"",password:""});
+
+  const [errors, setErrors] = useState({email:"",password:"",loginInvalid:"",credentialsInvalid:""});
+
 
 
 
@@ -54,9 +53,32 @@ function SignIn() {
 
   }
 
-   const login = ()=>{
-    
+
+   const login =async ()=>{
+    if(!schema.password.validate(credentials.password).error && !schema.email.validate(credentials.email).error){
+      try{
+    const {data} = await axios.post("api/user/login",credentials);
+    console.log(data)
+    const token = data.token
+    window.localStorage.setItem("token",token)
+  }catch(error){
+    console.log("here")
+     let myErrors = {...errors}
+      myErrors.loginInvalid = error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+      myErrors.credentialsInvalid="";
+      setErrors(myErrors)
+      console.log(myErrors.loginInvalid)
+  }
    }
+   else{
+    let myErrors = {...errors}
+    myErrors.credentialsInvalid = "Please enter valid info at all fields"
+    setErrors(myErrors)
+    console.log(myErrors.credentialsInvalid)
+   }
+  }
 
 
   return (
@@ -64,6 +86,16 @@ function SignIn() {
       <div className="container-fluid bg-img">
         <div className=" row justify-content-center  align-content-center">
           <div className="box col-lg-4 col-md-8 mb-3 mt-5">
+          {errors.loginInvalid && (
+                  <div className="alert alert-danger d-block mt-4 theme-border">
+                    {errors.loginInvalid}
+                  </div>
+                )}
+                {errors.credentialsInvalid && (
+                  <div className="alert alert-danger d-block mt-4 theme-border">
+                    {errors.credentialsInvalid}
+                  </div>
+                )}
             <form className="px-4 py-1 ">
               <div className="form-group mt-5">
                 <label htmlFor="login-email">Email address</label>
@@ -76,7 +108,9 @@ function SignIn() {
                   onChange={validateEmail}
                 />
               </div>
-              {errors.email && (<div className="alert alert-danger">{errors.email}</div>)}
+
+              {errors.email && (<div className="alert alert-danger theme-border">{errors.email}</div>)}
+
 
               <div className="form-group ">
                 <label htmlFor="login-pss">Password</label>
@@ -89,7 +123,9 @@ function SignIn() {
                   onChange={validatePassword}
                 />
               </div>
-              {errors.password && (<div className="alert alert-danger">{errors.password}</div>)}
+
+              {errors.password && (<div className="alert alert-danger theme-border">{errors.password}</div>)}
+
 
 
               <div className="form-group p-2">
@@ -108,7 +144,9 @@ function SignIn() {
                   </label>
                 </div>
                 <button
-                  type="submit"
+
+                  type="button"
+
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
                   onClick={login}
                 >
