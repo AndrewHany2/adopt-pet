@@ -14,6 +14,7 @@ function SignIn() {
 
 
   const [errors, setErrors] = useState({email:"",password:"",loginInvalid:"",credentialsInvalid:""});
+  const [credentials, setCredentials] = useState({email:"",password:""});
 
 
 
