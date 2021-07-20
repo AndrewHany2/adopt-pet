@@ -4,82 +4,76 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./SignIn.css";
 import Joi from "joi";
-import { useState } from "react";
-import LoginFacebook from './../../components/LoginFacebook';
-import LoginGoogle from './../../components/LoginGoogle';
-import axios from "axios";
+import { useState, useEffect } from "react";
+import LoginFacebook from "./../../components/LoginFacebook";
+import LoginGoogle from "./../../components/LoginGoogle";
+import { useDispatch, useSelector } from "react-redux";
+import { Login } from "../../store/actions/UserActions";
 
-
-function SignIn() {
-
-
-  const [errors, setErrors] = useState({email:"",password:"",loginInvalid:"",credentialsInvalid:""});
-  const [credentials, setCredentials] = useState({email:"",password:""});
-
-
-
+function SignIn(props) {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    loginInvalid: "",
+    credentialsInvalid: "",
+  });
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
 
   const schema = {
-    email: Joi.string().email({
-      minDomainSegments: 2,
-      tlds: false,
-    }).required(),
-    password: Joi.string().required()
-
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: false,
+      })
+      .required(),
+    password: Joi.string().required(),
   };
 
-   const validateEmail = (e)=>{
-     let myData = {...credentials}
-     myData.email = e.target.value
-     setCredentials(myData)
-    const validate =schema.email.validate(e.target.value)
-    let myErrors = {...errors};
-    myErrors.email = validate.error?validate.error.details[0].message:null;
-    setErrors(myErrors)
-    console.log(validate)
+  const validateEmail = (e) => {
+    let myData = { ...credentials };
+    myData.email = e.target.value;
+    setCredentials(myData);
+    const validate = schema.email.validate(e.target.value);
+    let myErrors = { ...errors };
+    myErrors.email = validate.error ? validate.error.details[0].message : null;
+    setErrors(myErrors);
+    console.log(validate);
+  };
 
+  const validatePassword = (e) => {
+    let myData = { ...credentials };
+    myData.password = e.target.value;
+    setCredentials(myData);
+    const validate = schema.password.validate(e.target.value);
+    let myErrors = { ...errors };
+    myErrors.password = validate.error
+      ? validate.error.details[0].message
+      : null;
+    setErrors(myErrors);
+    console.log(validate);
+  };
 
-   }
+  const login = () => {
+    if (
+      !schema.password.validate(credentials.password).error &&
+      !schema.email.validate(credentials.email).error
+    ) {
+      dispatch(Login(credentials));
+    } else {
+      let myErrors = { ...errors };
+      myErrors.credentialsInvalid = "Please enter valid info at all fields";
+      setErrors(myErrors);
+    }
+  };
+  useEffect(() => {
+    if (userLogin.success === true) {
+      props.history.push(`/profile/${userLogin.info.userId}`);
+    }
+  });
 
-   const validatePassword = (e)=>{
-    let myData = {...credentials}
-    myData.password = e.target.value
-    setCredentials(myData)
-   const validate =schema.password.validate(e.target.value)
-   let myErrors = {...errors};
-   myErrors.password = validate.error?validate.error.details[0].message:null;
-   setErrors(myErrors)
-   console.log(validate)
-
-  }
-
-
-   const login =async ()=>{
-    if(!schema.password.validate(credentials.password).error && !schema.email.validate(credentials.email).error){
-      try{
-    const {data} = await axios.post("api/user/login",credentials);
-    console.log(data)
-    const token = data.token
-    window.localStorage.setItem("token",token)
-  }catch(error){
-    console.log("here")
-     let myErrors = {...errors}
-      myErrors.loginInvalid = error.response && error.response.data.message
-      ? error.response.data.message
-      : error.message;
-      myErrors.credentialsInvalid="";
-      setErrors(myErrors)
-      console.log(myErrors.loginInvalid)
-  }
-   }
-   else{
-    let myErrors = {...errors}
-    myErrors.credentialsInvalid = "Please enter valid info at all fields"
-    setErrors(myErrors)
-    console.log(myErrors.credentialsInvalid)
-   }
-  }
 
 
   return (
@@ -87,16 +81,16 @@ function SignIn() {
       <div className="container-fluid bg-img">
         <div className=" row justify-content-center  align-content-center">
           <div className="box col-lg-4 col-md-8 mb-3 mt-5">
-          {errors.loginInvalid && (
-                  <div className="alert alert-danger d-block mt-4 theme-border">
-                    {errors.loginInvalid}
-                  </div>
-                )}
-                {errors.credentialsInvalid && (
-                  <div className="alert alert-danger d-block mt-4 theme-border">
-                    {errors.credentialsInvalid}
-                  </div>
-                )}
+            {errors.loginInvalid && (
+              <div className="alert alert-danger d-block mt-4 theme-border">
+                {errors.loginInvalid}
+              </div>
+            )}
+            {errors.credentialsInvalid && (
+              <div className="alert alert-danger d-block mt-4 theme-border">
+                {errors.credentialsInvalid}
+              </div>
+            )}
             <form className="px-4 py-1 ">
               <div className="form-group mt-5">
                 <label htmlFor="login-email">Email address</label>
@@ -110,7 +104,13 @@ function SignIn() {
                 />
               </div>
 
-              {errors.email && (<div className="alert alert-danger theme-border">{errors.email}</div>)}
+
+              {errors.email && (
+                <div className="alert alert-danger theme-border">
+                  {errors.email}
+                </div>
+              )}
+
 
 
               <div className="form-group ">
@@ -125,8 +125,12 @@ function SignIn() {
                 />
               </div>
 
-              {errors.password && (<div className="alert alert-danger theme-border">{errors.password}</div>)}
 
+              {errors.password && (
+                <div className="alert alert-danger theme-border">
+                  {errors.password}
+                </div>
+              )}
 
 
               <div className="form-group p-2">
@@ -157,10 +161,10 @@ function SignIn() {
             </form>
             <div className="dropdown-divider p-1"></div>
             <div className="col-md-12  mb-3">
-            <LoginFacebook/>
-            <LoginGoogle/>
+              <LoginFacebook />
+              <LoginGoogle />
 
-{/* 
+              {/* 
               <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
                 <FontAwesomeIcon icon={faFacebook} className="mr-2" />
                 Sign In with Facebook
@@ -169,7 +173,6 @@ function SignIn() {
                 <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                 Sign In With Google
               </button> */}
-
             </div>
 
             <div className="dropdown-divider p-1"></div>

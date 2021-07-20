@@ -6,17 +6,18 @@ import Footer from "./components/Footer";
 import Profile from "./pages/Profile/Profile";
 import PetsInfo from "./pages/PetsInfo/PetsInfo";
 import AdoptionApp from "./pages/AdoptionApp/adoptionApp";
-import NavBar from "./components/NavBar/NavBar"
+import NavBar from "./components/NavBar/NavBar";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
+
 import ContactUs from "./pages/ContactUs/contactUs";
 function App() {
   return (
     <Router>
       <NavBar></NavBar>
       <Switch>
-        <Route path="/pets/:id" component={PetsInfo}></Route>
-        <Route path="/pets" component={PetsGallery}></Route>
+        <Route path="/pet/:id" component={PetsInfo}></Route>
+        <Route exact path="/pets/:page" component={PetsGallery}></Route>
         <Route path="/Adoption" component={AdoptionApp}></Route>
         <Route path="/signin" component={SignIn}></Route>
         <Route path="/signup" component={SignUp}></Route>
@@ -24,10 +25,8 @@ function App() {
         <Route path="/profile/:id" component={Profile}></Route>
         <Route path="/contactus" component={ContactUs}></Route>
       </Switch>
-      <Footer/>
-
+      <Footer />
     </Router>
-
   );
 }
 
