@@ -21,6 +21,7 @@ function SignIn(props) {
   });
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
+
   const schema = {
     email: Joi.string()
       .email({
@@ -73,6 +74,8 @@ function SignIn(props) {
     }
   });
 
+
+
   return (
     <>
       <div className="container-fluid bg-img">
@@ -101,11 +104,14 @@ function SignIn(props) {
                 />
               </div>
 
+
               {errors.email && (
                 <div className="alert alert-danger theme-border">
                   {errors.email}
                 </div>
               )}
+
+
 
               <div className="form-group ">
                 <label htmlFor="login-pss">Password</label>
@@ -119,11 +125,13 @@ function SignIn(props) {
                 />
               </div>
 
+
               {errors.password && (
                 <div className="alert alert-danger theme-border">
                   {errors.password}
                 </div>
               )}
+
 
               <div className="form-group p-2">
                 <div className="form-check">
@@ -141,7 +149,9 @@ function SignIn(props) {
                   </label>
                 </div>
                 <button
+
                   type="button"
+
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
                   onClick={login}
                 >

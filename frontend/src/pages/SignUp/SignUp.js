@@ -163,6 +163,7 @@ function SignUp() {
     }
   };
 
+
   return (
     <>
       <div className="container-fluid bg-img">
@@ -187,6 +188,8 @@ function SignUp() {
                     className="form-control theme-border"
                     id="firstName"
                     required
+
+
                     value={userInfo.firstName}
                     onChange={validateFields}
                   />
@@ -198,12 +201,15 @@ function SignUp() {
                     type="text"
                     className="form-control theme-border"
                     id="lastName"
+
                     required
+
                     value={userInfo.lastName}
                     onChange={validateFields}
                   />
                 </div>
                 {errors.firstName && (
+
                   <div className="alert alert-danger d-block theme-border">
                     {errors.firstName}
                   </div>
@@ -212,6 +218,7 @@ function SignUp() {
                   <div className="alert alert-danger d-block theme-border">
                     {errors.lastName}
                   </div>
+
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
@@ -228,15 +235,15 @@ function SignUp() {
                 </div>
               </div>
               {errors.email && (
-                <div className="alert alert-danger theme-border">
-                  {errors.email}
-                </div>
+
+                <div className="alert alert-danger theme-border">{errors.email}</div>
               )}
               <div className="form-row mr-3 ml-3 pb-2">
                 <div className="col-12 mb-3">
                   <label htmlFor="phone">Phone</label>
                   <input
                     type="number"
+
                     className="form-control theme-border"
                     id="phone"
                     value={userInfo.phone}
@@ -244,9 +251,9 @@ function SignUp() {
                   />
                 </div>
                 {errors.phone && (
-                  <div className="alert alert-danger theme-border">
-                    {errors.phone}
-                  </div>
+
+                  <div className="alert alert-danger theme-border">{errors.phone}</div>
+
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
