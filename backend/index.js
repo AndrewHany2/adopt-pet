@@ -19,8 +19,9 @@ app.use("/api/user", userRouter);
 app.use("/api/pets", petRouter);
 app.use((err, req, res, next) => {
   console.log(err);
-  res.status(500).json({ msg: err });
+  res.status(500).json({ message: err });
 });
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

@@ -1,5 +1,7 @@
 .bg-img {
   background-image: url(./Resources/FormBG.jpg);
+  height: 100vw;
+  width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
