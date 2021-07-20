@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function NavBar() {
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-nav main-nav">
+      <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-nav main-nav">
         <div className="container">
           <ul className="nav navbar-nav">
             <i>

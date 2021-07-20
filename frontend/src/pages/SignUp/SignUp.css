@@ -1,32 +1,28 @@
 .bg-img {
-    background-image: url(./Resources/FormBG.jpg);
-    height: 100vh;
-    width: 100vw;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-  }
-  .box {
-    border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
-    background-color: rgb(251, 244, 222,0.85);
-  }
+  background-image: url(./Resources/FormBG.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.box {
+  border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
+  background-color: rgb(251, 244, 222, 0.85);
+}
 
-  .sign-up-box{
-      height: 535px;
-      width: 45vw;    
-      left:25vw;
-      top:15vh;
-  }
-  .theme-border{
-      border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
-  }
-  .google-btn{
-    background-color:#DB4437;
-    color: white;
-  }
-  .fb-btn{
-    background-color: #3b5998 ;
-    color: white ;
-
-  }
+.sign-up-box {
+  height: 535px;
+  width: 45vw;
+  left: 25vw;
+  top: 15vh;
+}
+.theme-border {
+  border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
+}
+.google-btn {
+  background-color: #db4437;
+  color: white;
+}
+.fb-btn {
+  background-color: #3b5998;
+  color: white;
+}

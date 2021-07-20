@@ -10,6 +10,8 @@ function PetsCards({ pets }) {
               <div key={pet._id} className="col mb-4 card-animate">
                 <div className="card bg-light-custom border-irregular1">
                   <img
+                    width="360px"
+                    height="360px"
                     className="border-irregular1 img-fluid"
                     src={`../${pet.image}`}
                     alt="a"

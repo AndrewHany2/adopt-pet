@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 
 function PetsFilter(props) {
   const [filterByGender, setFilterByGender] = useState("");
@@ -8,7 +9,9 @@ function PetsFilter(props) {
   const [genderClicked, setGenderClicked] = useState(false);
   const [ageClicked, setAgeClicked] = useState(false);
 
-  useEffect(() => {}, [filterByGender, filterByPet, filterByAge]);
+  useEffect(() => {
+    props.history.push("/pets/1");
+  }, [filterByGender, filterByPet, filterByAge]);
   return (
     <div className={`bg-light-custom  border-irregular1 pt-2`}>
       <p
@@ -60,12 +63,7 @@ function PetsFilter(props) {
         id="collapseExample"
         style={{ width: "50%", margin: "0px auto" }}
       >
-        <div
-          className="card card-body border-irregular1"
-          // onChange={(e) => {
-          //   props.getPets(filterByGender, filterByPet, filterByAge);
-          // }}
-        >
+        <div className="card card-body border-irregular1">
           <div className="custom-control custom-checkbox custom-control-inline">
             <input
               type="checkbox"
@@ -261,4 +259,4 @@ function PetsFilter(props) {
   );
 }
 
-export default PetsFilter;
+export default withRouter(PetsFilter);

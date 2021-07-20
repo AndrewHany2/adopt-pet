@@ -46,7 +46,6 @@ function PetsGallery(props) {
           </p>
         </div>
       </div>
-
       <div className="container">
         <PetsFilter getPets={handlePetsList}></PetsFilter>
         <div className="mt-5">
