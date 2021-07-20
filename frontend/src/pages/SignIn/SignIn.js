@@ -57,6 +57,9 @@ function SignIn(props) {
   };
 
   const login = () => {
+    const myErrors = {...errors}
+    myErrors.credentialsInvalid = "";
+    setErrors(myErrors)
     if (
       !schema.password.validate(credentials.password).error &&
       !schema.email.validate(credentials.email).error
@@ -81,9 +84,18 @@ function SignIn(props) {
       <div className="container-fluid bg-img">
         <div className=" row justify-content-center  align-content-center">
           <div className="box col-lg-4 col-md-8 mb-3 mt-5">
-            {errors.loginInvalid && (
+            <div className="d-flex justify-content-center">
+          <p className="text-inverse text-center mt-4 border alert-info theme-border w-75">
+              New User?{" "}
+              <Link to="/signup" data-abc="true">
+                Sign Up
+              </Link>
+            </p>
+            </div>
+              
+            {userLogin.error && (
               <div className="alert alert-danger d-block mt-4 theme-border">
-                {errors.loginInvalid}
+                {userLogin.error}
               </div>
             )}
             {errors.credentialsInvalid && (
@@ -176,12 +188,7 @@ function SignIn(props) {
             </div>
 
             <div className="dropdown-divider p-1"></div>
-            <p className="text-inverse text-center">
-              New User?{" "}
-              <Link to="/signup" data-abc="true">
-                Sign Up
-              </Link>
-            </p>
+            
             <p className="text-inverse text-center mb-2">
               <Link
                 className="active"
