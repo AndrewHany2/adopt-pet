@@ -4,7 +4,7 @@ import PetsCards from "../../components/PetsCards";
 import PetsFilter from "../../components/PetsFilter";
 import { NavLink as Link } from "react-router-dom";
 import { getPets } from "./../../store/actions/petActions";
-import LoadingScreen from "../../components/Loading/loading";
+import Loading from "../../components/loadingComponent/loadingComponent";
 import "./petsGallery.css";
 
 function PetsGallery(props) {
@@ -50,7 +50,7 @@ function PetsGallery(props) {
         <PetsFilter getPets={handlePetsList}></PetsFilter>
         <div className="mt-5">
           {pets.loading ? (
-            <LoadingScreen></LoadingScreen>
+            <Loading></Loading>
           ) : (
             <PetsCards pets={pets}></PetsCards>
           )}

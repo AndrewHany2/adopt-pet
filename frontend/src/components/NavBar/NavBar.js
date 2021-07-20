@@ -5,8 +5,10 @@ import "./NavBar.css";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function NavBar() {
+  const userLogin = useSelector((state) => state.userLogin);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-nav main-nav">

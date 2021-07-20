@@ -123,7 +123,7 @@ userRouter.post("/login", async (req, res, next) => {
         const match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
-          res.status(200).json({ token });
+          res.status(200).json({ token, userId: user._id });
         } else {
           return res.status(400).json({ message: "password invalid" });
         }
