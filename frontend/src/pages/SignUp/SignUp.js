@@ -3,9 +3,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import LoginFacebook from "./../../components/LoginFacebook";
 import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
@@ -137,13 +134,17 @@ function SignUp() {
     delete myData.passwordObj;
     delete myData.city;
     delete myData.country;
+
+    const wrapData = {...userInfo}
+    delete wrapData.passwordObj
+    wrapData.password = myPassword.password
     console.log(myData);
     if (
       !fullSchema.validate(myData).error &&
       !passwordSchema.validate(myPassword).error
     ) {
       try {
-        const { data } = await axios.post("api/user/register", userInfo);
+        const { data } = await axios.post("/api/user/register", wrapData);
         console.log(data);
       } catch (error) {
         let myErrors = { ...errors };
@@ -166,7 +167,7 @@ function SignUp() {
 
   return (
     <>
-      <div className="container-fluid bg-img">
+      <div className="container-fluid pb-5">
         <div className="row justify-content-center  align-content-center">
           <div className="col-12 col-md-7 box mt-5 px-lg-5">
             {errors.formValid && (

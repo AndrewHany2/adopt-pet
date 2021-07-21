@@ -81,11 +81,11 @@ function SignIn(props) {
 
   return (
     <>
-      <div className="container-fluid bg-img">
+      <div className="container-fluid pb-5">
         <div className=" row justify-content-center  align-content-center">
           <div className="box col-lg-4 col-md-8 mb-3 mt-5">
             <div className="d-flex justify-content-center">
-          <p className="text-inverse text-center mt-4 border alert-info theme-border w-75">
+          <p className="text-inverse text-center mt-4 border alert-danger p-2 theme-border w-75">
               New User?{" "}
               <Link to="/signup" data-abc="true">
                 Sign Up

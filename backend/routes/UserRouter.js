@@ -123,7 +123,7 @@ userRouter.post("/login", async (req, res, next) => {
         const match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
-          res.status(200).json({ token, userId: user._id });
+          res.status(200).json({ token: token, userId: user._id, userRole:user.role });
         } else {
           return res.status(400).json({ message: "password invalid" });
         }
@@ -142,7 +142,7 @@ userRouter.post("/register", async (req, res) => {
   try {
     existingUser = await User.findOne({ email: body.email });
     if (existingUser) {
-      return res.status(400).json({ status: "Email already exists" });
+      return res.status(400).json({ message: "Email already exists" });
     } else {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(body.password, salt);
