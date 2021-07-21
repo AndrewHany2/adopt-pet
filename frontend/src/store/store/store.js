@@ -6,16 +6,29 @@ import {
 } from "../reducers/petReducers";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { UserLoginReducer } from "../reducers/UserReducer";
+import { getUserReducer, UserLoginReducer, UserRegisterReducer } from "../reducers/UserReducer";
 
 const reducer = combineReducers({
   pets: petListReducer,
   pet: petInfoReducer,
   petsFrom: postPetReducer,
   userLogin: UserLoginReducer,
+  userData: getUserReducer,
+  registerData: UserRegisterReducer,
 });
 
-const intialState = {};
+let intialState = {};
+
+const userInfo = window.localStorage.getItem("userInfo");
+if (userInfo) {
+  intialState = {
+    userLogin: {
+      loading: false,
+      success: true,
+      info: JSON.parse(userInfo),
+    },
+  };
+}
 
 const middleware = [thunk];
 

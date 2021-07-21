@@ -13,13 +13,15 @@ import { Login } from "../../store/actions/UserActions";
 function SignIn(props) {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
+  const registerData = useSelector((state) => state.registerData);
+
   const [errors, setErrors] = useState({
     email: "",
     password: "",
     loginInvalid: "",
     credentialsInvalid: "",
   });
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({ email:registerData.info?registerData.info.email:"", password: "" });
 
 
   const schema = {

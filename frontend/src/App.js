@@ -11,6 +11,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 
 import ContactUs from "./pages/ContactUs/contactUs";
+import SignOut from "./components/SignOut";
 function App() {
   return (
     <Router>
@@ -24,6 +25,8 @@ function App() {
         <Route path="/about" component={About}></Route>
         <Route path="/profile/:id" component={Profile}></Route>
         <Route path="/contactus" component={ContactUs}></Route>
+        <Route path="/signout" component={SignOut}></Route>
+
       </Switch>
       <Footer />
     </Router>
