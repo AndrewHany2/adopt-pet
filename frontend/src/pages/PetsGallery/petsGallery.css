@@ -86,7 +86,27 @@
 .page-link:hover {
   background-color: #f9575c !important;
 }
-
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: 46%/46% 100% no-repeat;
+  background-color: #000;
+  border-radius: 50%;
+}
+.carousel-control-prev {
+  left: 40%;
+}
+.carousel-control-next {
+  right: 40%;
+}
+.myimg {
+  width: 200px; /* width of container */
+  height: 200px; /* height of container */
+  object-fit: cover;
+  object-position: 50% 10%; /* try 20px 10px */
+}
 @media only screen and (max-width: 900px) {
   .adoptionFont {
     font-size: 3rem;

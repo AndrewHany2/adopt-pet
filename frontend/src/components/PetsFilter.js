@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPets } from "./../store/actions/petActions";
+import { withRouter } from "react-router-dom";
 
-function PetsFilter() {
+function PetsFilter(props) {
   const [filterByGender, setFilterByGender] = useState("");
-  const [filterByPet, setFilterByPet] = useState("");
+  const [filterByPet, setFilterByPet] = useState([]);
   const [filterByAge, setFilterByAge] = useState("");
   const [kindClicked, setKindClicked] = useState(false);
   const [genderClicked, setGenderClicked] = useState(false);
   const [ageClicked, setAgeClicked] = useState(false);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getPets(filterByGender, filterByPet, filterByAge));
-  });
+    props.history.push("/pets/1");
+  }, [filterByGender, filterByPet, filterByAge]);
   return (
-    <div className={`bg-light-custom  border-irregular1 py-3`}>
+    <div className={`bg-light-custom  border-irregular1 pt-2`}>
       <p
-        className="m-0"
+        className="m-0 pb-2"
         style={{ display: "flex", justifyContent: "space-around" }}
       >
         <button
@@ -30,7 +27,6 @@ function PetsFilter() {
           aria-controls="collapseExample"
           onClick={() => {
             setKindClicked(!kindClicked);
-            console.log(kindClicked);
           }}
         >
           Kind
@@ -63,7 +59,7 @@ function PetsFilter() {
         </button>
       </p>
       <div
-        className="collapse pb-4"
+        className="collapse pb-3"
         id="collapseExample"
         style={{ width: "50%", margin: "0px auto" }}
       >
@@ -74,7 +70,20 @@ function PetsFilter() {
               className="custom-control-input"
               id="customCheck1"
               onChange={(e) => {
-                e.target.checked ? setFilterByPet("cat") : setFilterByPet("");
+                if (e.target.checked) {
+                  let tempArr = [...filterByPet];
+                  tempArr.push("cat");
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                } else {
+                  const index = filterByPet.findIndex(
+                    (element) => element === "cat"
+                  );
+                  let tempArr = [...filterByPet];
+                  tempArr.splice(index, 1);
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                }
               }}
             />
             <label className="custom-control-label" htmlFor="customCheck1">
@@ -87,7 +96,20 @@ function PetsFilter() {
               className="custom-control-input"
               id="customCheck2"
               onChange={(e) => {
-                e.target.checked ? setFilterByPet("dog") : setFilterByPet("");
+                if (e.target.checked) {
+                  let tempArr = [...filterByPet];
+                  tempArr.push("dog");
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                } else {
+                  const index = filterByPet.findIndex(
+                    (element) => element === "dog"
+                  );
+                  let tempArr = [...filterByPet];
+                  tempArr.splice(index, 1);
+                  setFilterByPet(tempArr);
+                  props.getPets(filterByGender, tempArr, filterByAge);
+                }
               }}
             />
             <label className="custom-control-label" htmlFor="customCheck2">
@@ -97,11 +119,16 @@ function PetsFilter() {
         </div>
       </div>
       <div
-        className="collapse pb-4"
+        className="collapse pb-3"
         id="collapseExample1"
         style={{ width: "50%", margin: "0px auto" }}
       >
-        <div className="card card-body border-irregular1">
+        <div
+          className="card card-body border-irregular1"
+          onChange={(e) => {
+            props.getPets(filterByGender, filterByPet, filterByAge);
+          }}
+        >
           <div>
             <div className="custom-control custom-radio custom-control-inline">
               <input
@@ -153,7 +180,7 @@ function PetsFilter() {
         </div>
       </div>
       <div
-        className="collapse pb-4"
+        className="collapse pb-3"
         id="collapseExample3"
         style={{ width: "50%", margin: "0px auto" }}
       >
@@ -161,6 +188,7 @@ function PetsFilter() {
           className="card card-body border-irregular1"
           onChange={(e) => {
             setFilterByAge(e.target.value);
+            props.getPets(filterByGender, filterByPet, filterByAge);
           }}
         >
           <div>
@@ -231,4 +259,4 @@ function PetsFilter() {
   );
 }
 
-export default PetsFilter;
+export default withRouter(PetsFilter);

@@ -3,12 +3,11 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import { useState } from "react";
-import Joi from "joi";
 import LoginFacebook from "./../../components/LoginFacebook";
 import LoginGoogle from "./../../components/LoginGoogle";
+import { useState } from "react";
+import Joi from "joi";
 import axios from "axios";
-
 
 function SignUp() {
   const [userInfo, setUserInfo] = useState({
@@ -29,8 +28,8 @@ function SignUp() {
     phone: "",
     password: "",
     repeatPassword: "",
-    formValid:"",
-    registerFailed:"",
+    formValid: "",
+    registerFailed: "",
   });
 
   const fullSchema = Joi.object({
@@ -135,45 +134,52 @@ function SignUp() {
     delete myData.passwordObj;
     delete myData.city;
     delete myData.country;
-    console.log(myData)
-    if (!fullSchema.validate(myData).error && !passwordSchema.validate(myPassword).error) {
-      try{
-        const {data} = await axios.post("api/user/register",userInfo);
-        console.log(data)
-      }catch(error){
-         let myErrors = {...errors}
-          myErrors.registerFailed = error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-          myErrors.credentialsInvalid="";
-          setErrors(myErrors)
-          console.log(myErrors.registerFailed)
+
+    const wrapData = {...userInfo}
+    delete wrapData.passwordObj
+    wrapData.password = myPassword.password
+    console.log(myData);
+    if (
+      !fullSchema.validate(myData).error &&
+      !passwordSchema.validate(myPassword).error
+    ) {
+      try {
+        const { data } = await axios.post("/api/user/register", wrapData);
+        console.log(data);
+      } catch (error) {
+        let myErrors = { ...errors };
+        myErrors.registerFailed =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        myErrors.credentialsInvalid = "";
+        setErrors(myErrors);
+        console.log(myErrors.registerFailed);
       }
-       }
-       else{
-        let myErrors = {...errors}
-        myErrors.formValid = "Please enter valid info at all fields"
-        setErrors(myErrors)
-        console.log(myErrors.formValid)
-       }
-      };
+    } else {
+      let myErrors = { ...errors };
+      myErrors.formValid = "Please enter valid info at all fields";
+      setErrors(myErrors);
+      console.log(myErrors.formValid);
+    }
+  };
 
 
   return (
     <>
-      <div className="container-fluid bg-img">
+      <div className="container-fluid pb-5">
         <div className="row justify-content-center  align-content-center">
           <div className="col-12 col-md-7 box mt-5 px-lg-5">
-          {errors.formValid && (
-                  <div className="alert alert-danger d-block mt-5 theme-border">
-                    {errors.formValid}
-                  </div>
-                )}
-                {errors.registerFailed && (
-                  <div className="alert alert-danger d-block mt-5 theme-border">
-                    {errors.registerFailed}
-                  </div>
-                )}
+            {errors.formValid && (
+              <div className="alert alert-danger d-block mt-5 theme-border">
+                {errors.formValid}
+              </div>
+            )}
+            {errors.registerFailed && (
+              <div className="alert alert-danger d-block mt-5 theme-border">
+                {errors.registerFailed}
+              </div>
+            )}
             <form>
               <div className="form-row mt-4 mr-3 ml-3 pt-5 pb-2">
                 <div className="col-md-6 mb-3">
@@ -182,8 +188,8 @@ function SignUp() {
                     type="text"
                     className="form-control theme-border"
                     id="firstName"
-
                     required
+
 
                     value={userInfo.firstName}
                     onChange={validateFields}
@@ -232,7 +238,6 @@ function SignUp() {
               {errors.email && (
 
                 <div className="alert alert-danger theme-border">{errors.email}</div>
-
               )}
               <div className="form-row mr-3 ml-3 pb-2">
                 <div className="col-12 mb-3">
@@ -279,7 +284,6 @@ function SignUp() {
                     type="password"
                     className="form-control theme-border"
                     id="password"
-                    
                     value={userInfo.password}
                     onChange={validatePassword}
                   />
@@ -290,13 +294,14 @@ function SignUp() {
                     type="password"
                     className="form-control theme-border"
                     id="repeatPassword"
-                    
                     value={userInfo.repeatPassword}
                     onChange={validatePassword}
                   />
                 </div>
                 {errors.password && (
-                  <div className="alert alert-danger theme-border">{errors.password}</div>
+                  <div className="alert alert-danger theme-border">
+                    {errors.password}
+                  </div>
                 )}
                 {errors.repeatPassword && (
                   <div className="alert alert-danger theme-border">
@@ -310,7 +315,6 @@ function SignUp() {
                     className="form-check-input theme-border"
                     type="checkbox"
                     id="invalidCheck"
-                    
                   />
                   <label className="form-check-label" htmlFor="invalidCheck">
                     Agree to terms and conditions
