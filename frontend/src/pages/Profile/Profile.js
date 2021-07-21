@@ -12,10 +12,12 @@ function Profile() {
   const [user, setUser] = useState({})
   useEffect( () => {
    const getUser = async ()=>{
+   const userInfo =JSON.parse(window.localStorage.getItem("userInfo"))
+
 
       const header = {
         headers: {
-          Authorization: window.localStorage.getItem("token")
+          Authorization: userInfo.token 
         }
       }
         const {data} = await axios.get(`/api/user/profile/${id}`,header);
