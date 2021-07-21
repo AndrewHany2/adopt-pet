@@ -18,11 +18,13 @@ export const getUser = (id) => async (dispatch) => {
        console.log(list)
     dispatch({
       type: "USER_DATA_SUCCESS",
+
       payload: list,
     });
   } catch (error) {
     dispatch({
       type: "USER_DATA_FAIL",
+
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -36,6 +38,7 @@ export const Login = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: "USER_LOGIN_REQUEST" });
     const { data } = await axios.post(`${baseURL}/login`, credentials);
+
     window.localStorage.setItem("userInfo", JSON.stringify(data));
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: data });
   } catch (error) {
