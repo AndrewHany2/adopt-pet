@@ -13,13 +13,17 @@ import { Login } from "../../store/actions/UserActions";
 function SignIn(props) {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
+  const registerData = useSelector((state) => state.registerData);
+
   const [errors, setErrors] = useState({
     email: "",
     password: "",
     loginInvalid: "",
     credentialsInvalid: "",
   });
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [credentials, setCredentials] = useState({ email:registerData.info?registerData.info.email:"", password: "" });
+
+
 
   const schema = {
     email: Joi.string()
@@ -56,6 +60,9 @@ function SignIn(props) {
   };
 
   const login = () => {
+    const myErrors = {...errors}
+    myErrors.credentialsInvalid = "";
+    setErrors(myErrors)
     if (
       !schema.password.validate(credentials.password).error &&
       !schema.email.validate(credentials.email).error
@@ -73,14 +80,25 @@ function SignIn(props) {
     }
   });
 
+
+
   return (
     <>
-      <div className="container-fluid bg-img">
+      <div className="container-fluid pb-5">
         <div className=" row justify-content-center  align-content-center">
           <div className="box col-lg-4 col-md-8 mb-3 mt-5">
-            {errors.loginInvalid && (
+            <div className="d-flex justify-content-center">
+          <p className="text-inverse text-center mt-4 border alert-danger p-2 theme-border w-75">
+              New User?{" "}
+              <Link to="/signup" data-abc="true">
+                Sign Up
+              </Link>
+            </p>
+            </div>
+              
+            {userLogin.error && (
               <div className="alert alert-danger d-block mt-4 theme-border">
-                {errors.loginInvalid}
+                {userLogin.error}
               </div>
             )}
             {errors.credentialsInvalid && (
@@ -101,11 +119,14 @@ function SignIn(props) {
                 />
               </div>
 
+
               {errors.email && (
                 <div className="alert alert-danger theme-border">
                   {errors.email}
                 </div>
               )}
+
+
 
               <div className="form-group ">
                 <label htmlFor="login-pss">Password</label>
@@ -119,11 +140,13 @@ function SignIn(props) {
                 />
               </div>
 
+
               {errors.password && (
                 <div className="alert alert-danger theme-border">
                   {errors.password}
                 </div>
               )}
+
 
               <div className="form-group p-2">
                 <div className="form-check">
@@ -141,7 +164,9 @@ function SignIn(props) {
                   </label>
                 </div>
                 <button
+
                   type="button"
+
                   className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
                   onClick={login}
                 >
@@ -166,12 +191,7 @@ function SignIn(props) {
             </div>
 
             <div className="dropdown-divider p-1"></div>
-            <p className="text-inverse text-center">
-              New User?{" "}
-              <Link to="/signup" data-abc="true">
-                Sign Up
-              </Link>
-            </p>
+            
             <p className="text-inverse text-center mb-2">
               <Link
                 className="active"

@@ -5,7 +5,7 @@ import "./NavBar.css";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function NavBar() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -63,22 +63,46 @@ function NavBar() {
                   Contact
                 </Link>
               </li>
-              <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/messanger">
-                  Messages
-                </Link>
-              </li>
-              <li className="nav-item ml-3 ml-lg-5">
-                <Link className="nav-link active" to="/signin">
-                  Sign In
-                </Link>
-              </li>
-              <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/signup">
-                  Sign Up
-                </Link>
-              </li>
-            </ul>
+              {!userLogin.success && (
+                <li className="nav-item ml-3 ml-lg-5">
+                  <Link className="nav-link active" to="/signin">
+                    Sign In / Sign UP
+                  </Link>
+                </li>
+              )}
+              </ul>
+              {userLogin.success && (
+                <ul  className="nav navbar-nav mx-auto nav-item-font ">
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link dropdown-toggle active"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Account
+                    </Link>
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
+                        Profile
+                      </Link>
+                      <Link className="dropdown-item" to="/signout">
+                        Log Out{" "}
+                      </Link>
+                      {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
+                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
+                        Dashboard{" "}
+                      </Link>}
+                    </div>
+                  </li>
+                </ul>
+              )}
           </div>
         </div>
       </nav>

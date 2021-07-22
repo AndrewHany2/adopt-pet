@@ -1,39 +1,28 @@
 import React from "react";
 import UserInfo from "../../components/UserInfo";
-import { useEffect, useState } from 'react'
-import { useParams } from "react-router"
-import PetInfo from './../../components/PetInfo';
+import { useEffect } from "react";
+import { useParams } from "react-router";
+import PetInfo from "./../../components/PetInfo";
 import PageHeader from "../../components/PageHeader";
-import axios from "axios";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../../store/actions/UserActions";
 
 function Profile() {
-  const { id } = useParams()
-  const [user, setUser] = useState({})
-  useEffect( () => {
-   const getUser = async ()=>{
+  const { id } = useParams();
+  const userData = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
 
-      const header = {
-        headers: {
-          Authorization: window.localStorage.getItem("token")
-        }
-      }
-        const {data} = await axios.get(`/api/user/profile/${id}`,header);
-        setUser(data);
 
-    }
-    getUser()
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, []);
 
-    }, [])
-
+  console.log(userData);
   return (
     <div>
-    <PageHeader title='Profile'/>
-    <UserInfo user={user}/>
-    {
-      user.pet ? <PetInfo info={user.pet}/> : ""
-
-    }
+      <PageHeader title="Profile" />
+      {userData?.info && <UserInfo user={userData.info} />}
+      {userData?.info && <PetInfo info={userData.info} />}
     </div>
   );
 }

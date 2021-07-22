@@ -1,18 +1,18 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import LoginFacebook from "./../../components/LoginFacebook";
 import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
 import Joi from "joi";
-import axios from "axios";
+import{useDispatch, useSelector} from "react-redux"
+import { RegisterUser } from "../../store/actions/UserActions";
 
-function SignUp() {
+function SignUp(props) {
+  const dispatch = useDispatch();
+  const registerData = useSelector((state)=>state.registerData)
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -137,24 +137,16 @@ function SignUp() {
     delete myData.passwordObj;
     delete myData.city;
     delete myData.country;
+
+    const wrapData = {...userInfo}
+    delete wrapData.passwordObj
+    wrapData.password = myPassword.password
     console.log(myData);
     if (
       !fullSchema.validate(myData).error &&
       !passwordSchema.validate(myPassword).error
     ) {
-      try {
-        const { data } = await axios.post("api/user/register", userInfo);
-        console.log(data);
-      } catch (error) {
-        let myErrors = { ...errors };
-        myErrors.registerFailed =
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message;
-        myErrors.credentialsInvalid = "";
-        setErrors(myErrors);
-        console.log(myErrors.registerFailed);
-      }
+      dispatch(RegisterUser(wrapData))
     } else {
       let myErrors = { ...errors };
       myErrors.formValid = "Please enter valid info at all fields";
@@ -162,10 +154,17 @@ function SignUp() {
       console.log(myErrors.formValid);
     }
   };
+  useEffect(() => {
+    if (registerData.success === true) {
+      props.history.push(`/signin`);
+    }
+  });
+
+
 
   return (
     <>
-      <div className="container-fluid bg-img">
+      <div className="container-fluid pb-5">
         <div className="row justify-content-center  align-content-center">
           <div className="col-12 col-md-7 box mt-5 px-lg-5">
             {errors.formValid && (
@@ -173,9 +172,9 @@ function SignUp() {
                 {errors.formValid}
               </div>
             )}
-            {errors.registerFailed && (
+            {registerData.error && (
               <div className="alert alert-danger d-block mt-5 theme-border">
-                {errors.registerFailed}
+                {registerData.error}
               </div>
             )}
             <form>
@@ -187,6 +186,8 @@ function SignUp() {
                     className="form-control theme-border"
                     id="firstName"
                     required
+
+
                     value={userInfo.firstName}
                     onChange={validateFields}
                   />
@@ -198,12 +199,15 @@ function SignUp() {
                     type="text"
                     className="form-control theme-border"
                     id="lastName"
+
                     required
+
                     value={userInfo.lastName}
                     onChange={validateFields}
                   />
                 </div>
                 {errors.firstName && (
+
                   <div className="alert alert-danger d-block theme-border">
                     {errors.firstName}
                   </div>
@@ -212,6 +216,7 @@ function SignUp() {
                   <div className="alert alert-danger d-block theme-border">
                     {errors.lastName}
                   </div>
+
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
@@ -228,15 +233,15 @@ function SignUp() {
                 </div>
               </div>
               {errors.email && (
-                <div className="alert alert-danger theme-border">
-                  {errors.email}
-                </div>
+
+                <div className="alert alert-danger theme-border">{errors.email}</div>
               )}
               <div className="form-row mr-3 ml-3 pb-2">
                 <div className="col-12 mb-3">
                   <label htmlFor="phone">Phone</label>
                   <input
                     type="number"
+
                     className="form-control theme-border"
                     id="phone"
                     value={userInfo.phone}
@@ -244,9 +249,9 @@ function SignUp() {
                   />
                 </div>
                 {errors.phone && (
-                  <div className="alert alert-danger theme-border">
-                    {errors.phone}
-                  </div>
+
+                  <div className="alert alert-danger theme-border">{errors.phone}</div>
+
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
