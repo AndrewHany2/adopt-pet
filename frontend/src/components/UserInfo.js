@@ -7,7 +7,7 @@ function UserInfo(props) {
       <div className="row">
           <div className="col-md-4">
           <img src={`../resources/${props.user.image}`} className="img-fluid about-img"/>
-          <div style={{ margin: '2rem 0 0 6rem'}}>
+          {/* <div style={{ margin: '2rem 0 0 6rem'}}>
             Adoption Request<label style={{    background: '#ef0707',
                                                 width: '12%',
                                                 borderRadius: '50%',
@@ -16,7 +16,7 @@ function UserInfo(props) {
                                                 color: '#fff',
                                                 margin: '0 0 0 1rem'
                                             }}>{props.user.request}</label>
-          </div>
+          </div> */}
           </div>
           <div className="col-md-8">
           <div className="card-body">

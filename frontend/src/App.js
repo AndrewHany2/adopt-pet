@@ -4,13 +4,18 @@ import PetsGallery from "./pages/PetsGallery/PetsGallery";
 import About from "./pages/About/About";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile/Profile";
+import EditProfile from "./pages/editProfile/editProfile";
 import PetsInfo from "./pages/PetsInfo/PetsInfo";
 import AdoptionApp from "./pages/AdoptionApp/adoptionApp";
 import NavBar from "./components/NavBar/NavBar";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
-
 import ContactUs from "./pages/ContactUs/contactUs";
+
+import DashboardPage from "./pages/Dashboard/Dashboard.js";
+import TableList from "./pages/TableList/TableList.js";
+import Typography from "./pages/Typography/Typography.js";
+
 function App() {
   return (
     <Router>
@@ -23,7 +28,12 @@ function App() {
         <Route path="/signup" component={SignUp}></Route>
         <Route path="/about" component={About}></Route>
         <Route path="/profile/:id" component={Profile}></Route>
+        <Route path="/edit/:id" component={EditProfile}></Route>
         <Route path="/contactus" component={ContactUs}></Route>
+        <Route path="/dashboard/home" component={DashboardPage}></Route>
+        <Route path="/dashboard/table" component={TableList}></Route>
+        <Route path="/dashboard/posts" component={Typography}></Route>
+
       </Switch>
       <Footer />
     </Router>
