@@ -4,6 +4,8 @@ const petRouter = require("./routes/petRouter");
 const express = require("express");
 const morgan = require("morgan");
 const userRouter = require("./routes/UserRouter");
+const conversationRoute = require("./routes/conversations");
+const messageRoute = require("./routes/messages");
 const app = express();
 db.connectDB();
 
@@ -21,7 +23,8 @@ app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).json({ message: err });
 });
-
+app.use("/api/conversations", conversationRoute);
+app.use("/api/messages", messageRoute);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

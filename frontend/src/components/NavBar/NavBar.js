@@ -63,6 +63,11 @@ function NavBar() {
                   Contact
                 </Link>
               </li>
+              <li className="nav-item ml-3">
+                <Link className="nav-link active" to="/messanger">
+                  Messages
+                </Link>
+              </li>
               <li className="nav-item ml-3 ml-lg-5">
                 <Link className="nav-link active" to="/signin">
                   Sign In

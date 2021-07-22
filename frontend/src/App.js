@@ -9,8 +9,9 @@ import AdoptionApp from "./pages/AdoptionApp/adoptionApp";
 import NavBar from "./components/NavBar/NavBar";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
-
+import Messanger from "./pages/messenger/Messenger";
 import ContactUs from "./pages/ContactUs/contactUs";
+
 function App() {
   return (
     <Router>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/about" component={About}></Route>
         <Route path="/profile/:id" component={Profile}></Route>
         <Route path="/contactus" component={ContactUs}></Route>
+        <Route path="/messanger" component={Messanger}></Route>
       </Switch>
       <Footer />
     </Router>
