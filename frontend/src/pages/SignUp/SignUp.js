@@ -1,15 +1,18 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
 import LoginFacebook from "./../../components/LoginFacebook";
 import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
 import Joi from "joi";
-import axios from "axios";
+import{useDispatch, useSelector} from "react-redux"
+import { RegisterUser } from "../../store/actions/UserActions";
 
-function SignUp() {
+function SignUp(props) {
+  const dispatch = useDispatch();
+  const registerData = useSelector((state)=>state.registerData)
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -143,19 +146,7 @@ function SignUp() {
       !fullSchema.validate(myData).error &&
       !passwordSchema.validate(myPassword).error
     ) {
-      try {
-        const { data } = await axios.post("/api/user/register", wrapData);
-        console.log(data);
-      } catch (error) {
-        let myErrors = { ...errors };
-        myErrors.registerFailed =
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message;
-        myErrors.credentialsInvalid = "";
-        setErrors(myErrors);
-        console.log(myErrors.registerFailed);
-      }
+      dispatch(RegisterUser(wrapData))
     } else {
       let myErrors = { ...errors };
       myErrors.formValid = "Please enter valid info at all fields";
@@ -163,6 +154,12 @@ function SignUp() {
       console.log(myErrors.formValid);
     }
   };
+  useEffect(() => {
+    if (registerData.success === true) {
+      props.history.push(`/signin`);
+    }
+  });
+
 
 
   return (
@@ -175,9 +172,9 @@ function SignUp() {
                 {errors.formValid}
               </div>
             )}
-            {errors.registerFailed && (
+            {registerData.error && (
               <div className="alert alert-danger d-block mt-5 theme-border">
-                {errors.registerFailed}
+                {registerData.error}
               </div>
             )}
             <form>

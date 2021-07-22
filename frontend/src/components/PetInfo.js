@@ -1,44 +1,42 @@
 import React from "react";
 
-
-
-
-function PetInfo(props) {
-console.log(props)
+function PetInfo({ info }) {
   return (
-      <>
+    <>
       <div className="container">
         <div className="row">
-          <div className="col-md-3">
-            </div>
-            <div className="col-md-9">
-            <h3 style={{ margin: '0 0 1rem 0'}}>Pet Info</h3>
+          <div className="col-md-3"></div>
+          <div className="col-md-9">
+            <h3 style={{ margin: "0 0 1rem 0" }}>Pet Info</h3>
             <div className="table-responsive">
-            <img src={`../resources/${props.info.image}`} className="img-fluid about-img m-3"/>
+              <img
+                src={`../resources/${info.image}`}
+                className="img-fluid about-img m-3"
+                alt=""
+              />
 
               <table className="table">
                 <tbody>
                   <tr>
                     <th colSpan="3">Name</th>
-                    <td>{props.info.name}</td>
+                    <td>{info.firstName}</td> 
+                    <td>{info.lastName}</td>
                   </tr>
                   <tr>
                     <th colSpan="3">Gender</th>
-                    <td>{props.info.gender}</td>
+                    <td>{info.gender}</td>
                   </tr>
                   <tr>
                     <th colSpan="3">Type</th>
-                    <td>{props.info.type}</td>
+                    <td>{info.type}</td>
                   </tr>
                 </tbody>
               </table>
-
-
-              </div>
-              </div>
             </div>
-            </div>
-        </>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

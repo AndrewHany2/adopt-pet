@@ -16,6 +16,7 @@ import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import TableList from "./pages/TableList/TableList.js";
 import Typography from "./pages/Typography/Typography.js";
 
+import SignOut from "./components/SignOut";
 function App() {
   return (
     <Router>
@@ -33,6 +34,7 @@ function App() {
         <Route path="/dashboard/home" component={DashboardPage}></Route>
         <Route path="/dashboard/table" component={TableList}></Route>
         <Route path="/dashboard/posts" component={Typography}></Route>
+        <Route path="/signout" component={SignOut}></Route>
 
       </Switch>
       <Footer />
