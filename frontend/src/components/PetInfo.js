@@ -1,40 +1,138 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "font-awesome/css/font-awesome.min.css";
+import { Carousel } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-function PetInfo({ info }) {
+function PetInfo(props) {
+  const userLogin = useSelector((state) => state.userLogin);
+  console.log("inside Pet Info")
+    console.log(props)
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3"></div>
-          <div className="col-md-9">
-            <h3 style={{ margin: "0 0 1rem 0" }}>Pet Info</h3>
-            <div className="table-responsive">
-              <img
-                src={`../resources/${info.image}`}
-                className="img-fluid about-img m-3"
-                alt=""
-              />
+      <div className="page m-5 m-md-0">
+        <div className="container">
+          <div className="row mt-5">
+            <div className="row bg-light-custom border-irregular1">
+              <div className="row p-4 d-flex justify-content-around">
+                <div
+                  className="col-12 col-md-4 text-center"
+                  style={{ width: "300px" }}
+                >
+                  <Carousel>
+                    <Carousel.Item>
+                      <img
+                        className="border-irregular1 img-fluid w-100 myimg"
+                        src={props.petInfo.image}
+                        alt=""
+                      />{" "}
+                    </Carousel.Item>
+                    <Carousel.Item>
+                      <img
+                        className="border-irregular1 img-fluid w-100 myimg"
+                        src="/resources/adoption1-185x185.jpg"
+                        alt="Third slide"
+                      />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                      <img
+                        className="border-irregular1 img-fluid w-100 myimg"
+                        src="/resources/adoption2-185x185.jpg"
+                        alt="Third slide"
+                      />
+                    </Carousel.Item>
+                  </Carousel>
+                </div>
+                <div className="text-center text-md-left col-12 col-md-8 col-lg-4 mt-4">
+                  <div className="row">
+                    <h4 className="col-12">
+                      <strong>petInfo Name:</strong> {props.petInfo.name}
+                    </h4>
+                    <div className="col-sm-6">
+                      <ul className="list-unstyled petInfo-adopt-info">
+                        <li className="h7">
+                          Gender: <span> {props.petInfo.gender}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="col-sm-6">
+                      <ul className="list-unstyled petInfo-adopt-info">
+                        <li className="h7">
+                          Age: <span>{props.petInfo.age}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="col-sm-6">
+                      <ul className="list-unstyled petInfo-adopt-info">
+                        <li className="h7">
+                          Breed: <span> Poodle</span>
+                        </li>
+                      </ul>
+                    </div>
 
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <th colSpan="3">Name</th>
-                    <td>{info.firstName}</td> 
-                    <td>{info.lastName}</td>
-                  
-                  </tr>
-                  <tr>
+                    <div className="col-sm-6">
+                      <ul className="list-unstyled petInfo-adopt-info">
+                        <li className="h7">
+                          Vaccinated: <span> {props.petInfo.vaccinated}</span>
+                        </li>
+                      </ul>
+                    </div>
 
-                    <th colSpan="3">Gender</th>
-                    <td>{info.gender}</td>
-                  </tr>
-                  <tr>
-                    <th colSpan="3">Type</th>
-                    <td>{info.type}</td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div className="col-sm-6">
+                      <ul className="list-unstyled petInfo-adopt-info">
+                        <li className="h7">
+                          Size: <span> {props.petInfo.size}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    {userLogin.info ? (
+                      <>
+                        <div className="col-sm-6 col-md-8">
+                          <button className="btn btn-primary">Adopt</button>
+                          <button className="btn btn-primary">
+                            Message Owner
+                          </button>
+                        </div>
+                        <div className="col-sm-6 col-md-8 mt-3"></div>
+                      </>
+                    ) : (
+                      <div className="col-sm-6 col-md-8">
+                        <div class="alert alert-danger" role="alert">
+                          Login to adopt
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div className="mt-5">
+            <h3>About Lucky</h3>
+            <ul className="custom list-inline font-weight-bold">
+              <li className="list-inline-item">
+                <i
+                  className="fa fa-paw mr-1"
+                  style={{ color: "#f9575c", fontSize: "1.3vw" }}
+                ></i>
+                Friendly to other dogs
+              </li>
+              <li className="list-inline-item">
+                <i
+                  className="fa fa-paw mr-1"
+                  style={{ color: "#f9575c", fontSize: "1.3vw" }}
+                ></i>
+                Good for Apartments
+              </li>
+              <li className="list-inline-item">
+                <i
+                  className="fa fa-paw mr-1"
+                  style={{ color: "#f9575c", fontSize: "1.3vw" }}
+                ></i>
+                Friendly with Kids
+              </li>
+            </ul>
+            <p style={{ display: "block" }}>{props.petInfo.description}</p>
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ function PetsInfo({ match }) {
   const userLogin = useSelector((state) => state.userLogin);
 
   useEffect(() => {
+    console.log(id,"*****************")
     dispatch(getPetInfo(id));
   }, [dispatch, id]);
   return (

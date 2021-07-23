@@ -50,7 +50,7 @@ const userSchema = mongoose.Schema({
   },
   phone: {
     type: String
-  }
+  },
 });
 
 const User = mongoose.model("User", userSchema);

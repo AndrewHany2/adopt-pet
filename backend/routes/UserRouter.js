@@ -252,4 +252,36 @@ userRouter.get("/:id", async (req, res) => {
   catch (error) { console.log(error); return res.status(500).json(error); };
 });
 
+userRouter.put("/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findOne({ _id: id });
+    const firstName = req.body.firstName || user.firstName;
+    const lastName = req.body.lastName || user.lastName;
+    const email = req.body.email || user.email;
+    const country = req.body.country || user.country;
+    const phone = req.body.phone || user.phone;
+    const city = req.body.city || user.city;
+
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.country = country;
+    user.phone = phone;
+    user.city = city;
+    user.country = country;
+    user.phone = phone;
+
+    req.body.postedPets?user.postedPets.push(req.body.postedPets):user.postedPets;
+    req.body.adoptionRequests?user.adoptionRequests.push(req.body.adoptionRequests):user.adoptionRequests;
+
+    const response = await user.save();
+    if (response) {
+      res.status(200).json({ response: response });
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = userRouter;

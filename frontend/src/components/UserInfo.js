@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserInfo(props) {
+function UserInfo({userInfo}) {
   const requestStyles = {
     background: "#ef0707",
     width: "12%",
@@ -12,15 +12,15 @@ function UserInfo(props) {
   }
   
   return (
-    <div className="container" style={{ margin: "3rem 2rem" }}>
-      <div className="row">
-          <div className="col-md-4">
+    <div className="container d-flex" style={{ margin: "3rem 2rem" }}>
+      <div className="row justify-content-center">
+          <div className="col-md-4 ">
           <img src={
-            props.user.image?
-            `../resources/${props.user.image}`
+            userInfo.image?
+            `../resources/${userInfo.image}`
             : '/assets/person/noAvatar.png'
           }
-             className="img-fluid about-img"/>
+             className="img-fluid about-img" alt=""/>
           {/* <div style={{ margin: '2rem 0 0 6rem'}}>
             Adoption Request<label style={{    background: '#ef0707',
                                                 width: '12%',
@@ -29,34 +29,34 @@ function UserInfo(props) {
                                                 padding: '0 0 0 0.6rem',
                                                 color: '#fff',
                                                 margin: '0 0 0 1rem'
-                                            }}>{props.user.request}</label>
+                                            }}>{userInfo.request}</label>
           </div> */}
           </div>
         </div>
         <div className="col-md-8">
           <div className="card-body">
             <h5 className="card-title text-primary display-5 mb-5">
-              {props.user.name}
+              {userInfo.name}
             </h5>
             <div className="table-responsive">
               <table className="table">
                 <tbody>
                   <tr>
                     <th colSpan="3">Name</th>
-                    <td>{props.user.firstName} {props.user.lastName}</td>
+                    <td>{userInfo.firstName} {userInfo.lastName}</td>
 
                   </tr>
                   <tr>
                     <th colSpan="3">Email</th>
-                    <td>{props.user.email}</td>
+                    <td>{userInfo.email}</td>
                   </tr>
                   <tr>
                     <th colSpan="3">City</th>
-                    <td>{props.user.city}</td>
+                    <td>{userInfo.city}</td>
                   </tr>
                   <tr>
                     <th colSpan="3">Phone </th>
-                    <td>{props.user.phone}</td>
+                    <td>{userInfo.phone}</td>
                   </tr>
                   <tr>
                     <th colSpan="3"></th>

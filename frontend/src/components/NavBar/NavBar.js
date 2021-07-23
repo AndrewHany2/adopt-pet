@@ -48,24 +48,13 @@ function NavBar() {
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="#">
-                  Services
-                </Link>
-              </li>
-
-              <li className="nav-item ml-3">
                 <Link className="nav-link active" to="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="#">
+                <Link className="nav-link active" to="/contactus                        ">
                   Contact
-                </Link>
-              </li>
-              <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/messanger">
-                  Messeges
                 </Link>
               </li>
               {!userLogin.success && (
@@ -86,7 +75,7 @@ function NavBar() {
             {userLogin.success && (
               <>
                 <ul className="nav navbar-nav mx-auto nav-item-font ">
-                  <li className="nav-item dropdown">
+                  <li className="nav-item dropdown ml-3">
                     <Link
                       className="nav-link dropdown-toggle active"
                       href="#"
@@ -102,18 +91,26 @@ function NavBar() {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
-
+                      <Link
+                        className="dropdown-item"
+                        to={`/profile/${userLogin.info.userId}`}
+                      >
                         Profile
+                      </Link>
+                      <Link  className="dropdown-item"  to="/messanger">
+                        Messeges
                       </Link>
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
                       </Link>
-                      {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
-                        Dashboard{" "}
-                      </Link>}
-
+                      {userLogin.info.userRole === "ADMIN" && (
+                        <div className="dropdown-divider"></div>
+                      )}
+                      {userLogin.info.userRole === "ADMIN" && (
+                        <Link className="dropdown-item" to="#">
+                          Dashboard{" "}
+                        </Link>
+                      )}
                     </div>
                   </li>
                 </ul>

@@ -109,7 +109,7 @@ petRouter.post("/", upload, (req, res) => {
     owner: req.body.owner,
   });
   pet
-    .save()
+    .save().then(()=>{})
     .then((result) => {
       res.status(201).json({ petId: result._id });
     })
@@ -118,5 +118,24 @@ petRouter.post("/", upload, (req, res) => {
       res.status(400).json(err);
     });
 });
+
+petRouter.get("/userpets/list",async(req,res)=>{
+
+const query = req.query.postedpets;
+pets = query.split(",");
+console.log(pets[0])
+try{
+
+  const userPetList = await Pet.find({_id : {$in:pets}})
+
+  
+  return res.status(201).json(userPetList)
+}catch(error){
+  return res.status(400).json(error);
+}
+
+
+
+})
 
 module.exports = petRouter;
