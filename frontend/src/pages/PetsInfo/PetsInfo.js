@@ -39,13 +39,25 @@ function PetsInfo({ match, history }) {
     }
   };
   const sendMessage = async () => {
-    const result = await axios.post(`/api/conversations`, {
-      senderId: userLogin.info.userId,
-      receiverId: pet.info.owner,
-    });
-    if (result) {
+    const checkCoversation = await axios.get(
+      `/api/conversations/find/${userLogin.info.userId}/${pet.info.owner}`
+    );
+    if (!checkCoversation.data) {
+      console.log("sdas");
+      const result = await axios.post(`/api/conversations`, {
+        senderId: userLogin.info.userId,
+        receiverId: pet.info.owner,
+      });
+      if (result) {
+        await axios.post(`/api/messages`, {
+          conversationId: result.data._id,
+          sender: userLogin.info.userId,
+          text: message,
+        });
+      }
+    } else if (checkCoversation.data) {
       await axios.post(`/api/messages`, {
-        conversationId: result.data._id,
+        conversationId: checkCoversation.data._id,
         sender: userLogin.info.userId,
         text: message,
       });
