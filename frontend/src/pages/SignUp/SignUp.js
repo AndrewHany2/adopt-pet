@@ -7,14 +7,12 @@ import LoginFacebook from "./../../components/LoginFacebook";
 import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
 import Joi from "joi";
-
 import { useDispatch, useSelector } from "react-redux"
-
 import { RegisterUser } from "../../store/actions/UserActions";
 
 function SignUp(props) {
   const dispatch = useDispatch();
-  const registerData = useSelector((state)=>state.registerData)
+  const registerData = useSelector((state) => state.registerData)
 
   const [userInfo, setUserInfo] = useState({
     firstName: "",
