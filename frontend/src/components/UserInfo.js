@@ -65,14 +65,6 @@ function UserInfo(props) {
                 </tbody>
               </table>
             </div>
-            <a class="me-4" style={{ margin: "1rem" }}>
-              <button class="btn btn-lg btn-success">
-                <i class="fa fa-pencil-square"></i>
-              </button>
-            </a>
-            <button class="btn btn-lg btn-danger">
-              <i class="fa fa-trash"></i>
-            </button>
           </div>
         </div>
       </div>

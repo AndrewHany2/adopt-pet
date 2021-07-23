@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPetInfo } from "../../store/actions/petActions";
-import { Link } from "react-router-dom";
 import "font-awesome/css/font-awesome.min.css";
 import { Carousel } from "react-bootstrap";
 
