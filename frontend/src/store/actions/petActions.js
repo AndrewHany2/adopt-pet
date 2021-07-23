@@ -53,7 +53,7 @@ export const getPetInfo = (id) => async (dispatch) => {
 export const adoptpet = (pet) => async (dispatch) => {
   try {
     dispatch({ type: "PET_ADOPT_REQUEST" });
-    const { data } = await axios.post(`${baseURL}/adopt`, pet);
+    const { data } = await axios.post(`${baseURL}`, pet);
     dispatch({
       type: "PET_ADOPT_SUCCESS",
       payload: data,

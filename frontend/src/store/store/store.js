@@ -11,7 +11,7 @@ import { getUserReducer, UserLoginReducer, UserRegisterReducer } from "../reduce
 const reducer = combineReducers({
   pets: petListReducer,
   pet: petInfoReducer,
-  petsFrom: postPetReducer,
+  petsForm: postPetReducer,
   userLogin: UserLoginReducer,
   userData: getUserReducer,
   registerData: UserRegisterReducer,

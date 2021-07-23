@@ -81,38 +81,68 @@ passport.deserializeUser(function (obj, cb) {
   cb(null, obj);
 });
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID:
-        "714325331151-ae7jueb7a25q79nc13h346u35f2pk00p.apps.googleusercontent.com",
-      clientSecret: "YIQQAK4ZokbI10Q1lqOgHpeu",
-      callbackURL: "http://localhost:8000/api/user/login/google/callback",
-      passReqToCallback: true,
-    },
-    function (request, accessToken, refreshToken, profile, done) {
-      console.log(profile);
-      return done(null, profile);
-    }
-  )
-);
 
-userRouter.get(
-  "/login/google",
-  passport.authenticate("google", {
-    scope: ["email", "profile"],
-  })
-);
-
-userRouter.get(
-  "/login/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "http://localhost:3000/signin",
-  }),
-  function (req, res) {
-    res.redirect("http://localhost:3000/");
+passport.use(new GoogleStrategy({
+  clientID: "714325331151-am2l8ga5p9kjh647rjaqf9lnhma5bg0g.apps.googleusercontent.com",
+  clientSecret: "TfI-HWOiXh4LFYG1bU4xm-Bc",
+  callbackURL: "/login/google/callback",
+},
+async (accessToken, refreshToken, profile, done) => {
+  console.log(profile);
+  //get the user data from google 
+  const newUser = {
+    googleId: profile.id,
+    firstName: profile.name.givenName,
+    lastName: profile.name.familyName,
+    email: profile.emails[0].value
   }
+
+  try {
+    //find the user in our database 
+    let user = await User.findOne({ googleId: profile.id })
+
+    if (user) {
+      //If user present in our database.
+      done(null, user)
+    } else {
+      // if user is not preset in our database save user data to database.
+      user = await User.create(newUser)
+      done(null, user)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+));
+
+
+userRouter.get('/login/google',
+    passport.authenticate('google', {
+            scope:
+                ['email', 'profile']
+        }
+    ));
+
+userRouter.get('/login/google/callback',
+    passport.authenticate('google', {
+        failureRedirect: 'http://localhost:3000/signin',
+    }),
+    function (req, res) {
+        res.redirect('http://localhost:3000/')
+    }
 );
+
+
+// Used to stuff a piece of information into a cookie
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+// Used to decode the received cookie and persist session
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 userRouter.post("/login", async (req, res, next) => {
   const { body } = req;
@@ -147,13 +177,16 @@ userRouter.post("/register", async (req, res) => {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(body.password, salt);
       body.password = hashedPassword;
-
+      console.log(req.body);
       const user = new User({
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
         age: body.age,
         password: body.password,
+        country: body.country,
+        city: body.city,
+        phone: body.phone
       });
       const savedUser = await user.save();
       return res.status(201).json(savedUser);
@@ -210,5 +243,13 @@ userRouter.delete("/", async (req, res) => {
 //     return res.status(500).json(error);
 //   }
 // });
+
+userRouter.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    return res.status(200).json(user);
+  }
+  catch (error) { console.log(error); return res.status(500).json(error); };
+});
 
 module.exports = userRouter;

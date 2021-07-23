@@ -12,6 +12,7 @@ function Profile() {
   const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(getUser(id));
   }, []);
