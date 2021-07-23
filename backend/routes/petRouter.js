@@ -19,7 +19,7 @@ petRouter.get("/", async (req, res, next) => {
   try {
     const queries = req.query;
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 4;
+    const limit = parseInt(req.query.limit) || 8;
     delete queries.limit;
     delete queries.page;
     switch (queries.age) {

@@ -16,12 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const path = require("path");
+
 app.use("/images", express.static(path.join(__dirname, "/images")));
-
 app.use("/api/user", userRouter);
-
 app.use("/api/pets", petRouter);
-
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/admin", dashboard);

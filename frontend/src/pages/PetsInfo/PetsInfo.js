@@ -5,17 +5,22 @@ import { getUser } from "../../store/actions/UserActions";
 import "font-awesome/css/font-awesome.min.css";
 import { Carousel } from "react-bootstrap";
 import axios from "axios";
+import { Modal, Button, Form } from "react-bootstrap";
 
-function PetsInfo({ match }) {
+function PetsInfo({ match, history }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [show, setShow] = useState(false);
   const [alreadyRequested, setAlreadyRequested] = useState(false);
-
+  const [message, setMessage] = useState("");
   const id = match.params.id;
   const dispatch = useDispatch();
   const pet = useSelector((state) => state.pet);
   const userLogin = useSelector((state) => state.userLogin);
   const userData = useSelector((state) => state.userData);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleAdopt = async () => {
     try {
@@ -33,21 +38,39 @@ function PetsInfo({ match }) {
       console.log(error);
     }
   };
-
+  const sendMessage = async () => {
+    const result = await axios.post(`/api/conversations`, {
+      senderId: userLogin.info.userId,
+      receiverId: pet.info.owner,
+    });
+    if (result) {
+      await axios.post(`/api/messages`, {
+        conversationId: result.data._id,
+        sender: userLogin.info.userId,
+        text: message,
+      });
+    }
+    handleClose();
+  };
   useEffect(() => {
     async function temp() {
-      await dispatch(getPetInfo(id));
-      await dispatch(getUser(id));
-      setAlreadyRequested(
-        userData.info.petAdoptionRequests.some((element) => {
-          return element === id;
-        })
-      );
+      if (userLogin.info) {
+        await Promise.all([
+          dispatch(getPetInfo(id)),
+          dispatch(getUser(userLogin.info.userId)),
+        ]);
+      }
     }
     temp();
   }, [dispatch, id]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (userData.loading === false) {
+      setAlreadyRequested(
+        userData.info.petAdoptionRequests.some((element) => element === id)
+      );
+    }
+  }, [userData.loading]);
 
   return (
     <>
@@ -81,7 +104,7 @@ function PetsInfo({ match }) {
                             className="border-irregular1 img-fluid w-100 myimg"
                             src={pet.info.image}
                             alt=""
-                          />{" "}
+                          />
                         </Carousel.Item>
                         <Carousel.Item>
                           <img
@@ -152,16 +175,51 @@ function PetsInfo({ match }) {
                                   Adopt
                                 </button>
                               )}
-                              {loading && success && (
-                                <div class="alert alert-primary" role="alert">
-                                  Adoption Request sent wait for response
-                                </div>
-                              )}
-                              <button className="btn btn-primary">
+                              <button
+                                className="btn btn-primary"
+                                onClick={handleShow}
+                              >
                                 Message Owner
                               </button>
                             </div>
-                            <div className="col-sm-6 col-md-8 mt-3"></div>
+                            {success && (
+                              <div class="alert alert-primary" role="alert">
+                                Adoption Request sent wait for response
+                              </div>
+                            )}
+                            <Modal show={show} onHide={handleClose}>
+                              <Modal.Header closeButton>
+                                <Modal.Title>
+                                  Send message to pet owner
+                                </Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body>
+                                <Form.Group
+                                  className="mb-3"
+                                  controlId="exampleForm.ControlTextarea1"
+                                >
+                                  <Form.Label>Message</Form.Label>
+                                  <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    onChange={(e) => {
+                                      setMessage(e.target.value);
+                                    }}
+                                  />
+                                </Form.Group>
+                              </Modal.Body>
+                              <Modal.Footer>
+                                <Button
+                                  variant="secondary"
+                                  onClick={handleClose}
+                                >
+                                  Close
+                                </Button>
+                                <Button variant="primary" onClick={sendMessage}>
+                                  Send Message
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
                           </>
                         ) : (
                           <div className="col-sm-6 col-md-8">

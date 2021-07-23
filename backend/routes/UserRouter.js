@@ -158,7 +158,7 @@ userRouter.post("/login", async (req, res, next) => {
             token: token,
             userId: user._id,
             userRole: user.role,
-            adoptionRequests: user.adoptionRequests,
+            petAdoptionRequests: user.petAdoptionRequests,
           });
         } else {
           return res.status(400).json({ message: "password invalid" });
@@ -191,7 +191,7 @@ userRouter.post("/register", async (req, res) => {
         password: body.password,
         country: body.country,
         city: body.city,
-        phone: body.phone
+        phone: body.phone,
       });
       const savedUser = await user.save();
       return res.status(201).json(savedUser);
@@ -252,8 +252,10 @@ userRouter.get("/:id", async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
   }
-  catch (error) { console.log(error); return res.status(500).json(error); };
 });
 
 module.exports = userRouter;
