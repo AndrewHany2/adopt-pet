@@ -1,7 +1,6 @@
 import "./messenger.css";
 import Conversation from "../../components/MessangerComponents/conversations/Conversation";
 import Message from "../../components/MessangerComponents/message/Message";
-import ChatOnline from "../../components/MessangerComponents/chatOnline/ChatOnline";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
@@ -13,7 +12,6 @@ export default function Messenger(props) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
   const userLogin = useSelector((state) => state.userLogin);
   const scrollRef = useRef();
@@ -42,26 +40,16 @@ export default function Messenger(props) {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    try {
-      socket.current.emit("addUser", userLogin.info.userId);
-      // socket.current.on("getUsers", (users) => {
-      //   setOnlineUsers(
-      //     userLogin.info.userId.followings.filter((f) =>
-      //       users.some((u) => u.userId === f)
-      //     )
-      //   );
-      // });
-    } catch (err) {}
-  }, [userLogin.info]);
+    socket.current.emit("addUser", userLogin.info.userId);
+  }, [userLogin.info.userId]);
 
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations/" + userLogin.info.userId);
+        const res = await axios.get(`/api/conversations/${userLogin.info.userId}`);
         setConversations(res.data);
-      } catch (err) {
-        console.log(err);
       }
+      catch (err) { console.log(err) };
     };
     getConversations();
   }, [userLogin.info]);
@@ -69,7 +57,7 @@ export default function Messenger(props) {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChat?._id); //here ?
+        const res = await axios.get(`api/messages/${currentChat?._id}`); //here ?
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -81,23 +69,23 @@ export default function Messenger(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
-      sender: userLogin.info.userId._id,
+      sender: userLogin.info.userId,
       text: newMessage,
       conversationId: currentChat._id,
     };
 
     const receiverId = currentChat.members.find(
-      (member) => member !== userLogin.info.userId._id
+      member => member !== userLogin.info.userId
     );
 
     socket.current.emit("sendMessage", {
-      senderId: userLogin.info.userId._id,
+      senderId: userLogin.info.userId,
       receiverId,
       text: newMessage,
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post("api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -160,15 +148,6 @@ export default function Messenger(props) {
                   Open a conversation to start a chat.
                 </span>
               )}
-            </div>
-          </div>
-          <div className="chatOnline">
-            <div className="chatOnlineWrapper">
-              <ChatOnline
-                onlineUsers={onlineUsers}
-                currentId={userLogin.info.userId}
-                setCurrentChat={setCurrentChat}
-              />
             </div>
           </div>
         </div>

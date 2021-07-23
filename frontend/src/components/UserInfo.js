@@ -15,7 +15,12 @@ function UserInfo(props) {
     <div className="container" style={{ margin: "3rem 2rem" }}>
       <div className="row">
           <div className="col-md-4">
-          <img src={`../resources/${props.user.image}`} className="img-fluid about-img"/>
+          <img src={
+            props.user.image?
+            `../resources/${props.user.image}`
+            : '/assets/person/noAvatar.png'
+          }
+             className="img-fluid about-img"/>
           {/* <div style={{ margin: '2rem 0 0 6rem'}}>
             Adoption Request<label style={{    background: '#ef0707',
                                                 width: '12%',
