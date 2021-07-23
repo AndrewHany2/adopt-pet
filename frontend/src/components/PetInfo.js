@@ -21,8 +21,10 @@ function PetInfo({ info }) {
                     <th colSpan="3">Name</th>
                     <td>{info.firstName}</td> 
                     <td>{info.lastName}</td>
+                  
                   </tr>
                   <tr>
+
                     <th colSpan="3">Gender</th>
                     <td>{info.gender}</td>
                   </tr>

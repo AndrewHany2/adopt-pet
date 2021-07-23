@@ -21,7 +21,7 @@ function Profile() {
     <div>
       <PageHeader title="Profile" />
       {userData?.info && <UserInfo user={userData.info} />}
-      {userData?.info && <PetInfo info={userData.info} />}
+      {userData?.info && userData.info.postedPets.map((pet)=>{return <PetInfo info={pet}/>})}
     </div>
   );
 }
