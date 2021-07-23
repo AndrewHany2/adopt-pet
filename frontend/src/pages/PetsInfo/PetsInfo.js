@@ -4,10 +4,13 @@ import { getPetInfo } from "../../store/actions/petActions";
 import { Link } from "react-router-dom";
 import "font-awesome/css/font-awesome.min.css";
 import { Carousel } from "react-bootstrap";
+
 function PetsInfo({ match }) {
   const id = match.params.id;
   const dispatch = useDispatch();
   const pet = useSelector((state) => state.pet);
+  const userLogin = useSelector((state) => state.userLogin);
+
   useEffect(() => {
     dispatch(getPetInfo(id));
   }, [dispatch, id]);
@@ -103,11 +106,23 @@ function PetsInfo({ match }) {
                             </li>
                           </ul>
                         </div>
-                        <div className="col-sm-6 col-md-8">
-                          <Link to="/Adoption" className="btn btn-primary">
-                            Adopt
-                          </Link>
-                        </div>
+                        {userLogin.info ? (
+                          <>
+                            <div className="col-sm-6 col-md-8">
+                              <button className="btn btn-primary">Adopt</button>
+                              <button className="btn btn-primary">
+                                Message Owner
+                              </button>
+                            </div>
+                            <div className="col-sm-6 col-md-8 mt-3"></div>
+                          </>
+                        ) : (
+                          <div className="col-sm-6 col-md-8">
+                            <div class="alert alert-danger" role="alert">
+                              Login to adopt
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

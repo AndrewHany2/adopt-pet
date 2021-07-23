@@ -11,7 +11,7 @@ function NavBar() {
   const userLogin = useSelector((state) => state.userLogin);
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-nav main-nav">
+      <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-nav main-nav">
         <div className="container">
           <ul className="nav navbar-nav">
             <i>
@@ -63,6 +63,11 @@ function NavBar() {
                   Contact
                 </Link>
               </li>
+              <li className="nav-item ml-3">
+                <Link className="nav-link active" to="/messanger">
+                  Messeges
+                </Link>
+              </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
                   <Link className="nav-link active" to="/signin">
@@ -70,9 +75,17 @@ function NavBar() {
                   </Link>
                 </li>
               )}
-              </ul>
               {userLogin.success && (
-                <ul  className="nav navbar-nav mx-auto nav-item-font ">
+                <li className="nav-item ml-3">
+                  <Link className="nav-link active" to="/addPet">
+                    Add-Pet
+                  </Link>
+                </li>
+              )}
+            </ul>
+            {userLogin.success && (
+              <>
+                <ul className="nav navbar-nav mx-auto nav-item-font ">
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link dropdown-toggle active"
@@ -90,6 +103,7 @@ function NavBar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
+
                         Profile
                       </Link>
                       <Link className="dropdown-item" to="/signout">
@@ -99,10 +113,12 @@ function NavBar() {
                       {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
                         Dashboard{" "}
                       </Link>}
+
                     </div>
                   </li>
                 </ul>
-              )}
+              </>
+            )}
           </div>
         </div>
       </nav>
