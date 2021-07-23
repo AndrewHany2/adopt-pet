@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const userRouter = require("./routes/UserRouter");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
+const dashboard = require("./routes/dashboard");
 const app = express();
 db.connectDB();
 
@@ -19,13 +20,15 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use("/api/user", userRouter);
 
 app.use("/api/pets", petRouter);
+
+app.use("/api/conversations", conversationRoute);
+app.use("/api/messages", messageRoute);
+app.use("/api/admin", dashboard);
+
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).json({ message: err });
 });
-app.use("/api/conversations", conversationRoute);
-app.use("/api/messages", messageRoute);
-
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);

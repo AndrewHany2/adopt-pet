@@ -75,9 +75,17 @@ function NavBar() {
                   </Link>
                 </li>
               )}
-              </ul>
               {userLogin.success && (
-                <ul  className="nav navbar-nav mx-auto nav-item-font ">
+                <li className="nav-item ml-3">
+                  <Link className="nav-link active" to="/addPet">
+                    Add-Pet
+                  </Link>
+                </li>
+              )}
+            </ul>
+            {userLogin.success && (
+              <>
+                <ul className="nav navbar-nav mx-auto nav-item-font ">
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link dropdown-toggle active"
@@ -95,6 +103,7 @@ function NavBar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
+
                         Profile
                       </Link>
                       <Link className="dropdown-item" to="/signout">
@@ -104,10 +113,12 @@ function NavBar() {
                       {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
                         Dashboard{" "}
                       </Link>}
+
                     </div>
                   </li>
                 </ul>
-              )}
+              </>
+            )}
           </div>
         </div>
       </nav>
