@@ -26,7 +26,6 @@ io.on("connection", (socket) => {
   //take userId and socketId from user
   socket.on("addUser", (userId) => {
     addUser(userId, socket.id);
-    io.emit("getUsers", users);
   });
 
   //send and get message
@@ -42,6 +41,5 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("a user disconnected!");
     removeUser(socket.id);
-    io.emit("getUsers", users);
   });
 });

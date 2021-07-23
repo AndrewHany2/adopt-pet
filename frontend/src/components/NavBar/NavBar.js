@@ -11,7 +11,7 @@ function NavBar() {
   const userLogin = useSelector((state) => state.userLogin);
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-nav main-nav">
+      <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-nav main-nav">
         <div className="container">
           <ul className="nav navbar-nav">
             <i>
@@ -61,6 +61,11 @@ function NavBar() {
               <li className="nav-item ml-3">
                 <Link className="nav-link active" to="#">
                   Contact
+                </Link>
+              </li>
+              <li className="nav-item ml-3">
+                <Link className="nav-link active" to="/messanger">
+                  Messeges
                 </Link>
               </li>
               {!userLogin.success && (

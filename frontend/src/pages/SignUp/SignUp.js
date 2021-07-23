@@ -7,12 +7,12 @@ import LoginFacebook from "./../../components/LoginFacebook";
 import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
 import Joi from "joi";
-import{useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RegisterUser } from "../../store/actions/UserActions";
 
 function SignUp(props) {
   const dispatch = useDispatch();
-  const registerData = useSelector((state)=>state.registerData)
+  const registerData = useSelector((state) => state.registerData)
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -58,6 +58,8 @@ function SignUp(props) {
         "string.pattern.base": `Please enter a valid mobile phone number`,
         "string.length": `Please enter 11 numbers`,
       }),
+    country: Joi.string().required(),
+    city: Joi.string().required()
   });
   const schema = {
     firstName: Joi.string().alphanum().min(3).max(30).required().messages({
@@ -82,6 +84,8 @@ function SignUp(props) {
         "string.pattern.base": `Please enter a valid mobile phone number`,
         "string.length": `Please enter 11 numbers`,
       }),
+      country: Joi.string().required(),
+      city: Joi.string().required()
   };
   const passwordSchema = Joi.object({
     password: Joi.string()
@@ -135,10 +139,8 @@ function SignUp(props) {
     const myData = { ...userInfo };
     const myPassword = myData.passwordObj;
     delete myData.passwordObj;
-    delete myData.city;
-    delete myData.country;
 
-    const wrapData = {...userInfo}
+    const wrapData = { ...userInfo }
     delete wrapData.passwordObj
     wrapData.password = myPassword.password
     console.log(myData);
@@ -262,8 +264,15 @@ function SignUp(props) {
                     className="form-control theme-border"
                     id="country"
                     required
+                    value={userInfo.country}
+                    onChange={validateFields}
                   />
                 </div>
+                {errors.country && (
+
+                  <div className="alert alert-danger theme-border">{errors.country}</div>
+
+                )}
                 <div className="col-md-6 mb-3">
                   <label htmlFor="city">City</label>
                   <input
@@ -271,8 +280,15 @@ function SignUp(props) {
                     className="form-control theme-border"
                     id="city"
                     required
+                    value={userInfo.city}
+                    onChange={validateFields}
                   />
                 </div>
+                {errors.city && (
+
+                  <div className="alert alert-danger theme-border">{errors.city}</div>
+
+                )}
               </div>
               <div className="form-row mr-3 ml-3">
                 <div className="col-md-6 mb-3">
