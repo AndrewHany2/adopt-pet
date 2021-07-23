@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./conversation.css";
+import { Spinner } from "react-bootstrap";
 
 export default function Conversation({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
@@ -19,7 +20,8 @@ export default function Conversation({ conversation, currentUser }) {
     getUser();
   }, [currentUser, conversation]);
 
-  return (
+  return user?
+  (
     <div className="conversation">
       <img
         className="conversationImg"
@@ -32,5 +34,10 @@ export default function Conversation({ conversation, currentUser }) {
       />
       <span className="conversationName">{`${user?.firstName} ${user?.lastName}`}</span>
     </div>
-  );
+  )
+  : (
+      <div className="conversation">
+        <Spinner animation="border" style={{color: '#F9BE4F'}} />
+      </div>
+  )
 }

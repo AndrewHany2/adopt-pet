@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
 
 export default function Messenger(props) {
   const [conversations, setConversations] = useState([]);
@@ -138,9 +139,9 @@ export default function Messenger(props) {
                       onChange={(e) => setNewMessage(e.target.value)}
                       value={newMessage}
                     ></textarea>
-                    <button className="chatSubmitButton" onClick={handleSubmit}>
+                    <Button className="chatSubmitButton ml-4" onClick={handleSubmit}>
                       Send
-                    </button>
+                    </Button>
                   </div>
                 </>
               ) : (
