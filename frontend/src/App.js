@@ -26,7 +26,7 @@ function App() {
       <Switch>
         <Route path="/pet/:id" component={PetsInfo}></Route>
         <Route exact path="/pets/:page" component={PetsGallery}></Route>
-        <Route path="/Adoption" component={AdoptionApp}></Route>
+        <Route path="/addPet" component={AdoptionApp}></Route>
         <Route path="/signin" component={SignIn}></Route>
         <Route path="/signup" component={SignUp}></Route>
         <Route path="/about" component={About}></Route>
@@ -38,7 +38,6 @@ function App() {
         <Route path="/dashboard/table" component={TableList}></Route>
         <Route path="/dashboard/posts" component={Typography}></Route>
         <Route path="/signout" component={SignOut}></Route>
-
       </Switch>
       <Footer />
     </Router>
