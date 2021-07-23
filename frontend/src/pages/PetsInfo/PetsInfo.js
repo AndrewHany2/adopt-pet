@@ -1,19 +1,54 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPetInfo } from "../../store/actions/petActions";
-import { Link } from "react-router-dom";
+import { getUser } from "../../store/actions/UserActions";
 import "font-awesome/css/font-awesome.min.css";
 import { Carousel } from "react-bootstrap";
+import axios from "axios";
 
 function PetsInfo({ match }) {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [alreadyRequested, setAlreadyRequested] = useState(false);
+
   const id = match.params.id;
   const dispatch = useDispatch();
   const pet = useSelector((state) => state.pet);
   const userLogin = useSelector((state) => state.userLogin);
+  const userData = useSelector((state) => state.userData);
+
+  const handleAdopt = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/adoptionRequest", {
+        requestedUserId: userLogin.info.userId,
+        ownerUserId: pet.info.owner,
+        petId: pet.info._id,
+      });
+      if (data) {
+        setLoading(false);
+        setSuccess(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    dispatch(getPetInfo(id));
+    async function temp() {
+      await dispatch(getPetInfo(id));
+      await dispatch(getUser(id));
+      setAlreadyRequested(
+        userData.info.petAdoptionRequests.some((element) => {
+          return element === id;
+        })
+      );
+    }
+    temp();
   }, [dispatch, id]);
+
+  useEffect(() => {}, []);
+
   return (
     <>
       {pet.info ? (
@@ -109,7 +144,19 @@ function PetsInfo({ match }) {
                         {userLogin.info ? (
                           <>
                             <div className="col-sm-6 col-md-8">
-                              <button className="btn btn-primary">Adopt</button>
+                              {!loading && !success && !alreadyRequested && (
+                                <button
+                                  className="btn btn-primary"
+                                  onClick={handleAdopt}
+                                >
+                                  Adopt
+                                </button>
+                              )}
+                              {loading && success && (
+                                <div class="alert alert-primary" role="alert">
+                                  Adoption Request sent wait for response
+                                </div>
+                              )}
                               <button className="btn btn-primary">
                                 Message Owner
                               </button>

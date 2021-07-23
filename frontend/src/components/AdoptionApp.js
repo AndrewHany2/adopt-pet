@@ -18,7 +18,11 @@ function AdoptionForm({ history }) {
     image: "",
   });
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, success } = useSelector((state) => state.petsForm);
+  const {
+    loading,
+    success,
+    pet: petInfo,
+  } = useSelector((state) => state.petsForm);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,11 +30,13 @@ function AdoptionForm({ history }) {
       history.push("/signin");
     }
     if (success) {
-      history.push(`/profile/${userLogin.info.userId}`);
+      history.push(`/pet/${petInfo.petId}`);
     }
   });
   useEffect(() => {
-    return dispatch({ type: "PET_ADOPT_RESET" });
+    return () => {
+      dispatch({ type: "PET_ADOPT_RESET" });
+    };
   }, []);
   const imageRef = useRef();
   const handleChange = (e) => {

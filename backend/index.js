@@ -7,6 +7,7 @@ const userRouter = require("./routes/UserRouter");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const dashboard = require("./routes/dashboard");
+const application = require("./routes/adoptionApplication");
 const app = express();
 db.connectDB();
 
@@ -24,6 +25,7 @@ app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/admin", dashboard);
+app.use("/api/adoptionRequest", application);
 
 app.use((err, req, res, next) => {
   console.log(err);
