@@ -46,6 +46,15 @@ const userSchema = mongoose.Schema({
   googleId: {
     type: String,
   },
+  country: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

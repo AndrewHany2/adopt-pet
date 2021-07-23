@@ -182,13 +182,16 @@ userRouter.post("/register", async (req, res) => {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(body.password, salt);
       body.password = hashedPassword;
-
+      console.log(req.body);
       const user = new User({
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
         age: body.age,
         password: body.password,
+        country: body.country,
+        city: body.city,
+        phone: body.phone
       });
       const savedUser = await user.save();
       return res.status(201).json(savedUser);
@@ -244,5 +247,13 @@ userRouter.delete("/", async (req, res) => {
 //     return res.status(500).json(error);
 //   }
 // });
+
+userRouter.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    return res.status(200).json(user);
+  }
+  catch (error) { console.log(error); return res.status(500).json(error); };
+});
 
 module.exports = userRouter;
