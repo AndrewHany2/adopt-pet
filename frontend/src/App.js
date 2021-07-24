@@ -15,6 +15,7 @@ import Messanger from "./pages/messenger/Messenger";
 import ContactUs from "./pages/ContactUs/contactUs";
 import SignOut from "./components/SignOut";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Home from "./pages/home";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Switch>
         <Route path="/pet/:id" component={PetsInfo}></Route>
         <Route exact path="/pets/:page" component={PetsGallery}></Route>
+        <Route exact path="/" component={Home}></Route>
         <Route path="/addPet" component={AdoptionApp}></Route>
         <Route path="/signin" component={SignIn}></Route>
         <Route path="/signup" component={SignUp}></Route>
