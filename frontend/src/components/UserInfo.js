@@ -12,15 +12,15 @@ function UserInfo({userInfo}) {
   };
 
   return (
-    <div className="container d-flex" style={{ margin: "3rem 2rem" }}>
-      <div className="row justify-content-center">
-          <div className="col-md-4 ">
+    <div className="container">
+      <div className="row">
+          <div className="col-md-4">
           <img src={
             userInfo.image?
             `../resources/${userInfo.image}`
             : '/assets/person/noAvatar.png'
           }
-             className="img-fluid about-img" alt=""/>
+             className="img-fluid about-img w-100" alt=""/>
 
           {/* <div style={{ margin: '2rem 0 0 6rem'}}>
             Adoption Request<label style={{    background: '#ef0707',

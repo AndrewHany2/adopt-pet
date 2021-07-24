@@ -31,8 +31,10 @@ function Profile() {
     return (
       <div>
         <PageHeader title="Profile" />
-        {profileData?.userInfo && <UserInfo userInfo={profileData.userInfo} />}
         <div className="container">
+        {profileData?.userInfo && <UserInfo userInfo={profileData.userInfo} />}
+        
+        { profileData?.petsInfo !== undefined && (<div className="container">
           <div className="alert alert-primary mt-5 p-4" role="alert">
             <div style={{ color: "white" }}>
               <p className="h3">Adoption Rules</p>
@@ -45,11 +47,13 @@ function Profile() {
               </p>
             </div>
           </div>
-        </div>
+        </div>) 
+        }
         {profileData?.petsInfo !== undefined &&
-          profileData.petsInfo.map((pet) => { console.log("inside pets info"); console.log(pet)
+          profileData.petsInfo.map((pet) => { 
             return <PetInfo key={pet} petInfo={pet} />;
           })}
+      </div>
       </div>
     );
   }
