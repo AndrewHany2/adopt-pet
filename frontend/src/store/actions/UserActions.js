@@ -33,7 +33,6 @@ export const getUser = (id) => async (dispatch) => {
   }
 };
 
-  
 export const Login = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: "USER_LOGIN_REQUEST" });

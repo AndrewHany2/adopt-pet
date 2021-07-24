@@ -13,10 +13,8 @@ import SignIn from "./pages/SignIn/SignIn";
 import Messanger from "./pages/messenger/Messenger";
 
 import ContactUs from "./pages/ContactUs/contactUs";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
-import DashboardPage from "./pages/Dashboard/Dashboard.js";
-import TableList from "./pages/TableList/TableList.js";
-import Typography from "./pages/Typography/Typography.js";
 
 import SignOut from "./components/SignOut";
 function App() {
@@ -34,11 +32,8 @@ function App() {
         <Route path="/edit/:id" component={EditProfile}></Route>
         <Route path="/contactus" component={ContactUs}></Route>
         <Route path="/messanger" component={Messanger}></Route>
-        <Route path="/dashboard/home" component={DashboardPage}></Route>
-        <Route path="/dashboard/table" component={TableList}></Route>
-        <Route path="/dashboard/posts" component={Typography}></Route>
         <Route path="/signout" component={SignOut}></Route>
-
+        <Route path="/dashboard" component={Dashboard}></Route>  
       </Switch>
       <Footer />
     </Router>
