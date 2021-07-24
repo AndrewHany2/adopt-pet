@@ -14,10 +14,8 @@ import Messanger from "./pages/messenger/Messenger";
 
 import ContactUs from "./pages/ContactUs/contactUs";
 import SignOut from "./components/SignOut";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
-import DashboardPage from "./pages/Dashboard/Dashboard.js";
-import TableList from "./pages/TableList/TableList.js";
-import Typography from "./pages/Typography/Typography.js";
 
 function App() {
   return (
@@ -35,9 +33,8 @@ function App() {
         <Route path="/contactus" component={ContactUs}></Route>
         <Route path="/signout" component={SignOut}></Route>
         <Route path="/messanger" component={Messanger}></Route>
-        <Route path="/dashboard/home" component={DashboardPage}></Route>
-        <Route path="/dashboard/table" component={TableList}></Route>
-        <Route path="/dashboard/posts" component={Typography}></Route>
+        <Route path="/signout" component={SignOut}></Route>
+        <Route path="/dashboard" component={Dashboard}></Route>  
       </Switch>
       <Footer />
   </Router>
