@@ -24,7 +24,6 @@ passport.use(
     },
 
     function (accessToken, refreshToken, profile, done) {
-      // console.log(profile)
       //Check the DB to find a User with the profile.id
       User.findOne(
         {
@@ -39,8 +38,8 @@ passport.use(
           }
 
           if (user) {
-            // console.log(user);
-            done(null, user); //If User already exists login as stated on line 10 return User
+             console.log(user);
+            done(null, user); //If User already exists login as stated on line 10 return User    
           } else {
             //else create a new User
             user = new User({

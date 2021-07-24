@@ -13,20 +13,19 @@ import SignIn from "./pages/SignIn/SignIn";
 import Messanger from "./pages/messenger/Messenger";
 
 import ContactUs from "./pages/ContactUs/contactUs";
-
-
-import DashboardPage from "./pages/Dashboard/Dashboard.js";
-import TableList from "./pages/TableList/TableList.js";
-import Typography from "./pages/Typography/Typography.js";
-
 import SignOut from "./components/SignOut";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Home from "./pages/home";
+
+
 function App() {
   return (
-    <Router>
+  <Router>
       <NavBar></NavBar>
       <Switch>
         <Route path="/pet/:id" component={PetsInfo}></Route>
         <Route exact path="/pets/:page" component={PetsGallery}></Route>
+        <Route exact path="/" component={Home}></Route>
         <Route path="/addPet" component={AdoptionApp}></Route>
         <Route path="/signin" component={SignIn}></Route>
         <Route path="/signup" component={SignUp}></Route>
@@ -36,14 +35,12 @@ function App() {
         <Route path="/contactus" component={ContactUs}></Route>
         <Route path="/signout" component={SignOut}></Route>
         <Route path="/messanger" component={Messanger}></Route>
-        <Route path="/dashboard/home" component={DashboardPage}></Route>
-        <Route path="/dashboard/table" component={TableList}></Route>
-        <Route path="/dashboard/posts" component={Typography}></Route>
         <Route path="/signout" component={SignOut}></Route>
-
+        <Route path="/dashboard" component={Dashboard}></Route>  
       </Switch>
       <Footer />
-    </Router>
+  </Router>
+
   );
 }
 

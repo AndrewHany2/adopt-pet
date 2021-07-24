@@ -18,7 +18,7 @@ function NavBar() {
               <FontAwesomeIcon icon={faPaw} className="m-nav-icon mr-3 mt-1" />
             </i>
             <li className="nav-item active">
-              <Link className="nav-link nav-logo" to="#">
+              <Link className="nav-link nav-logo" to="/">
                 WOOF!
               </Link>
             </li>
@@ -53,7 +53,7 @@ function NavBar() {
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/contactus                        ">
+                <Link className="nav-link active" to="/contactus">
                   Contact
                 </Link>
               </li>
@@ -102,7 +102,7 @@ function NavBar() {
                         Log Out{" "}
                       </Link>
                       {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
+                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="/dashboard#">
                         Dashboard{" "}
                       </Link>}
 

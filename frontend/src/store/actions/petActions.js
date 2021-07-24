@@ -52,7 +52,6 @@ export const getPetInfo = (id) => async (dispatch) => {
     });
   }
 };
-
 export const adoptpet = (pet) => async (dispatch) => {
 
   try {

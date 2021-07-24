@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 function UserInfo({userInfo}) {
   const requestStyles = {
@@ -58,10 +59,6 @@ function UserInfo({userInfo}) {
                   <tr>
                     <th colSpan="3">Phone </th>
                     <td>{userInfo.phone}</td>
-                  </tr>
-                  <tr>
-                    <th colSpan="3"></th>
-                    <td></td>
                   </tr>
                 </tbody>
               </table>
