@@ -102,7 +102,7 @@ function NavBar() {
                         Log Out{" "}
                       </Link>
                       {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
+                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="/dashboard#">
                         Dashboard{" "}
                       </Link>}
 
