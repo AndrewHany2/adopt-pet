@@ -19,7 +19,8 @@ function Profile() {
     dispatch(getProfile(id));
   }, []);
 
-  console.log(profileData);
+  console.log("Profile Data")
+  console.log(profileData.petInfo);
   if (profileData.loading) {
     return (
       <>
@@ -45,8 +46,8 @@ function Profile() {
             </div>
           </div>
         </div>
-        {profileData.petsInfo?.postedPets &&
-          profileData.petsInfo.map((pet) => {
+        {profileData?.petsInfo !== undefined &&
+          profileData.petsInfo.map((pet) => { console.log("inside pets info"); console.log(pet)
             return <PetInfo key={pet} petInfo={pet} />;
           })}
       </div>

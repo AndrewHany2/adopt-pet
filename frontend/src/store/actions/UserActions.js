@@ -91,7 +91,7 @@ export const getProfile =(userId) => async (dispatch) => {
         const stringData =  userData.postedPets.map((value) => `${value}`).join(',');
          pets = await axios.get(`/api/pets/userpets/list/?postedpets=${stringData}`);
       }
-      let petsData = pets.data?pets.data:{}
+      let petsData = pets.data?pets.data:[]
       console.log("pets Data Action")
       console.log(petsData)
 

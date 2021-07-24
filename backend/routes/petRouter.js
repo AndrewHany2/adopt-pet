@@ -19,7 +19,7 @@ petRouter.get("/", async (req, res, next) => {
   try {
     const queries = req.query;
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 4;
+    const limit = parseInt(req.query.limit) || 8;
     delete queries.limit;
     delete queries.page;
     switch (queries.age) {
@@ -109,7 +109,7 @@ petRouter.post("/", upload, (req, res) => {
     owner: req.body.owner,
   });
   pet
-    .save().then(()=>{})
+    .save()
     .then((result) => {
       res.status(201).json({ petId: result._id });
     })
@@ -119,17 +119,16 @@ petRouter.post("/", upload, (req, res) => {
     });
 });
 
+
 petRouter.get("/userpets/list",async(req,res)=>{
 
 
 try{
-  if(req.query.postedpets){
     const query = req.query.postedpets;
     pets = query.split(",");
-    console.log(pets[0])
     const userPetList = await Pet.find({_id : {$in:pets}}) 
     return res.status(201).json(userPetList)
-  }
+  
 }catch(error){
   return res.status(400).json(error);
 }

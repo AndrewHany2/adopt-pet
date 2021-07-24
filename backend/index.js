@@ -23,7 +23,7 @@ app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/admin", dashboard);
-// app.use("/api/adoptionRequest", application);
+app.use("/api/adoptionRequest", application);
 
 app.use((err, req, res, next) => {
   console.log(err);
