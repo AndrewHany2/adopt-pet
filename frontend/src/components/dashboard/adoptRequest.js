@@ -1,6 +1,9 @@
-import React from "react"
+import React,{useEffect} from "react"
+import axios from "axios";
 
-function AdoptRequest(){
+
+function AdoptRequest(props){
+ console.log(props)
     return(
 <div className="table-responsive">
    <table class="table">

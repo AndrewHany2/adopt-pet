@@ -1,7 +1,29 @@
-import React from "react";
+import React,{useEffect} from "react";
 import PostDashboard from "../../components/dashboard/postDashboard";
 import AdoptRequest from "../../components/dashboard/adoptRequest";
+import axios from "axios";
+
 export default function Dashboard() {
+  const baseURL = "/api/adoptionRequest/";
+  let user ;
+  const getAllRequests = ()=>{
+      axios.get(`${baseURL}`)
+      .then((res)=>{
+        const reqData = res.data;
+        user = res.data;
+        reqData.map((data)=>{
+
+            console.log(data.requestedUserId);
+          })
+          console.log(res.data);
+      })
+      .catch(err => console.log("Error"));
+  }
+
+  useEffect(()=>{
+      getAllRequests();
+  },[])
+
   return (
    <>
    <div className="container">
@@ -12,7 +34,7 @@ export default function Dashboard() {
         </div>
         <div className="col-12 col-md-6">
         <h2>AdoptionRequest</h2>
-        <AdoptRequest/>
+        <AdoptRequest data={user}/>
         </div>
       </div>
       <div className="row mb-5 form-inline">
