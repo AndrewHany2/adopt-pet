@@ -1,6 +1,8 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 function UserInfo(props) {
+  console.log(props)
   const requestStyles = {
     background: "#ef0707",
     width: "12%",
@@ -46,28 +48,17 @@ function UserInfo(props) {
                     <td>{props.user.email}</td>
                   </tr>
                   <tr>
-                    <th colSpan="3">City</th>
-                    <td>{props.user.city}</td>
-                  </tr>
-                  <tr>
                     <th colSpan="3">Phone </th>
                     <td>{props.user.phone}</td>
-                  </tr>
-                  <tr>
-                    <th colSpan="3"></th>
-                    <td></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <a class="me-4" style={{ margin: "1rem" }}>
+            <Link className="me-4" style={{ margin: "1rem" }} to={`/edit/${props.user.id}`}>
               <button class="btn btn-lg btn-success">
                 <i class="fa fa-pencil-square"></i>
               </button>
-            </a>
-            <button class="btn btn-lg btn-danger">
-              <i class="fa fa-trash"></i>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

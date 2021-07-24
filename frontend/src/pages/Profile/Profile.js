@@ -18,6 +18,7 @@ function Profile() {
   }, []);
 
   console.log(userData);
+
   return (
     <div>
       <PageHeader title="Profile" />

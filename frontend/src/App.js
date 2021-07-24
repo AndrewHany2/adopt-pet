@@ -11,15 +11,14 @@ import NavBar from "./components/NavBar/NavBar";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import ContactUs from "./pages/ContactUs/contactUs";
-
+import SignOut from "./components/SignOut";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import TableList from "./pages/TableList/TableList.js";
 import Typography from "./pages/Typography/Typography.js";
 
-import SignOut from "./components/SignOut";
 function App() {
   return (
-    <Router>
+  <Router>
       <NavBar></NavBar>
       <Switch>
         <Route path="/pet/:id" component={PetsInfo}></Route>
@@ -31,14 +30,14 @@ function App() {
         <Route path="/profile/:id" component={Profile}></Route>
         <Route path="/edit/:id" component={EditProfile}></Route>
         <Route path="/contactus" component={ContactUs}></Route>
+        <Route path="/signout" component={SignOut}></Route>
         <Route path="/dashboard/home" component={DashboardPage}></Route>
         <Route path="/dashboard/table" component={TableList}></Route>
         <Route path="/dashboard/posts" component={Typography}></Route>
-        <Route path="/signout" component={SignOut}></Route>
-
       </Switch>
       <Footer />
-    </Router>
+  </Router>
+
   );
 }
 

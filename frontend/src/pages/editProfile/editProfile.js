@@ -17,42 +17,62 @@ const EditProfile = ()=>{
     }
   };
 
-    return     <div
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center"
-    }}
-  >
-    <input
-      type="file"
-      accept="image/*"
-      onChange={handleImageUpload}
-      ref={imageUploader}
-      style={{
-        display: "none"
-      }}
-    />
-    <div
-      style={{
-        height: "60px",
-        width: "60px",
-        border: "1px dashed black"
-      }}
-      onClick={() => imageUploader.current.click()}
-    >
-      <img
-        ref={uploadedImage}
-        style={{
-          width: "100%",
-          height: "100%",
-          position: "acsolute"
-        }}
-      />
+    return <>
+    <div className="container" style={{minHeight:"24vw"}}>
+    <form className="row">
+      <div className="col-md-4">
+         <div className="m-4"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+          >
+        <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            ref={imageUploader}
+            style={{
+              display: "none"
+                  }}
+        />
+        <div
+            style={{
+                  width: "50%",
+              border: "1px dashed black"
+            }}
+            onClick={() => imageUploader.current.click()}
+        >
+          <img
+            ref={uploadedImage}
+            style={{
+              width: "100%",
+              height: "100%",
+              position: "acsolute"
+            }}
+          />
     </div>
     Click to upload Image
   </div>
+  </div>
+    <div className="col-md-8 my-2">
+          <input  type="text" name="name" placeholder="First name" 
+                              className="d-block w-75 mx-auto my-3"/>
+          <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Last name" />
+          <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Email" />
+          <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Age" />
+
+    </div>
+  </form>
+  <div className="text-center m-3">
+    <button className="btn btn-warning text-white ">
+        Update
+    </button>
+  </div>
+  </div>
+  </>
 
 }
 export default EditProfile;

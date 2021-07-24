@@ -24,7 +24,6 @@ passport.use(
     },
 
     function (accessToken, refreshToken, profile, done) {
-      // console.log(profile)
       //Check the DB to find a User with the profile.id
       User.findOne(
         {
@@ -39,8 +38,8 @@ passport.use(
           }
 
           if (user) {
-            // console.log(user);
-            done(null, user); //If User already exists login as stated on line 10 return User
+             console.log(user);
+            done(null, user); //If User already exists login as stated on line 10 return User    
           } else {
             //else create a new User
             user = new User({
@@ -85,7 +84,7 @@ passport.deserializeUser(function (obj, cb) {
 passport.use(new GoogleStrategy({
   clientID: "714325331151-am2l8ga5p9kjh647rjaqf9lnhma5bg0g.apps.googleusercontent.com",
   clientSecret: "TfI-HWOiXh4LFYG1bU4xm-Bc",
-  callbackURL: "/login/google/callback",
+  callbackURL: "http://localhost:8000/api/user/login/google/callback",
 },
 async (accessToken, refreshToken, profile, done) => {
   console.log(profile);
@@ -120,7 +119,7 @@ async (accessToken, refreshToken, profile, done) => {
 userRouter.get('/login/google',
     passport.authenticate('google', {
             scope:
-                ['email', 'profile']
+                ['openid ','email', 'profile']
         }
     ));
 
