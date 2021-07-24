@@ -86,6 +86,9 @@
 .page-link:hover {
   background-color: #f9575c !important;
 }
+.pagination-active {
+  background-color: #f9575c !important;
+}
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   display: inline-block;

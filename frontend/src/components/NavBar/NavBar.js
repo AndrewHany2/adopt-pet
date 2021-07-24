@@ -91,10 +91,8 @@ function NavBar() {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <Link
-                        className="dropdown-item"
-                        to={`/profile/${userLogin.info.userId}`}
-                      >
+                      <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
+
                         Profile
                       </Link>
                       <Link  className="dropdown-item"  to="/messanger">
@@ -103,14 +101,11 @@ function NavBar() {
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
                       </Link>
-                      {userLogin.info.userRole === "ADMIN" && (
-                        <div className="dropdown-divider"></div>
-                      )}
-                      {userLogin.info.userRole === "ADMIN" && (
-                        <Link className="dropdown-item" to="#">
-                          Dashboard{" "}
-                        </Link>
-                      )}
+                      {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
+                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
+                        Dashboard{" "}
+                      </Link>}
+
                     </div>
                   </li>
                 </ul>

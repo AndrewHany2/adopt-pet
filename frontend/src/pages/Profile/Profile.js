@@ -14,6 +14,7 @@ function Profile() {
 
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(getProfile(id));
   }, []);
@@ -44,13 +45,14 @@ function Profile() {
             </div>
           </div>
         </div>
-        {profileData?.petsInfo &&
+        {profileData.petsInfo?.postedPets &&
           profileData.petsInfo.map((pet) => {
             return <PetInfo key={pet} petInfo={pet} />;
           })}
       </div>
     );
   }
+
 }
 
 export default Profile;

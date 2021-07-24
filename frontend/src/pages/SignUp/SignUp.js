@@ -16,6 +16,7 @@ function SignUp(props) {
   const dispatch = useDispatch();
   const registerData = useSelector((state) => state.registerData);
 
+
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",

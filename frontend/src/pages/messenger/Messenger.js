@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
 
 export default function Messenger(props) {
   const [conversations, setConversations] = useState([]);
@@ -103,10 +104,7 @@ export default function Messenger(props) {
         <div className="messenger">
           <div className="chatMenu">
             <div className="chatMenuWrapper">
-              <input
-                placeholder="Search for friends"
-                className="chatMenuInput"
-              />
+              <div style={{color: '#F9575C', fontSize: 'x-large', fontWeight: 'bold', borderBottom: '2px solid #F9BE4F', padding: '10px'}}>Chats</div>
               {conversations.map((c) => (
                 <div onClick={() => setCurrentChat(c)}>
                   <Conversation
@@ -138,9 +136,9 @@ export default function Messenger(props) {
                       onChange={(e) => setNewMessage(e.target.value)}
                       value={newMessage}
                     ></textarea>
-                    <button className="chatSubmitButton" onClick={handleSubmit}>
+                    <Button className="chatSubmitButton ml-4" onClick={handleSubmit}>
                       Send
-                    </button>
+                    </Button>
                   </div>
                 </>
               ) : (

@@ -9,8 +9,8 @@ function UserInfo({userInfo}) {
     padding: "0 0 0 0.6rem",
     color: "#fff",
     margin: "0 0 0 1rem",
-  }
-  
+  };
+
   return (
     <div className="container d-flex" style={{ margin: "3rem 2rem" }}>
       <div className="row justify-content-center">
@@ -21,6 +21,7 @@ function UserInfo({userInfo}) {
             : '/assets/person/noAvatar.png'
           }
              className="img-fluid about-img" alt=""/>
+
           {/* <div style={{ margin: '2rem 0 0 6rem'}}>
             Adoption Request<label style={{    background: '#ef0707',
                                                 width: '12%',
@@ -31,7 +32,6 @@ function UserInfo({userInfo}) {
                                                 margin: '0 0 0 1rem'
                                             }}>{userInfo.request}</label>
           </div> */}
-          </div>
         </div>
         <div className="col-md-8">
           <div className="card-body">
@@ -44,6 +44,7 @@ function UserInfo({userInfo}) {
                   <tr>
                     <th colSpan="3">Name</th>
                     <td>{userInfo.firstName} {userInfo.lastName}</td>
+
 
                   </tr>
                   <tr>
@@ -65,17 +66,15 @@ function UserInfo({userInfo}) {
                 </tbody>
               </table>
             </div>
-            <a class="me-4" style={{ margin: "1rem" }}>
-              <button class="btn btn-lg btn-success">
-                <i class="fa fa-pencil-square"></i>
-              </button>
-            </a>
-            <button class="btn btn-lg btn-danger">
-              <i class="fa fa-trash"></i>
-            </button>
           </div>
+          <a class="me-4" style={{ margin: "1rem" }}>
+            <button class="btn btn-lg btn-success">
+              <i class="fa fa-pencil-square"></i>
+            </button>
+          </a>
         </div>
       </div>
+    </div>
   );
 }
 

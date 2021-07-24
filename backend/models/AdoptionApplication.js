@@ -7,6 +7,11 @@ const AdoptionApplicationSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    ownerUserId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     petId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -15,7 +20,6 @@ const AdoptionApplicationSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "PENDING",
-      required: true,
       enum: ["ACCEPTED", "REJECTED", "PENDING"],
     },
   },

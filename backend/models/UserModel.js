@@ -36,20 +36,24 @@ const userSchema = mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
   },
-  facebookId:{
+  petAdoptionRequests: {
+    type: [mongoose.Schema.Types.ObjectId],
+    default: [],
+  },
+  facebookId: {
     type: String,
   },
-  googleId:{
+  googleId: {
     type: String,
   },
   country: {
-    type: String
+    type: String,
   },
   city: {
-    type: String
+    type: String,
   },
   phone: {
-    type: String
+    type: String,
   },
 });
 

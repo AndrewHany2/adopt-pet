@@ -74,15 +74,16 @@ function PetsGallery(props) {
                 </Link>
               </li>
               {[...Array(pets.info.totalPages).keys()].map((x) => (
-                <li
-                  key={x + 1}
-                  className={
-                    "page-item" + x + 1 === pets.info.currentPage
-                      ? "active"
-                      : ""
-                  }
-                >
-                  <Link className="page-link" exact to={`/pets/${x + 1}`}>
+                <li key={x + 1} className={"page-item"}>
+                  <Link
+                    className={
+                      x + 1 === pets.info.currentPage
+                        ? "page-link pagination-active"
+                        : "page-link"
+                    }
+                    exact
+                    to={`/pets/${x + 1}`}
+                  >
                     {x + 1}
                   </Link>
                 </li>
