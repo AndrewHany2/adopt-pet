@@ -6,15 +6,17 @@ import {
 } from "../reducers/petReducers";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { getUserReducer, UserLoginReducer, UserRegisterReducer } from "../reducers/UserReducer";
+import { getUserReducer, UserLoginReducer, UserRegisterReducer,getProfileReducer } from "../reducers/UserReducer";
+
 
 const reducer = combineReducers({
   pets: petListReducer,
   pet: petInfoReducer,
-  petsFrom: postPetReducer,
+  petsForm: postPetReducer,
   userLogin: UserLoginReducer,
   userData: getUserReducer,
   registerData: UserRegisterReducer,
+  profile:getProfileReducer,
 });
 
 let intialState = {};

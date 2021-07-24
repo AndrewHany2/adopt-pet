@@ -1,6 +1,6 @@
 export const petListReducer = (state = {}, action) => {
   switch (action.type) {
-    case "PET_LIST_REQUEST":
+    case "PET_USER_LIST_REQUEST":
       return { loading: true };
     case "PET_LIST_SUCCESS":
       return {
@@ -32,14 +32,17 @@ export const petInfoReducer = (state = {}, action) => {
 export const postPetReducer = (state = {}, action) => {
   switch (action.type) {
     case "PET_ADOPT_REQUEST":
-      return { loading: true, ...state };
+      return { loading: true };
     case "PET_ADOPT_SUCCESS":
       return {
         loading: false,
-        list: action.payload,
+        success: true,
+        pet: action.payload,
       };
     case "PET_ADOPT_FAIL":
       return { loading: false, error: action.payload };
+    case "PET_ADOPT_RESET":
+      return {};
     default:
       return state;
   }

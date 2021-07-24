@@ -8,36 +8,46 @@ const petSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  vaccinated:{
+  vaccinated: {
     type: String,
     required: true,
   },
   dateOfBirth: {
     type: Date,
-    required:true,
-  },
-  petType:{
-    type:String,
     required: true,
   },
-  size:{
-    type:String,
-    require:true,
+  petType: {
+    type: String,
+    required: true,
   },
-  description:{
-    type:String,
-    require:true
+  size: {
+    type: String,
+    require: true,
+  },
+  description: {
+    type: String,
+    require: true,
   },
   image: {
     type: String,
     required: true,
   },
-  status:{
+  status: {
     type: String,
     default: "PENDING",
-    required:true,
-    enum:['ACCEPTED','REJECTED','PENDING']
-  }
+    required: true,
+    enum: ["ACCEPTED", "REJECTED", "PENDING"],
+  },
+  isAdopted: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
 });
 const Pet = mongoose.model("Pet", petSchema);
 

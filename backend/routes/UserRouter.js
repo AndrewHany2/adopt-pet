@@ -80,58 +80,59 @@ passport.deserializeUser(function (obj, cb) {
   cb(null, obj);
 });
 
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID:
+        "714325331151-am2l8ga5p9kjh647rjaqf9lnhma5bg0g.apps.googleusercontent.com",
+      clientSecret: "TfI-HWOiXh4LFYG1bU4xm-Bc",
+      callbackURL: "/login/google/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
+      //get the user data from google
+      const newUser = {
+        googleId: profile.id,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        email: profile.emails[0].value,
+      };
 
-passport.use(new GoogleStrategy({
-  clientID: "714325331151-am2l8ga5p9kjh647rjaqf9lnhma5bg0g.apps.googleusercontent.com",
-  clientSecret: "TfI-HWOiXh4LFYG1bU4xm-Bc",
-  callbackURL: "http://localhost:8000/api/user/login/google/callback",
-},
-async (accessToken, refreshToken, profile, done) => {
-  console.log(profile);
-  //get the user data from google 
-  const newUser = {
-    googleId: profile.id,
-    firstName: profile.name.givenName,
-    lastName: profile.name.familyName,
-    email: profile.emails[0].value
-  }
+      try {
+        //find the user in our database
+        let user = await User.findOne({ googleId: profile.id });
 
-  try {
-    //find the user in our database 
-    let user = await User.findOne({ googleId: profile.id })
-
-    if (user) {
-      //If user present in our database.
-      done(null, user)
-    } else {
-      // if user is not preset in our database save user data to database.
-      user = await User.create(newUser)
-      done(null, user)
-    }
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-));
-
-
-userRouter.get('/login/google',
-    passport.authenticate('google', {
-            scope:
-                ['openid ','email', 'profile']
+        if (user) {
+          //If user present in our database.
+          done(null, user);
+        } else {
+          // if user is not preset in our database save user data to database.
+          user = await User.create(newUser);
+          done(null, user);
         }
-    ));
-
-userRouter.get('/login/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: 'http://localhost:3000/signin',
-    }),
-    function (req, res) {
-        res.redirect('http://localhost:3000/')
+      } catch (err) {
+        console.error(err);
+      }
     }
+  )
 );
 
+userRouter.get(
+  "/login/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile"],
+  })
+);
+
+userRouter.get(
+  "/login/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "http://localhost:3000/signin",
+  }),
+  function (req, res) {
+    res.redirect("http://localhost:3000/");
+  }
+);
 
 // Used to stuff a piece of information into a cookie
 passport.serializeUser((user, done) => {
@@ -152,13 +153,17 @@ userRouter.post("/login", async (req, res, next) => {
         const match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
-          res.status(200).json({ token: token, userId: user._id, userRole:user.role });
+          res.status(200).json({
+            token: token,
+            userId: user._id,
+            userRole: user.role,
+            petAdoptionRequests: user.petAdoptionRequests,
+          });
         } else {
           return res.status(400).json({ message: "password invalid" });
         }
       } else {
         return res.status(404).json({ message: "user invalid" });
-
       }
     }
   } catch (error) {
@@ -176,13 +181,16 @@ userRouter.post("/register", async (req, res) => {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(body.password, salt);
       body.password = hashedPassword;
-
+      console.log(req.body);
       const user = new User({
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
         age: body.age,
         password: body.password,
+        country: body.country,
+        city: body.city,
+        phone: body.phone
       });
       const savedUser = await user.save();
       return res.status(201).json(savedUser);
@@ -204,7 +212,6 @@ userRouter.delete("/delete/:id", verifyUser, async (req, res) => {
 });
 userRouter.get("/profile/:id", verifyUser, async (req, res) => {
   try {
-    console.log(req.params.id);
     if (req.verified) {
       const user = await User.findOne({ _id: req.verified });
       return res.status(200).json(user);
@@ -239,5 +246,47 @@ userRouter.delete("/", async (req, res) => {
 //     return res.status(500).json(error);
 //   }
 // });
+
+userRouter.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
+
+userRouter.put("/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findOne({ _id: id });
+    const firstName = req.body.firstName || user.firstName;
+    const lastName = req.body.lastName || user.lastName;
+    const email = req.body.email || user.email;
+    const country = req.body.country || user.country;
+    const phone = req.body.phone || user.phone;
+    const city = req.body.city || user.city;
+
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.country = country;
+    user.phone = phone;
+    user.city = city;
+    user.country = country;
+    user.phone = phone;
+
+    req.body.postedPets?user.postedPets.push(req.body.postedPets):user.postedPets;
+    req.body.adoptionRequests?user.adoptionRequests.push(req.body.adoptionRequests):user.adoptionRequests;
+
+    const response = await user.save();
+    if (response) {
+      res.status(200).json({ response: response });
+    }
+  } catch (e) {
+    next(e);
+  }
+});
 
 module.exports = userRouter;

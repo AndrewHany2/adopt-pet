@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux";
 import axios from "axios";
 const baseURL = "/api/pets";
+
+
 
 export const getPets =
   (currentPage, filterByGender, filterByPet, filterByAge) =>
@@ -51,9 +54,15 @@ export const getPetInfo = (id) => async (dispatch) => {
 };
 
 export const adoptpet = (pet) => async (dispatch) => {
+
   try {
+   const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
     dispatch({ type: "PET_ADOPT_REQUEST" });
-    const { data } = await axios.post(`${baseURL}/adopt`, pet);
+    const { data } = await axios.post(`${baseURL}`, pet);
+    console.log(data)
+    if(data){
+      await axios.put(`/api/user/${userInfo.userId}`, {postedPets:data.petId})
+    }
     dispatch({
       type: "PET_ADOPT_SUCCESS",
       payload: data,
@@ -68,3 +77,5 @@ export const adoptpet = (pet) => async (dispatch) => {
     });
   }
 };
+
+

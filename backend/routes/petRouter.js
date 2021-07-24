@@ -19,7 +19,7 @@ petRouter.get("/", async (req, res, next) => {
   try {
     const queries = req.query;
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 4;
+    const limit = parseInt(req.query.limit) || 8;
     delete queries.limit;
     delete queries.page;
     switch (queries.age) {
@@ -94,7 +94,8 @@ petRouter.put("/:id", async (req, res, next) => {
     next(e);
   }
 });
-petRouter.post("/adopt", upload, (req, res) => {
+
+petRouter.post("/", upload, (req, res) => {
   const pet = new Pet({
     name: req.body.name,
     gender: req.body.gender,
@@ -105,17 +106,35 @@ petRouter.post("/adopt", upload, (req, res) => {
     description: req.body.description,
     image: `/images/${req.file.filename}`,
     status: req.body.status,
+    owner: req.body.owner,
   });
   pet
     .save()
     .then((result) => {
-      console.log(result);
-      res.status(201).json({ status: "adoption pet" });
+      res.status(201).json({ petId: result._id });
     })
     .catch((err) => {
-      onsole.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
+
+
+petRouter.get("/userpets/list",async(req,res)=>{
+
+
+try{
+    const query = req.query.postedpets;
+    pets = query.split(",");
+    const userPetList = await Pet.find({_id : {$in:pets}}) 
+    return res.status(201).json(userPetList)
+  
+}catch(error){
+  return res.status(400).json(error);
+}
+
+
+
+})
 
 module.exports = petRouter;

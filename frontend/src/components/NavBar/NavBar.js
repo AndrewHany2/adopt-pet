@@ -11,7 +11,7 @@ function NavBar() {
   const userLogin = useSelector((state) => state.userLogin);
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-nav main-nav">
+      <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-nav main-nav">
         <div className="container">
           <ul className="nav navbar-nav">
             <i>
@@ -48,18 +48,12 @@ function NavBar() {
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="#">
-                  Services
-                </Link>
-              </li>
-
-              <li className="nav-item ml-3">
                 <Link className="nav-link active" to="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="#">
+                <Link className="nav-link active" to="/contactus                        ">
                   Contact
                 </Link>
               </li>
@@ -70,10 +64,18 @@ function NavBar() {
                   </Link>
                 </li>
               )}
-              </ul>
               {userLogin.success && (
-                <ul  className="nav navbar-nav mx-auto nav-item-font ">
-                  <li className="nav-item dropdown">
+                <li className="nav-item ml-3">
+                  <Link className="nav-link active" to="/addPet">
+                    Add-Pet
+                  </Link>
+                </li>
+              )}
+            </ul>
+            {userLogin.success && (
+              <>
+                <ul className="nav navbar-nav mx-auto nav-item-font ">
+                  <li className="nav-item dropdown ml-3">
                     <Link
                       className="nav-link dropdown-toggle active"
                       href="#"
@@ -90,7 +92,11 @@ function NavBar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
+
                         Profile
+                      </Link>
+                      <Link  className="dropdown-item"  to="/messanger">
+                        Messeges
                       </Link>
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
@@ -99,10 +105,12 @@ function NavBar() {
                       {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
                         Dashboard{" "}
                       </Link>}
+
                     </div>
                   </li>
                 </ul>
-              )}
+              </>
+            )}
           </div>
         </div>
       </nav>

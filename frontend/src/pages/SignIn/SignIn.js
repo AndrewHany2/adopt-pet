@@ -31,7 +31,9 @@ function SignIn(props) {
         minDomainSegments: 2,
         tlds: false,
       })
-      .required(),
+      .required().messages({
+        "string.email": `Please enter a valid email`,
+      }),
     password: Joi.string().required(),
   };
 

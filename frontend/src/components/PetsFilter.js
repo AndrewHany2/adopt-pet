@@ -188,7 +188,7 @@ function PetsFilter(props) {
           className="card card-body border-irregular1"
           onChange={(e) => {
             setFilterByAge(e.target.value);
-            props.getPets(filterByGender, filterByPet, filterByAge);
+            props.getPets(filterByGender, filterByPet, e.target.value);
           }}
         >
           <div>

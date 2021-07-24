@@ -7,12 +7,16 @@ import LoginFacebook from "./../../components/LoginFacebook";
 import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
 import Joi from "joi";
-import{useDispatch, useSelector} from "react-redux"
+
+import { useDispatch, useSelector } from "react-redux";
+
 import { RegisterUser } from "../../store/actions/UserActions";
 
 function SignUp(props) {
   const dispatch = useDispatch();
-  const registerData = useSelector((state)=>state.registerData)
+  const registerData = useSelector((state) => state.registerData);
+
+
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -36,10 +40,7 @@ function SignUp(props) {
   });
 
   const fullSchema = Joi.object({
-    firstName: Joi.string().alphanum().min(3).max(30).required().messages({
-      "string.min": `should have a minimum length of {#limit}`,
-      "string.max": `should have a maximum length of {#limit}`,
-    }),
+    firstName: Joi.string().alphanum().min(3).max(30).required(),
 
     lastName: Joi.string().alphanum().min(3).max(30).required(),
 
@@ -53,26 +54,33 @@ function SignUp(props) {
     phone: Joi.string()
       .length(11)
       .pattern(/^(010|012|011|015)[0-9]{8}$/)
-      .required()
-      .messages({
-        "string.pattern.base": `Please enter a valid mobile phone number`,
-        "string.length": `Please enter 11 numbers`,
-      }),
+      .required(),
+    country: Joi.string().required(),
+    city: Joi.string().required(),
   });
   const schema = {
     firstName: Joi.string().alphanum().min(3).max(30).required().messages({
-      "string.min": `should have a minimum length of {#limit}`,
-      "string.max": `should have a maximum length of {#limit}`,
+      "string.min": `First name should have a minimum length of {#limit}`,
+      "string.max": `First name should have a maximum length of {#limit}`,
+      "string.empty": `First name is required`,
     }),
 
-    lastName: Joi.string().alphanum().min(3).max(30).required(),
+    lastName: Joi.string().alphanum().min(3).max(30).required().messages({
+      "string.min": `Last name should have a minimum length of {#limit}`,
+      "string.max": `Last name should have a maximum length of {#limit}`,
+      "string.empty": `Last name is required`,
+    }),
 
     email: Joi.string()
       .email({
         minDomainSegments: 2,
         tlds: false,
       })
-      .required(),
+      .required()
+      .messages({
+        "string.email": `Please enter a valid email`,
+        "string.empty": `Email is required`,
+      }),
 
     phone: Joi.string()
       .length(11)
@@ -81,7 +89,14 @@ function SignUp(props) {
       .messages({
         "string.pattern.base": `Please enter a valid mobile phone number`,
         "string.length": `Please enter 11 numbers`,
+        "string.empty": `Phone is required`,
       }),
+    country: Joi.string().required().messages({
+      "string.empty": `Country is required`,
+    }),
+    city: Joi.string().required().messages({
+      "string.empty": `City is required`,
+    }),
   };
   const passwordSchema = Joi.object({
     password: Joi.string()
@@ -135,18 +150,16 @@ function SignUp(props) {
     const myData = { ...userInfo };
     const myPassword = myData.passwordObj;
     delete myData.passwordObj;
-    delete myData.city;
-    delete myData.country;
 
-    const wrapData = {...userInfo}
-    delete wrapData.passwordObj
-    wrapData.password = myPassword.password
+    const wrapData = { ...userInfo };
+    delete wrapData.passwordObj;
+    wrapData.password = myPassword.password;
     console.log(myData);
     if (
       !fullSchema.validate(myData).error &&
       !passwordSchema.validate(myPassword).error
     ) {
-      dispatch(RegisterUser(wrapData))
+      dispatch(RegisterUser(wrapData));
     } else {
       let myErrors = { ...errors };
       myErrors.formValid = "Please enter valid info at all fields";
@@ -159,8 +172,6 @@ function SignUp(props) {
       props.history.push(`/signin`);
     }
   });
-
-
 
   return (
     <>
@@ -186,8 +197,6 @@ function SignUp(props) {
                     className="form-control theme-border"
                     id="firstName"
                     required
-
-
                     value={userInfo.firstName}
                     onChange={validateFields}
                   />
@@ -199,15 +208,12 @@ function SignUp(props) {
                     type="text"
                     className="form-control theme-border"
                     id="lastName"
-
                     required
-
                     value={userInfo.lastName}
                     onChange={validateFields}
                   />
                 </div>
                 {errors.firstName && (
-
                   <div className="alert alert-danger d-block theme-border">
                     {errors.firstName}
                   </div>
@@ -216,7 +222,6 @@ function SignUp(props) {
                   <div className="alert alert-danger d-block theme-border">
                     {errors.lastName}
                   </div>
-
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
@@ -233,15 +238,15 @@ function SignUp(props) {
                 </div>
               </div>
               {errors.email && (
-
-                <div className="alert alert-danger theme-border">{errors.email}</div>
+                <div className="alert alert-danger theme-border">
+                  {errors.email}
+                </div>
               )}
               <div className="form-row mr-3 ml-3 pb-2">
                 <div className="col-12 mb-3">
                   <label htmlFor="phone">Phone</label>
                   <input
                     type="number"
-
                     className="form-control theme-border"
                     id="phone"
                     value={userInfo.phone}
@@ -249,9 +254,9 @@ function SignUp(props) {
                   />
                 </div>
                 {errors.phone && (
-
-                  <div className="alert alert-danger theme-border">{errors.phone}</div>
-
+                  <div className="alert alert-danger theme-border">
+                    {errors.phone}
+                  </div>
                 )}
               </div>
               <div className="form-row mr-3 ml-3 pb-2">
@@ -262,6 +267,8 @@ function SignUp(props) {
                     className="form-control theme-border"
                     id="country"
                     required
+                    value={userInfo.country}
+                    onChange={validateFields}
                   />
                 </div>
                 <div className="col-md-6 mb-3">
@@ -271,8 +278,20 @@ function SignUp(props) {
                     className="form-control theme-border"
                     id="city"
                     required
+                    value={userInfo.city}
+                    onChange={validateFields}
                   />
                 </div>
+                {errors.country && (
+                  <div className="alert alert-danger theme-border">
+                    {errors.country}
+                  </div>
+                )}
+                {errors.city && (
+                  <div className="alert alert-danger theme-border">
+                    {errors.city}
+                  </div>
+                )}
               </div>
               <div className="form-row mr-3 ml-3">
                 <div className="col-md-6 mb-3">
