@@ -1,38 +1,27 @@
 import { useEffect, useState } from "react";
 import PostDashboard from "../../components/dashboard/postDashboard";
 import AdoptRequest from "../../components/dashboard/adoptRequest";
-import axios from "axios";
 
   
 export default function Dashboard() {
   const [pets, setPets] = useState([{}]);
+  const [req, setReq] = useState([{}]);
+
   useEffect(() => {
+    getAllRequests();
     fetch(`/api/pets/`)
     .then(response => response.json())
     .then(data => setPets(data))
   },[]);
-  console.log(pets)
+  //console.log(pets)
 
-
-  const baseURL = "/api/adoptionRequest/";
-  let user ;
   const getAllRequests = ()=>{
-      axios.get(`${baseURL}`)
-      .then((res)=>{
-        const reqData = res.data;
-        user = res.data;
-        reqData.map((data)=>{
-
-            console.log(data.requestedUserId);
-          })
-          console.log(res.data);
-      })
+    fetch("/api/adoptionRequest/")
+      .then((res)=> res.json())
+      .then(data => setReq(data))
       .catch(err => console.log("Error"));
   }
-
-  useEffect(()=>{
-      getAllRequests();
-  },[])
+//console.log(req);
 
   
   return (
@@ -64,7 +53,24 @@ export default function Dashboard() {
 
         <div className="col-12 col-md-6">
         <h2>AdoptionRequest</h2>
-        <AdoptRequest data={user}/>
+        <div className="table-responsive">
+        <table class="table">
+          <thead>
+        <tr>
+        <th scope="col">Requested User</th>
+        <th scope="col">Name-pet</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Type</th>
+        <th scope="col">Size</th>
+        <th scope="col">image</th>
+        <th colSpan="true" className="text-center">status</th>
+        </tr>
+          </thead>
+        {req && req.map((req)=>{
+                  return <AdoptRequest key={req._id} requests={req} />
+                })}
+        </table>
+        </div>        
         </div>
       </div>
       <div className="row mb-5 form-inline">

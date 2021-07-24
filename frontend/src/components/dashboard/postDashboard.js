@@ -1,5 +1,6 @@
 import React from "react"
 import { useEffect, useState } from "react";
+
 function PostDashboard(props){
     const [user, setUser] = useState({});
   useEffect(() => {

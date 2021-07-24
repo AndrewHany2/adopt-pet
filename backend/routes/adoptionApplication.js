@@ -22,6 +22,7 @@ AdoptionApplication.post("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
 AdoptionApplication.get("/:id", async (req, res) => {
   try {
     const adoptionRequest = await Application.findOne({ _id: req.params.id });

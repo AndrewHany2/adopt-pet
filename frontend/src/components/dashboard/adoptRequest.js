@@ -1,39 +1,50 @@
-import React,{useEffect} from "react"
-import axios from "axios";
+import React from "react"
+import { useEffect, useState } from "react";
 
 
 function AdoptRequest(props){
- console.log(props)
-    return(
-<div className="table-responsive">
-   <table class="table">
-    <thead>
-        <tr>
-        <th scope="col">User</th>
-        <th scope="col">Name-pet</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Type</th>
-        <th scope="col">DateOfBirth</th>
-        <th scope="col">Size</th>
-        <th scope="col">image</th>
-        <th colSpan="true" className="text-center">status</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <th scope="row">Email@gmail.com</th>
-        <td>Fluffy</td>
-        <td>Female</td>
-        <td>dog</td>
-        <td>7-7-2020</td>
-        <td>Medium</td>
-        <td><img src="../resources/adoption1-185x185.jpg" width="50" className="rounded-circle"/></td>
-        <td><button className="btn btn-success">Accept</button></td>
-        <td><button className="btn btn-danger">Reject</button></td>
-        </tr>
-    </tbody>
-    </table>
-</div>
-    )
+    const [user, setUser] = useState({});
+    const [pet, setPet] = useState({});
+
+     const requestedUsers = ()=>{
+        fetch(`/api/user/${props.requests.requestedUserId}`)
+        .then((res)=> res.json())
+        .then(data => setUser(data))
+        .catch(err => console.log("Error"));
+    }
+
+    const requestedPets = ()=>{
+        fetch(`/api/pets/${props.requests.petId}`)
+        .then((res)=> res.json())
+        .then(data => setPet(data))
+        .catch(err => console.log("Error"));
+    }
+
+    const handleAccept = ()=>{
+        fetch(`/api/adoptionRequest/${props.requests._id}`)
+        .then(res => res.json())
+        .then(data => setPet(data))
+        .catch(err => console.log("Error"));
+
+    }
+    useEffect(() => {
+        requestedUsers();
+        requestedPets()
+      },[]);
+
+        return(
+            <tbody>
+                <tr>
+                <th scope="row">{user.email}</th>
+                <td>{pet.name}</td>
+                <td>{pet.gender}</td>
+                <td>{pet.petType}</td>
+                <td>{pet.size}</td>
+                <td><img src={pet.image} width="50" className="rounded-circle"/></td>
+                <td><button className="btn btn-success" onClick={handleAccept}>Accept</button></td>
+                <td><button className="btn btn-danger">Reject</button></td>
+                </tr>
+            </tbody>
+            )
 }
 export default AdoptRequest
