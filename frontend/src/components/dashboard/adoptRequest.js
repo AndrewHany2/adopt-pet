@@ -7,7 +7,6 @@ import moment from 'moment'
 function AdoptRequest(props){
     const [user, setUser] = useState({});
     const [pet, setPet] = useState({});
-console.log(pet.dateOfBirth);
      const requestedUsers = ()=>{
         fetch(`/api/user/${props.requests.requestedUserId}`)
         .then((res)=> res.json())
