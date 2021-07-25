@@ -112,7 +112,7 @@ function SignIn(props) {
               </div>
             )}
             <form className="px-4 py-1 ">
-              <div className="form-group mt-5">
+              <div className="form-group mt-5 mb-5">
                 <label htmlFor="login-email">Email address</label>
                 <input
                   type="email"
@@ -133,7 +133,7 @@ function SignIn(props) {
 
 
 
-              <div className="form-group ">
+              <div className="form-group  mt-5 mb-5">
                 <label htmlFor="login-pss">Password</label>
                 <input
                   type="password"
@@ -172,19 +172,19 @@ function SignIn(props) {
 
                   type="button"
 
-                  className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
+                  className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-5 mt-3 theme-border font-weight-normal"
                   onClick={login}
                 >
                   Sign In
                 </button>
               </div>
             </form>
-            <div className="dropdown-divider p-1"></div>
+            {/* <div className="dropdown-divider p-1"></div>
             <div className="col-md-12  mb-3">
               <LoginFacebook />
               <LoginGoogle />
 
-              {/* 
+              
               <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
                 <FontAwesomeIcon icon={faFacebook} className="mr-2" />
                 Sign In with Facebook
@@ -192,12 +192,12 @@ function SignIn(props) {
               <button className="form-control theme-border btn google-btn mb-2 font-weight-normal">
                 <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                 Sign In With Google
-              </button> */}
-            </div>
+              </button> 
+            </div> */}
 
-            <div className="dropdown-divider p-1"></div>
+            {/* <div className="dropdown-divider p-1"></div> */}
             
-            <p className="text-inverse text-center mb-2">
+            {/* <p className="text-inverse text-center mb-2">
               <Link
                 className="active"
                 to="<?= base_url() ?>auth/login"
@@ -205,7 +205,7 @@ function SignIn(props) {
               >
                 Forgot Password ?
               </Link>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
