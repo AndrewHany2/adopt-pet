@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 
+
 function AdoptRequest(props) {
   const handleAccept = () => {
     axios.patch(`/api/admin/application/accept/${props.request._id}`);
