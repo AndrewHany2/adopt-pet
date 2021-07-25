@@ -64,8 +64,7 @@ export const getProfileReducer = (state = {}, action) => {
       return {
         loading: false,
         success: true,
-        userInfo: action.payload.userData,
-        petsInfo: action.payload.petsData,
+        rquestsInfo: action.payload,
       };
     case "PET_USER_PROFILE_FAIL":
       return { loading: false, error: action.payload };
@@ -73,3 +72,4 @@ export const getProfileReducer = (state = {}, action) => {
       return state;
   }
 };
+

@@ -34,7 +34,7 @@ function Profile() {
         <div className="container">
         {profileData?.userInfo && <UserInfo userInfo={profileData.userInfo} />}
         
-        { profileData?.petsInfo !== undefined && (<div className="container">
+        { profileData.petsInfo?.length !== 0 && (<div className="container">
           <div className="alert alert-primary mt-5 p-4" role="alert">
             <div style={{ color: "white" }}>
               <p className="h3">Adoption Rules</p>

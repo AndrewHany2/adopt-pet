@@ -33,8 +33,11 @@ function SignIn(props) {
       })
       .required().messages({
         "string.email": `Please enter a valid email`,
+        "string.empty": `Email is required`,
       }),
-    password: Joi.string().required(),
+    password: Joi.string().required().messages({
+      "string.empty": `Password is required`,
+    }),
   };
 
   const validateEmail = (e) => {
