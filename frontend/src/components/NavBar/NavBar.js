@@ -17,7 +17,7 @@ function NavBar() {
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
             <i>
-              <img src='/resources/logoPet.png' width="80px" />
+              <img src='/resources/aLogo.png' width="80px" />
             </i>
               </Link>
             </li>
