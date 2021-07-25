@@ -21,7 +21,7 @@ const userLogin = useSelector((state)=>state.userLogin)
           <div className="col-md-4">
           <img src={
             props.userInfo.image?
-            `../resources/${props.userInfo.image}`
+            `${props.userInfo.image}`
             : '/assets/person/noAvatar.png'
           }
              className="img-fluid about-img w-100" alt=""/>
