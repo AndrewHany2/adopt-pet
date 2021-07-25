@@ -240,7 +240,7 @@ userRouter.get("/profile/:id",verifyUser, async (req, res) => {
   }
 });
 
-userRouter.get("/", async ({ query }, res) => {
+userRouter.get("/",verifyUser, async ({ query }, res) => {
   try{
   if (query.email) {
     const user = await User.findOne({ email: query.email });

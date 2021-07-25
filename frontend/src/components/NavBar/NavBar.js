@@ -104,8 +104,8 @@ function NavBar() {
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
                       </Link>
-                      {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="/dashboard#">
+                      {userLogin.info.userRole !== "USER" && <div className="dropdown-divider"></div>}
+                      {userLogin.info.userRole !== "USER" && <Link className="dropdown-item" to="/dashboard#">
                         Dashboard{" "}
                       </Link>}
 
