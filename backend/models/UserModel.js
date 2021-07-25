@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["ADMIN", "USER"],
+    enum: ["USER", "ADMIN", "SUPWE_ADMIN"],
     default: "USER",
   },
   postedPets: {

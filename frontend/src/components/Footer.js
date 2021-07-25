@@ -1,6 +1,7 @@
 import React from "react";
 import 'font-awesome/css/font-awesome.min.css';
-
+import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function Footer() {
@@ -11,7 +12,7 @@ function Footer() {
                 <div class="col-md-6">
                     <div class="fcontent">
                         <div class="fheading">
-                            <h3>Woof</h3>
+                            <h3><i className="fa fa-paw" style={{ color: "#f9575c"}}></i> Woof</h3>
                         </div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, nesciunt accusamus esse
                          atque tempore incidunt nam dolores 
@@ -39,8 +40,7 @@ function Footer() {
                     <div class="fcontent">
                         <div class="fheading">
                             <h4>
-                                <i class="far fa-clock "></i>
-                                Working Hours
+                            <FontAwesomeIcon icon={faClock} /> Working Hours
                             </h4>
                         </div>
                         <ul class="contact">
