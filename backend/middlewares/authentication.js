@@ -5,9 +5,6 @@ const authenticationRole = role => {
         try{
             const user = await User.findOne({_id: req.verified})
             console.log(req.verified);
-            console.log(user);
-            console.log(role);
-            console.log(user.role);
             if (user.role != role) {
                 res.status(401);
                 return res.send('Not Allowed');
