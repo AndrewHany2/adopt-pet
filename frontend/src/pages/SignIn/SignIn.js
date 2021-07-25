@@ -21,7 +21,7 @@ function SignIn(props) {
     loginInvalid: "",
     credentialsInvalid: "",
   });
-  const [credentials, setCredentials] = useState({ email:registerData.info?registerData.info.email:"", password: "" });
+  const [credentials, setCredentials] = useState({ email: registerData.info ? registerData.info.email : "", password: "" });
 
 
 
@@ -65,7 +65,7 @@ function SignIn(props) {
   };
 
   const login = () => {
-    const myErrors = {...errors}
+    const myErrors = { ...errors }
     myErrors.credentialsInvalid = "";
     setErrors(myErrors)
     if (
@@ -93,14 +93,14 @@ function SignIn(props) {
         <div className=" row justify-content-center  align-content-center">
           <div className="box col-lg-4 col-md-8 mb-3 mt-5">
             <div className="d-flex justify-content-center">
-          <p className="text-inverse text-center mt-4 border alert-danger p-2 theme-border w-75">
-              New User?{" "}
-              <Link to="/signup" data-abc="true">
-                Sign Up
-              </Link>
-            </p>
+              <p className="text-inverse text-center mt-4 border alert-danger p-2 theme-border w-75">
+                New User?{" "}
+                <Link to="/signup" data-abc="true">
+                  Sign Up
+                </Link>
+              </p>
             </div>
-              
+
             {userLogin.error && (
               <div className="alert alert-danger d-block mt-4 theme-border">
                 {userLogin.error}
@@ -168,15 +168,17 @@ function SignIn(props) {
                     Remember me
                   </label>
                 </div> */}
-                <button
+                <div className="text-center">
+                  <button
 
-                  type="button"
+                    type="button"
 
-                  className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-5 mt-3 theme-border font-weight-normal"
-                  onClick={login}
-                >
-                  Sign In
-                </button>
+                    className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-5 mt-3 theme-border font-weight-normal"
+                    onClick={login}
+                  >
+                    Sign In
+                  </button>
+                </div>
               </div>
             </form>
             {/* <div className="dropdown-divider p-1"></div>
@@ -196,7 +198,7 @@ function SignIn(props) {
             </div> */}
 
             {/* <div className="dropdown-divider p-1"></div> */}
-            
+
             {/* <p className="text-inverse text-center mb-2">
               <Link
                 className="active"

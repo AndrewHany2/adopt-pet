@@ -336,16 +336,18 @@ function SignUp(props) {
                     Agree to terms and conditions
                   </label>
                 </div>
-                <button
-                  type="button"
-                  className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
-                  onClick={sendData}
-                >
-                  Sign Up
-                </button>
+                <div className="text-center my-4">
+                  <button
+                    type="button"
+                    className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-1 mt-2 theme-border font-weight-normal"
+                    onClick={sendData}
+                  >
+                    Sign Up
+                  </button>
+                </div>
               </div>
             </form>
-            
+
             <div className="dropdown-divider p-1 "></div>
             <p className="text-inverse text-center">
               Already have an account?{" "}
