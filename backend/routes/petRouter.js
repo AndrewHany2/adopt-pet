@@ -18,23 +18,15 @@ petRouter.get("/:id", async (req, res, next) => {
 petRouter.get("/", async (req, res, next) => {
   try {
     const queries = req.query;
+    if (queries.status === 'PENDING') {
+      const result = await Pet.find({ status: queries.status });
+      res.status(200).json({ result });
+      return;
+    }
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 8;
     delete queries.limit;
     delete queries.page;
-    switch (queries.age) {
-      case "young":
-        queries.age = "1";
-        break;
-      case "old":
-        queries.age = "2";
-        break;
-      case "senior":
-        queries.age = "3";
-        break;
-      default:
-        break;
-    }
     let conditions = {};
     for (i of Object.keys(queries)) {
       if (queries[i] !== "") {
@@ -120,18 +112,18 @@ petRouter.post("/", upload, (req, res) => {
 });
 
 
-petRouter.get("/userpets/list",async(req,res)=>{
+petRouter.get("/userpets/list", async (req, res) => {
 
 
-try{
+  try {
     const query = req.query.postedpets;
     pets = query.split(",");
-    const userPetList = await Pet.find({_id : {$in:pets}}) 
+    const userPetList = await Pet.find({ _id: { $in: pets } })
     return res.status(201).json(userPetList)
-  
-}catch(error){
-  return res.status(400).json(error);
-}
+
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 
 
 
