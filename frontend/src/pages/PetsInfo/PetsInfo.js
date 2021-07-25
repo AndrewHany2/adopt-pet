@@ -43,7 +43,6 @@ function PetsInfo({ match, history }) {
       `/api/conversations/find/${userLogin.info.userId}/${pet.info.owner}`
     );
     if (!checkCoversation.data) {
-      console.log("sdas");
       const result = await axios.post(`/api/conversations`, {
         senderId: userLogin.info.userId,
         receiverId: pet.info.owner,
