@@ -8,6 +8,7 @@ export const getUser = (id) => async (dispatch) => {
     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
     const header = {
       headers: {
+
         Authorization: userInfo.token,
       },
     };
@@ -68,4 +69,43 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: "USER_LOGOUT" });
   dispatch({ type: "USER_DATA_RESET" });
+};
+
+
+export const getProfile =(userId) => async (dispatch) => {
+  try {
+    dispatch({ type: "PET_USER_PROFILE_REQUEST" });
+    const userInfo =JSON.parse(window.localStorage.getItem("userInfo"))
+
+
+    const header = {
+      headers: {
+        Authorization: userInfo.token 
+      }
+    }
+      const {data} = await axios.get(`${baseURL}/profile/${userId}`,header);
+      const userData  = data;
+      let pets = {}
+      if(userData?.postedPets.length !== 0){
+
+        const stringData =  userData.postedPets.map((value) => `${value}`).join(',');
+         pets = await axios.get(`/api/pets/userpets/list/?postedpets=${stringData}`);
+      }
+      let petsData = pets.data?pets.data:[]
+      console.log("pets Data Action")
+      console.log(petsData)
+
+    dispatch({
+      type: "PET_USER_PROFILE_SUCCESS",
+      payload: {userData:userData, petsData:petsData},
+    });
+  } catch (error) {
+    dispatch({
+      type: "PET_USER_PROFILE_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

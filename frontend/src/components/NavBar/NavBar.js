@@ -18,7 +18,7 @@ function NavBar() {
               <FontAwesomeIcon icon={faPaw} className="m-nav-icon mr-3 mt-1" />
             </i>
             <li className="nav-item active">
-              <Link className="nav-link nav-logo" to="#">
+              <Link className="nav-link nav-logo" to="/">
                 WOOF!
               </Link>
             </li>
@@ -48,24 +48,13 @@ function NavBar() {
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="#">
-                  Services
-                </Link>
-              </li>
-
-              <li className="nav-item ml-3">
                 <Link className="nav-link active" to="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="#">
+                <Link className="nav-link active" to="/contactus">
                   Contact
-                </Link>
-              </li>
-              <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/messanger">
-                  Messeges
                 </Link>
               </li>
               {!userLogin.success && (
@@ -86,7 +75,7 @@ function NavBar() {
             {userLogin.success && (
               <>
                 <ul className="nav navbar-nav mx-auto nav-item-font ">
-                  <li className="nav-item dropdown">
+                  <li className="nav-item dropdown ml-3">
                     <Link
                       className="nav-link dropdown-toggle active"
                       href="#"
@@ -106,11 +95,14 @@ function NavBar() {
 
                         Profile
                       </Link>
+                      <Link  className="dropdown-item"  to="/messanger">
+                        Messeges
+                      </Link>
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
                       </Link>
                       {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="#">
+                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="/dashboard#">
                         Dashboard{" "}
                       </Link>}
 

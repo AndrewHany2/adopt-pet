@@ -31,7 +31,9 @@ function SignIn(props) {
         minDomainSegments: 2,
         tlds: false,
       })
-      .required(),
+      .required().messages({
+        "string.email": `Please enter a valid email`,
+      }),
     password: Joi.string().required(),
   };
 
@@ -149,7 +151,7 @@ function SignIn(props) {
 
 
               <div className="form-group p-2">
-                <div className="form-check">
+                {/* <div className="form-check">
                   <input
                     type="checkbox"
                     className="form-check-input"
@@ -162,7 +164,7 @@ function SignIn(props) {
                   >
                     Remember me
                   </label>
-                </div>
+                </div> */}
                 <button
 
                   type="button"
