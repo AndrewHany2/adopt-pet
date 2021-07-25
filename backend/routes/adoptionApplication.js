@@ -2,6 +2,19 @@ const AdoptionApplication = require("express").Router();
 const Application = require("../models/AdoptionApplication");
 const User = require("../models/UserModel");
 
+AdoptionApplication.get('/', async ({ query }, response) => {
+    try {
+      let adoptionRequests;
+      if (query.status) {
+        adoptionRequests = await Application.find({ status: query.status });
+      }
+      else
+        adoptionRequests = await Application.find({});
+      response.status(200).json(adoptionRequests);
+  }
+  catch (error) { respopnse.status(500).json(error) }
+});
+
 AdoptionApplication.post("/", async (req, res) => {
   try {
     const app = await new Application(req.body);
