@@ -4,22 +4,32 @@ import AdoptRequest from "../../components/dashboard/adoptRequest";
 import axios from "axios";
 
 export default function Dashboard() {
-  const [pets, setPets] = useState([{}]);
-  const [req, setReq] = useState([{}]);
+  const [pets, setPets] = useState([]);
+  const [req, setReq] = useState([]);
 
   useEffect(() => {
     async function temp() {
-      const { data } = await axios.get("/api/pets?status=PENDING");
+      const { data } = await axios.get("/api/admin/pendingPets");
       setPets(data?.result);
+      const response = await axios.get(`/api/admin/pendingApplications`);
+      setReq(response.data.result);
     }
     temp();
   }, []);
 
-  const handleClick = (id) => {
-    let temp = [...pets];
-    const index = temp.findIndex((pet) => pet._id === id);
-    temp.splice(index, 1);
-    setPets(temp);
+  const handleClick = (id, list) => {
+    if (list === "pets") {
+      let temp = [...pets];
+      const index = temp.findIndex((pet) => pet._id === id);
+      temp.splice(index, 1);
+      setPets(temp);
+    }
+    if (list === "requests") {
+      let temp = [...req];
+      const index = temp.findIndex((element) => element._id === id);
+      temp.splice(index, 1);
+      setReq(temp);
+    }
   };
 
   return (
@@ -48,7 +58,7 @@ export default function Dashboard() {
                   return (
                     <PostDashboard
                       key={pet._id}
-                      pets={pet}
+                      pet={pet}
                       handleClick={handleClick}
                     />
                   );
@@ -77,7 +87,13 @@ export default function Dashboard() {
                 </thead>
                 {req &&
                   req.map((req) => {
-                    return <AdoptRequest key={req._id} requests={req} />;
+                    return (
+                      <AdoptRequest
+                        key={req._id}
+                        request={req}
+                        handleClick={handleClick}
+                      />
+                    );
                   })}
               </table>
             </div>

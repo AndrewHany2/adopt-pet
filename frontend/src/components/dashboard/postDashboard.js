@@ -1,38 +1,29 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import axios from "axios";
-function PostDashboard(props) {
-  const [user, setUser] = useState({});
 
-  useEffect(() => {
-    async function temp() {
-      const { data } = await axios.get(`/api/user/${props.pets.owner}`);
-      setUser(data);
-    }
-    temp();
-  }, []);
+function PostDashboard(props) {
   const handleClickAccept = async () => {
-    const id = props.pets._id;
+    const id = props.pet._id;
     await axios.patch(`/api/admin/postPet/accept/${id}`);
-    props.handleClick(props.pets._id);
+    props.handleClick(props.pet._id, "pets");
   };
   const handleClickReject = async () => {
-    const id = props.pets._id;
+    const id = props.pet._id;
     await axios.patch(`/api/admin/postPet/reject/${id}`);
-    props.handleClick(props.pets._id);
+    props.handleClick(props.pet._id, "pets");
   };
   return (
     <tbody>
       <tr>
-        {user ? <th scope="row">{user.email}</th> : null}
-        <td>{props.pets.name}</td>
-        <td>{props.pets.gender}</td>
-        <td>{props.pets.petType}</td>
-        <td>{props.pets.vaccinated}</td>
-        <td>{props.pets.size}</td>
+        <th scope="row">{props.pet.owner?.email}</th>
+        <td>{props.pet.name}</td>
+        <td>{props.pet.gender}</td>
+        <td>{props.pet.petType}</td>
+        <td>{props.pet.vaccinated}</td>
+        <td>{props.pet.size}</td>
         <td>
           <img
-            src={props.pets.image}
+            src={props.pet.image}
             width="50"
             className="rounded-circle"
             alt="pet"

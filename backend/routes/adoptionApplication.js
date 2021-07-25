@@ -2,17 +2,22 @@ const AdoptionApplication = require("express").Router();
 const Application = require("../models/AdoptionApplication");
 const User = require("../models/UserModel");
 
-AdoptionApplication.get('/', async ({ query }, response) => {
-    try {
-      let adoptionRequests;
-      if (query.status) {
-        adoptionRequests = await Application.find({ status: query.status });
-      }
-      else
-        adoptionRequests = await Application.find({});
-      response.status(200).json(adoptionRequests);
+AdoptionApplication.get("/", async ({ query }, response) => {
+  try {
+    let adoptionRequests;
+    if (query.status) {
+      adoptionRequests = await Application.find({
+        status: query.status,
+      })
+        .populate("requestedUserId", "email")
+        .populate("petId", "_id name gender dateOfBirth type size");
+      console.log(adoptionRequests);
+      return 0;
+    } else adoptionRequests = await Application.find({});
+    response.status(200).json(adoptionRequests);
+  } catch (error) {
+    respopnse.status(500).json(error);
   }
-  catch (error) { respopnse.status(500).json(error) }
 });
 
 AdoptionApplication.post("/", async (req, res) => {
@@ -47,7 +52,6 @@ AdoptionApplication.get("/:id", async (req, res) => {
     res.status(400).json(err);
   }
 });
-
 
 AdoptionApplication.get("/", async (req, res) => {
   try {
