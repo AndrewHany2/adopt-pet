@@ -17,9 +17,8 @@ function NavBar() {
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
             <i>
-              <FontAwesomeIcon icon={faPaw} className="m-nav-icon mr-3 mt-1" />
+              <img src='/resources/logoPet.png' width="80px" />
             </i>
-                WOOF!
               </Link>
             </li>
           </ul>
