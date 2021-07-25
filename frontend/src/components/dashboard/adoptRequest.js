@@ -1,13 +1,13 @@
 import React from "react"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import moment from 'moment'
 
 
 function AdoptRequest(props){
     const [user, setUser] = useState({});
     const [pet, setPet] = useState({});
-
-// console.log(props.requests.petId)
+console.log(pet.dateOfBirth);
      const requestedUsers = ()=>{
         fetch(`/api/user/${props.requests.requestedUserId}`)
         .then((res)=> res.json())
@@ -41,7 +41,7 @@ function AdoptRequest(props){
                 <th scope="row">{user.email}</th>
                 <td>{pet.name}</td>
                 <td>{pet.gender}</td>
-                <td>{pet.dateOfBirth}</td>
+                <td>{moment(pet.dateOfBirth).format("DD/MM/YYYY")}</td>
                 <td>{pet.petType}</td>
                 <td>{pet.size}</td>
                 <td><img src={pet.image} width="50" className="rounded-circle"/></td>
