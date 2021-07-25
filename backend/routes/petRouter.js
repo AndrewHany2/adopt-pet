@@ -18,23 +18,16 @@ petRouter.get("/:id", async (req, res, next) => {
 petRouter.get("/", async (req, res, next) => {
   try {
     const queries = req.query;
+    if (queries.status === "PENDING") {
+      const result = await Pet.find({ status: queries.status });
+      res.status(200).json({ result });
+      return;
+    }
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 8;
+    console.log(req.query.limit);
     delete queries.limit;
     delete queries.page;
-    switch (queries.age) {
-      case "young":
-        queries.age = "1";
-        break;
-      case "old":
-        queries.age = "2";
-        break;
-      case "senior":
-        queries.age = "3";
-        break;
-      default:
-        break;
-    }
     let conditions = {};
     for (i of Object.keys(queries)) {
       if (queries[i] !== "") {

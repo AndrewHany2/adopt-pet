@@ -43,7 +43,6 @@ function PetsInfo({ match, history }) {
       `/api/conversations/find/${userLogin.info.userId}/${pet.info.owner}`
     );
     if (!checkCoversation.data) {
-      console.log("sdas");
       const result = await axios.post(`/api/conversations`, {
         senderId: userLogin.info.userId,
         receiverId: pet.info.owner,
@@ -86,6 +85,30 @@ function PetsInfo({ match, history }) {
 
   return (
     <>
+      {!userLogin.info ? (
+        <div
+          style={{
+            margin: "auto",
+            height: "300px",
+            width: "50%",
+            fontSize: "2rem",
+          }}
+          className="alert alert-danger my-5 text-center"
+          role="alert"
+        >
+          <div className="mt-5">Login to adopt</div>
+          <div>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                history.push("/signin");
+              }}
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      ) : null}
       {pet.info ? (
         <div>
           <div className="container-fluid backgroundImg p-4">
@@ -176,70 +199,55 @@ function PetsInfo({ match, history }) {
                             </li>
                           </ul>
                         </div>
-                        {userLogin.info ? (
-                          <>
-                            <div className="col-sm-6 col-md-8">
-                              {!loading && !success && !alreadyRequested && (
-                                <button
-                                  className="btn btn-primary"
-                                  onClick={handleAdopt}
-                                >
-                                  Adopt
-                                </button>
-                              )}
-                              <button
-                                className="btn btn-primary"
-                                onClick={handleShow}
-                              >
-                                Message Owner
-                              </button>
-                            </div>
-                            {success && (
-                              <div class="alert alert-primary" role="alert">
-                                Adoption Request sent wait for response
-                              </div>
-                            )}
-                            <Modal show={show} onHide={handleClose}>
-                              <Modal.Header closeButton>
-                                <Modal.Title>
-                                  Send message to pet owner
-                                </Modal.Title>
-                              </Modal.Header>
-                              <Modal.Body>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="exampleForm.ControlTextarea1"
-                                >
-                                  <Form.Label>Message</Form.Label>
-                                  <Form.Control
-                                    as="textarea"
-                                    rows={3}
-                                    onChange={(e) => {
-                                      setMessage(e.target.value);
-                                    }}
-                                  />
-                                </Form.Group>
-                              </Modal.Body>
-                              <Modal.Footer>
-                                <Button
-                                  variant="secondary"
-                                  onClick={handleClose}
-                                >
-                                  Close
-                                </Button>
-                                <Button variant="primary" onClick={sendMessage}>
-                                  Send Message
-                                </Button>
-                              </Modal.Footer>
-                            </Modal>
-                          </>
-                        ) : (
-                          <div className="col-sm-6 col-md-8">
-                            <div class="alert alert-danger" role="alert">
-                              Login to adopt
-                            </div>
+                        <div className="col-sm-6 col-md-8">
+                          {!loading && !success && !alreadyRequested && (
+                            <button
+                              className="btn btn-primary"
+                              onClick={handleAdopt}
+                            >
+                              Adopt
+                            </button>
+                          )}
+                          <button
+                            className="btn btn-primary"
+                            onClick={handleShow}
+                          >
+                            Message Owner
+                          </button>
+                        </div>
+                        {success && (
+                          <div class="alert alert-primary" role="alert">
+                            Adoption Request sent wait for response
                           </div>
                         )}
+                        <Modal show={show} onHide={handleClose}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Send message to pet owner</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlTextarea1"
+                            >
+                              <Form.Label>Message</Form.Label>
+                              <Form.Control
+                                as="textarea"
+                                rows={3}
+                                onChange={(e) => {
+                                  setMessage(e.target.value);
+                                }}
+                              />
+                            </Form.Group>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                              Close
+                            </Button>
+                            <Button variant="primary" onClick={sendMessage}>
+                              Send Message
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
                       </div>
                     </div>
                   </div>
