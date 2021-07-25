@@ -7,9 +7,7 @@ const verifyUser = async (req, res, next) => {
             const payload = await verifyToken(authorization)
             if (payload.id) {
                 req.verified = payload.id;
-                console.log(payload)
                 return next()
-                
             }
         }
         return next (new Error('not authorized'))
