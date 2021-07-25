@@ -4,12 +4,26 @@ import moment from 'moment';
 
 function AdoptRequest(props) {
   const handleAccept = () => {
-    axios.patch(`/api/admin/application/accept/${props.request._id}`);
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+
+        Authorization: userInfo.token,
+      },
+    };
+    axios.patch(`/api/admin/application/accept/${props.request._id}`,header);
     props.handleClick(props.request._id, "requests");
   };
 
   const handleReject = () => {
-    axios.patch(`/api/admin/application/reject/${props.request._id}`);
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+
+        Authorization: userInfo.token,
+      },
+    };
+    axios.patch(`/api/admin/application/reject/${props.request._id}`,header);
     props.handleClick(props.request._id, "requests");
   };
 

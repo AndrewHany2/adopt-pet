@@ -3,13 +3,27 @@ import axios from "axios";
 
 function PostDashboard(props) {
   const handleClickAccept = async () => {
+     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+
+        Authorization: userInfo.token,
+      },
+    };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/accept/${id}`);
+    await axios.patch(`/api/admin/postPet/accept/${id}`,header);
     props.handleClick(props.pet._id, "pets");
   };
   const handleClickReject = async () => {
+     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+
+        Authorization: userInfo.token,
+      },
+    };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/reject/${id}`);
+    await axios.patch(`/api/admin/postPet/reject/${id}`,header);
     props.handleClick(props.pet._id, "pets");
   };
   return (
