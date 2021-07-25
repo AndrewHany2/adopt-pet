@@ -103,4 +103,19 @@ dashboard.get("/adoptpet/:id", async (req, res) => {
   }
 });
 
+dashboard.patch("/assignrole/:id",async (req,res)=>{
+  try{
+    const userRole = req.query.role
+    console.log(userRole)
+  const updateUser = await User.findOneAndUpdate({_id:req.params.id},{role:userRole})
+  const user = await User.findOne({_id:req.params.id})
+     return res.status(200).json(user);
+  }catch(err){
+    return res.status(500).json(err);
+  
+  }
+  
+  });
+
+
 module.exports = dashboard;

@@ -6,6 +6,8 @@ import axios from "axios";
 export default function Dashboard() {
   const [pets, setPets] = useState([]);
   const [req, setReq] = useState([]);
+  const [search, setSearch] = useState({ isData: false, data: {} });
+  const [serachEmail, setSearchEmail] = useState("");
 
   useEffect(() => {
     async function temp() {
@@ -32,8 +34,104 @@ export default function Dashboard() {
     }
   };
 
+  const getUser = async () => {
+    console.log("here");
+    const { data } = await axios.get(`/api/user?email=${serachEmail}`);
+    setSearch({ isData: true, data: data });
+    console.log("here");
+    console.log(data);
+
+  };
+
+  const setEmail = (event) => {
+    setSearchEmail(event.target.value);
+  };
+  const makeAdmin = async () => {
+    const { data } = await axios.patch(
+      `/api/admin/assignrole/${search.data._id}?role=ADMIN`
+    );
+    console.log("Admin");
+    console.log(data);    const hideUser = {...search}
+    hideUser.isData = false;
+    setSearch(hideUser)
+  };
+  const removeAdmin = async () => {
+    const { data } = await axios.patch(
+      `/api/admin/assignrole/${search.data._id}?role=USER`
+    );
+    console.log("Not Admin");
+    console.log(data);    const hideUser = {...search}
+    hideUser.isData = false;
+    setSearch(hideUser)
+  };
+
+
   return (
     <>
+     <div className="row my-5 form-inline">
+        <div className="col-12 d-flex justify-content-center">
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search By Email"
+            aria-label="Search"
+            value={serachEmail}
+            onChange={setEmail}
+          />
+          <button
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="button"
+            onClick={getUser}
+          >
+            Search
+          </button>
+        </div>
+        {search.isData && <div className="d-flex justify-content-center w-100">
+          <div
+            className="card d-flex flex-column align-content-center"
+            style={{ width: "18rem" }}
+          >
+            <img
+              className="card-img-top"
+              src={search.data.image}
+              alt="Card cap"
+            />
+            <div className="card-body">
+              <h5 className="card-title">
+                {search.data.firstName} {search.data.lastName}
+              </h5>
+            </div>
+            <div className="card-body">
+              <h5 className="card-title">
+                {search.data.phone} 
+              </h5>
+            </div>
+            <div className="card-body">
+              <h5 className="card-title">
+                {search.data.country}
+              </h5>
+            </div>
+            <div className="card-body">
+              <h5 className="card-title">
+                {search.data.city}
+              </h5>
+            </div>
+            
+            <div className="d-flex justify-content-center w-100">
+              <div class="card-body">
+                <button className="btn btn-danger" onClick={makeAdmin}>
+                  Make Admin
+                </button>
+              </div>
+              <div class="card-body">
+                <button className="btn btn-danger" onClick={removeAdmin}>
+                  Remove Admin
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>}
+      </div>
       <div className="container">
         <div className="row mb-5 mt-3">
           <div className="col-12 col-md-6">
