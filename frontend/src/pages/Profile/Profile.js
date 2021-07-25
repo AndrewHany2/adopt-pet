@@ -53,7 +53,7 @@ function Profile() {
             </div>
           )}
           {profileData.petsInfo?.length !== 0 &&
-            profileData.petsInfo.map((pet) => {
+            profileData.petsInfo?.map((pet) => {
               return <PetInfo key={pet} petInfo={pet} />;
             })}
         </div>
