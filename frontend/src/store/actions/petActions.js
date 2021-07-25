@@ -2,21 +2,21 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 const baseURL = "/api/pets";
 
-
-
 export const getPets =
-  (currentPage, filterByGender, filterByPet, filterByAge) =>
+  (currentPage, filterByGender, filterByPet, filterByAge, limit) =>
   async (dispatch) => {
     let list = "";
     try {
       dispatch({ type: "PET_LIST_REQUEST" });
       if (filterByPet || filterByGender || filterByAge) {
         const { data } = await axios.get(
-          `${baseURL}?gender=${filterByGender}&petType=${filterByPet}&age=${filterByAge}&page=${currentPage}`
+          `${baseURL}?gender=${filterByGender}&petType=${filterByPet}&age=${filterByAge}&page=${currentPage}&status=ACCEPTED`
         );
         list = data;
       } else {
-        const { data } = await axios.get(`${baseURL}?page=${currentPage}`);
+        const { data } = await axios.get(
+          `${baseURL}?page=${currentPage}&limit=${limit}&status=ACCEPTED`
+        );
         list = data;
       }
       dispatch({
@@ -53,14 +53,15 @@ export const getPetInfo = (id) => async (dispatch) => {
   }
 };
 export const adoptpet = (pet) => async (dispatch) => {
-
   try {
-   const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
     dispatch({ type: "PET_ADOPT_REQUEST" });
     const { data } = await axios.post(`${baseURL}`, pet);
-    console.log(data)
-    if(data){
-      await axios.put(`/api/user/${userInfo.userId}`, {postedPets:data.petId})
+    console.log(data);
+    if (data) {
+      await axios.put(`/api/user/${userInfo.userId}`, {
+        postedPets: data.petId,
+      });
     }
     dispatch({
       type: "PET_ADOPT_SUCCESS",
@@ -76,5 +77,3 @@ export const adoptpet = (pet) => async (dispatch) => {
     });
   }
 };
-
-

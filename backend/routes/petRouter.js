@@ -20,6 +20,7 @@ petRouter.get("/", async (req, res, next) => {
     const queries = req.query;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 8;
+    console.log(req.query.limit);
     delete queries.limit;
     delete queries.page;
     switch (queries.age) {
@@ -119,22 +120,15 @@ petRouter.post("/", upload, (req, res) => {
     });
 });
 
-
-petRouter.get("/userpets/list",async(req,res)=>{
-
-
-try{
+petRouter.get("/userpets/list", async (req, res) => {
+  try {
     const query = req.query.postedpets;
     pets = query.split(",");
-    const userPetList = await Pet.find({_id : {$in:pets}}) 
-    return res.status(201).json(userPetList)
-  
-}catch(error){
-  return res.status(400).json(error);
-}
-
-
-
-})
+    const userPetList = await Pet.find({ _id: { $in: pets } });
+    return res.status(201).json(userPetList);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
 
 module.exports = petRouter;
