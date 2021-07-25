@@ -7,9 +7,9 @@ const verifyUser = require("../middlewares/VerifyUser");
 const passport = require("passport");
 const facebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
+const upload = require("../helpers/multer");
 
-userRouter.use(passport.initialize());
-userRouter.use(passport.session());
+
 
 userRouter.use(passport.initialize());
 userRouter.use(passport.session());
@@ -276,7 +276,7 @@ userRouter.get("/:id", async (req, res) => {
   }
 });
 
-userRouter.put("/:id", async (req, res, next) => {
+userRouter.put("/:id",upload ,async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findOne({ _id: id });
@@ -286,6 +286,11 @@ userRouter.put("/:id", async (req, res, next) => {
     const country = req.body.country || user.country;
     const phone = req.body.phone || user.phone;
     const city = req.body.city || user.city;
+    let image = user.image;
+    if(req.file){
+       image = `/images/${req.file.filename}`;
+    }
+
 
     user.firstName = firstName;
     user.lastName = lastName;
@@ -295,8 +300,9 @@ userRouter.put("/:id", async (req, res, next) => {
     user.city = city;
     user.country = country;
     user.phone = phone;
+    user.image = image;
 
-    req.body.postedPets
+     req.body.postedPets
       ? user.postedPets.push(req.body.postedPets)
       : user.postedPets;
     req.body.adoptionRequests
@@ -309,6 +315,8 @@ userRouter.put("/:id", async (req, res, next) => {
     }
   } catch (e) {
     next(e);
+    return res.status(500).json(error);
+
   }
 });
 

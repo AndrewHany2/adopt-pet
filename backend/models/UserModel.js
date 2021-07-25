@@ -51,6 +51,10 @@ const userSchema = mongoose.Schema({
   phone: {
     type: String
   },
+  image:
+  {
+      type: String
+  }
 });
 
 const User = mongoose.model("User", userSchema);
