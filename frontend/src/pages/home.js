@@ -9,23 +9,25 @@ import { getPets } from "../store/actions/petActions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const pets = useSelector((state) => state.pets);
-  useEffect(() => {
-    dispatch(getPets("", "", "", "", 4));
-  }, []);
-  return (
-    <div className="container mt-4">
-      <HomeCarouel />
-      {pets.info ? (
-        <div className="mt-5">
-          <PetsCards pets={pets} />{" "}
-        </div>
-      ) : null}
-      <AboutUs />
-      <Counter />
-      <Slider />
-      <ContactUs />
-    </div>
-  );
+    const dispatch = useDispatch();
+    const pets = useSelector((state) => state.pets);
+    useEffect(() => {
+        dispatch(getPets("", "", "", "", 4));
+    }, []);
+    return (
+        <>
+            <HomeCarouel />
+            <div className="container mt-4">
+                {pets.info ? (
+                    <div className="mt-5">
+                        <PetsCards pets={pets} />{" "}
+                    </div>
+                ) : null}
+                <AboutUs />
+                <Counter />
+                <Slider />
+                <ContactUs />
+            </div>
+        </>
+    );
 }

@@ -7,7 +7,10 @@ import {
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {getAdoptionRequestsReducer} from"../reducers/DashboardReducer"
-import { getUserReducer, UserLoginReducer, UserRegisterReducer,getProfileReducer } from "../reducers/UserReducer";
+import { getUserReducer,
+         UserLoginReducer,
+          UserRegisterReducer,
+          getProfileReducer } from "../reducers/UserReducer";
 
 
 const reducer = combineReducers({

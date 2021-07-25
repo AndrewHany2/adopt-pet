@@ -15,16 +15,17 @@ function UserInfo(props) {
   // };
   const {push} = useHistory()
 const userLogin = useSelector((state)=>state.userLogin)
+console.log(props.userInfo)
   return (
     <div className="container mb-5">
       <div className="row">
           <div className="col-md-4">
           <img src={
             props.userInfo.image?
-            `../resources/${props.userInfo.image}`
+            `${props.userInfo.image}`
             : '/assets/person/noAvatar.png'
           }
-             className="img-fluid about-img w-100" alt=""/>
+             className="img-fluid about-img w-100 m-3" alt=""/>
 
           {/* <div style={{ margin: '2rem 0 0 6rem'}}>
             Adoption Request<label style={{    background: '#ef0707',
@@ -68,9 +69,11 @@ const userLogin = useSelector((state)=>state.userLogin)
             </div>
           </div>
           {/* <a class="me-4" style={{ margin: "1rem" }}> */}
-            <button class="btn btn-lg btn-success" onClick={()=>push(`/editprofile`)}>
-              <i class="fa fa-pencil-square"></i>
+          <Link className="m-4" to={`/editprofile/${props.userInfo._id}`}>
+            <button className="btn btn-lg btn-success">
+              <i className="fa fa-pencil-square"></i>
             </button>
+          </Link>
           {/* </a> */}
         </div>
       </div>

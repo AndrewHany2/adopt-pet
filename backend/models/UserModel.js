@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["USER", "ADMIN", "SUPWE_ADMIN"],
+    enum: ["USER", "ADMIN", "SUPER_ADMIN"],
     default: "USER",
   },
   postedPets: {
@@ -51,6 +51,10 @@ const userSchema = mongoose.Schema({
   phone: {
     type: String
   },
+  image:
+  {
+      type: String
+  }
 });
 
 const User = mongoose.model("User", userSchema);

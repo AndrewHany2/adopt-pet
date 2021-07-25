@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import moment from 'moment';
 
 function AdoptRequest(props) {
   const handleAccept = () => {
@@ -12,13 +12,16 @@ function AdoptRequest(props) {
     axios.patch(`/api/admin/application/reject/${props.request._id}`);
     props.handleClick(props.request._id, "requests");
   };
+
+
+
   return (
     <tbody>
       <tr>
         <th scope="row">{props.request.requestedUserId.email}</th>
         <td>{props.request.petId.name}</td>
         <td>{props.request.petId.gender}</td>
-        <td>{props.request.petId.dateOfBirth}</td>
+        <td>{moment(props.request.petId.dateOfBirth).format('DD/MM/YYYY')}</td>
         <td>{props.request.petId.petType}</td>
         <td>{props.request.petId.size}</td>
         <td>
