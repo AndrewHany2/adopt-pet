@@ -62,7 +62,10 @@ const EditProfile = ()=>{
                               className="d-block w-75 mx-auto my-3"/>
           <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Last name" />
           <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Email" />
-          <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Age" />
+          <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Phone" />
+          <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="Country" />
+          <input type="text" name="email" className="d-block w-75 mx-auto my-3" placeholder="City" />
+
 
     </div>
   </form>

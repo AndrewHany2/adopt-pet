@@ -117,6 +117,7 @@ petRouter.get("/userpets/list", async (req, res) => {
     const query = req.query.postedpets;
     pets = query.split(",");
     const userPetList = await Pet.find({ _id: { $in: pets } });
+    console.log(userPetList)
     return res.status(201).json(userPetList);
   } catch (error) {
     return res.status(400).json(error);

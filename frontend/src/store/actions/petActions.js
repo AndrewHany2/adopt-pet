@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import axios from "axios";
 const baseURL = "/api/pets";
 

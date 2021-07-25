@@ -98,6 +98,9 @@ function NavBar() {
                       <Link  className="dropdown-item"  to="/messanger">
                         Messeges
                       </Link>
+                      <Link className="dropdown-item" to={`/useradotionrequests/${userLogin.info.userId}`}>
+                        Requests Status{" "}
+                      </Link>
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
                       </Link>

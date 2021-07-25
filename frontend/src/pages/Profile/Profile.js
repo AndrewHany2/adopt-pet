@@ -31,11 +31,12 @@ function Profile() {
       <div>
         <PageHeader title="Profile" />
         <div className="container">
+
           {profileData?.userInfo && (
             <UserInfo userInfo={profileData.userInfo} />
           )}
 
-          {profileData?.petsInfo !== undefined && (
+          {profileData.petsInfo?.length !== 0 && (
             <div className="container">
               <div className="alert alert-primary mt-5 p-4" role="alert">
                 <div style={{ color: "white" }}>

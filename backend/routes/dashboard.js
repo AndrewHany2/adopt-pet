@@ -1,6 +1,7 @@
 const dashboard = require("express").Router();
 const Pet = require("../models/PetModel");
 const User = require("../models/UserModel");
+const App = require("../models/AdoptionApplication")
 
 dashboard.patch("/postPet/accept/:id", async (req, res) => {
   try {
@@ -27,7 +28,7 @@ dashboard.patch("/postPet/reject/:id", async (req, res) => {
 dashboard.patch("/adoptPet/accept/:id", async (req, res) => {
   try {
     await Pet.findByIdAndUpdate(req.params.id, {
-      isAdopted: "ACCEPTED",
+      isAdopted: true,
     });
     res.status(200).json({ status: "ACCEPTED" });
   } catch (error) {
@@ -37,8 +38,8 @@ dashboard.patch("/adoptPet/accept/:id", async (req, res) => {
 
 dashboard.patch("/adoptPet/reject/:id", async (req, res) => {
   try {
-    await Pet.findByIdAndUpdate(ctx.params.id, {
-      isAdopted: "REJECTED",
+    await Pet.findByIdAndUpdate(req.params.id, {
+      isAdopted: false,
     });
     res.status(200).json({ status: "REJECTED" });
   } catch (error) {
@@ -67,5 +68,23 @@ dashboard.patch("/application/decline/:id", async (req, res) => {
     res.status(400).json(error);
   }
 });
+dashboard.get("/adoptpet/:id",async (req,res) =>{
+
+const id = req.params.id
+try{
+
+//   const requests = await App.find({ requestedUserId : id})
+//  res.status(200).json(requests) 
+
+ const requests = await App.find({requestedUserId : id}).populate('petId');
+  res.status(200).json(requests);
+
+}catch(error){
+  res.status(500).json({message: error})
+}
+
+})
+
+
 
 module.exports = dashboard;
