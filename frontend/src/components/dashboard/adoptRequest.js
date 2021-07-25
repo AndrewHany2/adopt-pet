@@ -1,11 +1,13 @@
 import React from "react"
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 function AdoptRequest(props){
     const [user, setUser] = useState({});
     const [pet, setPet] = useState({});
 
+// console.log(props.requests.petId)
      const requestedUsers = ()=>{
         fetch(`/api/user/${props.requests.requestedUserId}`)
         .then((res)=> res.json())
@@ -15,21 +17,22 @@ function AdoptRequest(props){
 
     const requestedPets = ()=>{
         fetch(`/api/pets/${props.requests.petId}`)
-        .then((res)=> res.json())
+        .then(res => res.json())
         .then(data => setPet(data))
         .catch(err => console.log("Error"));
     }
 
     const handleAccept = ()=>{
-        fetch(`/api/adoptionRequest/${props.requests._id}`)
-        .then(res => res.json())
-        .then(data => setPet(data))
-        .catch(err => console.log("Error"));
-
+        axios.patch(`/api/admin/adoptPet/accept/${props.requests.petId}`)
     }
+
+    const handleReject = ()=>{
+        axios.patch(`/api/admin/adoptPet/reject/${props.requests.petId}`)
+    }
+
     useEffect(() => {
         requestedUsers();
-        requestedPets()
+        requestedPets();
       },[]);
 
         return(
@@ -38,11 +41,12 @@ function AdoptRequest(props){
                 <th scope="row">{user.email}</th>
                 <td>{pet.name}</td>
                 <td>{pet.gender}</td>
+                <td>{pet.dateOfBirth}</td>
                 <td>{pet.petType}</td>
                 <td>{pet.size}</td>
                 <td><img src={pet.image} width="50" className="rounded-circle"/></td>
                 <td><button className="btn btn-success" onClick={handleAccept}>Accept</button></td>
-                <td><button className="btn btn-danger">Reject</button></td>
+                <td><button className="btn btn-danger" onClick={handleReject}>Reject</button></td>
                 </tr>
             </tbody>
             )
