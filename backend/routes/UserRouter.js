@@ -241,13 +241,17 @@ userRouter.get("/profile/:id",verifyUser, async (req, res) => {
 });
 
 userRouter.get("/", async ({ query }, res) => {
-  try {
-    users = await User.find({});
-    return res.status(200).json(users);
-  } catch (err) {
-    return res.status(500).json(err);
+  try{
+  if (query.email) {
+    const user = await User.findOne({ email: query.email });
+    return  res.status(200).json(user);
+  } else {
+    const user = await User.find({});
+    return res.status(200).json(user);
   }
-});
+} catch (err) {
+  return res.status(500).json(err);
+}});
 
 userRouter.delete("/", async (req, res) => {
   try {

@@ -78,7 +78,7 @@ function PetsInfo({ match, history }) {
   useEffect(() => {
     if (userData.loading === false) {
       setAlreadyRequested(
-        userData.info.petAdoptionRequests.some((element) => element === id)
+        userData.info.petAdoptionRequests?.some((element) => element === id)
       );
     }
   }, [userData.loading]);

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "font-awesome/css/font-awesome.min.css";
@@ -6,18 +5,12 @@ import { Carousel } from "react-bootstrap";
 import axios from "axios";
 
 function RequestsInfo(props) {
-    useEffect(()=>{
-        console.log("props")
-        console.log(props.requests)
-
-
-
-
-    },[])
-
+    
+    console.log("props")
+    console.log(props.requests)
   return (
       <>
-    <div className="page m-5 m-md-0">
+    {props.requests?.petId && <div className="page m-5 m-md-0">
       <div className="container mb-5">
         <div className="row mt-5">
           <div className="row bg-light-custom border-irregular1">
@@ -102,7 +95,7 @@ function RequestsInfo(props) {
           </div>
         </div>
       </div>
-    </div>
+    </div>}
     </>
   );
 }

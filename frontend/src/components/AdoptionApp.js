@@ -7,6 +7,8 @@ import { adoptpet } from "../store/actions/petActions";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import LoadingComponent from "./loadingComponent/loadingComponent";
 function AdoptionForm({ history }) {
+
+  const [label, setLabel] = useState('Choose File');
   const [pet, setpet] = useState({
     name: "",
     gender: "",
@@ -39,6 +41,7 @@ function AdoptionForm({ history }) {
     };
   }, []);
   const imageRef = useRef();
+
   const handleChange = (e) => {
     const key = e.currentTarget.name;
     const state = { ...pet };
@@ -46,6 +49,7 @@ function AdoptionForm({ history }) {
       state[key] = e.target.value;
     } else {
       state[key] = e.target.files[0];
+      setLabel(e.target.files[0].name)
     }
     setpet(state);
   };
@@ -156,11 +160,13 @@ function AdoptionForm({ history }) {
                   required
                   onChange={handleChange}
                 />
+
                 <Form.File
+                className="mt-4"
                   id="custom-file-translate-scss"
                   name="image"
                   required
-                  label="Choose file"
+                  label={label}
                   ref={imageRef}
                   lang="en"
                   accept="image/*"

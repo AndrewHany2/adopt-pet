@@ -13,7 +13,7 @@ function Counter() {
                 <div className="row">
                     <div className="col-md-3 ">
                         <div className="mr-2 counter">
-                            <i className="counter-icon fa fa-users"></i>
+                            <i className="counter-icon fa fa-users fa-4x"></i>
                             <div className="counter-value">1500</div>
                             <h3 className="title">Happy Clients</h3>
                         </div> 

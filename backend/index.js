@@ -8,6 +8,9 @@ const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const dashboard = require("./routes/dashboard");
 const application = require("./routes/adoptionApplication");
+const authenticationRole = require ("./middlewares/authentication");
+const verifyUser = require("./middlewares/VerifyUser");
+
 const app = express();
 db.connectDB();
 
