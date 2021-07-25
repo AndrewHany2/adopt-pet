@@ -28,7 +28,7 @@ dashboard.patch("/postPet/reject/:id", async (req, res) => {
 dashboard.patch("/adoptPet/accept/:id", async (req, res) => {
   try {
     await Pet.findByIdAndUpdate(req.params.id, {
-      isAdopted: "ACCEPTED",
+      isAdopted: true,
     });
     res.status(200).json({ status: "ACCEPTED" });
   } catch (error) {
@@ -38,8 +38,8 @@ dashboard.patch("/adoptPet/accept/:id", async (req, res) => {
 
 dashboard.patch("/adoptPet/reject/:id", async (req, res) => {
   try {
-    await Pet.findByIdAndUpdate(ctx.params.id, {
-      isAdopted: "REJECTED",
+    await Pet.findByIdAndUpdate(req.params.id, {
+      isAdopted: false,
     });
     res.status(200).json({ status: "REJECTED" });
   } catch (error) {

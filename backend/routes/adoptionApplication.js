@@ -35,9 +35,23 @@ AdoptionApplication.post("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
 AdoptionApplication.get("/:id", async (req, res) => {
   try {
     const adoptionRequest = await Application.findOne({ _id: req.params.id });
+    if (adoptionRequest) {
+      res.status(200).json(adoptionRequest);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
+
+AdoptionApplication.get("/", async (req, res) => {
+  try {
+    const adoptionRequest = await Application.find({});
     if (adoptionRequest) {
       res.status(200).json(adoptionRequest);
     }
