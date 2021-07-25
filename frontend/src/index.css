@@ -11,3 +11,82 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.carousel-caption{
+  right: 36% !important;
+  bottom: 65px !important;
+  background:rgba(255, 255, 255, 0.74);
+  border-radius: 155px 45px 125px 75px/15px 125px 15px 155px;
+  padding:20px!important;
+}
+.carousel-caption h3{
+  font-size: 1.2em;
+    line-height: 1.1em;
+    color: #675444;
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+.carousel-caption p{
+  font-size: 24px;
+    line-height: 33px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    color: #878787;
+}
+@media (min-width: 576px) {
+  .carousel-caption{
+    right: 52% !important;
+    bottom: 102px !important;
+  background:rgba(255, 255, 255, 0.74);
+  border-radius: 155px 45px 125px 75px/15px 125px 15px 155px;
+  padding:31px!important;
+  }
+  .carousel-caption h3{
+  font-size: 1.5em;
+    line-height: 1.1em;
+    color: #675444;
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+}
+@media  (min-width: 992px) {
+  .carousel-caption{
+    right: 52% !important;
+    bottom: 160px !important;
+  background:rgba(255, 255, 255, 0.74);
+  border-radius: 155px 45px 125px 75px/15px 125px 15px 155px;
+  padding:31px!important;
+  }
+  .carousel-caption h3{
+  font-size: 1.5em;
+    line-height: 1.1em;
+    color: #675444;
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+}
+@media (min-width: 1200px) { 
+  .carousel-caption{
+  right: 43%;
+  bottom: 145px !important;
+  background:rgba(255, 255, 255, 0.74);
+  border-radius: 155px 45px 125px 75px/15px 125px 15px 155px;
+  padding:60px!important;
+}
+.carousel-caption h3{
+  font-size: 2em;
+    line-height: 1.1em;
+    color: #675444;
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+.carousel-caption p{
+  font-size: 24px;
+    line-height: 33px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    color: #878787;
+} }

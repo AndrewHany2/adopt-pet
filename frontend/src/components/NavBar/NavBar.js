@@ -14,11 +14,11 @@ function NavBar() {
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-nav main-nav">
         <div className="container">
           <ul className="nav navbar-nav">
+            <li className="nav-item active">
+              <Link className="nav-link nav-logo" to="/">
             <i>
               <FontAwesomeIcon icon={faPaw} className="m-nav-icon mr-3 mt-1" />
             </i>
-            <li className="nav-item active">
-              <Link className="nav-link nav-logo" to="/">
                 WOOF!
               </Link>
             </li>
@@ -97,9 +97,6 @@ function NavBar() {
                       </Link>
                       <Link  className="dropdown-item"  to="/messanger">
                         Messeges
-                      </Link>
-                      <Link className="dropdown-item" to={`/useradotionrequests/${userLogin.info.userId}`}>
-                        Requests Status{" "}
                       </Link>
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
