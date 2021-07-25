@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "font-awesome/css/font-awesome.min.css";
 import { Carousel } from "react-bootstrap";
 import axios from "axios";
-import { Modal, Button, Form } from "react-bootstrap";
 
 function PetInfo(props) {
   const userLogin = useSelector((state) => state.userLogin);
@@ -141,7 +140,7 @@ function PetInfo(props) {
                             </li>
                           </ul>
                         </div>
-                        {userLogin.info ? (
+                        {/* {userLogin.info ? (
                           <>
                             <div className="col-sm-6 col-md-8 col-lg-10">
                               {!loading && !success && !alreadyRequested && (
@@ -204,7 +203,7 @@ function PetInfo(props) {
                               Login to adopt
                             </div>
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   </div>

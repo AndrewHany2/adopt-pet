@@ -23,37 +23,58 @@ passport.use(
       profileFields: ["id", "displayName", "email", "first_name", "last_name"],
     },
 
-    function (accessToken, refreshToken, profile, done) {
+    async function (accessToken, refreshToken, profile, done) {
       //Check the DB to find a User with the profile.id
-      User.findOne(
+      const user = await User.findOne(
         {
           facebookId: profile.id,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
         },
-        function (err, user) {
+        async function (err, user) {
           //See if a User already exists with the Facebook ID
           if (err) {
             console.log(err); // handle errors!
           }
 
           if (user) {
-             console.log(user);
-            done(null, user); //If User already exists login as stated on line 10 return User    
+            const token = await generateToken(user._id);
+            let myUser = {
+              facebookId: profile.id,
+              token: token,
+              userId: user._id,
+              userRole: user.role,
+              petAdoptionRequests: user.petAdoptionRequests,
+            };
+            console.log(myUser);
+            done(null, myUser); //If User already exists login as stated on line 10 return User
           } else {
             //else create a new User
-            user = new User({
+            user = await new User({
               facebookId: profile.id,
               firstName: profile.name.givenName,
               lastName: profile.name.familyName, //pass in the id and displayName params from Facebook
             });
-            user.save(function (err) {
+            await user.save(async function (err) {
               //Save User if there are no errors else redirect to login route
               if (err) {
                 console.log(err); // handle errors!
               } else {
+                const user = await User.findOne({
+                  facebookId: profile.id,
+                  firstName: profile.name.givenName,
+                  lastName: profile.name.familyName,
+                });
+                const token = await generateToken(user._id);
+                myUser = {
+                  facebookId: profile.id,
+                  token: token,
+                  userId: user._id,
+                  userRole: user.role,
+                  petAdoptionRequests: user.petAdoptionRequests,
+                };
                 console.log("saving user ...");
-                done(null, user);
+                done(null, myUser);
               }
             });
           }
@@ -190,7 +211,7 @@ userRouter.post("/register", async (req, res) => {
         password: body.password,
         country: body.country,
         city: body.city,
-        phone: body.phone
+        phone: body.phone,
       });
       const savedUser = await user.save();
       return res.status(201).json(savedUser);
@@ -210,12 +231,10 @@ userRouter.delete("/delete/:id", verifyUser, async (req, res) => {
     return res.status(500).json(error);
   }
 });
-userRouter.get("/profile/:id", verifyUser, async (req, res) => {
+userRouter.get("/profile/:id",verifyUser, async (req, res) => {
   try {
-    if (req.verified) {
-      const user = await User.findOne({ _id: req.verified });
-      return res.status(200).json(user);
-    }
+    const user = await User.findOne({ _id: req.params.id });
+    return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -277,8 +296,12 @@ userRouter.put("/:id", async (req, res, next) => {
     user.country = country;
     user.phone = phone;
 
-    req.body.postedPets?user.postedPets.push(req.body.postedPets):user.postedPets;
-    req.body.adoptionRequests?user.adoptionRequests.push(req.body.adoptionRequests):user.adoptionRequests;
+    req.body.postedPets
+      ? user.postedPets.push(req.body.postedPets)
+      : user.postedPets;
+    req.body.adoptionRequests
+      ? user.adoptionRequests.push(req.body.adoptionRequests)
+      : user.adoptionRequests;
 
     const response = await user.save();
     if (response) {
