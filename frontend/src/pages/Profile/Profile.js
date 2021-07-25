@@ -36,7 +36,7 @@ function Profile() {
             <UserInfo userInfo={profileData.userInfo} />
           )}
 
-          {profileData?.petsInfo !== undefined && (
+          {profileData.petsInfo?.length !== 0 && (
             <div className="container">
               <div className="alert alert-primary mt-5 p-4" role="alert">
                 <div style={{ color: "white" }}>
@@ -54,7 +54,7 @@ function Profile() {
             </div>
           )}
           {profileData.petsInfo?.length !== 0 &&
-            profileData.petsInfo.map((pet) => {
+            profileData.petsInfo?.map((pet) => {
               return <PetInfo key={pet} petInfo={pet} />;
             })}
         </div>
