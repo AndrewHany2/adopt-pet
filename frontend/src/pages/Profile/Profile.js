@@ -10,7 +10,7 @@ import PetInfo from "../../components/PetInfo";
 
 function Profile() {
   const { id } = useParams();
-  console.log("id" + id)
+
   const profileData = useSelector((state) => state.profile);
 
   const dispatch = useDispatch();
@@ -19,8 +19,7 @@ function Profile() {
     dispatch(getProfile(id));
   }, []);
 
-  console.log("Profile Data");
-  console.log(profileData.petInfo);
+
   if (profileData.loading) {
     return (
       <>

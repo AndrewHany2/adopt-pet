@@ -11,8 +11,7 @@ const EditProfile = () => {
   const length = url.length;
   const id = url[length - 1];
   const profileData = useSelector((state) => state.profile);
-  //console.log(uploadedImage)
-  //console.log(imageUploader)
+
 
 
   const [fname, setFName] = useState();
@@ -23,6 +22,8 @@ const EditProfile = () => {
   const [city, setCity] = useState();
   const [img, setImg] = useState();
   const form_data = new FormData();
+  const[emailError,setEmailError] = useState("");
+
   const handleImageUpload = e => {
     setImg(e.target.files[0])
     const [file] = e.target.files;
@@ -75,18 +76,32 @@ const EditProfile = () => {
     if (img) {
       form_data.append('image', img);
     }
-    axios.put(`/api/user/${id}`, form_data)
-      .then(response => {
-        window.location.href = `/profile/${id}`
-        console.log("Data: ", response.data);
-      }).catch(error => {
-        console.error('Something went wrong!', error);
-      });
-  }
+    const userInfo =JSON.parse(window.localStorage.getItem("userInfo"))
+  
+  
+      const header = {
+        headers: {
+          Authorization: userInfo.token 
+        }
+      }
+     axios.put(`/api/user/${id}`, form_data,header)
+           .then(response => {
+            window.location.href=`/profile/${id}`
+             console.log("Data: ", response.data);
+           }).catch(error => {setEmailError( error.response.data.message)
+             console.error('Something went wrong!', error.response.data.message);
+           });
+
+}
 
 
-  return <>
+    return <>
     <div className="container" style={{ minHeight: "24vw" }}>
+    {emailError && (
+  <div className="alert alert-danger d-block mt-4">
+    {emailError}
+  </div>
+)}
       <form className="row">
         <div className="col-md-5">
           <div className="m-4"

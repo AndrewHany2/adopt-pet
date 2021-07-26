@@ -58,7 +58,7 @@ export default function DashboardNavbar() {
         >
           Messages
         </Link>
-        {userLogin.userRole === 'SUPER_ADMIN' && <Link
+        {userLogin.info.userRole === 'SUPER_ADMIN' && <Link
           activeClassName="is-active"
           style={{
             color: "white",

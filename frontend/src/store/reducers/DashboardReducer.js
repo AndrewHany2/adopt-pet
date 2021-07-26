@@ -3,9 +3,7 @@ export const getAdoptionRequestsReducer = (state = {}, action) => {
     case "PET_ADOPTION_REQUESTS_REQUEST":
       return { loading: true, ...state };
     case "PET_ADOPTION_REQUESTS_SUCCESS":
-      console.log("Reducer dasboard");
-      console.log(action.payload.petsData);
-      console.log(action.payload.requestsData);
+
 
       return {
         loading: false,

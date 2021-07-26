@@ -14,13 +14,13 @@ import Messanger from "./pages/messenger/Messenger";
 
 import ContactUs from "./pages/ContactUs/contactUs";
 import SignOut from "./components/SignOut";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/home";
 import UserAdoptionRequests from "./pages/UserAdoptionRequests/UserAdoptionRequests"
 import Posts from "./pages/Dashboard/posts";
 import AdoptionRequests from "./pages/Dashboard/adoption-requests";
 import Messages from "./pages/Dashboard/messages";
 import SetAdmin from "./pages/Dashboard/set-admin";
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -47,6 +47,7 @@ function App() {
         <Route path="/dashboard/adoption-requests" component={AdoptionRequests}></Route>
         <Route path="/dashboard/messages" component={Messages}></Route>
         <Route path="/dashboard/set-admin" component={SetAdmin}></Route>
+        <Route path="*" component={NotFound} />
       </Switch>
       <Footer />
   </Router>

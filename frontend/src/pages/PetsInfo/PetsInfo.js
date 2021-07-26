@@ -35,7 +35,7 @@ function PetsInfo({ match, history }) {
         setSuccess(true);
       }
     } catch (error) {
-      console.log(error);
+  
     }
   };
   const sendMessage = async () => {

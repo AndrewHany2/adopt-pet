@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-
 function PostDashboard(props) {
   const handleClickAccept = () => {
     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
@@ -21,7 +20,7 @@ function PostDashboard(props) {
       },
     };
     const id = props.pet._id;
-    axios.patch(`/api/admin/postPet/reject/${id}`, header);
+    axios.patch(`/api/admin/postPet/reject/${id}`, {},header);
     props.handleClick(props.pet._id);
   };
   return (
