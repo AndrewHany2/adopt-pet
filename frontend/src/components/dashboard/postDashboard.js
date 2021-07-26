@@ -3,7 +3,7 @@ import axios from "axios";
 
 function PostDashboard(props) {
   const handleClickAccept = async () => {
-     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
     const header = {
       headers: {
 
@@ -11,11 +11,11 @@ function PostDashboard(props) {
       },
     };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/accept/${id}`,header);
+    await axios.patch(`/api/admin/postPet/accept/${id}`, header);
     props.handleClick(props.pet._id, "pets");
   };
   const handleClickReject = async () => {
-     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
     const header = {
       headers: {
 
@@ -23,7 +23,7 @@ function PostDashboard(props) {
       },
     };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/reject/${id}`,header);
+    await axios.patch(`/api/admin/postPet/reject/${id}`, header);
     props.handleClick(props.pet._id, "pets");
   };
   return (
@@ -38,7 +38,8 @@ function PostDashboard(props) {
         <td>
           <img
             src={props.pet.image}
-            width="50"
+            width="40px"
+            height="40px"
             className="rounded-circle"
             alt="pet"
           />

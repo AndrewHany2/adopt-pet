@@ -74,6 +74,7 @@ export const logout = () => (dispatch) => {
 
 export const getProfile =(userId) => async (dispatch) => {
   try {
+    
     dispatch({ type: "PET_USER_PROFILE_REQUEST" });
     const userInfo =JSON.parse(window.localStorage.getItem("userInfo"))
 
@@ -89,7 +90,7 @@ export const getProfile =(userId) => async (dispatch) => {
       if(userData?.postedPets.length !== 0){
 
         const stringData =  userData.postedPets.map((value) => `${value}`).join(',');
-         pets = await axios.get(`/api/pets/userpets/list/?postedpets=${stringData}`);
+         pets = await axios.get(`/api/pets/userpets/list/?postedpets=${stringData}`,header);
       }
       let petsData = pets.data?pets.data:[]
       console.log("pets Data Action")

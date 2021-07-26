@@ -41,7 +41,8 @@ function AdoptRequest(props) {
         <td>
           <img
             src={props.request.petId.image}
-            width="50"
+            width="40px"
+            height="40px"
             className="rounded-circle"
             alt="pet"
           />

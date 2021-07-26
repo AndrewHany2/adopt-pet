@@ -8,12 +8,17 @@ const verifyUser = async (req, res, next) => {
             if (payload.id) {
                 req.verified = payload.id;
                 return next()
+            }else{
+                return next (new Error('Invalid Token'))
+
             }
+        }else{
+
+            return next (new Error('not authorized'))
         }
-        return next (new Error('not authorized'))
     }
     catch(err){
-        return next(new Error('not authorized'))   
+        return next(new Error('Server Error'))   
     }
 }
 

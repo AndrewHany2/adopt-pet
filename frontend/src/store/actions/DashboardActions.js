@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const getAdoptionRequests =(userId) => async (dispatch) => {
     try {
+      console.log("Dispatch Profile")
+      console.log(userId)
       dispatch({ type: "PET_ADOPTION_REQUESTS_REQUEST" });
       const userInfo =JSON.parse(window.localStorage.getItem("userInfo"))
   
