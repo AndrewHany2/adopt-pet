@@ -37,35 +37,35 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul className="nav navbar-nav mx-auto nav-item-font">
               <li className="nav-item active ml-3">
-                <Link className="nav-link active" to="/">
+                <Link className="nav-link active nave-box" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/pets/1">
+                <Link className="nav-link active nave-box" to="/pets/1">
                   Adobtion-Gallery
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/about">
+                <Link className="nav-link active nave-box" to="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/contactus">
+                <Link className="nav-link active nave-box" to="/contactus">
                   Contact
                 </Link>
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <Link className="nav-link active" to="/signin">
+                  <Link className="nav-link active nave-box" to="/signin">
                     Sign In / Sign UP
                   </Link>
                 </li>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
-                  <Link className="nav-link active" to="/addPet">
+                  <Link className="nav-link active nave-box" to="/addPet">
                     Add-Pet
                   </Link>
                 </li>
@@ -76,7 +76,7 @@ function NavBar() {
                 <ul className="nav navbar-nav mx-auto nav-item-font ">
                   <li className="nav-item dropdown ml-3">
                     <Link
-                      className="nav-link dropdown-toggle active"
+                      className="nav-link dropdown-toggle active nave-box"
                       href="#"
                       id="navbarDropdown"
                       role="button"

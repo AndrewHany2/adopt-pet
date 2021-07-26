@@ -14,8 +14,7 @@ function UserAdoptionRequests({match}) {
     useEffect(()=>{
         dispatch(getAdoptionRequests(id))
     },[])
-    console.log("UAR")
-    console.log(requests)
+
   
     if (requests?.loading) {
       return (
@@ -26,7 +25,7 @@ function UserAdoptionRequests({match}) {
     } else {
   return (
 <>
- { requests?.info &&  requests.info.map((request)=>{console.log("request");console.log(request);return<RequestsInfo requests={request}/>})}
+ { requests?.info &&  requests.info.map((request)=>{return<RequestsInfo requests={request}/>})}
 </>
   );
 }

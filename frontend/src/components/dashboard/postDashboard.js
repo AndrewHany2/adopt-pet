@@ -11,7 +11,16 @@ function PostDashboard(props) {
       },
     };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/accept/${id}`, header);
+   const {data} = await axios.patch(`/api/admin/postPet/accept/${id}`,{},header);
+  
+
+   let user = {};
+   if (data) {
+    let pet = new FormData();
+    pet.append("postedPets", data._doc._id);
+    user = await axios.put(`/api/user/${userInfo.userId}`,pet,header);
+
+  }
     props.handleClick(props.pet._id, "pets");
   };
   const handleClickReject = async () => {
@@ -23,7 +32,7 @@ function PostDashboard(props) {
       },
     };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/reject/${id}`, header);
+    await axios.patch(`/api/admin/postPet/reject/${id}`,{}, header);
     props.handleClick(props.pet._id, "pets");
   };
   return (

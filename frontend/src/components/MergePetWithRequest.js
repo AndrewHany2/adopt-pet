@@ -16,16 +16,14 @@ function MergePetWithRequest(props) {
           objs = mergedObjects;
           objs.push(mergedObj);
           setMergedObjects(objs);
-          console.log("here")
-          console.log(mergedObj)
-        //   console.log(mergedObjects)
-        //   console.log(objs)
+ 
+  
 
 
         }
       }
     }
-    console.log(objs)
+   
     
     
   }, [mergedObjects]);
@@ -34,8 +32,7 @@ function MergePetWithRequest(props) {
 
   return (
     <>
-     {console.log("Merged")}
-     {console.log(mergedObjects)}
+ 
      {mergedObjects ? (
         mergedObjects.map((obj) => { return <RequestsInfo key={obj._id} info={obj} />
         })

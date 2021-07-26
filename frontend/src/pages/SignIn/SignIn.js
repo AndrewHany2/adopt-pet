@@ -46,7 +46,7 @@ function SignIn(props) {
     let myErrors = { ...errors };
     myErrors.email = validate.error ? validate.error.details[0].message : null;
     setErrors(myErrors);
-    console.log(validate);
+  
   };
 
   const validatePassword = (e) => {
@@ -59,7 +59,7 @@ function SignIn(props) {
       ? validate.error.details[0].message
       : null;
     setErrors(myErrors);
-    console.log(validate);
+ 
   };
 
   const login = () => {

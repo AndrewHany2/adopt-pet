@@ -52,13 +52,12 @@ export default function Dashboard() {
         Authorization: userInfo.token,
       },
     };
-    console.log("here");
+
     const { data } = await axios.get(`/api/user?email=${serachEmail}`, header);
     if (data) {
       setSearch({ isData: true, data: data });
     }
-    console.log("here");
-    console.log(data);
+
   };
 
   const setEmail = (event) => {
@@ -73,7 +72,7 @@ export default function Dashboard() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Admin");
+   
       });
     const hideUser = { ...search };
     hideUser.isData = false;
@@ -89,16 +88,14 @@ export default function Dashboard() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("NOT Admin");
-        console.log(data);
+  
       });
     const hideUser = { ...search };
     hideUser.isData = false;
     setSearch(hideUser);
   };
 
-  console.log("SUPR_ADMIN");
-  console.log(userLogin);
+
 
   return (
     <>
@@ -241,27 +238,6 @@ export default function Dashboard() {
                     );
                   })}
               </table>
-            </div>
-          </div>
-          <div className="row mb-5 form-inline">
-            <div className="col-12">
-              <input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search By Email"
-                aria-label="Search"
-              />
-              <select className="form-control mr-2">
-                <option>Super Admin</option>
-                <option>Admin</option>
-              </select>
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="button"
-              >
-                Search
-              </button>
-              <p className="pl-2">Search</p>
             </div>
           </div>
         </div>

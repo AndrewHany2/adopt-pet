@@ -3,19 +3,20 @@ const Pet = require("../models/PetModel");
 const User = require("../models/UserModel");
 const App = require("../models/AdoptionApplication");
 const verifyUser = require("../middlewares/VerifyUser");
+const auth = require("../middlewares/authentication")
 
-dashboard.patch("/postPet/accept/:id", async (req, res) => {
+dashboard.patch("/postPet/accept/:id",auth.authenticationRole("ADMIN"), async (req, res) => {
   try {
-    await Pet.findByIdAndUpdate(req.params.id, {
+    const pet =  await Pet.findByIdAndUpdate(req.params.id, {
       status: "ACCEPTED",
     });
-    res.status(200).json({ status: "ACCEPTED" });
+    res.status(200).json({ status: "ACCEPTED" ,...pet });
   } catch (error) {
     res.status(400).json(error);
   }
 });
 
-dashboard.patch("/postPet/reject/:id", async (req, res) => {
+dashboard.patch("/postPet/reject/:id",auth.authenticationRole("ADMIN"), async (req, res) => {
   try {
     await Pet.findByIdAndUpdate(req.params.id, {
       status: "REJECTED",
@@ -26,18 +27,18 @@ dashboard.patch("/postPet/reject/:id", async (req, res) => {
   }
 });
 
-dashboard.patch("/adoptPet/accept/:id", async (req, res) => {
+dashboard.patch("/adoptPet/accept/:id",auth.authenticationRole("ADMIN"), async (req, res) => {
   try {
-    await Pet.findByIdAndUpdate(req.params.id, {
+   await Pet.findByIdAndUpdate(req.params.id, {
       isAdopted: true,
     });
-    res.status(200).json({ status: "ACCEPTED" });
+    res.status(200).json({ status: "ACCEPTED"});
   } catch (error) {
     res.status(400).json(error);
   }
 });
 
-dashboard.patch("/adoptPet/reject/:id", async (req, res) => {
+dashboard.patch("/adoptPet/reject/:id",auth.authenticationRole("ADMIN"), async (req, res) => {
   try {
     await Pet.findByIdAndUpdate(req.params.id, {
       isAdopted: false,
@@ -104,7 +105,7 @@ dashboard.get("/adoptpet/:id", async (req, res) => {
   }
 });
 
-dashboard.patch("/assignrole/:id",async (req,res)=>{
+dashboard.patch("/assignrole/:id",auth.authenticationAdmin(),async (req,res)=>{
   try{
     const userRole = req.query.role
     console.log(userRole)

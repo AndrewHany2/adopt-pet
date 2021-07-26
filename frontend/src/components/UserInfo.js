@@ -15,7 +15,7 @@ function UserInfo(props) {
   // };
   const {push} = useHistory()
 const userLogin = useSelector((state)=>state.userLogin)
-console.log(props.userInfo)
+
   return (
     <div className="container mb-5">
       <div className="row">
