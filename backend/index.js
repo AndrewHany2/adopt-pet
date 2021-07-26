@@ -25,7 +25,7 @@ app.use("/api/user", userRouter);
 app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
-app.use("/api/admin",verifyUser, dashboard);
+app.use("/api/admin", verifyUser, dashboard);
 app.use("/api/adoptionRequest", application);
 
 app.use((err, req, res, next) => {
