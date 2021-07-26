@@ -17,6 +17,7 @@ function PetsGallery(props) {
   }, [currentPage]);
 
   const handlePetsList = (filterByGender, filterByPet, filterByAge) => {
+    console.log(filterByGender, filterByPet, filterByAge);
     dispatch(getPets(currentPage, filterByGender, filterByPet, filterByAge, 8));
   };
   return (
