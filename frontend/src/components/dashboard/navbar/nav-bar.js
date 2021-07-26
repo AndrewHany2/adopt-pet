@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import './nav-bar.css'
 
 export default function DashboardNavbar() {
+
+  const userLogin = useSelector(state => state.userLogin)
+
   return (
     <>
       <ul
@@ -12,6 +17,7 @@ export default function DashboardNavbar() {
         className="mt-4 mb-5 text-center w-75 mx-auto text-dark"
       >
         <Link
+          activeClassName="is-active"
           style={{
             color: "white",
             lineHeight: "50px",
@@ -25,6 +31,7 @@ export default function DashboardNavbar() {
           Post Pet
         </Link>
         <Link
+          activeClassName="is-active"
           style={{
             color: "white",
             lineHeight: "50px",
@@ -38,6 +45,7 @@ export default function DashboardNavbar() {
           Adoption Requests
         </Link>
         <Link
+          activeClassName="is-active"
           style={{
             color: "white",
             lineHeight: "50px",
@@ -50,7 +58,8 @@ export default function DashboardNavbar() {
         >
           Messages
         </Link>
-        <Link
+        {userLogin.userRole === 'SUPER_ADMIN' && <Link
+          activeClassName="is-active"
           style={{
             color: "white",
             lineHeight: "50px",
@@ -62,7 +71,7 @@ export default function DashboardNavbar() {
           to="/dashboard/set-admin"
         >
           Set Admins
-        </Link>
+        </Link>}
       </ul>
     </>
   );

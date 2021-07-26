@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux"
-import DashboardNavbar from "../../components/dashboard/nav-bar";
+import DashboardNavbar from "../../components/dashboard/navbar/nav-bar";
 
 export default function SetAdmin() {
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import DashboardNavbar from "../../components/dashboard/nav-bar";
+import DashboardNavbar from "../../components/dashboard/navbar/nav-bar";
 import AdoptRequest from "../../components/dashboard/adoptRequest";
 import { Spinner } from "react-bootstrap";
 

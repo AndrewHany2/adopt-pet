@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PostDashboard from "../../components/dashboard/postDashboard";
 import axios from "axios";
-import DashboardNavbar from "../../components/dashboard/nav-bar";
+import DashboardNavbar from "../../components/dashboard/navbar/nav-bar";
 import { Spinner } from "react-bootstrap";
 
 export default function Posts() {
