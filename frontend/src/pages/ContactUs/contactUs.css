@@ -52,7 +52,7 @@ transition: all .3s ease;
  outline: none;
  padding: 5px 15px;
 }
-#contactUs input[type="button"]{
+#contactUs input[type="submit"]{
  border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
  outline: none;
  color: #fff;
