@@ -5,65 +5,65 @@ import DashboardNavbar from "../../components/dashboard/navbar/nav-bar";
 
 export default function SetAdmin() {
 
-    const [search, setSearch] = useState({ isData: false, data: {} });
-    const [serachEmail, setSearchEmail] = useState("");
-    const userLogin = useSelector((state) => state.userLogin);
+  const [search, setSearch] = useState({ isData: false, data: {} });
+  const [serachEmail, setSearchEmail] = useState("");
+  const userLogin = useSelector((state) => state.userLogin);
 
 
-    const getUser = async () => {
-        const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
-        const header = {
-          headers: {
-            Authorization: userInfo.token,
-          },
-        };
-        const { data } = await axios.get(`/api/user?email=${serachEmail}`, header);
-        if (data) {
-          setSearch({ isData: true, data: data });
-        }
+  const getUser = async () => {
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+        Authorization: userInfo.token,
+      },
+    };
+    const { data } = await axios.get(`/api/user?email=${serachEmail}`, header);
+    if (data) {
+      setSearch({ isData: true, data: data });
+    }
 
-      };
-    
-      const setEmail = (event) => {
-        setSearchEmail(event.target.value);
-      };
-      const makeAdmin = async () => {
-        const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
-    
-        fetch(`/api/admin/assignrole/${search.data._id}?role=ADMIN`, {
-          method: "PATCH",
-          headers: { Authorization: userInfo.token },
-        })
-          .then((response) => response.json())
-          .then((data) => {
+  };
 
-          });
-        const hideUser = { ...search };
-        hideUser.isData = false;
-        setSearch(hideUser);
-      };
-      const removeAdmin = async () => {
-        const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
-      
-    
-        fetch(`/api/admin/assignrole/${search.data._id}?role=USER`, {
-          method: "PATCH",
-          headers: { Authorization: userInfo.token },
-        })
-          .then((response) => response.json())
-          .then((data) => {
+  const setEmail = (event) => {
+    setSearchEmail(event.target.value);
+  };
+  const makeAdmin = async () => {
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
 
-          });
-        const hideUser = { ...search };
-        hideUser.isData = false;
-        setSearch(hideUser);
-      };
+    fetch(`/api/admin/assignrole/${search.data._id}?role=ADMIN`, {
+      method: "PATCH",
+      headers: { Authorization: userInfo.token },
+    })
+      .then((response) => response.json())
+      .then((data) => {
 
-    return (
-        <>
-            <DashboardNavbar />
+      });
+    const hideUser = { ...search };
+    hideUser.isData = false;
+    setSearch(hideUser);
+  };
+  const removeAdmin = async () => {
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
 
-            {userLogin.info.userRole === "SUPER_ADMIN" && (
+
+    fetch(`/api/admin/assignrole/${search.data._id}?role=USER`, {
+      method: "PATCH",
+      headers: { Authorization: userInfo.token },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+
+      });
+    const hideUser = { ...search };
+    hideUser.isData = false;
+    setSearch(hideUser);
+  };
+
+  return (
+    <>
+      <DashboardNavbar />
+
+      {userLogin.info.userRole === "SUPER_ADMIN" && (
         <div className="row my-5 form-inline">
           <div className="col-12 d-flex justify-content-center">
             <input
@@ -93,9 +93,9 @@ export default function SetAdmin() {
                   src={
                     search.data.image
                       ? search.data.image
-                      : `/resources/noAvatar.png`
+                      : `/assets/person/noAvatar.png`
                   }
-                  alt="Card cap"
+                  alt="User Image"
                 />
                 <div className="card-body">
                   <h5 className="card-title">
@@ -140,6 +140,6 @@ export default function SetAdmin() {
           )}
         </div>
       )}
-        </>
-    )
+    </>
+  )
 }

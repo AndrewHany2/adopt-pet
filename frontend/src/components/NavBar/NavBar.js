@@ -16,9 +16,9 @@ function NavBar() {
           <ul className="nav navbar-nav">
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
-            <i>
-              <img src='/resources/theLogo.png' width="80px" />
-            </i>
+                <i>
+                  <img src='/resources/theLogo.png' width="80px" />
+                </i>
               </Link>
             </li>
           </ul>
@@ -59,7 +59,7 @@ function NavBar() {
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
                   <Link className="nav-link active nave-box" to="/signin">
-                    Sign In / Sign UP
+                    Sign In
                   </Link>
                 </li>
               )}
@@ -94,10 +94,10 @@ function NavBar() {
 
                         Profile
                       </Link>
-                      <Link  className="dropdown-item"  to={`/useradotionrequests/${userLogin.info.userId}`}>
+                      <Link className="dropdown-item" to={`/useradotionrequests/${userLogin.info.userId}`}>
                         Adoption Requests
                       </Link>
-                      <Link  className="dropdown-item"  to="/messanger">
+                      <Link className="dropdown-item" to="/messanger">
                         Messeges
                       </Link>
                       <Link className="dropdown-item" to="/signout">
