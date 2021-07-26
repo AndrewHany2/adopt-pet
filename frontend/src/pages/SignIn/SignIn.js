@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import "./SignIn.css";
 import Joi from "joi";
 import { useState, useEffect } from "react";
-import LoginFacebook from "./../../components/LoginFacebook";
-import LoginGoogle from "./../../components/LoginGoogle";
 import { useDispatch, useSelector } from "react-redux";
 import { Login } from "../../store/actions/UserActions";
 
@@ -48,7 +46,7 @@ function SignIn(props) {
     let myErrors = { ...errors };
     myErrors.email = validate.error ? validate.error.details[0].message : null;
     setErrors(myErrors);
-    console.log(validate);
+  
   };
 
   const validatePassword = (e) => {
@@ -61,7 +59,7 @@ function SignIn(props) {
       ? validate.error.details[0].message
       : null;
     setErrors(myErrors);
-    console.log(validate);
+ 
   };
 
   const login = () => {

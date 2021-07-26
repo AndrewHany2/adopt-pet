@@ -1,6 +1,7 @@
 const petRouter = require("express").Router();
 const Pet = require("../models/PetModel");
 const upload = require("../helpers/multer");
+const verifyUser = require("../middlewares/VerifyUser");
 
 petRouter.get("/:id", async (req, res, next) => {
   try {
@@ -112,12 +113,11 @@ petRouter.post("/", upload, (req, res) => {
     });
 });
 
-petRouter.get("/userpets/list", async (req, res) => {
+petRouter.get("/userpets/list",verifyUser, async (req, res) => {
   try {
     const query = req.query.postedpets;
     pets = query.split(",");
     const userPetList = await Pet.find({ _id: { $in: pets } });
-    console.log(userPetList)
     return res.status(201).json(userPetList);
   } catch (error) {
     return res.status(400).json(error);

@@ -131,7 +131,7 @@ function SignUp(props) {
       ? validate.error.details[0].message
       : null;
     setErrors(myErrors);
-    console.log(validate);
+   
   };
   const validateFields = (e) => {
     let value = e.target.id;
@@ -143,7 +143,7 @@ function SignUp(props) {
     let myErrors = { ...errors };
     myErrors[value] = validate.error ? validate.error.details[0].message : null;
     setErrors(myErrors);
-    console.log(validate);
+  
   };
 
   const sendData = async () => {
@@ -154,7 +154,7 @@ function SignUp(props) {
     const wrapData = { ...userInfo };
     delete wrapData.passwordObj;
     wrapData.password = myPassword.password;
-    console.log(myData);
+  
     if (
       !fullSchema.validate(myData).error &&
       !passwordSchema.validate(myPassword).error
@@ -164,7 +164,7 @@ function SignUp(props) {
       let myErrors = { ...errors };
       myErrors.formValid = "Please enter valid info at all fields";
       setErrors(myErrors);
-      console.log(myErrors.formValid);
+  
     }
   };
   useEffect(() => {

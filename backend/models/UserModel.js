@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["USER", "ADMIN", "SUPWE_ADMIN"],
+    enum: ["USER", "ADMIN", "SUPER_ADMIN"],
     default: "USER",
   },
   postedPets: {
@@ -36,20 +36,27 @@ const userSchema = mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
   },
-  facebookId:{
+  facebookId: {
     type: String,
   },
-  googleId:{
+  googleId: {
     type: String,
   },
   country: {
-    type: String
+    type: String,
   },
   city: {
-    type: String
+    type: String,
   },
   phone: {
-    type: String
+    type: String,
+  },
+  image: {
+    type: String,
+  },
+  petAdoptionRequests: {
+    type: [mongoose.Schema.Types.ObjectId],
+    default: [],
   },
 });
 

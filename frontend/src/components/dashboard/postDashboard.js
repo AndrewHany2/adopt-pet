@@ -1,16 +1,27 @@
 import React from "react";
 import axios from "axios";
-
 function PostDashboard(props) {
-  const handleClickAccept = async () => {
+  const handleClickAccept = () => {
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+        Authorization: userInfo.token,
+      },
+    };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/accept/${id}`);
-    props.handleClick(props.pet._id, "pets");
+    axios.patch(`/api/admin/postPet/accept/${id}`, header);
+    props.handleClick(props.pet._id);
   };
-  const handleClickReject = async () => {
+  const handleClickReject = () => {
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+        Authorization: userInfo.token,
+      },
+    };
     const id = props.pet._id;
-    await axios.patch(`/api/admin/postPet/reject/${id}`);
-    props.handleClick(props.pet._id, "pets");
+    axios.patch(`/api/admin/postPet/reject/${id}`, {},header);
+    props.handleClick(props.pet._id);
   };
   return (
     <tbody>
@@ -24,7 +35,8 @@ function PostDashboard(props) {
         <td>
           <img
             src={props.pet.image}
-            width="50"
+            width="40px"
+            height="40px"
             className="rounded-circle"
             alt="pet"
           />

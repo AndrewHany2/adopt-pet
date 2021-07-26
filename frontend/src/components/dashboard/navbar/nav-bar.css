@@ -1,0 +1,15 @@
+.nav-dashboard {
+    border-top-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+}
+
+
+.nav-box {
+    display: inline-block;
+    padding: 10px;
+}
+
+.nav-box:hover {
+    background-color: #F9BE4F !important;
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
+}

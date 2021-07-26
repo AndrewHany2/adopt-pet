@@ -11,8 +11,17 @@ export default function Message({ message, own }) {
     const id = message.sender;
 
     const getUser = async () => {
+
+      const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+      const header = {
+        headers: {
+
+          Authorization: userInfo.token,
+        },
+      };
+
       try {
-        const res = await axios(`api/user/${id}`);
+        const res = await axios.get(`api/user/${id}`, header);
         setUser(res.data);
       } catch (err) {
         console.log(err);

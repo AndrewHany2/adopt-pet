@@ -7,9 +7,9 @@ const verifyUser = require("../middlewares/VerifyUser");
 const passport = require("passport");
 const facebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
+const upload = require("../helpers/multer");
 
-userRouter.use(passport.initialize());
-userRouter.use(passport.session());
+
 
 userRouter.use(passport.initialize());
 userRouter.use(passport.session());
@@ -22,7 +22,6 @@ passport.use(
       callbackURL: "http://localhost:8000/api/user/login/facebook/callback",
       profileFields: ["id", "displayName", "email", "first_name", "last_name"],
     },
-
     async function (accessToken, refreshToken, profile, done) {
       //Check the DB to find a User with the profile.id
       const user = await User.findOne(
@@ -89,7 +88,7 @@ userRouter.get("/login/facebook", passport.authenticate("facebook"));
 userRouter.get(
   "/login/facebook/callback",
   passport.authenticate("facebook", {
-    successRedirect: "http://localhost:3000/",
+    successRedirect: `http://localhost:3000/`,
     failureRedirect: "http://localhost:3000/signin",
   })
 );
@@ -110,7 +109,6 @@ passport.use(
       callbackURL: "/login/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       //get the user data from google
       const newUser = {
         googleId: profile.id,
@@ -202,7 +200,6 @@ userRouter.post("/register", async (req, res) => {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(body.password, salt);
       body.password = hashedPassword;
-      console.log(req.body);
       const user = new User({
         firstName: body.firstName,
         lastName: body.lastName,
@@ -240,7 +237,7 @@ userRouter.get("/profile/:id",verifyUser, async (req, res) => {
   }
 });
 
-userRouter.get("/", async ({ query }, res) => {
+userRouter.get("/",verifyUser, async ({ query }, res) => {
   try{
   if (query.email) {
     const user = await User.findOne({ email: query.email });
@@ -270,7 +267,7 @@ userRouter.delete("/", async (req, res) => {
 //   }
 // });
 
-userRouter.get("/:id", async (req, res) => {
+userRouter.get("/:id",verifyUser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
@@ -280,7 +277,7 @@ userRouter.get("/:id", async (req, res) => {
   }
 });
 
-userRouter.put("/:id", async (req, res, next) => {
+userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findOne({ _id: id });
@@ -290,17 +287,28 @@ userRouter.put("/:id", async (req, res, next) => {
     const country = req.body.country || user.country;
     const phone = req.body.phone || user.phone;
     const city = req.body.city || user.city;
+    let image = user.image;
+    if(req.file){
+       image = `/images/${req.file.filename}`;
+    }
+    existingUser = await User.findOne({ email:email });
+    if(!existingUser){
+      user.email = email;
+    }else{
+      res.status(400).json({message:"Email Alraedy Exists"})
+    }
+
 
     user.firstName = firstName;
     user.lastName = lastName;
-    user.email = email;
     user.country = country;
     user.phone = phone;
     user.city = city;
     user.country = country;
     user.phone = phone;
+    user.image = image;
 
-    req.body.postedPets
+     req.body.postedPets
       ? user.postedPets.push(req.body.postedPets)
       : user.postedPets;
     req.body.adoptionRequests
@@ -313,6 +321,8 @@ userRouter.put("/:id", async (req, res, next) => {
     }
   } catch (e) {
     next(e);
+    return res.status(500).json(error);
+
   }
 });
 
