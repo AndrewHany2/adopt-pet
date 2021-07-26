@@ -116,7 +116,7 @@ const EditProfile = () => {
               <img
                 className="editImg"
                 ref={uploadedImage}
-                src={profileData.userInfo?.image}
+                src={profileData.userInfo?.image ? profileData.userInfo?.image : '/assets/person/noAvatar.png'}
                 style={{
                   width: "100%",
                   height: "100%",
