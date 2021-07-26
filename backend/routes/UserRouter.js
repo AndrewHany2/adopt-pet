@@ -22,7 +22,6 @@ passport.use(
       callbackURL: "http://localhost:8000/api/user/login/facebook/callback",
       profileFields: ["id", "displayName", "email", "first_name", "last_name"],
     },
-
     async function (accessToken, refreshToken, profile, done) {
       //Check the DB to find a User with the profile.id
       const user = await User.findOne(
@@ -89,7 +88,7 @@ userRouter.get("/login/facebook", passport.authenticate("facebook"));
 userRouter.get(
   "/login/facebook/callback",
   passport.authenticate("facebook", {
-    successRedirect: "http://localhost:3000/",
+    successRedirect: `http://localhost:3000/`,
     failureRedirect: "http://localhost:3000/signin",
   })
 );
