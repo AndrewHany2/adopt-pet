@@ -4,10 +4,14 @@ import axios from "axios";
 import DashboardNavbar from "../../components/dashboard/nav-bar";
 import { Spinner } from "react-bootstrap";
 
-export default function Posts() {
+export default function Posts(props) {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
+    if (!window.localStorage.getItem("userInfo")) {
+      props.history.push("/signin");
+      return 0;
+    }
     async function temp() {
       const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
       const header = {
@@ -22,7 +26,6 @@ export default function Posts() {
   }, []);
 
   const handleClick = (id) => {
-    console.log(id);
     let temp = [...pets];
     const index = temp.findIndex((pet) => pet._id === id);
     temp.splice(index, 1);
