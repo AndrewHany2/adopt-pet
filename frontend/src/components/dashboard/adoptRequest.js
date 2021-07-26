@@ -1,19 +1,29 @@
 import React from "react";
 import axios from "axios";
-import moment from 'moment';
+import moment from "moment";
 
 function AdoptRequest(props) {
   const handleAccept = () => {
-    axios.patch(`/api/admin/application/accept/${props.request._id}`);
-    props.handleClick(props.request._id, "requests");
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+        Authorization: userInfo.token,
+      },
+    };
+    axios.patch(`/api/admin/application/accept/${props.request._id}`, header);
+    props.handleClick(props.request._id);
   };
 
   const handleReject = () => {
-    axios.patch(`/api/admin/application/reject/${props.request._id}`);
-    props.handleClick(props.request._id, "requests");
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+        Authorization: userInfo.token,
+      },
+    };
+    axios.patch(`/api/admin/application/reject/${props.request._id}`, header);
+    props.handleClick(props.request._id);
   };
-
-
 
   return (
     <tbody>
@@ -21,13 +31,14 @@ function AdoptRequest(props) {
         <th scope="row">{props.request.requestedUserId.email}</th>
         <td>{props.request.petId.name}</td>
         <td>{props.request.petId.gender}</td>
-        <td>{moment(props.request.petId.dateOfBirth).format('DD/MM/YYYY')}</td>
+        <td>{moment(props.request.petId.dateOfBirth).format("DD/MM/YYYY")}</td>
         <td>{props.request.petId.petType}</td>
         <td>{props.request.petId.size}</td>
         <td>
           <img
             src={props.request.petId.image}
-            width="50"
+            width="40px"
+            height="40px"
             className="rounded-circle"
             alt="pet"
           />

@@ -35,7 +35,7 @@ function PetsInfo({ match, history }) {
         setSuccess(true);
       }
     } catch (error) {
-      console.log(error);
+  
     }
   };
   const sendMessage = async () => {
@@ -216,7 +216,7 @@ function PetsInfo({ match, history }) {
                           </button>
                         </div>
                         {success && (
-                          <div class="alert alert-primary" role="alert">
+                          <div class="alert alert-primary mt-4" role="alert">
                             Adoption Request sent wait for response
                           </div>
                         )}

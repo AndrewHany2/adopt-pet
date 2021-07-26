@@ -17,7 +17,7 @@ function NavBar() {
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
             <i>
-              <img src='/resources/aLogo.png' width="80px" />
+              <img src='/resources/theLogo.png' width="80px" />
             </i>
               </Link>
             </li>
@@ -37,35 +37,35 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul className="nav navbar-nav mx-auto nav-item-font">
               <li className="nav-item active ml-3">
-                <Link className="nav-link active" to="/">
+                <Link className="nav-link active nave-box" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/pets/1">
+                <Link className="nav-link active nave-box" to="/pets/1">
                   Adobtion-Gallery
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/about">
+                <Link className="nav-link active nave-box" to="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active" to="/contactus">
+                <Link className="nav-link active nave-box" to="/contactus">
                   Contact
                 </Link>
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <Link className="nav-link active" to="/signin">
+                  <Link className="nav-link active nave-box" to="/signin">
                     Sign In / Sign UP
                   </Link>
                 </li>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
-                  <Link className="nav-link active" to="/addPet">
+                  <Link className="nav-link active nave-box" to="/addPet">
                     Add-Pet
                   </Link>
                 </li>
@@ -76,7 +76,7 @@ function NavBar() {
                 <ul className="nav navbar-nav mx-auto nav-item-font ">
                   <li className="nav-item dropdown ml-3">
                     <Link
-                      className="nav-link dropdown-toggle active"
+                      className="nav-link dropdown-toggle active nave-box"
                       href="#"
                       id="navbarDropdown"
                       role="button"
@@ -94,14 +94,17 @@ function NavBar() {
 
                         Profile
                       </Link>
+                      <Link  className="dropdown-item"  to={`/useradotionrequests/${userLogin.info.userId}`}>
+                        Adoption Requests
+                      </Link>
                       <Link  className="dropdown-item"  to="/messanger">
                         Messeges
                       </Link>
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
                       </Link>
-                      {userLogin.info.userRole === "ADMIN" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole === "ADMIN" && <Link className="dropdown-item" to="/dashboard#">
+                      {userLogin.info.userRole !== "USER" && <div className="dropdown-divider"></div>}
+                      {userLogin.info.userRole !== "USER" && <Link className="dropdown-item" to="/dashboard#">
                         Dashboard{" "}
                       </Link>}
 

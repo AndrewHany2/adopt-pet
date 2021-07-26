@@ -109,7 +109,6 @@ passport.use(
       callbackURL: "/login/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       //get the user data from google
       const newUser = {
         googleId: profile.id,
@@ -201,7 +200,6 @@ userRouter.post("/register", async (req, res) => {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(body.password, salt);
       body.password = hashedPassword;
-      console.log(req.body);
       const user = new User({
         firstName: body.firstName,
         lastName: body.lastName,
@@ -239,7 +237,7 @@ userRouter.get("/profile/:id",verifyUser, async (req, res) => {
   }
 });
 
-userRouter.get("/", async ({ query }, res) => {
+userRouter.get("/",verifyUser, async ({ query }, res) => {
   try{
   if (query.email) {
     const user = await User.findOne({ email: query.email });
@@ -269,7 +267,7 @@ userRouter.delete("/", async (req, res) => {
 //   }
 // });
 
-userRouter.get("/:id", async (req, res) => {
+userRouter.get("/:id",verifyUser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
@@ -279,7 +277,7 @@ userRouter.get("/:id", async (req, res) => {
   }
 });
 
-userRouter.put("/:id",upload ,async (req, res, next) => {
+userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findOne({ _id: id });
@@ -293,11 +291,16 @@ userRouter.put("/:id",upload ,async (req, res, next) => {
     if(req.file){
        image = `/images/${req.file.filename}`;
     }
+    existingUser = await User.findOne({ email:email });
+    if(!existingUser){
+      user.email = email;
+    }else{
+      res.status(400).json({message:"Email Alraedy Exists"})
+    }
 
 
     user.firstName = firstName;
     user.lastName = lastName;
-    user.email = email;
     user.country = country;
     user.phone = phone;
     user.city = city;

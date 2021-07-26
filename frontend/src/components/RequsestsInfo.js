@@ -6,8 +6,7 @@ import axios from "axios";
 
 function RequestsInfo(props) {
     
-    console.log("props")
-    console.log(props.requests)
+
   return (
       <>
     {props.requests?.petId && <div className="page m-5 m-md-0">

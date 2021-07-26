@@ -58,8 +58,7 @@ export const getProfileReducer = (state = {}, action) => {
     case "PET_USER_PROFILE_REQUEST":
       return { loading: true, ...state };
     case "PET_USER_PROFILE_SUCCESS":
-      console.log("petsData")
-      console.log(action.payload.petsData)
+
 
       return {
         loading: false,

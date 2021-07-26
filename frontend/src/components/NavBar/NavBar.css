@@ -1,3 +1,4 @@
+
 .bg-nav{
     background-color: #F9BE4F;
   }
@@ -11,4 +12,8 @@
   .m-nav-icon{
 font-size: 3rem;
     color: #F9575C;
+  }
+  .nave-box:hover {
+    background-color: #F9575C !important;
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
   }
