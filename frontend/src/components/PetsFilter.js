@@ -123,12 +123,7 @@ function PetsFilter(props) {
         id="collapseExample1"
         style={{ width: "50%", margin: "0px auto" }}
       >
-        <div
-          className="card card-body border-irregular1"
-          onChange={(e) => {
-            props.getPets(filterByGender, filterByPet, filterByAge);
-          }}
-        >
+        <div className="card card-body border-irregular1">
           <div>
             <div className="custom-control custom-radio custom-control-inline">
               <input
@@ -137,9 +132,13 @@ function PetsFilter(props) {
                 name="customRadio"
                 className="custom-control-input"
                 onChange={(e) => {
-                  e.target.checked
-                    ? setFilterByGender("male")
-                    : setFilterByGender("");
+                  if (e.target.checked) {
+                    props.getPets("male", filterByPet, filterByAge);
+                    setFilterByGender("male");
+                  } else {
+                    props.getPets("", filterByPet, filterByAge);
+                    setFilterByGender("");
+                  }
                 }}
               />
               <label className="custom-control-label" htmlFor="customRadio1">
@@ -153,9 +152,13 @@ function PetsFilter(props) {
                 name="customRadio"
                 className="custom-control-input"
                 onChange={(e) => {
-                  e.target.checked
-                    ? setFilterByGender("female")
-                    : setFilterByGender("");
+                  if (e.target.checked) {
+                    props.getPets("female", filterByPet, filterByAge);
+                    setFilterByGender("female");
+                  } else {
+                    props.getPets("", filterByPet, filterByAge);
+                    setFilterByGender("");
+                  }
                 }}
               />
               <label className="custom-control-label" htmlFor="customRadio2">
@@ -169,6 +172,7 @@ function PetsFilter(props) {
                 name="customRadio"
                 className="custom-control-input"
                 onChange={(e) => {
+                  props.getPets("", filterByPet, filterByAge);
                   setFilterByGender("");
                 }}
               />

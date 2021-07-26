@@ -1,7 +1,7 @@
-import DashboardNavbar from "../../components/dashboard/nav-bar";
+import DashboardNavbar from "../../components/dashboard/navbar/nav-bar";
 
 export default function Messages() {
-    return(
+    return (
         <>
             <DashboardNavbar />
         </>

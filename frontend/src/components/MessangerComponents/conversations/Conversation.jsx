@@ -11,7 +11,16 @@ export default function Conversation({ conversation, currentUser }) {
 
     const getUser = async () => {
       try {
-        const res = await axios(`api/user/${friendId}`);
+
+        const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+        const header = {
+          headers: {
+
+            Authorization: userInfo.token,
+          },
+        };
+
+        const res = await axios.get(`api/user/${friendId}`, header);
         setUser(res.data);
       } catch (err) {
         console.log(err);
@@ -20,24 +29,24 @@ export default function Conversation({ conversation, currentUser }) {
     getUser();
   }, [currentUser, conversation]);
 
-  return user?
-  (
-    <div className="conversation">
-      <img
-        className="conversationImg"
-        src={
-          user?.profilePicture
-            ? user?.image
-            : "/assets/person/noAvatar.png"
-        }
-        alt=""
-      />
-      <span className="conversationName">{`${user?.firstName} ${user?.lastName}`}</span>
-    </div>
-  )
-  : (
+  return user ?
+    (
       <div className="conversation">
-        <Spinner animation="border" style={{color: '#F9BE4F'}} />
+        <img
+          className="conversationImg"
+          src={
+            user?.profilePicture
+              ? user?.image
+              : "/assets/person/noAvatar.png"
+          }
+          alt=""
+        />
+        <span className="conversationName">{`${user?.firstName} ${user?.lastName}`}</span>
       </div>
-  )
+    )
+    : (
+      <div className="conversation">
+        <Spinner animation="border" style={{ color: '#F9BE4F' }} />
+      </div>
+    )
 }
