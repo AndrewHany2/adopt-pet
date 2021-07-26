@@ -94,6 +94,9 @@ function NavBar() {
 
                         Profile
                       </Link>
+                      <Link  className="dropdown-item"  to={`/useradotionrequests/${userLogin.info.userId}`}>
+                        Adoption Requests
+                      </Link>
                       <Link  className="dropdown-item"  to="/messanger">
                         Messeges
                       </Link>

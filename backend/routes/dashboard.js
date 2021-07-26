@@ -2,6 +2,7 @@ const dashboard = require("express").Router();
 const Pet = require("../models/PetModel");
 const User = require("../models/UserModel");
 const App = require("../models/AdoptionApplication");
+const verifyUser = require("../middlewares/VerifyUser");
 
 dashboard.patch("/postPet/accept/:id", async (req, res) => {
   try {

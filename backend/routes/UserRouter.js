@@ -270,7 +270,7 @@ userRouter.delete("/", async (req, res) => {
 //   }
 // });
 
-userRouter.get("/:id", async (req, res) => {
+userRouter.get("/:id",verifyUser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
