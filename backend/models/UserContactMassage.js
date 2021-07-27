@@ -4,19 +4,24 @@ const contactUsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email:{
+  email: {
     type: String,
     required: true,
   },
-  subject:{
+  subject: {
     type: String,
     required: true,
   },
-  message:{
+  message: {
     type: String,
-    required: true, 
+    required: true,
   },
- 
+  status: {
+    type: String,
+    default: "UNREAD",
+    required: true,
+    enum: ['READ', 'UNREAD']
+  }
 });
 const ContactUs = mongoose.model("ContactUS", contactUsSchema);
 
