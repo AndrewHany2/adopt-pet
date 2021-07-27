@@ -58,14 +58,14 @@ function NavBar() {
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/signin">
+                  <Link className="nav-link active nave-box" to="/signin">
                     Sign In
-                  </NavLink>
+                  </Link>
                 </li>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
-                  <NavLink className="nav-link active nave-box" to="/addPet">
+                  <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/addPet">
                     Add-Pet
                   </NavLink>
                 </li>
