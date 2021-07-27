@@ -1,12 +1,12 @@
 .nav-dashboard {
-    border-top-left-radius: 20px !important;
-    border-bottom-right-radius: 20px !important;
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
+    width: 90%;
 }
 
 
 .nav-box {
     display: inline-block;
-    padding: 10px;
+    padding: 0 10px 0 10px;
 }
 
 .nav-box:hover {

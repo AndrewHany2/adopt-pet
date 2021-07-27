@@ -10,49 +10,44 @@ export default function DashboardNavbar() {
     <>
       <ul
         style={{
-          height: "80px",
+          height: "50px",
           backgroundColor: "#F9575C",
-          lineHeight: "80px"
+          lineHeight: "50px",
+          fontSize: "0.8rem"
         }}
-        className="nav-dashboard mt-4 mb-5 text-center w-75 mx-auto text-dark"
+        className="nav-dashboard mt-4 mb-5 text-center mx-auto text-dark"
       >
         <NavLink
           style={{
             color: "white",
-            lineHeight: "50px",
             textDecoration: "none",
-            fontSize: "1.2rem",
-            fontWeight: "bold",
+            fontWeight: "bold"
           }}
-          className="mx-5 nav-box"
+          className="mx-1 nav-box"
           activeClassName="dashboard-active"
           to="/dashboard/posts"
         >
-          Post Pet
+          Posts
         </NavLink>
         <NavLink
           style={{
             color: "white",
-            lineHeight: "50px",
             textDecoration: "none",
-            fontSize: "1.2rem",
             fontWeight: "bold",
           }}
-          className="mx-5 nav-box"
+          className="mx-1 nav-box"
           activeClassName="dashboard-active"
           to="/dashboard/adoption-requests"
         >
-          Adoption Requests
+          Adoption
         </NavLink>
         <NavLink
           style={{
             color: "white",
-            lineHeight: "50px",
             textDecoration: "none",
-            fontSize: "1.2rem",
             fontWeight: "bold",
           }}
-          className="mx-5 nav-box"
+          className="mx-1 nav-box"
           activeClassName="dashboard-active"
           to="/dashboard/messages"
         >
@@ -61,16 +56,14 @@ export default function DashboardNavbar() {
         {userLogin.info.userRole === 'SUPER_ADMIN' && <NavLink
           style={{
             color: "white",
-            lineHeight: "50px",
             textDecoration: "none",
-            fontSize: "1.2rem",
             fontWeight: "bold",
           }}
-          className="mx-5 nav-box"
+          className="mx-1 nav-box"
           activeClassName="dashboard-active"
           to="/dashboard/set-admin"
         >
-          Set Admins
+          Admins
         </NavLink>}
       </ul>
     </>
