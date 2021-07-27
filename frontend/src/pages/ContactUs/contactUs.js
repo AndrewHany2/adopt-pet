@@ -96,7 +96,7 @@ function ContactUs() {
                             </form>
                         </div>
                         <div className="col-12 col-md-6">
-                            <img src={"./resources/Mail-sent.png"} className="img-fluid" />
+                            <img src={"./resources/Mail-sent.png"} className="img-fluid" alt="mail" />
                         </div>
                     </div>
                 </div>

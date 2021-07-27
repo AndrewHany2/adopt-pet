@@ -3,8 +3,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import LoginFacebook from "./../../components/LoginFacebook";
-import LoginGoogle from "./../../components/LoginGoogle";
+// import LoginFacebook from "./../../components/LoginFacebook";
+// import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
 import Joi from "joi";
 
@@ -13,6 +13,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser } from "../../store/actions/UserActions";
 
 function SignUp(props) {
+
+  const handleEnter = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      sendData();
+    }
+  };
+
   const dispatch = useDispatch();
   const registerData = useSelector((state) => state.registerData);
 
@@ -131,7 +139,7 @@ function SignUp(props) {
       ? validate.error.details[0].message
       : null;
     setErrors(myErrors);
-   
+
   };
   const validateFields = (e) => {
     let value = e.target.id;
@@ -143,7 +151,7 @@ function SignUp(props) {
     let myErrors = { ...errors };
     myErrors[value] = validate.error ? validate.error.details[0].message : null;
     setErrors(myErrors);
-  
+
   };
 
   const sendData = async () => {
@@ -154,7 +162,7 @@ function SignUp(props) {
     const wrapData = { ...userInfo };
     delete wrapData.passwordObj;
     wrapData.password = myPassword.password;
-  
+
     if (
       !fullSchema.validate(myData).error &&
       !passwordSchema.validate(myPassword).error
@@ -164,7 +172,7 @@ function SignUp(props) {
       let myErrors = { ...errors };
       myErrors.formValid = "Please enter valid info at all fields";
       setErrors(myErrors);
-  
+
     }
   };
   useEffect(() => {
@@ -199,6 +207,7 @@ function SignUp(props) {
                     required
                     value={userInfo.firstName}
                     onChange={validateFields}
+                    onKeyUp={handleEnter}
                   />
                 </div>
 
@@ -211,6 +220,7 @@ function SignUp(props) {
                     required
                     value={userInfo.lastName}
                     onChange={validateFields}
+                    onKeyUp={handleEnter}
                   />
                 </div>
                 {errors.firstName && (
@@ -234,6 +244,7 @@ function SignUp(props) {
                     placeholder="email@example.com"
                     value={userInfo.email}
                     onChange={validateFields}
+                    onKeyUp={handleEnter}
                   />
                 </div>
               </div>
@@ -251,6 +262,7 @@ function SignUp(props) {
                     id="phone"
                     value={userInfo.phone}
                     onChange={validateFields}
+                    onKeyUp={handleEnter}
                   />
                 </div>
                 {errors.phone && (
@@ -269,6 +281,7 @@ function SignUp(props) {
                     required
                     value={userInfo.country}
                     onChange={validateFields}
+                    onKeyUp={handleEnter}
                   />
                 </div>
                 <div className="col-md-6 mb-3">
@@ -280,6 +293,7 @@ function SignUp(props) {
                     required
                     value={userInfo.city}
                     onChange={validateFields}
+                    onKeyUp={handleEnter}
                   />
                 </div>
                 {errors.country && (
@@ -302,6 +316,7 @@ function SignUp(props) {
                     id="password"
                     value={userInfo.password}
                     onChange={validatePassword}
+                    onKeyUp={handleEnter}
                   />
                 </div>
                 <div className="col-md-6 mb-3">
@@ -312,6 +327,7 @@ function SignUp(props) {
                     id="repeatPassword"
                     value={userInfo.repeatPassword}
                     onChange={validatePassword}
+                    onKeyUp={handleEnter}
                   />
                 </div>
                 {errors.password && (

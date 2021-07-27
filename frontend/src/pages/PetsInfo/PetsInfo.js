@@ -1,13 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPetInfo } from "../../store/actions/petActions";
 import { getUser } from "../../store/actions/UserActions";
 import "font-awesome/css/font-awesome.min.css";
-import { Carousel } from "react-bootstrap";
 import axios from "axios";
 import { Modal, Button, Form } from "react-bootstrap";
+import { io } from "socket.io-client";
 
 function PetsInfo({ match, history }) {
+
+  let age_now;
+
+  const calculate_age = (dob1) => {
+    let today = new Date();
+    let birthDate = new Date(dob1);  // create a date object directly from `dob1` argument
+    age_now = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age_now--;
+    }
+    if (age_now > 0)
+      return `${age_now} year/s`;
+    if (m > 0)
+      return `${m} month/s`;
+
+    let Difference_In_Time = today.getTime() - birthDate.getTime();
+    let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+    return `${Difference_In_Days.toFixed(0)} day/s`;
+
+  }
+
+  const handleEnter = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      sendMessage();
+    }
+  };
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [show, setShow] = useState(false);
@@ -18,6 +48,9 @@ function PetsInfo({ match, history }) {
   const pet = useSelector((state) => state.pet);
   const userLogin = useSelector((state) => state.userLogin);
   const userData = useSelector((state) => state.userData);
+  const socket = useRef();
+
+  useEffect(() => socket.current = io("ws://localhost:8900"));
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,13 +68,20 @@ function PetsInfo({ match, history }) {
         setSuccess(true);
       }
     } catch (error) {
-  
+
     }
   };
   const sendMessage = async () => {
     const checkCoversation = await axios.get(
       `/api/conversations/find/${userLogin.info.userId}/${pet.info.owner}`
     );
+
+    socket.current.emit("sendMessage", {
+      senderId: userLogin.info.userId,
+      receiverId: pet.info.owner,
+      text: message,
+    });
+
     if (!checkCoversation.data) {
       const result = await axios.post(`/api/conversations`, {
         senderId: userLogin.info.userId,
@@ -73,7 +113,7 @@ function PetsInfo({ match, history }) {
       }
     }
     temp();
-  }, [dispatch, id]);
+  }, [dispatch, id, userLogin.info]);
 
   useEffect(() => {
     if (userData.loading === false) {
@@ -81,7 +121,7 @@ function PetsInfo({ match, history }) {
         userData.info.petAdoptionRequests?.some((element) => element === id)
       );
     }
-  }, [userData.loading]);
+  }, [userData.loading, id, userData.info?.petAdoptionRequests]);
 
   return (
     <>
@@ -133,29 +173,11 @@ function PetsInfo({ match, history }) {
                       className="col-12 col-md-4 text-center"
                       style={{ width: "300px" }}
                     >
-                      <Carousel>
-                        <Carousel.Item>
-                          <img
-                            className="border-irregular1 img-fluid w-100 myimg"
-                            src={pet.info.image}
-                            alt=""
-                          />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                          <img
-                            className="border-irregular1 img-fluid w-100 myimg"
-                            src="/resources/adoption1-185x185.jpg"
-                            alt="Third slide"
-                          />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                          <img
-                            className="border-irregular1 img-fluid w-100 myimg"
-                            src="/resources/adoption2-185x185.jpg"
-                            alt="Third slide"
-                          />
-                        </Carousel.Item>
-                      </Carousel>
+                      <img
+                        className="border-irregular1 img-fluid w-100 myimg"
+                        src={pet.info.image}
+                        alt=""
+                      />
                     </div>
                     <div className="text-center text-md-left col-12 col-md-8 col-lg-4 mt-4">
                       <div className="row">
@@ -172,7 +194,7 @@ function PetsInfo({ match, history }) {
                         <div className="col-sm-6">
                           <ul className="list-unstyled pet-adopt-info">
                             <li className="h7">
-                              Age: <span>{pet.info.age}</span>
+                              Age: <span>{calculate_age(pet.info.dateOfBirth)}</span>
                             </li>
                           </ul>
                         </div>
@@ -236,6 +258,7 @@ function PetsInfo({ match, history }) {
                                 onChange={(e) => {
                                   setMessage(e.target.value);
                                 }}
+                                onKeyUp={handleEnter}
                               />
                             </Form.Group>
                           </Modal.Body>

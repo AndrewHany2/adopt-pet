@@ -8,8 +8,7 @@ const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const dashboard = require("./routes/dashboard");
 const application = require("./routes/adoptionApplication");
-const authenticationRole = require ("./middlewares/authentication");
-const verifyUser = require("./middlewares/VerifyUser");
+const authenticationRole = require("./middlewares/authentication");
 const contactUsRouter = require("./routes/ContactUs")
 
 const app = express();
@@ -26,7 +25,7 @@ app.use("/api/user", userRouter);
 app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
-app.use("/api/admin",verifyUser, dashboard);
+app.use("/api/admin", dashboard);
 app.use("/api/adoptionRequest", application);
 app.use("/api/contactus", contactUsRouter)
 app.use((err, req, res, next) => {

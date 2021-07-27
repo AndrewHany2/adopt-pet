@@ -27,7 +27,7 @@ export default function Messages(props) {
             setMessages(response.data);
         }
         temp();
-    }, []);
+    }, [props.history]);
 
     const handleClick = (id) => {
         let temp = [...messages];

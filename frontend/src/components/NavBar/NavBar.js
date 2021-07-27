@@ -2,9 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import React from "react";
 import "./NavBar.css";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+// import { faPaw } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function NavBar() {
@@ -17,7 +17,7 @@ function NavBar() {
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
                 <i>
-                  <img src='/resources/theLogo.png' width="80px" />
+                  <img src='/resources/theLogo.png' width="80px" alt="logo" />
                 </i>
               </Link>
             </li>
@@ -37,37 +37,37 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul className="nav navbar-nav mx-auto nav-item-font">
               <li className="nav-item active ml-3">
-                <Link className="nav-link active nave-box" to="/">
+                <NavLink exact className="nav-link active nave-box" activeClassName="navbar-active" to="/">
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active nave-box" to="/pets/1">
+                <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/pets/1">
                   Adobtion-Gallery
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active nave-box" to="/about">
+                <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/about">
                   About
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item ml-3">
-                <Link className="nav-link active nave-box" to="/contactus">
+                <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/contactus">
                   Contact
-                </Link>
+                </NavLink>
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <Link className="nav-link active nave-box" to="/signin">
+                  <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/signin">
                     Sign In
-                  </Link>
+                  </NavLink>
                 </li>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
-                  <Link className="nav-link active nave-box" to="/addPet">
+                  <NavLink className="nav-link active nave-box" to="/addPet">
                     Add-Pet
-                  </Link>
+                  </NavLink>
                 </li>
               )}
             </ul>

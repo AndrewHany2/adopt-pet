@@ -1,10 +1,10 @@
 import React from "react";
 import "./adoptionApp.css";
 import AdoptionForm from "../../components/AdoptionApp";
-import LoadingScreen from "../../components/Loading/loading";
-import { useState, useEffect } from "react";
+// import LoadingScreen from "../../components/Loading/loading";
+// import { useState } from "react";
 function AdoptionApp() {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   return (
     <>

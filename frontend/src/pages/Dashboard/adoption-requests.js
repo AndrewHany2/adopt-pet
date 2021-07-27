@@ -42,7 +42,7 @@ export default function AdoptionRequests() {
                 <th scope="col">Requested User</th>
                 <th scope="col">Name-pet</th>
                 <th scope="col">Gender</th>
-                <th scope="col">Data of Birth</th>
+                <th scope="col">Age</th>
                 <th scope="col">Type</th>
                 <th scope="col">Size</th>
                 <th scope="col">image</th>

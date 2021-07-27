@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import './nav-bar.css'
 
@@ -16,7 +16,7 @@ export default function DashboardNavbar() {
         }}
         className="nav-dashboard mt-4 mb-5 text-center w-75 mx-auto text-dark"
       >
-        <Link
+        <NavLink
           style={{
             color: "white",
             lineHeight: "50px",
@@ -25,11 +25,12 @@ export default function DashboardNavbar() {
             fontWeight: "bold",
           }}
           className="mx-5 nav-box"
+          activeClassName="dashboard-active"
           to="/dashboard/posts"
         >
           Post Pet
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           style={{
             color: "white",
             lineHeight: "50px",
@@ -38,11 +39,12 @@ export default function DashboardNavbar() {
             fontWeight: "bold",
           }}
           className="mx-5 nav-box"
+          activeClassName="dashboard-active"
           to="/dashboard/adoption-requests"
         >
           Adoption Requests
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           style={{
             color: "white",
             lineHeight: "50px",
@@ -51,11 +53,12 @@ export default function DashboardNavbar() {
             fontWeight: "bold",
           }}
           className="mx-5 nav-box"
+          activeClassName="dashboard-active"
           to="/dashboard/messages"
         >
           Messages
-        </Link>
-        {userLogin.info.userRole === 'SUPER_ADMIN' && <Link
+        </NavLink>
+        {userLogin.info.userRole === 'SUPER_ADMIN' && <NavLink
           style={{
             color: "white",
             lineHeight: "50px",
@@ -64,10 +67,11 @@ export default function DashboardNavbar() {
             fontWeight: "bold",
           }}
           className="mx-5 nav-box"
+          activeClassName="dashboard-active"
           to="/dashboard/set-admin"
         >
           Set Admins
-        </Link>}
+        </NavLink>}
       </ul>
     </>
   );

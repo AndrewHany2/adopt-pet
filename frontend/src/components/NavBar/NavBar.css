@@ -1,19 +1,27 @@
+.bg-nav {
+  background-color: #F9BE4F;
+}
 
-.bg-nav{
-    background-color: #F9BE4F;
-  }
-  .nav-logo{
-    font-size: 2rem;
-  }
-  .nav-item-font{
-    font-size: 1.05rem;
-    font-weight: bold; 
-  }
-  .m-nav-icon{
-font-size: 3rem;
-    color: #F9575C;
-  }
-  .nave-box:hover {
-    background-color: #F9575C !important;
-    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
-  }
+.nav-logo {
+  font-size: 2rem;
+}
+
+.nav-item-font {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+.m-nav-icon {
+  font-size: 3rem;
+  color: #F9575C;
+}
+
+.nave-box:hover {
+  background-color: #F9575C !important;
+  border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
+}
+
+.navbar-active {
+  background-color: #F9575C !important;
+  border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
+}

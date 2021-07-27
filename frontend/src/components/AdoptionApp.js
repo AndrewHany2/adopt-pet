@@ -39,7 +39,7 @@ function AdoptionForm({ history }) {
     return () => {
       dispatch({ type: "PET_ADOPT_RESET" });
     };
-  }, []);
+  }, [dispatch]);
   const imageRef = useRef();
 
   const handleChange = (e) => {
@@ -162,7 +162,7 @@ function AdoptionForm({ history }) {
                 />
 
                 <Form.File
-                className="mt-4"
+                  className="mt-4"
                   id="custom-file-translate-scss"
                   name="image"
                   required

@@ -23,13 +23,12 @@ export default function Posts(props) {
       setPets(data?.result);
     }
     temp();
-  }, []);
+  }, [props.history]);
 
   const handleClick = (id) => {
     let temp = [...pets];
     const index = temp.findIndex((pet) => pet._id === id);
     temp.splice(index, 1);
-    console.log(temp);
     setPets(temp);
   };
 

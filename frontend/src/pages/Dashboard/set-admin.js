@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux"
 import DashboardNavbar from "../../components/dashboard/navbar/nav-bar";
 
 export default function SetAdmin() {
+
+  const handleEnter = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      getUser();
+    }
+  };
 
   const [search, setSearch] = useState({ isData: false, data: {} });
   const [serachEmail, setSearchEmail] = useState("");
@@ -73,6 +80,7 @@ export default function SetAdmin() {
               aria-label="Search"
               value={serachEmail}
               onChange={setEmail}
+              onKeyUp={handleEnter}
             />
             <button
               className="btn btn-outline-success my-2 my-sm-0"
@@ -95,7 +103,7 @@ export default function SetAdmin() {
                       ? search.data.image
                       : `/assets/person/noAvatar.png`
                   }
-                  alt="User Image"
+                  alt="user"
                 />
                 <div className="card-body">
                   <h5 className="card-title">

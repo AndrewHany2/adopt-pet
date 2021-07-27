@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 function PostDashboard(props) {
-  const handleClickAccept = () => {
+  const handleClickAccept = async () => {
     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
     const header = {
       headers: {
@@ -9,7 +9,7 @@ function PostDashboard(props) {
       },
     };
     const id = props.pet._id;
-    axios.patch(`/api/admin/postPet/accept/${id}`, header);
+    await axios.patch(`/api/admin/postPet/accept/${id}`, {}, header);
     props.handleClick(props.pet._id);
   };
   const handleClickReject = () => {
@@ -20,7 +20,7 @@ function PostDashboard(props) {
       },
     };
     const id = props.pet._id;
-    axios.patch(`/api/admin/postPet/reject/${id}`, {},header);
+    axios.patch(`/api/admin/postPet/reject/${id}`, {}, header);
     props.handleClick(props.pet._id);
   };
   return (

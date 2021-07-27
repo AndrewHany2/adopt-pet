@@ -13,7 +13,7 @@ export default function Home() {
     const pets = useSelector((state) => state.pets);
     useEffect(() => {
         dispatch(getPets("", "", "", "", 4));
-    }, []);
+    }, [dispatch]);
     return (
         <>
             <HomeCarouel />

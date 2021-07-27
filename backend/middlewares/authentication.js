@@ -17,7 +17,7 @@ const authenticationAdmin = () => {
     return async (req, res, next) => {
         try {
             const user = await User.findOne({ _id: req.verified })
-            if (!user.role === "SUPER_ADMIN" && !user.role === "ADMIN") {
+            if (user.role !== "SUPER_ADMIN" && user.role !== "ADMIN") {
                 res.status(401);
                 return res.send('Not Allowed');
             }

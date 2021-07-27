@@ -24,7 +24,7 @@ import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
-  <Router>
+    <Router>
       <NavBar></NavBar>
       <Switch>
         <Route path="/pet/:id" component={PetsInfo}></Route>
@@ -50,7 +50,7 @@ function App() {
         <Route path="*" component={NotFound} />
       </Switch>
       <Footer />
-  </Router>
+    </Router>
 
   );
 }

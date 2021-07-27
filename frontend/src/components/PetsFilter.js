@@ -11,7 +11,7 @@ function PetsFilter(props) {
 
   useEffect(() => {
     props.history.push("/pets/1");
-  }, [filterByGender, filterByPet, filterByAge]);
+  }, [props.history, filterByGender, filterByPet, filterByAge]);
   return (
     <div className={`bg-light-custom  border-irregular1 pt-2`}>
       <p
