@@ -58,9 +58,9 @@ function NavBar() {
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <Link className="nav-link active nave-box" to="/signin">
+                  <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/signin">
                     Sign In
-                  </Link>
+                  </NavLink>
                 </li>
               )}
               {userLogin.success && (

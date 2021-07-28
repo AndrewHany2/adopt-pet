@@ -228,7 +228,7 @@ userRouter.delete("/delete/:id", verifyUser, async (req, res) => {
     return res.status(500).json(error);
   }
 });
-userRouter.get("/profile/:id",verifyUser, async (req, res) => {
+userRouter.get("/profile/:id", verifyUser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
@@ -237,18 +237,19 @@ userRouter.get("/profile/:id",verifyUser, async (req, res) => {
   }
 });
 
-userRouter.get("/",verifyUser, async ({ query }, res) => {
-  try{
-  if (query.email) {
-    const user = await User.findOne({ email: query.email });
-    return  res.status(200).json(user);
-  } else {
-    const user = await User.find({});
-    return res.status(200).json(user);
+userRouter.get("/", verifyUser, async ({ query }, res) => {
+  try {
+    if (query.email) {
+      const user = await User.findOne({ email: query.email });
+      return res.status(200).json(user);
+    } else {
+      const user = await User.find({});
+      return res.status(200).json(user);
+    }
+  } catch (err) {
+    return res.status(500).json(err);
   }
-} catch (err) {
-  return res.status(500).json(err);
-}});
+});
 
 userRouter.delete("/", async (req, res) => {
   try {
@@ -267,7 +268,7 @@ userRouter.delete("/", async (req, res) => {
 //   }
 // });
 
-userRouter.get("/:id",verifyUser, async (req, res) => {
+userRouter.get("/:id", verifyUser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
@@ -277,7 +278,7 @@ userRouter.get("/:id",verifyUser, async (req, res) => {
   }
 });
 
-userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
+userRouter.put("/:id", upload, verifyUser, async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findOne({ _id: id });
@@ -288,14 +289,14 @@ userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
     const phone = req.body.phone || user.phone;
     const city = req.body.city || user.city;
     let image = user.image;
-    if(req.file){
-       image = `/images/${req.file.filename}`;
+    if (req.file) {
+      image = `/images/${req.file.filename}`;
     }
-    existingUser = await User.findOne({ email:email });
-    if(!existingUser){
+    existingUser = await User.findOne({ $and: [{ email }, { email: { $not: { $eq: user.email } } }] });
+    if (!existingUser) {
       user.email = email;
-    }else{
-      res.status(400).json({message:"Email Alraedy Exists"})
+    } else {
+      res.status(400).json({ message: "Email Alraedy Exists" })
     }
 
 
@@ -308,7 +309,7 @@ userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
     user.phone = phone;
     user.image = image;
 
-     req.body.postedPets
+    req.body.postedPets
       ? user.postedPets.push(req.body.postedPets)
       : user.postedPets;
     req.body.adoptionRequests
