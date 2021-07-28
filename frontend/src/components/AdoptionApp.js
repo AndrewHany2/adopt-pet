@@ -8,6 +8,13 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import LoadingComponent from "./loadingComponent/loadingComponent";
 function AdoptionForm({ history }) {
 
+  const handleEnter = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      temp();
+    }
+  };
+
   const [label, setLabel] = useState('Choose File');
   const [pet, setpet] = useState({
     name: "",
@@ -53,8 +60,12 @@ function AdoptionForm({ history }) {
     }
     setpet(state);
   };
-  let Post = async (e) => {
+  let Post = (e) => {
     e.preventDefault();
+    temp();
+  };
+
+  const temp = async () => {
     let formdata = new FormData();
     formdata.append("name", pet.name);
     formdata.append("dateOfBirth", pet.dateOfBirth);
@@ -66,7 +77,8 @@ function AdoptionForm({ history }) {
     formdata.append("image", pet.image);
     formdata.append("owner", userLogin.info.userId);
     await dispatch(adoptpet(formdata));
-  };
+  }
+
   return (
     <>
       <section id="AdoptForm">
@@ -82,6 +94,7 @@ function AdoptionForm({ history }) {
                   name="name"
                   required
                   onChange={handleChange}
+                  onKeyUp={handleEnter}
                 />
                 <label className="d-block mt-1">Pet Type</label>
                 <select
@@ -159,6 +172,7 @@ function AdoptionForm({ history }) {
                   rows="3"
                   required
                   onChange={handleChange}
+                  onKeyUp={handleEnter}
                 />
 
                 <Form.File
