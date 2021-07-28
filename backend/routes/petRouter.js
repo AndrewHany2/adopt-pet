@@ -6,7 +6,6 @@ const verifyUser = require("../middlewares/VerifyUser");
 petRouter.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const pet = await Pet.findOne({ _id: id });
     if (pet) {
       res.status(200).json(pet);
@@ -26,7 +25,6 @@ petRouter.get("/", async (req, res, next) => {
     }
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 8;
-    console.log(req.query.limit);
     delete queries.limit;
     delete queries.page;
     let conditions = {};
@@ -108,12 +106,11 @@ petRouter.post("/", upload, (req, res) => {
       res.status(201).json({ petId: result._id });
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 });
 
-petRouter.get("/userpets/list",verifyUser, async (req, res) => {
+petRouter.get("/userpets/list", verifyUser, async (req, res) => {
   try {
     const query = req.query.postedpets;
     pets = query.split(",");

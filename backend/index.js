@@ -29,10 +29,9 @@ app.use("/api/admin", dashboard);
 app.use("/api/adoptionRequest", application);
 app.use("/api/contactus", contactUsRouter)
 app.use((err, req, res, next) => {
-  console.log(err);
   res.status(500).json({ message: err });
 });
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`);
+  console.log(`App listening at http://localhost:${PORT}`);
 });

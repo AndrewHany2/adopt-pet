@@ -12,7 +12,6 @@ dashboard.patch("/postPet/accept/:id", verifyUser, authenticationAdmin(), async 
     });
     res.status(200).json({ status: "ACCEPTED", ...pet });
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 });
@@ -46,7 +45,6 @@ dashboard.patch("/adoptPet/reject/:id", verifyUser, authenticationAdmin(), async
     });
     res.status(200).json({ status: "REJECTED" });
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 });
@@ -109,7 +107,6 @@ dashboard.get("/adoptpet/:id", verifyUser, async (req, res) => {
 dashboard.patch("/assignrole/:id", verifyUser, authenticationRole('SUPER_ADMIN'), async (req, res) => {
   try {
     const userRole = req.query.role
-    console.log(userRole)
     const updateUser = await User.findOneAndUpdate({ _id: req.params.id }, { role: userRole })
     const user = await User.findOne({ _id: req.params.id })
     return res.status(200).json(user);

@@ -11,7 +11,6 @@ AdoptionApplication.get("/", async ({ query }, response) => {
       })
         .populate("requestedUserId", "email")
         .populate("petId", "_id name gender dateOfBirth type size");
-      console.log(adoptionRequests);
       return 0;
     } else adoptionRequests = await Application.find({});
     response.status(200).json(adoptionRequests);
@@ -36,7 +35,6 @@ AdoptionApplication.post("/", async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err);
     res.status(400).json(err);
   }
 });
@@ -48,7 +46,6 @@ AdoptionApplication.get("/:id", async (req, res) => {
       res.status(200).json(adoptionRequest);
     }
   } catch (err) {
-    console.log(err);
     res.status(400).json(err);
   }
 });
@@ -60,7 +57,6 @@ AdoptionApplication.get("/", async (req, res) => {
       res.status(200).json(adoptionRequest);
     }
   } catch (err) {
-    console.log(err);
     res.status(400).json(err);
   }
 });

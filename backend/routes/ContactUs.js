@@ -26,7 +26,6 @@ contactUsRouter.get("/", verifyUser, authenticationAdmin(), async (req, res) => 
     let messages;
 
     let status = req.query.status;
-    console.log(status);
     switch (status) {
       case 'UNREAD':
         messages = await ContactUs.find({ status: 'UNREAD' });
