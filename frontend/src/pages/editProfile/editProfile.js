@@ -87,7 +87,6 @@ const EditProfile = () => {
     axios.put(`/api/user/${id}`, form_data, header)
       .then(response => {
         window.location.href = `/profile/${id}`
-        console.log("Data: ", response.data);
       }).catch(error => {
         setEmailError(error.response.data.message)
         console.error('Something went wrong!', error.response.data.message);
