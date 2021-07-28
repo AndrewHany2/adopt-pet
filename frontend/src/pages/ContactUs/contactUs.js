@@ -3,6 +3,14 @@ import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import "./contactUs.css"
 function ContactUs() {
+
+    const handleEnter = event => {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            temp();
+        }
+    };
+
     const [show, setShow] = useState(false);
     const [contactmsg, setcontactmsg] = useState({
         name: "",
@@ -27,8 +35,12 @@ function ContactUs() {
         setcontactmsg(state);
     };
 
-    let send = async (e) => {
+    let send = (e) => {
         e.preventDefault();
+        temp();
+    };
+
+    let temp = async () => {
         let data = {
             name: contactmsg.name,
             email: contactmsg.email,
@@ -37,7 +49,8 @@ function ContactUs() {
         }
         await axios.post("/api/contactus/", data)
         handleShow()
-    };
+    }
+
     return (
         <>
             <section id="contactUs">
@@ -85,13 +98,13 @@ function ContactUs() {
                             <p className="h4">Send us a message!</p>
                             <form onSubmit={send}>
                                 <label className="d-block">Name*</label>
-                                <input type="text" className="pb-1" required name="name" value={contactmsg.name} onChange={handleChange} />
+                                <input type="text" className="pb-1" required name="name" value={contactmsg.name} onChange={handleChange} onKeyUp={handleEnter} />
                                 <label className="d-block">Email Address*</label>
-                                <input type="email" name="email" required value={contactmsg.email} onChange={handleChange} />
+                                <input type="email" name="email" required value={contactmsg.email} onChange={handleChange} onKeyUp={handleEnter} />
                                 <label className="d-block">Subject*</label>
-                                <input type="text" className="pb-1" required name="subject" value={contactmsg.subject} onChange={handleChange} />
+                                <input type="text" className="pb-1" required name="subject" value={contactmsg.subject} onChange={handleChange} onKeyUp={handleEnter} />
                                 <label className="d-block">Message*</label>
-                                <textarea className="textAreaNoReaize" name="message" cols="40" rows="3" required value={contactmsg.message} onChange={handleChange}></textarea>
+                                <textarea className="textAreaNoReaize" name="message" cols="40" rows="3" required value={contactmsg.message} onChange={handleChange} onKeyUp={handleEnter}></textarea>
                                 <input type="submit" value="SEND MESSAGE" className="sendMessage mt-3 px-3 py-2" />
                             </form>
                         </div>
@@ -102,15 +115,15 @@ function ContactUs() {
                 </div>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Send message to pet owner</Modal.Title>
+                        <Modal.Title>You message has been sent</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Label>Message</Form.Label>
-                        <h3>Message sent</h3>
+                        <Form.Label style={{ fontWeight: 'bold' }}>{contactmsg?.subject}</Form.Label>
+                        <p>{contactmsg?.message}</p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
+                        <Button variant="primary" onClick={handleClose}>
+                            Okay
                         </Button>
                         {/* <Button variant="primary" onClick={sendMessage}>
                         Send Message
