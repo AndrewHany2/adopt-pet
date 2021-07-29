@@ -133,9 +133,6 @@ function NavBar() {
                       <Link className="dropdown-item" to="/messanger">
                         Messeges
                       </Link>
-                      <Link className="dropdown-item" to="/signout">
-                        Log Out{" "}
-                      </Link>
                       {userLogin.info.userRole !== "USER" && (
                         <div className="dropdown-divider"></div>
                       )}
@@ -144,6 +141,9 @@ function NavBar() {
                           Dashboard{" "}
                         </Link>
                       )}
+                      <Link className="dropdown-item" to="/signout">
+                        Log Out{" "}
+                      </Link>
                     </div>
                   </li>
                 </ul>
