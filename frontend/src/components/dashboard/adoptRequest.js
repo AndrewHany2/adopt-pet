@@ -3,28 +3,24 @@ import axios from "axios";
 // import moment from "moment";
 
 function AdoptRequest(props) {
-
   let age_now;
 
   const calculate_age = (dob1) => {
     let today = new Date();
-    let birthDate = new Date(dob1);  // create a date object directly from `dob1` argument
+    let birthDate = new Date(dob1); // create a date object directly from `dob1` argument
     age_now = today.getFullYear() - birthDate.getFullYear();
     let m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age_now--;
     }
-    if (age_now > 0)
-      return `${age_now} year/s`;
-    if (m > 0)
-      return `${m} month/s`;
+    if (age_now > 0) return `${age_now} year/s`;
+    if (m > 0) return `${m} month/s`;
 
     let Difference_In_Time = today.getTime() - birthDate.getTime();
     let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
     return `${Difference_In_Days.toFixed(0)} day/s`;
-
-  }
+  };
 
   const handleAccept = () => {
     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
@@ -33,7 +29,11 @@ function AdoptRequest(props) {
         Authorization: userInfo.token,
       },
     };
-    axios.patch(`/api/admin/application/accept/${props.request._id}`, {}, header);
+    axios.patch(
+      `/api/admin/application/acceptByAdmin/${props.request._id}`,
+      {},
+      header
+    );
     props.handleClick(props.request._id);
   };
 
@@ -44,40 +44,54 @@ function AdoptRequest(props) {
         Authorization: userInfo.token,
       },
     };
-    axios.patch(`/api/admin/application/decline/${props.request._id}`, {}, header);
+    axios.patch(
+      `/api/admin/application/decline/${props.request._id}`,
+      {},
+      header
+    );
     props.handleClick(props.request._id);
   };
-
   return (
-    <tbody>
-      <tr>
-        <th scope="row">{props.request.requestedUserId.email}</th>
-        <td>{props.request.petId.name}</td>
-        <td>{props.request.petId.gender}</td>
-        <td>{calculate_age(props.request.petId.dateOfBirth)}</td>
-        <td>{props.request.petId.petType}</td>
-        <td>{props.request.petId.size}</td>
-        <td>
-          <img
-            src={props.request.petId.image}
-            width="40px"
-            height="40px"
-            className="rounded-circle"
-            alt="pet"
-          />
-        </td>
-        <td>
-          <button className="btn btn-success" onClick={handleAccept}>
-            Accept
-          </button>
-        </td>
-        <td>
-          <button className="btn btn-danger" onClick={handleReject}>
-            Reject
-          </button>
-        </td>
-      </tr>
-    </tbody>
+    <>
+      {!props.request.acceptedByAdmin && (
+        <tbody>
+          <tr>
+            <th scope="row">
+              {props.request.requestedUserId.email}{" "}
+              {props.request.acceptedByUser && (
+                <div class="alert alert-primary" role="alert">
+                  accepted by user and waiting for you
+                </div>
+              )}
+            </th>
+            <td>{props.request.petId.name}</td>
+            <td>{props.request.petId.gender}</td>
+            <td>{calculate_age(props.request.petId.dateOfBirth)}</td>
+            <td>{props.request.petId.petType}</td>
+            <td>{props.request.petId.size}</td>
+            <td>
+              <img
+                src={props.request.petId.image}
+                width="40px"
+                height="40px"
+                className="rounded-circle"
+                alt="pet"
+              />
+            </td>
+            <td>
+              <button className="btn btn-success" onClick={handleAccept}>
+                Accept
+              </button>
+            </td>
+            <td>
+              <button className="btn btn-danger" onClick={handleReject}>
+                Reject
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      )}
+    </>
   );
 }
 export default AdoptRequest;

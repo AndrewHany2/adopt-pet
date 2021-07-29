@@ -9,8 +9,6 @@ const facebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const upload = require("../helpers/multer");
 
-
-
 userRouter.use(passport.initialize());
 userRouter.use(passport.session());
 
@@ -292,13 +290,14 @@ userRouter.put("/:id", upload, verifyUser, async (req, res, next) => {
     if (req.file) {
       image = `/images/${req.file.filename}`;
     }
-    existingUser = await User.findOne({ $and: [{ email }, { email: { $not: { $eq: user.email } } }] });
+    existingUser = await User.findOne({
+      $and: [{ email }, { email: { $not: { $eq: user.email } } }],
+    });
     if (!existingUser) {
       user.email = email;
     } else {
-      res.status(400).json({ message: "Email Alraedy Exists" })
+      res.status(400).json({ message: "Email Alraedy Exists" });
     }
-
 
     user.firstName = firstName;
     user.lastName = lastName;
@@ -323,7 +322,6 @@ userRouter.put("/:id", upload, verifyUser, async (req, res, next) => {
   } catch (e) {
     next(e);
     return res.status(500).json(error);
-
   }
 });
 

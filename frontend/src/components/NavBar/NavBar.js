@@ -17,7 +17,7 @@ function NavBar() {
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
                 <i>
-                  <img src='/resources/theLogo.png' width="80px" alt="logo" />
+                  <img src="/resources/theLogo.png" width="80px" alt="logo" />
                 </i>
               </Link>
             </li>
@@ -37,35 +37,60 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul className="nav navbar-nav mx-auto nav-item-font">
               <li className="nav-item active ml-3">
-                <NavLink exact className="nav-link active nave-box" activeClassName="navbar-active" to="/">
+                <NavLink
+                  exact
+                  className="nav-link active nave-box"
+                  activeClassName="navbar-active"
+                  to="/"
+                >
                   Home
                 </NavLink>
               </li>
               <li className="nav-item ml-3">
-                <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/pets/1">
+                <NavLink
+                  className="nav-link active nave-box"
+                  activeClassName="navbar-active"
+                  to="/pets/1"
+                >
                   Adobtion-Gallery
                 </NavLink>
               </li>
               <li className="nav-item ml-3">
-                <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/about">
+                <NavLink
+                  className="nav-link active nave-box"
+                  activeClassName="navbar-active"
+                  to="/about"
+                >
                   About
                 </NavLink>
               </li>
               <li className="nav-item ml-3">
-                <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/contactus">
+                <NavLink
+                  className="nav-link active nave-box"
+                  activeClassName="navbar-active"
+                  to="/contactus"
+                >
                   Contact
                 </NavLink>
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/signin">
+                  <NavLink
+                    className="nav-link active nave-box"
+                    activeClassName="navbar-active"
+                    to="/signin"
+                  >
                     Sign In
                   </NavLink>
                 </li>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
-                  <NavLink className="nav-link active nave-box" activeClassName="navbar-active" to="/addPet">
+                  <NavLink
+                    className="nav-link active nave-box"
+                    activeClassName="navbar-active"
+                    to="/addPet"
+                  >
                     Add-Pet
                   </NavLink>
                 </li>
@@ -90,12 +115,20 @@ function NavBar() {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
-
+                      <Link
+                        className="dropdown-item"
+                        to={`/profile/${userLogin.info.userId}`}
+                      >
                         Profile
                       </Link>
-                      <Link className="dropdown-item" to={`/useradotionrequests/${userLogin.info.userId}`}>
+                      <Link
+                        className="dropdown-item"
+                        to={`/useradotionrequests/${userLogin.info.userId}`}
+                      >
                         Adoption Requests
+                      </Link>
+                      <Link className="dropdown-item" to="/pendingRequests">
+                        Requests for your pets
                       </Link>
                       <Link className="dropdown-item" to="/messanger">
                         Messeges
@@ -103,11 +136,14 @@ function NavBar() {
                       <Link className="dropdown-item" to="/signout">
                         Log Out{" "}
                       </Link>
-                      {userLogin.info.userRole !== "USER" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole !== "USER" && <Link className="dropdown-item" to="/dashboard#">
-                        Dashboard{" "}
-                      </Link>}
-
+                      {userLogin.info.userRole !== "USER" && (
+                        <div className="dropdown-divider"></div>
+                      )}
+                      {userLogin.info.userRole !== "USER" && (
+                        <Link className="dropdown-item" to="/dashboard#">
+                          Dashboard{" "}
+                        </Link>
+                      )}
                     </div>
                   </li>
                 </ul>
