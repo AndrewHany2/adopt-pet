@@ -56,14 +56,9 @@ function AdoptRequest(props) {
       {!props.request.acceptedByAdmin && (
         <tbody>
           <tr>
-            <th scope="row">
-              {props.request.requestedUserId.email}{" "}
-              {props.request.acceptedByUser && (
-                <div class="alert alert-primary" role="alert">
-                  accepted by user and waiting for you
-                </div>
-              )}
-            </th>
+            <td>
+              {props.request.requestedUserId.email}
+            </td>
             <td>{props.request.petId.name}</td>
             <td>{props.request.petId.gender}</td>
             <td>{calculate_age(props.request.petId.dateOfBirth)}</td>

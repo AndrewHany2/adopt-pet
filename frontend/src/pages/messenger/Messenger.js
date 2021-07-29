@@ -118,7 +118,7 @@ export default function Messenger(props) {
             <div className="chatMenuWrapper">
               <div style={{ color: '#F9575C', fontSize: 'x-large', fontWeight: 'bold', borderBottom: '2px solid #F9BE4F', padding: '10px' }}>Chats</div>
               {conversations.map((c) => (
-                <div onClick={() => setCurrentChat(c)}>
+                <div key={c._id} onClick={() => setCurrentChat(c)}>
                   <Conversation
                     conversation={c}
                     currentUser={userLogin.info.userId}
@@ -133,7 +133,7 @@ export default function Messenger(props) {
                 <>
                   <div className="chatBoxTop">
                     {messages.map((m) => (
-                      <div ref={scrollRef}>
+                      <div key={m._id} ref={scrollRef}>
                         <Message
                           message={m}
                           own={m.sender === userLogin.info.userId}

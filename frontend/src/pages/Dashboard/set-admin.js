@@ -110,33 +110,33 @@ export default function SetAdmin() {
                     {search.data.firstName} {search.data.lastName}
                   </h5>
                 </div>
-                <ul class="list-group list-group-flush">
+                <ul className="list-group list-group-flush">
                   {search.data?.phone && (
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                       <strong>Phone:</strong> {search.data.phone}{" "}
                     </li>
                   )}
                   {search.data?.country && (
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                       <strong>Country:</strong> {search.data.country}
                     </li>
                   )}
                   {search.data?.city && (
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                       <strong>City:</strong> {search.data.city}
                     </li>
                   )}
                 </ul>
                 <div className="d-flex justify-content-center w-100">
                   {search.data.role === "USER" && (
-                    <div class="card-body">
+                    <div className="card-body">
                       <button className="btn btn-danger" onClick={makeAdmin}>
                         Make Admin
                       </button>
                     </div>
                   )}
                   {search.data.role === "ADMIN" && (
-                    <div class="card-body">
+                    <div className="card-body">
                       <button className="btn btn-danger" onClick={removeAdmin}>
                         Remove Admin
                       </button>

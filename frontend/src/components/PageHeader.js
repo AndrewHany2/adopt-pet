@@ -1,12 +1,10 @@
 import React from "react";
 import 'font-awesome/css/font-awesome.min.css';
 
-
-
 function PageHeader(props) {
-  return (
-    <header>
-        <div className="intro-2  overlay">
+    return (
+        <header>
+            <div className="intro-2  overlay">
                 <div className="full-bg-img">
                     <div className=" mask rgba-black-light flex-center">
                         <div className="container text-center white-text">
@@ -18,8 +16,8 @@ function PageHeader(props) {
                     </div>
                 </div>
             </div>
-    </header>
-  );
+        </header>
+    );
 }
 
 export default PageHeader;

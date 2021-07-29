@@ -6,16 +6,13 @@ import Counter from './../../components/Counter';
 import Slider from "../../components/Slider";
 import PageHeader from "../../components/PageHeader";
 
-
-
-
 function About() {
   return (
     <div>
-    <PageHeader title='About Us'/>
-    <AboutUs/>
-    <Counter/>
-    <Slider/>
+      <PageHeader title='About Us' />
+      <AboutUs />
+      <Counter />
+      <Slider />
     </div>
   );
 }

@@ -68,7 +68,7 @@ function UserInfo(props) {
               </table>
             </div>
           </div>
-          {/* <a class="me-4" style={{ margin: "1rem" }}> */}
+          {/* <a className="me-4" style={{ margin: "1rem" }}> */}
           <Link className="m-4" to={`/editprofile/${props.userInfo._id}`}>
             <button className="btn btn-lg btn-success">
               <i className="fa fa-pencil-square"></i>

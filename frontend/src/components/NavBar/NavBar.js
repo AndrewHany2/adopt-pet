@@ -125,10 +125,10 @@ function NavBar() {
                         className="dropdown-item"
                         to={`/useradotionrequests/${userLogin.info.userId}`}
                       >
-                        Adoption Requests
+                        Your Adoption Requests
                       </Link>
                       <Link className="dropdown-item" to="/pendingRequests">
-                        Requests for your pets
+                        Your Pets Requests
                       </Link>
                       <Link className="dropdown-item" to="/messanger">
                         Messeges

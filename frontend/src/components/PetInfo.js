@@ -1,5 +1,4 @@
 import "font-awesome/css/font-awesome.min.css";
-import { Carousel } from "react-bootstrap";
 
 function PetInfo(props) {
   // const userLogin = useSelector((state) => state.userLogin);
@@ -72,29 +71,11 @@ function PetInfo(props) {
                   className="col-12 col-md-4 text-center"
                   style={{ width: "300px" }}
                 >
-                  <Carousel>
-                    <Carousel.Item>
-                      <img
-                        className="border-irregular1 img-fluid w-100 myimg"
-                        src={props.petInfo.image}
-                        alt=""
-                      />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <img
-                        className="border-irregular1 img-fluid w-100 myimg"
-                        src="/resources/adoption1-185x185.jpg"
-                        alt="Third slide"
-                      />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <img
-                        className="border-irregular1 img-fluid w-100 myimg"
-                        src="/resources/adoption2-185x185.jpg"
-                        alt="Third slide"
-                      />
-                    </Carousel.Item>
-                  </Carousel>
+                  <img
+                    className="border-irregular1 img-fluid w-100 myimg"
+                    src={props.petInfo.image}
+                    alt=""
+                  />
                 </div>
                 <div className="text-center text-md-left col-12 col-md-8 col-lg-4 mt-4">
                   <div className="row">
@@ -157,7 +138,7 @@ function PetInfo(props) {
                               </button>
                             </div>
                             {success && (
-                              <div class="alert alert-primary" role="alert">
+                              <div className="alert alert-primary" role="alert">
                                 Adoption Request sent wait for response
                               </div>
                             )}
@@ -197,7 +178,7 @@ function PetInfo(props) {
                           </>
                         ) : (
                           <div className="col-sm-6 col-md-8">
-                            <div class="alert alert-danger" role="alert">
+                            <div className="alert alert-danger" role="alert">
                               Login to adopt
                             </div>
                           </div>

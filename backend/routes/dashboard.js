@@ -108,7 +108,7 @@ dashboard.get(
   authenticationAdmin(),
   async (req, res) => {
     try {
-      const result = await Pet.find({ status: "PENDING" }).populate(
+      const result = await Pet.find({ status: "PENDING" }).sort({ _id: -1 }).populate(
         "owner",
         "email"
       );
@@ -120,7 +120,7 @@ dashboard.get(
 );
 dashboard.get("/pendingApplications", verifyUser, async (req, res) => {
   try {
-    const result = await App.find({ status: "PENDING" })
+    const result = await App.find({ status: "PENDING" }).sort({ _id: -1 })
       .populate("requestedUserId", "email")
       .populate("petId", "email name gender dateOfBirth petType size image");
     res.status(200).json({ result });
@@ -150,10 +150,6 @@ dashboard.patch(
     try {
       const app = await App.findOne({ _id: req.params.id });
       app.acceptedByAdmin = true;
-      if (app.acceptedByAdmin && app.acceptedByUser) {
-        app.status = "ACCEPTED";
-      }
-      console.log(app);
       const result = await app.save();
       if (result) {
         res.status(200).json(result);

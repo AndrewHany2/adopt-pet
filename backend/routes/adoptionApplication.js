@@ -20,6 +20,15 @@ AdoptionApplication.get("/", async ({ query }, response) => {
   }
 });
 
+AdoptionApplication.get("/accepted-by-admin", verifyUser, async (request, response) => {
+  try {
+    const adoptionRequests = await Application.find({ status: 'PENDING', acceptedByAdmin: true }).sort({ _id: -1 }).populate("requestedUserId").populate("petId");
+    response.status(200).json({ result: adoptionRequests });
+  } catch (error) {
+    respopnse.status(500).json(error);
+  }
+});
+
 AdoptionApplication.post("/", async (req, res) => {
   try {
     const app = await new Application(req.body);
@@ -68,13 +77,11 @@ AdoptionApplication.patch("/acceptByUser/:id", verifyUser, async (req, res) => {
     if (app.acceptedByAdmin && app.acceptedByUser) {
       app.status = "ACCEPTED";
     }
-    console.log(app);
     const result = await app.save();
     if (result) {
       res.status(200).json(result);
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: err });
   }
 });

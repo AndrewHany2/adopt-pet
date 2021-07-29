@@ -36,7 +36,7 @@ export default function AdoptionRequests() {
       <DashboardNavbar />
       {req?.length ? (
         <div className="table-responsive">
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">Requested User</th>

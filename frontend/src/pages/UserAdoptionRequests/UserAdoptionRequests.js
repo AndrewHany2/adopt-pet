@@ -24,7 +24,7 @@ function UserAdoptionRequests({ match }) {
   } else {
     return (
       <>
-        {requests?.info && requests.info.map((request) => { return <RequestsInfo requests={request} /> })}
+        {requests?.info && requests.info.map((request) => { return <RequestsInfo key={request._id} requests={request} /> })}
       </>
     );
   }

@@ -40,6 +40,7 @@ petRouter.get("/", async (req, res, next) => {
     const list = await Pet.find(conditions)
       .limit(limit * 1)
       .skip((page - 1) * limit)
+      .sort({ _id: -1 })
       .exec();
     const count = await Pet.countDocuments(conditions);
     if (list)

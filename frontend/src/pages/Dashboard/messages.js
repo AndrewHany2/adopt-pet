@@ -46,7 +46,7 @@ export default function Messages(props) {
                 </div>
             ) : messages?.length > 0 ? (
                 <div className="table-responsive">
-                    <table class="table">
+                    <table className="table">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>

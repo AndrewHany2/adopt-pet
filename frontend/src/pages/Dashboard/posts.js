@@ -37,7 +37,7 @@ export default function Posts(props) {
       <DashboardNavbar />
       {pets?.length ? (
         <div className="table-responsive">
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">User</th>

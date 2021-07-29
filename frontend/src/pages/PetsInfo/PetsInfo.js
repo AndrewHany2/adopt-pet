@@ -238,7 +238,7 @@ function PetsInfo({ match, history }) {
                           </button>
                         </div>
                         {success && (
-                          <div class="alert alert-primary mt-4" role="alert">
+                          <div className="alert alert-primary mt-4" role="alert">
                             Adoption Request sent wait for response
                           </div>
                         )}
