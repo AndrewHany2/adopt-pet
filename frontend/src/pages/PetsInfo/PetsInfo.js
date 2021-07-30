@@ -50,7 +50,7 @@ function PetsInfo({ match, history }) {
   const userData = useSelector((state) => state.userData);
   const socket = useRef();
 
-  useEffect(() => socket.current = io("ws://localhost:8900"));
+  useEffect(() => socket.current = io("/"));
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
