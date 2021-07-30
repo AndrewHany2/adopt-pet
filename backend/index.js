@@ -65,6 +65,7 @@ app.use(cors());
 const path = require("path");
 
 app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use("/", express.static(path.join(__dirname, "/client")));
 app.use("/api/user", userRouter);
 app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);

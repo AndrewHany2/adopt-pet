@@ -36,7 +36,7 @@ function PetsCards({ pets }) {
                   width="360px"
                   height="360px"
                   className="border-irregular1 img-fluid"
-                  src={`../${pet.image}`}
+                  src={`${pet.image}`}
                   alt="a"
                 />
                 <div className="card-body">
