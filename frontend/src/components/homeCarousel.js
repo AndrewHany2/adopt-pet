@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function HomeCarouel() {
 
     return (
-        <Carousel fade>
+        <Carousel fade controls={false} indicators={false}>
             <Carousel.Item>
                 <img
                     className="d-block w-100"

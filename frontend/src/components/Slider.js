@@ -9,7 +9,7 @@ function Slider() {
                 <div className="container">
                     <h3 className="text-center clients">What our clients say
                     </h3>
-                    <Carousel id={'soliloquy-container-4985'}>
+                    <Carousel id={'soliloquy-container-4985'} controls={false} indicators={false}>
                         <Carousel.Item>
                             <div className="row">
                                 <div className="col-12" >
@@ -47,7 +47,7 @@ function Slider() {
                         </Carousel.Item>
                     </Carousel>
 
-                    <Carousel id={'soliloquy-container-4986'}>
+                    <Carousel id={'soliloquy-container-4986'} controls={false} indicators={false}>
                         <Carousel.Item>
                             <div className="row">
                                 <div className=" col-md-6" >

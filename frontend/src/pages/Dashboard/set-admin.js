@@ -71,8 +71,8 @@ export default function SetAdmin() {
       <DashboardNavbar />
 
       {userLogin.info.userRole === "SUPER_ADMIN" && (
-        <div className="row my-5 form-inline">
-          <div className="col-12 d-flex justify-content-center">
+        <div className="my-5 form-inline">
+          <div className="col-12 d-flex justify-content-center flex-wrap">
             <input
               className="form-control mr-sm-2"
               type="search"

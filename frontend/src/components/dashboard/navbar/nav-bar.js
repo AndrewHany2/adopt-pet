@@ -10,10 +10,11 @@ export default function DashboardNavbar() {
     <>
       <ul
         style={{
-          height: "50px",
+          // height: "50px",
           backgroundColor: "#F9575C",
-          lineHeight: "50px",
-          fontSize: "0.8rem"
+          lineHeight: "35px",
+          fontSize: "0.8rem",
+          padding:"6px 0px"
         }}
         className="nav-dashboard mt-4 mb-5 text-center mx-auto text-dark"
       >
