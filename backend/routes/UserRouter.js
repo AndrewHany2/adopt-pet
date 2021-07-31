@@ -8,161 +8,10 @@ const passport = require("passport");
 const facebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const upload = require("../helpers/multer");
-
-
-
-userRouter.use(passport.initialize());
-userRouter.use(passport.session());
-
-passport.use(
-  new facebookStrategy(
-    {
-      clientID: 5060833230611081,
-      clientSecret: "f3b7e15e534b0b4dc686b954c355b1a7",
-      callbackURL: "http://localhost:8000/api/user/login/facebook/callback",
-      profileFields: ["id", "displayName", "email", "first_name", "last_name"],
-    },
-
-    async function (accessToken, refreshToken, profile, done) {
-      //Check the DB to find a User with the profile.id
-      const user = await User.findOne(
-        {
-          facebookId: profile.id,
-          firstName: profile.name.givenName,
-          lastName: profile.name.familyName,
-        },
-        async function (err, user) {
-          //See if a User already exists with the Facebook ID
-          if (err) {
-            console.log(err); // handle errors!
-          }
-
-          if (user) {
-            const token = await generateToken(user._id);
-            let myUser = {
-              facebookId: profile.id,
-              token: token,
-              userId: user._id,
-              userRole: user.role,
-              petAdoptionRequests: user.petAdoptionRequests,
-            };
-            console.log(myUser);
-            done(null, myUser); //If User already exists login as stated on line 10 return User
-          } else {
-            //else create a new User
-            user = await new User({
-              facebookId: profile.id,
-              firstName: profile.name.givenName,
-              lastName: profile.name.familyName, //pass in the id and displayName params from Facebook
-            });
-            await user.save(async function (err) {
-              //Save User if there are no errors else redirect to login route
-              if (err) {
-                console.log(err); // handle errors!
-              } else {
-                const user = await User.findOne({
-                  facebookId: profile.id,
-                  firstName: profile.name.givenName,
-                  lastName: profile.name.familyName,
-                });
-                const token = await generateToken(user._id);
-                myUser = {
-                  facebookId: profile.id,
-                  token: token,
-                  userId: user._id,
-                  userRole: user.role,
-                  petAdoptionRequests: user.petAdoptionRequests,
-                };
-                console.log("saving user ...");
-                done(null, myUser);
-              }
-            });
-          }
-        }
-      );
-    }
-  )
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(
+  "250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com"
 );
-
-userRouter.get("/login/facebook", passport.authenticate("facebook"));
-
-userRouter.get(
-  "/login/facebook/callback",
-  passport.authenticate("facebook", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "http://localhost:3000/signin",
-  })
-);
-
-passport.serializeUser(function (user, cb) {
-  cb(null, user);
-});
-passport.deserializeUser(function (obj, cb) {
-  cb(null, obj);
-});
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID:
-        "714325331151-am2l8ga5p9kjh647rjaqf9lnhma5bg0g.apps.googleusercontent.com",
-      clientSecret: "TfI-HWOiXh4LFYG1bU4xm-Bc",
-      callbackURL: "/login/google/callback",
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      //get the user data from google
-      const newUser = {
-        googleId: profile.id,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        email: profile.emails[0].value,
-      };
-
-      try {
-        //find the user in our database
-        let user = await User.findOne({ googleId: profile.id });
-
-        if (user) {
-          //If user present in our database.
-          done(null, user);
-        } else {
-          // if user is not preset in our database save user data to database.
-          user = await User.create(newUser);
-          done(null, user);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  )
-);
-
-userRouter.get(
-  "/login/google",
-  passport.authenticate("google", {
-    scope: ["email", "profile"],
-  })
-);
-
-userRouter.get(
-  "/login/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "http://localhost:3000/signin",
-  }),
-  function (req, res) {
-    res.redirect("http://localhost:3000/");
-  }
-);
-
-// Used to stuff a piece of information into a cookie
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-// Used to decode the received cookie and persist session
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
 
 userRouter.post("/login", async (req, res, next) => {
   const { body } = req;
@@ -170,7 +19,11 @@ userRouter.post("/login", async (req, res, next) => {
     if (body.email && body.password) {
       const user = await User.findOne({ email: body.email });
       if (user) {
-        const match = await bcrypt.compare(body.password, user.password);
+        if (body.password) {
+          const match = await bcrypt.compare(body.password, user.password);
+        } else {
+          return res.status(400).json({ message: "password invalid" });
+        }
         if (match) {
           const token = await generateToken(user._id);
           res.status(200).json({
@@ -229,7 +82,7 @@ userRouter.delete("/delete/:id", verifyUser, async (req, res) => {
     return res.status(500).json(error);
   }
 });
-userRouter.get("/profile/:id",verifyUser, async (req, res) => {
+userRouter.get("/profile/:id", verifyUser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
@@ -238,18 +91,19 @@ userRouter.get("/profile/:id",verifyUser, async (req, res) => {
   }
 });
 
-userRouter.get("/",verifyUser, async ({ query }, res) => {
-  try{
-  if (query.email) {
-    const user = await User.findOne({ email: query.email });
-    return  res.status(200).json(user);
-  } else {
-    const user = await User.find({});
-    return res.status(200).json(user);
+userRouter.get("/", verifyUser, async ({ query }, res) => {
+  try {
+    if (query.email) {
+      const user = await User.findOne({ email: query.email });
+      return res.status(200).json(user);
+    } else {
+      const user = await User.find({});
+      return res.status(200).json(user);
+    }
+  } catch (err) {
+    return res.status(500).json(err);
   }
-} catch (err) {
-  return res.status(500).json(err);
-}});
+});
 
 userRouter.delete("/", async (req, res) => {
   try {
@@ -268,7 +122,7 @@ userRouter.delete("/", async (req, res) => {
 //   }
 // });
 
-userRouter.get("/:id",verifyUser, async (req, res) => {
+userRouter.get("/:id", verifyUser, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     return res.status(200).json(user);
@@ -278,7 +132,7 @@ userRouter.get("/:id",verifyUser, async (req, res) => {
   }
 });
 
-userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
+userRouter.put("/:id", upload, verifyUser, async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findOne({ _id: id });
@@ -289,16 +143,15 @@ userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
     const phone = req.body.phone || user.phone;
     const city = req.body.city || user.city;
     let image = user.image;
-    if(req.file){
-       image = `/images/${req.file.filename}`;
+    if (req.file) {
+      image = `/images/${req.file.filename}`;
     }
-    existingUser = await User.findOne({ email:email });
-    if(!existingUser){
+    existingUser = await User.findOne({ email: email });
+    if (!existingUser) {
       user.email = email;
-    }else{
-      res.status(400).json({message:"Email Alraedy Exists"})
+    } else {
+      res.status(400).json({ message: "Email Alraedy Exists" });
     }
-
 
     user.firstName = firstName;
     user.lastName = lastName;
@@ -309,7 +162,7 @@ userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
     user.phone = phone;
     user.image = image;
 
-     req.body.postedPets
+    req.body.postedPets
       ? user.postedPets.push(req.body.postedPets)
       : user.postedPets;
     req.body.adoptionRequests
@@ -323,7 +176,43 @@ userRouter.put("/:id",upload ,verifyUser,async (req, res, next) => {
   } catch (e) {
     next(e);
     return res.status(500).json(error);
+  }
+});
 
+userRouter.post("/googlelogin", async (req, res) => {
+  const { tokenId } = req.body;
+
+  const { payload } = await client.verifyIdToken({
+    idToken: tokenId,
+    audience:
+      "250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com",
+  });
+  const { given_name, email, picture, family_name } = payload;
+
+  const user = await User.findOne({ email });
+
+  if (user) {
+    const token = await generateToken(user._id);
+    res.status(200).json({
+      token: token,
+      userId: user._id,
+      userRole: user.role,
+      petAdoptionRequests: user.petAdoptionRequests,
+    });
+  } else {
+    const user = new User({
+      firstName: given_name,
+      lastName: family_name,
+      email: email,
+    });
+    const savedUser = await user.save((err, data) => {
+      console.log(data)
+      if (err) {
+        res.status(500).json({ message: "Something went wrong" });
+      } 
+    });
+    console.log(savedUser.data)
+    return res.status(201).json(savedUser);
   }
 });
 

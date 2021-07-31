@@ -3,8 +3,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import LoginFacebook from "./../../components/LoginFacebook";
-import LoginGoogle from "./../../components/LoginGoogle";
 import { useState } from "react";
 import Joi from "joi";
 

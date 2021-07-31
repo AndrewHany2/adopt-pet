@@ -1,14 +1,17 @@
 export const UserLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case "USER_LOGIN_REQUEST":
+    case "USER_LOGIN_GOOGLE_REQUEST":
       return { loading: true, ...state };
     case "USER_LOGIN_SUCCESS":
+      case "USER_LOGIN_GOOGLE_SUCCESS":
       return {
         loading: false,
         success: true,
         info: action.payload,
       };
     case "USER_LOGIN_FAIL":
+      case "USER_LOGIN_GOOGLE_FAIL":
       return { loading: false, error: action.payload };
       case "USER_LOGOUT":
         return {};

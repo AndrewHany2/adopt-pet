@@ -5,28 +5,28 @@ import FacebookLogin from 'react-facebook-login';
 
 function LoginFacebook() {
   
-// const responseFacebook = (response) => {
-//     return response;
-//   }
+const responseFacebook = (response) => {
+    return response;
+  }
   return (
     <>
-        <a className=" form-control theme-border btn mb-2 fb-btn font-weight-normal" href="http://localhost:8000/api/user/login/facebook/callback" role="button">
+        {/*<a className=" form-control theme-border btn mb-2 fb-btn font-weight-normal" href="http://localhost:8000/api/user/login/facebook/callback" role="button">
         <FontAwesomeIcon icon={faFacebook} className="mr-2" />
           Sign in with Facebook
         </a>
-         {/* <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
+         <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
                 <FontAwesomeIcon icon={faFacebook} className="mr-2" />
                 Sign In with Facebook
               </button> */}
-    {/* <FacebookLogin
+    { <FacebookLogin
         appId="5060833230611081"
         autoLoad={false}
         fields="name,email,picture"
         callback={responseFacebook}
-        cssClass="fb-btn form-control theme-border btn mb-2 fb-btn font-weight-normal"
+        cssClass="fb-btn form-control theme-border btn mb-2 font-weight-normal mx-3 mt-3"
         icon={<i className="fa fa-facebook" style={{marginLeft:'5px'}}></i>}
         textButton = "&nbsp;&nbsp;Sign In with Facebook"                                                                
-        /> */}
+        />}
   </>
   );
 }

@@ -16,9 +16,9 @@ function NavBar() {
           <ul className="nav navbar-nav">
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
-            <i>
-              <img src='/resources/theLogo.png' width="80px" />
-            </i>
+                <i>
+                  <img src="/resources/theLogo.png" width="80px" />
+                </i>
               </Link>
             </li>
           </ul>
@@ -37,35 +37,62 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul className="nav navbar-nav mx-auto nav-item-font">
               <li className="nav-item active ml-3">
-                <Link className="nav-link active nave-box" to="/">
+                <Link
+                  data-toggle="collapse"
+                  data-target="#navbarNavAltMarkup"
+                  className="nav-link active nave-box"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
-              <li className="nav-item ml-3">
+              <li
+                data-toggle="collapse"
+                data-target="#navbarNavAltMarkup"
+                className="nav-item ml-3"
+              >
                 <Link className="nav-link active nave-box" to="/pets/1">
                   Adobtion-Gallery
                 </Link>
               </li>
-              <li className="nav-item ml-3">
+              <li
+                data-toggle="collapse"
+                data-target="#navbarNavAltMarkup"
+                className="nav-item ml-3"
+              >
                 <Link className="nav-link active nave-box" to="/about">
                   About
                 </Link>
               </li>
-              <li className="nav-item ml-3">
+              <li
+                data-toggle="collapse"
+                data-target="#navbarNavAltMarkup"
+                className="nav-item ml-3"
+              >
                 <Link className="nav-link active nave-box" to="/contactus">
                   Contact
                 </Link>
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <Link className="nav-link active nave-box" to="/signin">
+                  <Link
+                    data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup"
+                    className="nav-link active nave-box"
+                    to="/signin"
+                  >
                     Sign In / Sign UP
                   </Link>
                 </li>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
-                  <Link className="nav-link active nave-box" to="/addPet">
+                  <Link
+                    data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup"
+                    className="nav-link active nave-box"
+                    to="/addPet"
+                  >
                     Add-Pet
                   </Link>
                 </li>
@@ -90,24 +117,51 @@ function NavBar() {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <Link className="dropdown-item" to={`/profile/${userLogin.info.userId}`}>
-
+                      <Link
+                        data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        className="dropdown-item"
+                        to={`/profile/${userLogin.info.userId}`}
+                      >
                         Profile
                       </Link>
-                      <Link  className="dropdown-item"  to={`/useradotionrequests/${userLogin.info.userId}`}>
+                      <Link
+                        data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        className="dropdown-item"
+                        to={`/useradotionrequests/${userLogin.info.userId}`}
+                      >
                         Adoption Requests
                       </Link>
-                      <Link  className="dropdown-item"  to="/messanger">
+                      <Link
+                        data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        className="dropdown-item"
+                        to="/messanger"
+                      >
                         Messeges
                       </Link>
-                      <Link className="dropdown-item" to="/signout">
+                      <Link
+                        data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        className="dropdown-item"
+                        to="/signout"
+                      >
                         Log Out{" "}
                       </Link>
-                      {userLogin.info.userRole !== "USER" && <div className="dropdown-divider"></div>}
-                      {userLogin.info.userRole !== "USER" && <Link className="dropdown-item" to="/dashboard#">
-                        Dashboard{" "}
-                      </Link>}
-
+                      {userLogin.info.userRole !== "USER" && (
+                        <div className="dropdown-divider"></div>
+                      )}
+                      {userLogin.info.userRole !== "USER" && (
+                        <Link
+                          data-toggle="collapse"
+                          data-target="#navbarNavAltMarkup"
+                          className="dropdown-item"
+                          to="/dashboard#"
+                        >
+                          Dashboard{" "}
+                        </Link>
+                      )}
                     </div>
                   </li>
                 </ul>

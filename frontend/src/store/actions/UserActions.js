@@ -48,6 +48,22 @@ export const Login = (credentials) => async (dispatch) => {
     });
   }
 };
+export const loginByGoogle = (tokenId) => async (dispatch) => {
+  try {
+    dispatch({ type: "USER_LOGIN_GOOGLE_REQUEST" });
+    const { data } = await axios.post('/api/user/googlelogin',{tokenId:tokenId});
+    window.localStorage.setItem("userInfo", JSON.stringify(data));
+    dispatch({ type: "USER_LOGIN_GOOGLE_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "USER_LOGIN_GOOGLE_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const RegisterUser = (userData) => async (dispatch) => {
   try {

@@ -7,6 +7,8 @@ import Joi from "joi";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Login } from "../../store/actions/UserActions";
+import LoginFacebook from "../../components/LoginFacebook";
+import LoginGoogle from "../../components/GoogleLogin/LoginGoogle";
 
 function SignIn(props) {
   const dispatch = useDispatch();
@@ -110,7 +112,7 @@ function SignIn(props) {
               </div>
             )}
             <form className="px-4 py-1 ">
-              <div className="form-group mt-5 mb-5">
+              <div className="form-group mt-3 mb-3">
                 <label htmlFor="login-email">Email address</label>
                 <input
                   type="email"
@@ -131,7 +133,7 @@ function SignIn(props) {
 
 
 
-              <div className="form-group  mt-5 mb-5">
+              <div className="form-group  mt-3 mb-3">
                 <label htmlFor="login-pss">Password</label>
                 <input
                   type="password"
@@ -171,7 +173,7 @@ function SignIn(props) {
 
                     type="button"
 
-                    className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-5 mt-3 theme-border font-weight-normal"
+                    className="btn btn-danger btn-submit mx-2 px-4 py-3 mb-2 mt-3 theme-border font-weight-normal"
                     onClick={login}
                   >
                     Sign In
@@ -179,21 +181,21 @@ function SignIn(props) {
                 </div>
               </div>
             </form>
-            {/* <div className="dropdown-divider p-1"></div>
-            <div className="col-md-12  mb-3">
+            <div className="dropdown-divider p-1"></div>
+            <div className="col-md-12  mb-2">
               <LoginFacebook />
               <LoginGoogle />
 
               
-              <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
+              {/* <button className="form-control theme-border btn mb-2 fb-btn font-weight-normal">
                 <FontAwesomeIcon icon={faFacebook} className="mr-2" />
                 Sign In with Facebook
               </button>
               <button className="form-control theme-border btn google-btn mb-2 font-weight-normal">
                 <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                 Sign In With Google
-              </button> 
-            </div> */}
+              </button>  */}
+            </div>
 
             {/* <div className="dropdown-divider p-1"></div> */}
 
