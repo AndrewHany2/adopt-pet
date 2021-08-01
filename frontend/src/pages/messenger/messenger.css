@@ -4,8 +4,10 @@
 }
 
 .chatMenu {
-  flex: 3;
-  overflow: scroll;
+  flex: 2;
+  /* overflow-y: scroll; */
+  border-right: 1px solid #ddd;
+
 }
 
 .chatMenuInput {
@@ -40,10 +42,10 @@
 
 .chatMessageInput {
   width: 80%;
-  height: 90px;
+  height: 3rem;
   padding: 10px;
   resize: none;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   border-top-left-radius: 10px;
   border-bottom-right-radius: 10px;
   outline: none;
@@ -63,14 +65,15 @@
 .noConversationText {
   position: absolute;
   top: 10%;
-  font-size: 50px;
+  font-size: 3vw;
   color: rgb(224, 220, 220);
   cursor: default;
+  left: 15%;
 }
 
 @media screen and (max-width: 768px) {
   .chatMenu {
-    flex: 1;
+    flex: 3;
   }
 
   .chatMenuInput {
@@ -84,4 +87,8 @@
   .chatOnline{
     flex: 1px;
   }
+  .messenger {
+    height: calc(150vh - 335px);
+    display: flex;
+}
 }

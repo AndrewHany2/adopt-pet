@@ -6,6 +6,8 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
+import { Scrollbars } from 'react-custom-scrollbars';
+
 
 export default function Messenger(props) {
 
@@ -115,6 +117,7 @@ export default function Messenger(props) {
       {userLogin.info ? (
         <div className="messenger">
           <div className="chatMenu">
+          <Scrollbars>
             <div className="chatMenuWrapper">
               <div style={{ color: '#F9575C', fontSize: 'x-large', fontWeight: 'bold', borderBottom: '2px solid #F9BE4F', padding: '10px' }}>Chats</div>
               {conversations.map((c) => (
@@ -126,6 +129,7 @@ export default function Messenger(props) {
                 </div>
               ))}
             </div>
+            </Scrollbars>
           </div>
           <div className="chatBox">
             <div className="chatBoxWrapper">
