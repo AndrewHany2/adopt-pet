@@ -1,7 +1,7 @@
 import React from "react";
-import {Link, useHistory} from 'react-router-dom'
-import {useSelector} from "react-redux"
-import { propTypes } from "react-bootstrap/esm/Image";
+import { Link } from 'react-router-dom'
+// import { useSelector } from "react-redux"
+// import { propTypes } from "react-bootstrap/esm/Image";
 
 function UserInfo(props) {
   // const requestStyles = {
@@ -13,19 +13,19 @@ function UserInfo(props) {
   //   color: "#fff",
   //   margin: "0 0 0 1rem",
   // };
-  const {push} = useHistory()
-const userLogin = useSelector((state)=>state.userLogin)
+  // const {push} = useHistory()
+  // const userLogin = useSelector((state)=>state.userLogin)
 
   return (
     <div className="container mb-5">
       <div className="row">
-          <div className="col-md-4">
+        <div className="col-md-4">
           <img src={
-            props.userInfo.image?
-            `${props.userInfo.image}`
-            : '/assets/person/noAvatar.png'
+            props.userInfo.image ?
+              `${props.userInfo.image}`
+              : '/assets/person/noAvatar.png'
           }
-             className="img-fluid about-img w-100 m-3" alt=""/>
+            className="img-fluid about-img w-100 m-3" alt="" />
 
           {/* <div style={{ margin: '2rem 0 0 6rem'}}>
             Adoption Request<label style={{    background: '#ef0707',
@@ -68,7 +68,7 @@ const userLogin = useSelector((state)=>state.userLogin)
               </table>
             </div>
           </div>
-          {/* <a class="me-4" style={{ margin: "1rem" }}> */}
+          {/* <a className="me-4" style={{ margin: "1rem" }}> */}
           <Link className="m-4" to={`/editprofile/${props.userInfo._id}`}>
             <button className="btn btn-lg btn-success">
               <i className="fa fa-pencil-square"></i>

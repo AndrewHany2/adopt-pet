@@ -12,18 +12,15 @@ const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(
   "250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com"
 );
+const fetch = require("node-fetch");
 
 userRouter.post("/login", async (req, res, next) => {
   const { body } = req;
   try {
     if (body.email && body.password) {
       const user = await User.findOne({ email: body.email });
-      if (user) {
-        if (body.password) {
-          const match = await bcrypt.compare(body.password, user.password);
-        } else {
-          return res.status(400).json({ message: "password invalid" });
-        }
+      if (user.password && user) {
+        match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
           res.status(200).json({
@@ -146,7 +143,9 @@ userRouter.put("/:id", upload, verifyUser, async (req, res, next) => {
     if (req.file) {
       image = `/images/${req.file.filename}`;
     }
-    existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({
+      $and: [{ email }, { email: { $not: { $eq: user.email } } }],
+    });
     if (!existingUser) {
       user.email = email;
     } else {
@@ -189,7 +188,7 @@ userRouter.post("/googlelogin", async (req, res) => {
   });
   const { given_name, email, picture, family_name } = payload;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOneAndUpdate({email}, {image:picture},{new:true})
 
   if (user) {
     const token = await generateToken(user._id);
@@ -204,16 +203,64 @@ userRouter.post("/googlelogin", async (req, res) => {
       firstName: given_name,
       lastName: family_name,
       email: email,
+      image: picture,
     });
-    const savedUser = await user.save((err, data) => {
-      console.log(data)
-      if (err) {
-        res.status(500).json({ message: "Something went wrong" });
-      } 
-    });
-    console.log(savedUser.data)
-    return res.status(201).json(savedUser);
+    const savedUser = await user.save();
+    if(savedUser){
+
+      console.log(savedUser)
+        const token = await generateToken(user._id);
+        res.status(200).json({
+            token: token,
+            userId: savedUser._id,
+            userRole: savedUser.role,
+            petAdoptionRequests: savedUser.petAdoptionRequests,
+          });
+      }
   }
+});
+
+userRouter.post("/facebooklogin", async (req, res) => {
+  const { accessToken, userID } = req.body;
+  const facebookData = await fetch(
+    `https://graph.facebook.com/${userID}?fields=email,name,picture.width(335).height(335)&access_token=${accessToken}`,
+    { method: "get" }
+  )
+  const data = await facebookData.json();
+  const { name, email, picture } = data;
+  let devide = name.split(" ");
+
+  const user = await User.findOneAndUpdate({email}, {image:picture.data.url},{new:true})
+
+  if (user) {
+
+    const token = await generateToken(user._id);
+    res.status(200).json({
+      token: token,
+      userId: user._id,
+      userRole: user.role,
+      petAdoptionRequests: user.petAdoptionRequests,
+    });
+  } else {
+    const user = new User({
+      firstName:devide[0],
+      lastName: devide[devide.length-1],
+      email: email,
+      image:picture.data.url,
+    });
+    const savedUser = await user.save();
+    if(savedUser){
+
+      console.log(savedUser)
+        const token = await generateToken(user._id);
+        res.status(200).json({
+            token: token,
+            userId: savedUser._id,
+            userRole: savedUser.role,
+            petAdoptionRequests: savedUser.petAdoptionRequests,
+          });
+      }
+    }
 });
 
 module.exports = userRouter;

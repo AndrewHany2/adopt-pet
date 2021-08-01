@@ -48,6 +48,7 @@ export const Login = (credentials) => async (dispatch) => {
     });
   }
 };
+
 export const loginByGoogle = (tokenId) => async (dispatch) => {
   try {
     dispatch({ type: "USER_LOGIN_GOOGLE_REQUEST" });
@@ -57,6 +58,24 @@ export const loginByGoogle = (tokenId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "USER_LOGIN_GOOGLE_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const loginByFacebook
+= (fbData) => async (dispatch) => {
+  try {
+    dispatch({ type: "USER_LOGIN_FACEBOOK_REQUEST" });
+    const {data}  = await axios.post('/api/user/facebooklogin',{accessToken:fbData.accessToken,userID:fbData.userID});
+    window.localStorage.setItem("userInfo", JSON.stringify(data));
+    dispatch({ type: "USER_LOGIN_FACEBOOK_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "USER_LOGIN_FACEBOOK_FAIL",
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

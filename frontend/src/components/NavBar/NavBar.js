@@ -2,9 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import React from "react";
 import "./NavBar.css";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+// import { faPaw } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function NavBar() {
@@ -17,7 +17,7 @@ function NavBar() {
             <li className="nav-item active">
               <Link className="nav-link nav-logo" to="/">
                 <i>
-                  <img src="/resources/theLogo.png" width="80px" />
+                  <img src="/resources/theLogo.png" width="80px" alt="logo" />
                 </i>
               </Link>
             </li>
@@ -37,64 +37,74 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul className="nav navbar-nav mx-auto nav-item-font">
               <li className="nav-item active ml-3">
-                <Link
+                <NavLink
                   data-toggle="collapse"
                   data-target="#navbarNavAltMarkup"
+                  exact
                   className="nav-link active nave-box"
+                  activeClassName="navbar-active"
                   to="/"
                 >
                   Home
-                </Link>
+                </NavLink>
               </li>
-              <li
-                data-toggle="collapse"
-                data-target="#navbarNavAltMarkup"
-                className="nav-item ml-3"
-              >
-                <Link className="nav-link active nave-box" to="/pets/1">
+              <li className="nav-item ml-3">
+                <NavLink
+                  data-toggle="collapse"
+                  data-target="#navbarNavAltMarkup"
+                  className="nav-link active nave-box"
+                  activeClassName="navbar-active"
+                  to="/pets/1"
+                >
                   Adobtion-Gallery
-                </Link>
+                </NavLink>
               </li>
-              <li
-                data-toggle="collapse"
-                data-target="#navbarNavAltMarkup"
-                className="nav-item ml-3"
-              >
-                <Link className="nav-link active nave-box" to="/about">
+              <li className="nav-item ml-3">
+                <NavLink
+                  data-toggle="collapse"
+                  data-target="#navbarNavAltMarkup"
+                  className="nav-link active nave-box"
+                  activeClassName="navbar-active"
+                  to="/about"
+                >
                   About
-                </Link>
+                </NavLink>
               </li>
-              <li
-                data-toggle="collapse"
-                data-target="#navbarNavAltMarkup"
-                className="nav-item ml-3"
-              >
-                <Link className="nav-link active nave-box" to="/contactus">
+              <li className="nav-item ml-3">
+                <NavLink
+                  data-toggle="collapse"
+                  data-target="#navbarNavAltMarkup"
+                  className="nav-link active nave-box"
+                  activeClassName="navbar-active"
+                  to="/contactus"
+                >
                   Contact
-                </Link>
+                </NavLink>
               </li>
               {!userLogin.success && (
                 <li className="nav-item ml-3 ml-lg-5">
-                  <Link
+                  <NavLink
                     data-toggle="collapse"
                     data-target="#navbarNavAltMarkup"
                     className="nav-link active nave-box"
+                    activeClassName="navbar-active"
                     to="/signin"
                   >
-                    Sign In / Sign UP
-                  </Link>
+                    Sign In
+                  </NavLink>
                 </li>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
-                  <Link
+                  <NavLink
                     data-toggle="collapse"
                     data-target="#navbarNavAltMarkup"
                     className="nav-link active nave-box"
+                    activeClassName="navbar-active"
                     to="/addPet"
                   >
                     Add-Pet
-                  </Link>
+                  </NavLink>
                 </li>
               )}
             </ul>
@@ -118,9 +128,9 @@ function NavBar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <Link
+                        className="dropdown-item"
                         data-toggle="collapse"
                         data-target="#navbarNavAltMarkup"
-                        className="dropdown-item"
                         to={`/profile/${userLogin.info.userId}`}
                       >
                         Profile
@@ -131,7 +141,15 @@ function NavBar() {
                         className="dropdown-item"
                         to={`/useradotionrequests/${userLogin.info.userId}`}
                       >
-                        Adoption Requests
+                        Your Adoption Requests
+                      </Link>
+                      <Link
+                        className="dropdown-item"
+                        data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        to="/pendingRequests"
+                      >
+                        Your Pets Requests
                       </Link>
                       <Link
                         data-toggle="collapse"

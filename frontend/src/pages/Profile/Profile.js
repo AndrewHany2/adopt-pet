@@ -17,7 +17,7 @@ function Profile() {
 
   useEffect(() => {
     dispatch(getProfile(id));
-  }, []);
+  }, [dispatch, id]);
 
 
   if (profileData.loading) {

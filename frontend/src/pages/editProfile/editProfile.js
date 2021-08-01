@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import FormData from "form-data";
 import axios from "axios";
 import './editProfile.css'
@@ -14,15 +14,15 @@ const EditProfile = () => {
 
 
 
-  const [fname, setFName] = useState();
-  const [lname, setLName] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
-  const [country, setCountry] = useState();
-  const [city, setCity] = useState();
+  const [fname, setFName] = useState(profileData.userInfo.firstName);
+  const [lname, setLName] = useState(profileData.userInfo.lastName);
+  const [email, setEmail] = useState(profileData.userInfo.email);
+  const [phone, setPhone] = useState(profileData.userInfo.phone);
+  const [country, setCountry] = useState(profileData.userInfo.country);
+  const [city, setCity] = useState(profileData.userInfo.city);
   const [img, setImg] = useState();
   const form_data = new FormData();
-  const[emailError,setEmailError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleImageUpload = e => {
     setImg(e.target.files[0])
@@ -76,32 +76,32 @@ const EditProfile = () => {
     if (img) {
       form_data.append('image', img);
     }
-    const userInfo =JSON.parse(window.localStorage.getItem("userInfo"))
-  
-  
-      const header = {
-        headers: {
-          Authorization: userInfo.token 
-        }
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
+
+
+    const header = {
+      headers: {
+        Authorization: userInfo.token
       }
-     axios.put(`/api/user/${id}`, form_data,header)
-           .then(response => {
-            window.location.href=`/profile/${id}`
-             console.log("Data: ", response.data);
-           }).catch(error => {setEmailError( error.response.data.message)
-             console.error('Something went wrong!', error.response.data.message);
-           });
+    }
+    axios.put(`/api/user/${id}`, form_data, header)
+      .then(response => {
+        window.location.href = `/profile/${id}`
+      }).catch(error => {
+        setEmailError(error.response.data.message)
+        console.error('Something went wrong!', error.response.data.message);
+      });
 
-}
+  }
 
 
-    return <>
+  return <>
     <div className="container" style={{ minHeight: "24vw" }}>
-    {emailError && (
-  <div className="alert alert-danger d-block mt-4">
-    {emailError}
-  </div>
-)}
+      {emailError && (
+        <div className="alert alert-danger d-block mt-4">
+          {emailError}
+        </div>
+      )}
       <form className="row">
         <div className="col-md-5">
           <div className="m-4"
@@ -131,7 +131,8 @@ const EditProfile = () => {
               <img
                 className="editImg"
                 ref={uploadedImage}
-                src={profileData.userInfo?.image}
+                src={profileData.userInfo?.image ? profileData.userInfo?.image : '/assets/person/noAvatar.png'}
+                alt="user"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -145,17 +146,17 @@ const EditProfile = () => {
           </div>
         </div>
         <div className="col-md-7 my-2">
-          <input type="text" name="firstName" placeholder="First name" value={profileData.userInfo.firstName}
+          <input type="text" name="firstName" placeholder="First name" value={fname}
             onChange={handleChangeFName} className="d-block w-75 mx-auto my-3" />
-          <input type="text" name="lastName" value={profileData.userInfo.lastName}
+          <input type="text" name="lastName" value={lname}
             onChange={handleChangeLName} className="d-block w-75 mx-auto my-3" placeholder="Last name" />
-          <input type="text" name="email" value={profileData.userInfo.email}
+          <input type="text" name="email" value={email}
             onChange={handleChangeEM} className="d-block w-75 mx-auto my-3" placeholder="Email" />
-          <input type="text" name="phone" value={profileData.userInfo.phone}
+          <input type="text" name="phone" value={phone}
             onChange={handleChangePhone} className="d-block w-75 mx-auto my-3" placeholder="Phone" />
-          <input type="text" name="country" value={profileData.userInfo.country}
+          <input type="text" name="country" value={country}
             onChange={handleChangeCountry} className="d-block w-75 mx-auto my-3" placeholder="Country" />
-          <input type="text" name="city" value={profileData.userInfo.city}
+          <input type="text" name="city" value={city}
             onChange={handleChangeCity} className="d-block w-75 mx-auto my-3" placeholder="City" />
 
 

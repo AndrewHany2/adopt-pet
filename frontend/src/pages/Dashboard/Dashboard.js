@@ -72,7 +72,7 @@ export default function Dashboard() {
     })
       .then((response) => response.json())
       .then((data) => {
-   
+
       });
     const hideUser = { ...search };
     hideUser.isData = false;
@@ -80,7 +80,7 @@ export default function Dashboard() {
   };
   const removeAdmin = async () => {
     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
-  
+
 
     fetch(`/api/admin/assignrole/${search.data._id}?role=USER`, {
       method: "PATCH",
@@ -88,7 +88,7 @@ export default function Dashboard() {
     })
       .then((response) => response.json())
       .then((data) => {
-  
+
       });
     const hideUser = { ...search };
     hideUser.isData = false;
@@ -138,33 +138,33 @@ export default function Dashboard() {
                     {search.data.firstName} {search.data.lastName}
                   </h5>
                 </div>
-                <ul class="list-group list-group-flush">
+                <ul className="list-group list-group-flush">
                   {search.data?.phone && (
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                       <strong>Phone:</strong> {search.data.phone}{" "}
                     </li>
                   )}
                   {search.data?.country && (
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                       <strong>Country:</strong> {search.data.country}
                     </li>
                   )}
                   {search.data?.city && (
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                       <strong>City:</strong> {search.data.city}
                     </li>
                   )}
                 </ul>
                 <div className="d-flex justify-content-center w-100">
                   {search.data.role === "USER" && (
-                    <div class="card-body">
+                    <div className="card-body">
                       <button className="btn btn-danger" onClick={makeAdmin}>
                         Make Admin
                       </button>
                     </div>
                   )}
                   {search.data.role === "ADMIN" && (
-                    <div class="card-body">
+                    <div className="card-body">
                       <button className="btn btn-danger" onClick={removeAdmin}>
                         Remove Admin
                       </button>
@@ -181,7 +181,7 @@ export default function Dashboard() {
           <div className="col-12 col-md-6">
             <h2>Post</h2>
             <div className="table-responsive">
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th scope="col">User</th>
@@ -212,7 +212,7 @@ export default function Dashboard() {
           <div className="col-12 col-md-6">
             <h2>AdoptionRequest</h2>
             <div className="table-responsive">
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th scope="col">Requested User</th>

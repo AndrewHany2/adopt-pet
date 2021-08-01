@@ -25,10 +25,7 @@
     border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
     border: 2px solid #675444;
     outline: none;
-    padding: 5px 2px;
-}
-#AdoptForm input[type="date"]{
-    width: 150px;
+    padding: 5px 7px;
 }
 
 #AdoptForm textarea{

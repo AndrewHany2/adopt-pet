@@ -11,6 +11,14 @@ import LoginFacebook from "../../components/LoginFacebook";
 import LoginGoogle from "../../components/GoogleLogin/LoginGoogle";
 
 function SignIn(props) {
+
+  const handleEnter = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      login();
+    }
+  };
+
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const registerData = useSelector((state) => state.registerData);
@@ -48,7 +56,7 @@ function SignIn(props) {
     let myErrors = { ...errors };
     myErrors.email = validate.error ? validate.error.details[0].message : null;
     setErrors(myErrors);
-  
+
   };
 
   const validatePassword = (e) => {
@@ -61,7 +69,7 @@ function SignIn(props) {
       ? validate.error.details[0].message
       : null;
     setErrors(myErrors);
- 
+
   };
 
   const login = () => {
@@ -81,7 +89,7 @@ function SignIn(props) {
   };
   useEffect(() => {
     if (userLogin.success === true) {
-      props.history.push(`/profile/${userLogin.info.userId}`);
+      userLogin.info.userRole === 'USER' ? props.history.push(`/`) : props.history.push(`/dashboard`);
     }
   });
 
@@ -112,7 +120,7 @@ function SignIn(props) {
               </div>
             )}
             <form className="px-4 py-1 ">
-              <div className="form-group mt-3 mb-3">
+              <div className="form-group mt-3 mb-4">
                 <label htmlFor="login-email">Email address</label>
                 <input
                   type="email"
@@ -121,6 +129,7 @@ function SignIn(props) {
                   placeholder="email@example.com"
                   value={credentials.email}
                   onChange={validateEmail}
+                  onKeyUp={handleEnter}
                 />
               </div>
 
@@ -133,7 +142,7 @@ function SignIn(props) {
 
 
 
-              <div className="form-group  mt-3 mb-3">
+              <div className="form-group  mt-4 mb-4">
                 <label htmlFor="login-pss">Password</label>
                 <input
                   type="password"
@@ -142,6 +151,7 @@ function SignIn(props) {
                   placeholder="Password"
                   value={credentials.password}
                   onChange={validatePassword}
+                  onKeyUp={handleEnter}
                 />
               </div>
 
@@ -182,7 +192,7 @@ function SignIn(props) {
               </div>
             </form>
             <div className="dropdown-divider p-1"></div>
-            <div className="col-md-12  mb-2">
+            <div className="col-md-12  mb-5">
               <LoginFacebook />
               <LoginGoogle />
 

@@ -16,25 +16,26 @@ function MergePetWithRequest(props) {
           objs = mergedObjects;
           objs.push(mergedObj);
           setMergedObjects(objs);
- 
-  
+
+
 
 
         }
       }
     }
-   
-    
-    
+
+
+
   }, [mergedObjects]);
 
-  
+
 
   return (
     <>
- 
-     {mergedObjects ? (
-        mergedObjects.map((obj) => { return <RequestsInfo key={obj._id} info={obj} />
+
+      {mergedObjects ? (
+        mergedObjects.map((obj) => {
+          return <RequestsInfo key={obj._id} info={obj} />
         })
       ) : (
         <h1 className="alert alert-primary">No Requests Yet</h1>

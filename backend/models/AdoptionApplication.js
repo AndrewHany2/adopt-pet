@@ -22,6 +22,14 @@ const AdoptionApplicationSchema = new mongoose.Schema(
       default: "PENDING",
       enum: ["ACCEPTED", "REJECTED", "PENDING"],
     },
+    acceptedByUser: {
+      type: Boolean,
+      default: false,
+    },
+    acceptedByAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

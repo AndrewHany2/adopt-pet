@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PetsCards from "../../components/PetsCards";
 import PetsFilter from "../../components/PetsFilter";
@@ -12,14 +12,15 @@ function PetsGallery(props) {
   const pets = useSelector((state) => state.pets);
   const currentPage = props.match.params.page || 1;
 
+  const handlePetsList = useCallback((filterByGender, filterByPet, filterByAge) => {
+    dispatch(getPets(currentPage, filterByGender, filterByPet, filterByAge, 8));
+  }, [currentPage, dispatch]);
+
   useEffect(() => {
     handlePetsList();
-  }, [currentPage]);
+  }, [handlePetsList]);
 
-  const handlePetsList = (filterByGender, filterByPet, filterByAge) => {
-    console.log(filterByGender, filterByPet, filterByAge);
-    dispatch(getPets(currentPage, filterByGender, filterByPet, filterByAge, 8));
-  };
+
   return (
     <div>
       <div className="container-fluid backgroundImg p-4">

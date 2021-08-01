@@ -29,26 +29,6 @@ function LoginGoogle(props) {
       });
     return (
     <>
-
-        {/* <a className="form-control theme-border btn google-btn mb-2 font-weight-normal" 
-            href="http://localhost:8000/api/user/login/google/callback">
-                <FontAwesomeIcon icon={faGoogle} className="mr-2" />
-                Sign In With Google
-        </a> */}
-        
-     {/* <GoogleLogin
-    clientId="250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com"
-    onSuccess={responseSuccessGoogle}
-    onFailure={responseFailureGoogle}
-    cookiePolicy={'single_host_origin'}
-    className="form-control theme-border btn google-btn mb-2 font-weight-normal mx-3 d-flex justify-content-centre"
-    icon={false}
-    >
-        <i className="fa fa-google" style={{ marginLeft: '5px' }}/> 
-        <span>&nbsp;&nbsp;Sign In with Google</span>                                                               
-    </GoogleLogin> */}
-
-
     <GoogleLogin
     clientId="250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com"
     render={renderProps => (

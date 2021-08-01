@@ -1,65 +1,79 @@
-#contactUs .contact{
-    border: 2px solid #fbf4de; 
+#contactUs .contact {
+    border: 2px solid #fbf4de;
     position: relative;
 }
+
 #contactUs .fa-envelope,
 #contactUs .fa-location-arrow,
 #contactUs .fa-phone,
 #contactUs .fa-heart {
- background-color: #fff;
- color: #F9575C;
- font-size: 60px;
- width: 100px;
- position: absolute;
- top:-30px;
- right: 0;
- left: 0;
- margin: auto;
- text-align: center;
- transition: all .3s ease;
+    background-color: #fff;
+    color: #F9575C;
+    font-size: 60px;
+    width: 100px;
+    position: absolute;
+    top: -30px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    transition: all .3s ease;
 }
+
 #contactUs .contact:hover .fa-envelope,
 #contactUs .contact:hover .fa-location-arrow,
 #contactUs .contact:hover .fa-phone,
-#contactUs .contact:hover .fa-heart{
- top: -20px;
+#contactUs .contact:hover .fa-heart {
+    top: -20px;
 }
-#contactUs .iconMadia{
-color:  #675444;
-transition: all .3s ease;
+
+#contactUs .iconMadia {
+    color: #675444;
+    transition: all .3s ease;
 }
+
 #contactUs .iconMadia .fa-facebook-square:hover,
 #contactUs .iconMadia .fa-twitter:hover,
-#contactUs .iconMadia .fa-google-plus:hover{
- color: #F9BE4F;
+#contactUs .iconMadia .fa-google-plus:hover {
+    color: #F9BE4F;
 }
-.contactForm{
- background-color:#FBF4DE;
- border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
- padding: 40px;
+
+.contactForm {
+    background-color: #FBF4DE;
+    border-radius: 155px 45px 225px 75px/15px 125px 15px 155px;
+    padding: 40px;
 }
-#contactUs input[type="text"],#contactUs input[type="email"]{
- border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
- width: 100%;
- border: 2px solid #675444;
- outline: none;
- padding: 5px 15px;
+
+#contactUs input[type="text"],
+#contactUs input[type="email"] {
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    width: 100%;
+    border: 2px solid #675444;
+    outline: none;
+    padding: 5px 15px;
 }
-#contactUs textarea{
- border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
- width: 100%;
- border: 2px solid #675444;
- outline: none;
- padding: 5px 15px;
+
+#contactUs textarea {
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    width: 100%;
+    border: 2px solid #675444;
+    outline: none;
+    padding: 5px 15px;
 }
-#contactUs input[type="button"]{
- border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
- outline: none;
- color: #fff;
- background-color: #F9575C;
- border:none;
- transition: all .3s ease;
+
+#contactUs input[type="submit"] {
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px;
+    outline: none;
+    color: #fff;
+    background-color: #F9575C;
+    border: none;
+    transition: all .3s ease;
 }
-#contactUs .sendMessage:hover{
- background-color: #F9BE4F;
+
+#contactUs .sendMessage:hover {
+    background-color: #F9BE4F;
+}
+
+.textAreaNoReaize {
+    resize: none;
 }

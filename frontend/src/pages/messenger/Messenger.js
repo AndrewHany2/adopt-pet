@@ -8,6 +8,14 @@ import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 
 export default function Messenger(props) {
+
+  const handleEnter = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      sendMessage();
+    }
+  };
+
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -24,7 +32,7 @@ export default function Messenger(props) {
   });
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("/");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -67,8 +75,7 @@ export default function Messenger(props) {
     getMessages();
   }, [currentChat]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const sendMessage = async () => {
     const message = {
       sender: userLogin.info.userId,
       text: newMessage,
@@ -92,6 +99,11 @@ export default function Messenger(props) {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    sendMessage();
   };
 
   useEffect(() => {
@@ -104,9 +116,9 @@ export default function Messenger(props) {
         <div className="messenger">
           <div className="chatMenu">
             <div className="chatMenuWrapper">
-              <div style={{color: '#F9575C', fontSize: 'x-large', fontWeight: 'bold', borderBottom: '2px solid #F9BE4F', padding: '10px'}}>Chats</div>
+              <div style={{ color: '#F9575C', fontSize: 'x-large', fontWeight: 'bold', borderBottom: '2px solid #F9BE4F', padding: '10px' }}>Chats</div>
               {conversations.map((c) => (
-                <div onClick={() => setCurrentChat(c)}>
+                <div key={c._id} onClick={() => setCurrentChat(c)}>
                   <Conversation
                     conversation={c}
                     currentUser={userLogin.info.userId}
@@ -121,7 +133,7 @@ export default function Messenger(props) {
                 <>
                   <div className="chatBoxTop">
                     {messages.map((m) => (
-                      <div ref={scrollRef}>
+                      <div key={m._id} ref={scrollRef}>
                         <Message
                           message={m}
                           own={m.sender === userLogin.info.userId}
@@ -134,6 +146,7 @@ export default function Messenger(props) {
                       className="chatMessageInput"
                       placeholder="write something..."
                       onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyUp={handleEnter}
                       value={newMessage}
                     ></textarea>
                     <Button className="chatSubmitButton ml-4" onClick={handleSubmit}>
