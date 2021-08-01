@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const util = require('util')
 const signTokenPromiseBased = util.promisify(jwt.sign)
 const verifyTokenPromiseBased = util.promisify(jwt.verify)
-const secret = process.env.SECRET||"MEARNSTACK";
+const secret = process.env.JWT_SECRET||"MEARNSTACK";
 
 const generateToken=(id)=>{
     return signTokenPromiseBased({id:id},secret)
