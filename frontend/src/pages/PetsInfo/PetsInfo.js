@@ -8,30 +8,26 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { io } from "socket.io-client";
 
 function PetsInfo({ match, history }) {
-
   let age_now;
 
   const calculate_age = (dob1) => {
     let today = new Date();
-    let birthDate = new Date(dob1);  // create a date object directly from `dob1` argument
+    let birthDate = new Date(dob1); // create a date object directly from `dob1` argument
     age_now = today.getFullYear() - birthDate.getFullYear();
     let m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age_now--;
     }
-    if (age_now > 0)
-      return `${age_now} year/s`;
-    if (m > 0)
-      return `${m} month/s`;
+    if (age_now > 0) return `${age_now} year/s`;
+    if (m > 0) return `${m} month/s`;
 
     let Difference_In_Time = today.getTime() - birthDate.getTime();
     let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
     return `${Difference_In_Days.toFixed(0)} day/s`;
+  };
 
-  }
-
-  const handleEnter = event => {
+  const handleEnter = (event) => {
     if (event.keyCode === 13) {
       event.preventDefault();
       sendMessage();
@@ -50,7 +46,7 @@ function PetsInfo({ match, history }) {
   const userData = useSelector((state) => state.userData);
   const socket = useRef();
 
-  useEffect(() => socket.current = io("/"));
+  useEffect(() => (socket.current = io("/")));
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -67,9 +63,7 @@ function PetsInfo({ match, history }) {
         setLoading(false);
         setSuccess(true);
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   const sendMessage = async () => {
     const checkCoversation = await axios.get(
@@ -174,7 +168,7 @@ function PetsInfo({ match, history }) {
                       style={{ width: "300px" }}
                     >
                       <img
-                        className="border-irregular1 img-fluid w-100 myimg"
+                        className="border-irregular1 img-fluid w-100"
                         src={pet.info.image}
                         alt=""
                       />
@@ -194,7 +188,8 @@ function PetsInfo({ match, history }) {
                         <div className="col-sm-6">
                           <ul className="list-unstyled pet-adopt-info">
                             <li className="h7">
-                              Age: <span>{calculate_age(pet.info.dateOfBirth)}</span>
+                              Age:{" "}
+                              <span>{calculate_age(pet.info.dateOfBirth)}</span>
                             </li>
                           </ul>
                         </div>
@@ -238,7 +233,10 @@ function PetsInfo({ match, history }) {
                           </button>
                         </div>
                         {success && (
-                          <div className="alert alert-primary mt-4" role="alert">
+                          <div
+                            className="alert alert-primary mt-4"
+                            role="alert"
+                          >
                             Adoption Request sent wait for response
                           </div>
                         )}

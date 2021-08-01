@@ -2,36 +2,43 @@ import axios from "axios";
 const baseURL = "/api/pets";
 
 export const getPets =
-  (currentPage, filterByGender, filterByPet, filterByAge, limit) =>
-    async (dispatch) => {
-      let list = "";
-      try {
-        dispatch({ type: "PET_LIST_REQUEST" });
-        if (filterByPet || filterByGender || filterByAge) {
-          const { data } = await axios.get(
-            `${baseURL}?gender=${filterByGender}&petType=${filterByPet}&age=${filterByAge}&page=${currentPage}&status=ACCEPTED`
-          );
-          list = data;
-        } else {
-          const { data } = await axios.get(
-            `${baseURL}?page=${currentPage}&limit=${limit}&status=ACCEPTED`
-          );
-          list = data;
-        }
-        dispatch({
-          type: "PET_LIST_SUCCESS",
-          payload: list,
-        });
-      } catch (error) {
-        dispatch({
-          type: "PET_LIST_FAIL",
-          payload:
-            error.response && error.response.data.message
-              ? error.response.data.message
-              : error.message,
-        });
+  (
+    currentPage,
+    filterByGender,
+    filterByPet,
+    filterByAge,
+    filterByVaccinated,
+    limit
+  ) =>
+  async (dispatch) => {
+    let list = "";
+    try {
+      dispatch({ type: "PET_LIST_REQUEST" });
+      if (filterByPet || filterByGender || filterByAge || filterByVaccinated) {
+        const { data } = await axios.get(
+          `${baseURL}?gender=${filterByGender}&petType=${filterByPet}&age=${filterByAge}&page=${currentPage}&vaccinated=${filterByVaccinated}&status=ACCEPTED`
+        );
+        list = data;
+      } else {
+        const { data } = await axios.get(
+          `${baseURL}?page=${currentPage}&limit=${limit}&status=ACCEPTED`
+        );
+        list = data;
       }
-    };
+      dispatch({
+        type: "PET_LIST_SUCCESS",
+        payload: list,
+      });
+    } catch (error) {
+      dispatch({
+        type: "PET_LIST_FAIL",
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const getPetInfo = (id) => async (dispatch) => {
   try {

@@ -29,9 +29,9 @@ function UserAdoptionRequests({ match }) {
     );
   }else{
     return (
-      <div className="d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
-        <h1 style={{color:"#F9575C"}}>No Adoption Requests Yet</h1>
-      </div>
+      <div className="alert alert-info w-50 my-5 mx-auto text-center display-4 p-0" style={{ height: '350px', lineHeight: '350px' }}>
+      No Adoption Requests Yet
+  </div>
     );
   }
 }

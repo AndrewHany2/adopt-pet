@@ -14,7 +14,7 @@ function PendingRequests(props) {
         },
       };
       const response = await axios.get(
-        `/api/adoptionRequest/accepted-by-admin`,
+        `/api/adoptionRequest/accepted-by-admin?userId=${userInfo.userId}`,
         header
       );
       setRequests(response.data.result);
@@ -61,7 +61,7 @@ function PendingRequests(props) {
             <th scope="col">Name</th>
             <th scope="col">email</th>
             <th scope="col">User Image</th>
-            <th scope="col">image</th>
+            <th scope="col">Accept</th>
             <th scope="col">Decline</th>
           </tr>
         </thead>
