@@ -22,7 +22,7 @@ AdoptionApplication.get("/", async ({ query }, response) => {
 
 AdoptionApplication.get("/accepted-by-admin", verifyUser, async (request, response) => {
   try {
-    const adoptionRequests = await Application.find({ status: 'PENDING', acceptedByAdmin: true }).sort({ _id: -1 }).populate("requestedUserId").populate("petId");
+    const adoptionRequests = await Application.find({ status: 'PENDING', ownerUserId: request.query.userId, acceptedByAdmin: true }).sort({ _id: -1 }).populate("requestedUserId").populate("petId");
     response.status(200).json({ result: adoptionRequests });
   } catch (error) {
     respopnse.status(500).json(error);
