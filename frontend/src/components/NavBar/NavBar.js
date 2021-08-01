@@ -82,17 +82,30 @@ function NavBar() {
                 </NavLink>
               </li>
               {!userLogin.success && (
-                <li className="nav-item ml-3 ml-lg-5">
-                  <NavLink
-                    data-toggle="collapse"
-                    data-target="#navbarNavAltMarkup"
-                    className="nav-link active nave-box"
-                    activeClassName="navbar-active"
-                    to="/signin"
-                  >
-                    Sign In
-                  </NavLink>
-                </li>
+                <>
+                  <li className="nav-item ml-3 ml-lg-5">
+                    <NavLink
+                      data-toggle="collapse"
+                      data-target="#navbarNavAltMarkup"
+                      className="nav-link active nave-box"
+                      activeClassName="navbar-active"
+                      to="/signin"
+                    >
+                      Sign In
+                    </NavLink>
+                  </li>
+                  <li className="nav-item ml-3">
+                    <NavLink
+                      data-toggle="collapse"
+                      data-target="#navbarNavAltMarkup"
+                      className="nav-link active nave-box"
+                      activeClassName="navbar-active"
+                      to="/signup"
+                    >
+                      Sign Up
+                    </NavLink>
+                  </li>
+                </>
               )}
               {userLogin.success && (
                 <li className="nav-item ml-3">
