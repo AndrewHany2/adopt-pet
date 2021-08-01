@@ -27,6 +27,15 @@ petRouter.get("/", async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 8;
     delete queries.limit;
     delete queries.page;
+    const age = req.query.age;
+    delete queries.age;
+
+    let youngDate = new Date();
+    youngDate.setFullYear(youngDate.getFullYear() - 2);
+    let oldDate = new Date();
+    oldDate.setFullYear(oldDate.getFullYear() - 5);
+    let seniorDate = new Date();
+    seniorDate.setFullYear(seniorDate.getFullYear() - 15);
     let conditions = {};
     for (i of Object.keys(queries)) {
       if (queries[i] !== "") {
@@ -37,10 +46,33 @@ petRouter.get("/", async (req, res, next) => {
         }
       }
     }
+    switch (age) {
+      case "young":
+        conditions.dateOfBirth = {
+          $gte: youngDate,
+        };
+
+        break;
+      case "old":
+        conditions.dateOfBirth = {
+          $gte: oldDate,
+          $lte: youngDate,
+        };
+
+        break;
+      case "senior":
+        conditions.dateOfBirth = {
+          $gte: seniorDate,
+          $lte: oldDate,
+        };
+        break;
+      default:
+        break;
+    }
     const list = await Pet.find(conditions)
       .limit(limit * 1)
       .skip((page - 1) * limit)
-      .sort({ _id: -1 })
+      .sort({ updatedAt: -1 })
       .exec();
     const count = await Pet.countDocuments(conditions);
     if (list)
@@ -50,6 +82,7 @@ petRouter.get("/", async (req, res, next) => {
         currentPage: page,
       });
   } catch (err) {
+    console.log(err);
     next(err);
   }
 });
