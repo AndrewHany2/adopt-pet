@@ -5,9 +5,11 @@ function PetsFilter(props) {
   const [filterByGender, setFilterByGender] = useState("");
   const [filterByPet, setFilterByPet] = useState([]);
   const [filterByAge, setFilterByAge] = useState("");
+  const [filterByVaccinated, setFilterByVaccinated] = useState("");
   const [kindClicked, setKindClicked] = useState(false);
   const [genderClicked, setGenderClicked] = useState(false);
   const [ageClicked, setAgeClicked] = useState(false);
+  const [vaccinatedClicked, setVaccinatedClicked] = useState(false);
 
   useEffect(() => {
     props.history.push("/pets/1");
@@ -57,6 +59,19 @@ function PetsFilter(props) {
         >
           Age
         </button>
+        <button
+          className={`btn btn-primary ${vaccinatedClicked ? "myActive" : ""}`}
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseExample4"
+          aria-expanded="false"
+          aria-controls="collapseExample4"
+          onClick={() => {
+            setVaccinatedClicked(!vaccinatedClicked);
+          }}
+        >
+          Vaccinated
+        </button>
       </p>
       <div
         className="collapse pb-3"
@@ -74,7 +89,12 @@ function PetsFilter(props) {
                   let tempArr = [...filterByPet];
                   tempArr.push("cat");
                   setFilterByPet(tempArr);
-                  props.getPets(filterByGender, tempArr, filterByAge);
+                  props.getPets(
+                    filterByGender,
+                    tempArr,
+                    filterByAge,
+                    filterByVaccinated
+                  );
                 } else {
                   const index = filterByPet.findIndex(
                     (element) => element === "cat"
@@ -82,7 +102,12 @@ function PetsFilter(props) {
                   let tempArr = [...filterByPet];
                   tempArr.splice(index, 1);
                   setFilterByPet(tempArr);
-                  props.getPets(filterByGender, tempArr, filterByAge);
+                  props.getPets(
+                    filterByGender,
+                    tempArr,
+                    filterByAge,
+                    filterByVaccinated
+                  );
                 }
               }}
             />
@@ -100,7 +125,12 @@ function PetsFilter(props) {
                   let tempArr = [...filterByPet];
                   tempArr.push("dog");
                   setFilterByPet(tempArr);
-                  props.getPets(filterByGender, tempArr, filterByAge);
+                  props.getPets(
+                    filterByGender,
+                    tempArr,
+                    filterByAge,
+                    filterByVaccinated
+                  );
                 } else {
                   const index = filterByPet.findIndex(
                     (element) => element === "dog"
@@ -108,7 +138,12 @@ function PetsFilter(props) {
                   let tempArr = [...filterByPet];
                   tempArr.splice(index, 1);
                   setFilterByPet(tempArr);
-                  props.getPets(filterByGender, tempArr, filterByAge);
+                  props.getPets(
+                    filterByGender,
+                    tempArr,
+                    filterByAge,
+                    filterByVaccinated
+                  );
                 }
               }}
             />
@@ -133,10 +168,20 @@ function PetsFilter(props) {
                 className="custom-control-input"
                 onChange={(e) => {
                   if (e.target.checked) {
-                    props.getPets("male", filterByPet, filterByAge);
+                    props.getPets(
+                      "male",
+                      filterByPet,
+                      filterByAge,
+                      filterByVaccinated
+                    );
                     setFilterByGender("male");
                   } else {
-                    props.getPets("", filterByPet, filterByAge);
+                    props.getPets(
+                      "",
+                      filterByPet,
+                      filterByAge,
+                      filterByVaccinated
+                    );
                     setFilterByGender("");
                   }
                 }}
@@ -153,10 +198,20 @@ function PetsFilter(props) {
                 className="custom-control-input"
                 onChange={(e) => {
                   if (e.target.checked) {
-                    props.getPets("female", filterByPet, filterByAge);
+                    props.getPets(
+                      "female",
+                      filterByPet,
+                      filterByAge,
+                      filterByVaccinated
+                    );
                     setFilterByGender("female");
                   } else {
-                    props.getPets("", filterByPet, filterByAge);
+                    props.getPets(
+                      "",
+                      filterByPet,
+                      filterByAge,
+                      filterByVaccinated
+                    );
                     setFilterByGender("");
                   }
                 }}
@@ -172,7 +227,12 @@ function PetsFilter(props) {
                 name="customRadio"
                 className="custom-control-input"
                 onChange={(e) => {
-                  props.getPets("", filterByPet, filterByAge);
+                  props.getPets(
+                    "",
+                    filterByPet,
+                    filterByAge,
+                    filterByVaccinated
+                  );
                   setFilterByGender("");
                 }}
               />
@@ -192,7 +252,12 @@ function PetsFilter(props) {
           className="card card-body border-irregular1"
           onChange={(e) => {
             setFilterByAge(e.target.value);
-            props.getPets(filterByGender, filterByPet, e.target.value);
+            props.getPets(
+              filterByGender,
+              filterByPet,
+              e.target.value,
+              filterByVaccinated
+            );
           }}
         >
           <div>
@@ -254,6 +319,55 @@ function PetsFilter(props) {
                 htmlFor="customRadioInline4"
               >
                 All
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="collapse pb-3"
+        id="collapseExample4"
+        style={{ width: "50%", margin: "0px auto" }}
+      >
+        <div
+          className="card card-body border-irregular1"
+          onChange={(e) => {
+            if (e.target.checked) {
+              setFilterByVaccinated(e.target.value);
+              props.getPets(
+                filterByGender,
+                filterByPet,
+                filterByAge,
+                e.target.value
+              );
+            } else {
+              setFilterByVaccinated("");
+            }
+          }}
+        >
+          <div>
+            <div className="custom-control custom-radio custom-control-inline">
+              <input
+                type="radio"
+                id="vaccinatedYes"
+                name="vaccinated"
+                className="custom-control-input"
+                value="yes"
+              />
+              <label className="custom-control-label" htmlFor="vaccinatedYes">
+                Yes
+              </label>
+            </div>
+            <div className="custom-control custom-radio custom-control-inline">
+              <input
+                type="radio"
+                id="vaccinatedNo"
+                name="vaccinated"
+                className="custom-control-input"
+                value="no"
+              />
+              <label className="custom-control-label" htmlFor="vaccinatedNo">
+                No
               </label>
             </div>
           </div>

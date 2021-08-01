@@ -12,14 +12,26 @@ function PetsGallery(props) {
   const pets = useSelector((state) => state.pets);
   const currentPage = props.match.params.page || 1;
 
-  const handlePetsList = useCallback((filterByGender, filterByPet, filterByAge) => {
-    dispatch(getPets(currentPage, filterByGender, filterByPet, filterByAge, 8));
-  }, [currentPage, dispatch]);
+  const handlePetsList = useCallback(
+    (filterByGender, filterByPet, filterByAge, filterByVaccinated) => {
+      console.log(currentPage);
+      dispatch(
+        getPets(
+          currentPage,
+          filterByGender,
+          filterByPet,
+          filterByAge,
+          filterByVaccinated,
+          8
+        )
+      );
+    },
+    [currentPage, dispatch]
+  );
 
   useEffect(() => {
     handlePetsList();
   }, [handlePetsList]);
-
 
   return (
     <div>

@@ -105,10 +105,11 @@
   right: 40%;
 }
 .myimg {
-  width: 200px; /* width of container */
-  height: 200px; /* height of container */
+  width: 200px;
+  height: 200px;
+  /*
   object-fit: cover;
-  object-position: 50% 10%; /* try 20px 10px */
+  object-position: 10% 10%;  */
 }
 @media only screen and (max-width: 900px) {
   .adoptionFont {
