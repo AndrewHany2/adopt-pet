@@ -47,26 +47,25 @@ petRouter.get("/", async (req, res, next) => {
       }
     }
     switch (age) {
+
       case "young":
         conditions.dateOfBirth = {
           $gte: youngDate,
         };
-
         break;
+
       case "old":
         conditions.dateOfBirth = {
           $gte: oldDate,
           $lte: youngDate,
         };
-
         break;
+
       case "senior":
         conditions.dateOfBirth = {
           $gte: seniorDate,
           $lte: oldDate,
         };
-        break;
-      default:
         break;
     }
     const list = await Pet.find(conditions)

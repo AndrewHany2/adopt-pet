@@ -14,7 +14,6 @@ function PetsGallery(props) {
 
   const handlePetsList = useCallback(
     (filterByGender, filterByPet, filterByAge, filterByVaccinated) => {
-      console.log(currentPage);
       dispatch(
         getPets(
           currentPage,

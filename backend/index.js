@@ -67,21 +67,22 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 
 const root = path.join(__dirname, "client");
 
-app.use(express.static(root));
-app.get("*", (req, res) => {
-  res.sendFile("index.html", { root });
-});
-
 app.use("/api/user", userRouter);
 app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/admin", dashboard);
 app.use("/api/adoptionRequest", application);
-app.use("/api/contactus", contactUsRouter)
+app.use("/api/contactus", contactUsRouter);
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err });
 });
+
+app.use(express.static(root));
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root });
+});
+
 server.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);
 });

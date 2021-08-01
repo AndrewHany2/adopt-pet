@@ -12,7 +12,7 @@ export default function Home() {
     const dispatch = useDispatch();
     const pets = useSelector((state) => state.pets);
     useEffect(() => {
-        dispatch(getPets("", "", "", "", 4));
+        dispatch(getPets("", "", "", "", "", 4));
     }, [dispatch]);
     return (
         <>
