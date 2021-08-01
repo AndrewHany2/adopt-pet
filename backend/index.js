@@ -9,6 +9,7 @@ const messageRoute = require("./routes/messages");
 const dashboard = require("./routes/dashboard");
 const application = require("./routes/adoptionApplication");
 const contactUsRouter = require("./routes/ContactUs");
+const path = require('path');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 8000;
@@ -62,10 +63,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const path = require("path");
-
 app.use("/images", express.static(path.join(__dirname, "/images")));
-app.use("/", express.static(path.join(__dirname, "/client")));
+
+const root = path.join(__dirname, "client");
+
+app.use(express.static(root));
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root });
+});
+
 app.use("/api/user", userRouter);
 app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);
