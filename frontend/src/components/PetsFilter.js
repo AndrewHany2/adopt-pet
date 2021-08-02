@@ -15,7 +15,10 @@ function PetsFilter(props) {
     props.history.push("/pets/1");
   }, [props.history, filterByGender, filterByPet, filterByAge]);
   return (
-    <div className={`bg-light-custom  border-irregular1 pt-2`}>
+    <div
+      id="responsive-filter"
+      className="bg-light-custom  border-irregular1 pt-2"
+    >
       <p
         className="m-0 pb-2"
         style={{ display: "flex", justifyContent: "space-around" }}
