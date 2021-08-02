@@ -13,13 +13,13 @@ function AdoptRequest(props) {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age_now--;
     }
-    if (age_now > 0) return `${age_now} year/s`;
-    if (m > 0) return `${m} month/s`;
+    if (age_now > 0) return `${age_now} Hear`;
+    if (m > 0) return `${m} Month`;
 
     let Difference_In_Time = today.getTime() - birthDate.getTime();
     let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
-    return `${Difference_In_Days.toFixed(0)} day/s`;
+    return `${Difference_In_Days.toFixed(0)} Day`;
   };
 
   const handleAccept = () => {
