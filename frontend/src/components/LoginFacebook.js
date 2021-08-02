@@ -49,10 +49,10 @@ function LoginFacebook() {
         autoLoad={false}
         fields="name,email,picture"
         callback={responseFacebook}
-        cssClass="my-facebook-button-class form-control theme-border btn ml-2 fb-btn font-weight-normal"
+        cssClass="my-facebook-button-class form-control theme-border btn ml-2 fb-btn font-weight-normal mb-3"
         icon="fa-facebook"
         textButton=" Sign in with Facebook"
-      />,
+      />
     </>
   );
 }

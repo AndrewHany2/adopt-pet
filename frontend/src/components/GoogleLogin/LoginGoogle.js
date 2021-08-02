@@ -32,13 +32,13 @@ function LoginGoogle(props) {
     <GoogleLogin
     clientId="250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com"
     render={renderProps => (
-      <button className="form-control theme-border btn google-btn mb-2 font-weight-normal mx-3" onClick={renderProps.onClick} disabled={renderProps.disabled}><i className="fa fa-google" style={{ marginLeft: '5px' }}/> Sign In with Google</button>
+      <button className="form-control theme-border btn google-btn mb-2 font-weight-normal mx-3 mb-3" onClick={renderProps.onClick} disabled={renderProps.disabled}><i className="fa fa-google" style={{ marginLeft: '5px' }}/> Sign In with Google</button>
     )}
     buttonText="Login"
     onSuccess={responseSuccessGoogle}
     onFailure={responseFailureGoogle}
     cookiePolicy={'single_host_origin'}
-  />,
+  />
 
   </>
 

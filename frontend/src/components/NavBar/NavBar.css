@@ -25,3 +25,15 @@
   background-color: #F9575C !important;
   border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
 }
+@media screen and (min-width: 1024px){
+  .collapse {
+      display: block;
+      height: auto !important;
+      visibility: visible;
+    }
+    .collapsing{
+      position: relative;
+      height: unset !important;
+      overflow: hidden;
+    }
+}
