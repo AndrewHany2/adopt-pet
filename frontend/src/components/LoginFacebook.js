@@ -1,9 +1,9 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
-import {loginByFacebook} from "../store/actions/UserActions"
-import {useDispatch , useSelector} from "react-redux"
+import { loginByFacebook } from "../store/actions/UserActions"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import {useEffect} from "react"
+import { useEffect } from "react"
 
 
 
@@ -11,18 +11,18 @@ function LoginFacebook() {
   const { push } = useHistory()
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-const responseFacebook = (response) => {
+  const responseFacebook = (response) => {
 
-    dispatch(loginByFacebook({accessToken:response.accessToken,userID:response.userID}))
+    dispatch(loginByFacebook({ accessToken: response.accessToken, userID: response.userID }))
 
-      return response;
+    return response;
+  }
+
+  useEffect(() => {
+    if (userLogin.success === true) {
+      push(`/profile/${userLogin.info.userId}`);
     }
-
-    useEffect(() => {
-      if (userLogin.success === true) {
-       push(`/profile/${userLogin.info.userId}`);
-      }
-    });
+  });
   return (
     <>
       {/* <a className=" form-control theme-border btn mb-2 fb-btn font-weight-normal" href="http://localhost:8000/api/user/login/facebook/callback" role="button">
@@ -44,15 +44,15 @@ const responseFacebook = (response) => {
         /> */}
 
 
-<FacebookLogin
-    appId="1452614855116764"
-    autoLoad={false}
-    fields="name,email,picture"
-    callback={responseFacebook}
-    cssClass="my-facebook-button-class form-control theme-border btn ml-2 fb-btn font-weight-normal"
-    icon="fa-facebook"
-    textButton=" Login By Facebook"
-  />,
+      <FacebookLogin
+        appId="1452614855116764"
+        autoLoad={false}
+        fields="name,email,picture"
+        callback={responseFacebook}
+        cssClass="my-facebook-button-class form-control theme-border btn ml-2 fb-btn font-weight-normal"
+        icon="fa-facebook"
+        textButton=" Sign in with Facebook"
+      />,
     </>
   );
 }

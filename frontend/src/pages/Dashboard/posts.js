@@ -5,7 +5,7 @@ import DashboardNavbar from "../../components/dashboard/navbar/nav-bar";
 import { Spinner } from "react-bootstrap";
 
 export default function Posts(props) {
-  const [pets, setPets] = useState([]);
+  const [pets, setPets] = useState(null);
 
   useEffect(() => {
     if (!window.localStorage.getItem("userInfo")) {
@@ -35,39 +35,44 @@ export default function Posts(props) {
   return (
     <>
       <DashboardNavbar />
-      {pets?.length ? (
-        <div className="table-responsive">
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">User</th>
-                <th scope="col">Name-pet</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Type</th>
-                <th scope="col">Vaccinated</th>
-                <th scope="col">Size</th>
-                <th scope="col">image</th>
-                <th scope="col">Accept</th>
-                <th scope="col">Decline</th>
-              </tr>
-            </thead>
-            {pets?.map((pet) => {
-              return (
-                <PostDashboard
-                  key={pet._id}
-                  pet={pet}
-                  handleClick={handleClick}
-                />
-              );
-            })}
-          </table>
-        </div>
-      ) : (
+      {!pets ? (
         <div className="text-center mt-4 mb-5">
           <span>Loading Post Requests.. &nbsp;&nbsp;</span>
           <Spinner animation="grow" variant="warning" />
         </div>
-      )}
+      ) :
+        pets?.length > 0 ? (
+          <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">User</th>
+                  <th scope="col">Name-pet</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Vaccinated</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">image</th>
+                  <th scope="col">Accept</th>
+                  <th scope="col">Decline</th>
+                </tr>
+              </thead>
+              {pets?.map((pet) => {
+                return (
+                  <PostDashboard
+                    key={pet._id}
+                    pet={pet}
+                    handleClick={handleClick}
+                  />
+                );
+              })}
+            </table>
+          </div>
+        ) : (
+          <div className="alert alert-info w-50 my-5 mx-auto text-center p-0" style={{ height: '350px', lineHeight: '350px', fontSize: '22pt' }}>
+            No Posts Requests
+          </div>
+        )}
     </>
   );
 }

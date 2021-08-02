@@ -8,9 +8,11 @@
   box-shadow: inset 0 0 0 1000px rgb(41 41 41 / 42%);
   background-color: #e9ecef;
 }
+
 .myFont {
   font-family: "Quicksand", sans-serif;
 }
+
 .adoptionFont {
   color: white;
   font-weight: bold;
@@ -18,6 +20,7 @@
   letter-spacing: 3px;
   font-size: 4rem;
 }
+
 .homeFont {
   color: white;
   font-weight: bold;
@@ -25,35 +28,43 @@
   letter-spacing: 1px;
   font-size: 0.8rem;
 }
+
 .headFont {
   font-weight: 700;
   line-height: 1.2;
   color: #808080;
   font-size: 3rem;
 }
+
 .bodyFont {
   line-height: 1.6;
   font-weight: 400;
   font-family: "Open Sans", sans-serif;
   color: #808080;
 }
+
 .adopt-card {
   transition: all 0.3s ease-in-out;
 }
+
 .bg-light-custom {
   background: #fbf4de !important;
 }
+
 .border-irregular1 {
   border-radius: 155px 45px 225px 75px/15px 125px 15px 155px !important;
 }
+
 .card {
   padding: 15px !important;
   border: 0px !important;
 }
+
 .btn-primary {
   border-color: #f9575c !important;
   background: #f9575c !important;
 }
+
 .btn {
   border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
   font-family: "Quicksand", sans-serif !important;
@@ -61,20 +72,25 @@
   font-weight: bold !important;
   font-size: 1rem !important;
 }
+
 .card-animate:hover {
   bottom: 15px;
 }
+
 .btn:hover {
   background-color: #f9be4f !important;
   border-color: #f9be4f !important;
 }
+
 .myActive {
   background-color: #f9be4f !important;
   border-color: #f9be4f !important;
 }
+
 .page-item {
   background-color: #f9be4f !important;
 }
+
 .page-link {
   color: white !important;
   background-color: #f9be4f !important;
@@ -83,12 +99,15 @@
   font-weight: 700;
   border: 1px solid #fff;
 }
+
 .page-link:hover {
   background-color: #f9575c !important;
 }
+
 .pagination-active {
   background-color: #f9575c !important;
 }
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   display: inline-block;
@@ -98,40 +117,47 @@
   background-color: #000;
   border-radius: 50%;
 }
+
 .carousel-control-prev {
   left: 40%;
 }
+
 .carousel-control-next {
   right: 40%;
 }
+
 .myimg {
-  width: 200px;
-  height: 200px;
-  /*
   object-fit: cover;
-  object-position: 10% 10%;  */
+  object-position: 50% 10%;
 }
+
 @media only screen and (max-width: 900px) {
   .adoptionFont {
     font-size: 3rem;
   }
+
   .homeFont {
     font-size: 0.8rem;
   }
+
   .headFont {
     font-size: 2rem;
   }
 }
+
 @media only screen and (max-width: 730px) {
   .adoptionFont {
     font-size: 2rem;
   }
+
   .homeFont {
     font-size: 0.5rem;
   }
+
   .headFont {
     font-size: 1.5rem;
   }
+
   .bodyFont {
     font-size: 0.8rem;
   }

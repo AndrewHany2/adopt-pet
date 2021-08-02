@@ -21,17 +21,32 @@ function UserAdoptionRequests({ match }) {
         <LoadingScreen></LoadingScreen>
       </div>
     );
-  } else if(requests?.success && requests.info[0]?._id ) {
+  } else if (requests?.success && requests.info[0]?._id) {
     return (
-      <>
-        {requests?.info && requests.info.map((request) => { return <RequestsInfo key={request._id} requests={request} /> })}
-      </>
+      <div className="table-responsive user-adoption-request">
+        <table className="table my-5">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Pet</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Age</th>
+              <th scope="col">Vaccinated</th>
+              <th scope="col">Size</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {requests?.info && requests.info.map((request) => { return <RequestsInfo key={request._id} requests={request} /> })}
+          </tbody>
+        </table>
+      </div>
     );
-  }else{
+  } else {
     return (
       <div className="alert alert-info w-50 my-5 mx-auto text-center display-4 p-0" style={{ height: '350px', lineHeight: '350px' }}>
-      No Adoption Requests Yet
-  </div>
+        No Adoption Requests Yet
+      </div>
     );
   }
 }
