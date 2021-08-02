@@ -70,7 +70,7 @@ function NavBar() {
                   About
                 </NavLink>
               </li>
-              <li className="nav-item ml-3">
+              <li className="nav-item ml-3 mr-lg-5">
                 <NavLink
                   data-toggle="collapse"
                   data-target="#navbarNavAltMarkup"
@@ -94,7 +94,7 @@ function NavBar() {
                       Sign In
                     </NavLink>
                   </li>
-                  <li className="nav-item ml-3">
+                  <li className="nav-item ml-3 ml-lg-1">
                     <NavLink
                       data-toggle="collapse"
                       data-target="#navbarNavAltMarkup"
