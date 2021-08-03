@@ -209,15 +209,15 @@ function SignIn(props) {
 
             {/* <div className="dropdown-divider p-1"></div> */}
 
-            {/* <p className="text-inverse text-center mb-2">
+            <p className="text-inverse text-center mb-4">
               <Link
                 className="active"
-                to="<?= base_url() ?>auth/login"
+                to="/sendresetemail"
                 data-abc="true"
               >
                 Forgot Password ?
               </Link>
-            </p> */}
+            </p>
           </div>
         </div>
       </div>

@@ -180,7 +180,7 @@ userRouter.put("/:id", upload, verifyUser, async (req, res, next) => {
 
 userRouter.post("/googlelogin", async (req, res) => {
   const { tokenId } = req.body;
-
+try{
   const { payload } = await client.verifyIdToken({
     idToken: tokenId,
     audience:
@@ -217,11 +217,14 @@ userRouter.post("/googlelogin", async (req, res) => {
             petAdoptionRequests: savedUser.petAdoptionRequests,
           });
       }
+  }}catch(error){
+    res.status(500).json({message:error})
   }
 });
 
 userRouter.post("/facebooklogin", async (req, res) => {
   const { accessToken, userID } = req.body;
+  try{
   const facebookData = await fetch(
     `https://graph.facebook.com/${userID}?fields=email,name,picture.width(335).height(335)&access_token=${accessToken}`,
     { method: "get" }
@@ -260,6 +263,8 @@ userRouter.post("/facebooklogin", async (req, res) => {
             petAdoptionRequests: savedUser.petAdoptionRequests,
           });
       }
+    }}catch(error){
+      res.status(500).json({message:error})
     }
 });
 

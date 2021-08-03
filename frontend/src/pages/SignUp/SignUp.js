@@ -340,7 +340,7 @@ function SignUp(props) {
                 )}
               </div>
               <div className="form-group ml-4">
-                <div className="form-check">
+                {/* <div className="form-check">
                   <input
                     className="form-check-input theme-border"
                     type="checkbox"
@@ -349,7 +349,7 @@ function SignUp(props) {
                   <label className="form-check-label" htmlFor="invalidCheck">
                     Agree to terms and conditions
                   </label>
-                </div>
+                </div> */}
                 <div className="text-center my-4">
                   <button
                     type="button"
