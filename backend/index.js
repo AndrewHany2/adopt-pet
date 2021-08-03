@@ -11,6 +11,7 @@ const application = require("./routes/adoptionApplication");
 const contactUsRouter = require("./routes/ContactUs");
 const path = require('path');
 const cors = require('cors');
+const resetPasswordRouter = require("./routes/ResetPasswordRouter");
 
 const PORT = process.env.PORT || 8000;
 
@@ -68,6 +69,7 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 const root = path.join(__dirname, "client");
 
 app.use("/api/user", userRouter);
+app.use("/api/resetPassword", resetPasswordRouter);
 app.use("/api/pets", petRouter);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);

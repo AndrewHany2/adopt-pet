@@ -27,6 +27,8 @@ import Messages from "./pages/Dashboard/messages";
 import SetAdmin from "./pages/Dashboard/set-admin";
 import NotFound from "./pages/NotFound/NotFound";
 import PendingRequests from "./pages/PendingRequests/PendingRequests";
+import SendResetEmail from "./pages/SendResetEmail";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
         <Route path="/signout" component={SignOut}></Route>
         <Route path="/editprofile" component={EditProfile}></Route>
         <Route path="/pendingRequests" component={PendingRequests}></Route>
+        <Route path="/sendresetemail" component={SendResetEmail}></Route>
+        <Route path="/password-reset/:id/:token" component={ResetPassword}></Route>
 
         <Route
           path="/useradotionrequests/:id"
