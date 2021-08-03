@@ -301,10 +301,10 @@ function PetsInfo({ match, history }) {
                 </ul>
                 <p style={{ display: "block" }}>{pet.info.description}</p>
               </div>
-              <div className="alert alert-primary mt-5 p-4" role="alert">
-                <div style={{ color: "white" }}>
+              <div className="mt-5 mb-5 p-4" role="alert" style={{ color: "black",backgroundColor: "#fbf4de", borderColor: "#fbf4de", borderRadius: "12px",}}>
+                <div>
                   <p className="h3">Adoption Rules</p>
-                  <p style={{ color: "white" }}>
+                  <p>
                     Elit uasi quidem minus id omnis a nibh fusce mollis imperdie
                     tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas
                     ellus ac sodales felis tiam non metus. lorem ipsum dolor sit

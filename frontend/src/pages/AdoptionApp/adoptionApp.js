@@ -18,10 +18,10 @@ function AdoptionApp() {
             style={{ color: "#f9575c", fontSize: "4vw" }}
           ></i>
         </div>
-        <div className="adoptionFont myFont">Adoption</div>
+        <div className="adoptionFont myFont">Add-Pet</div>
         <div className="homeFont myFont">
           <span>HOME {">"}</span>
-          <span style={{ color: "#cecece" }}>ADOPTION</span>
+          <span style={{ color: "#cecece" }}>ADD-PET</span>
         </div>
       </div>
       <AdoptionForm />
