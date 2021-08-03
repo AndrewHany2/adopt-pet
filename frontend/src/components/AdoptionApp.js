@@ -15,7 +15,7 @@ function AdoptionForm({ history }) {
     }
   };
 
-  const [label, setLabel] = useState('Choose File');
+  const [label, setLabel] = useState('Choose Image');
   const [pet, setpet] = useState({
     name: "",
     gender: "",
@@ -184,7 +184,7 @@ function AdoptionForm({ history }) {
                 />
 
                 <Form.File
-                  className="mt-3"
+                  className="mt-3 choose-img-pet"
                   id="custom-file-translate-scss"
                   name="image"
                   required

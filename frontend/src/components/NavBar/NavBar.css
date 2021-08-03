@@ -15,7 +15,10 @@
   font-size: 3rem;
   color: #F9575C;
 }
-
+a.nav-link.active.nave-box {
+  padding-left: 10px;
+  margin-bottom: 3px;
+}
 .nave-box:hover {
   background-color: #F9575C !important;
   border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;

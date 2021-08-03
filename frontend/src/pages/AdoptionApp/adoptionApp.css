@@ -52,3 +52,11 @@
 #AdoptForm .sendMessage:hover{
     background-color: #F9BE4F;
 }
+.choose-img-pet .custom-file-label{
+    border-radius: 355px 45px 225px 75px/15px 225px 15px 255px !important;
+    border: 2px solid #675444 !important;
+}
+.choose-img-pet .custom-file-label::after {
+    background-color: #f9575ce3 !important;
+    color: #fbf4de !important;
+}
