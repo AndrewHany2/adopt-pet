@@ -19,7 +19,10 @@ userRouter.post("/login", async (req, res, next) => {
   try {
     if (body.email && body.password) {
       const user = await User.findOne({ email: body.email });
-      if (user.password && user) {
+      if (!user) {
+        if (user.password && user) {
+          return res.status(400).json({ message: "Email Does not Exist" });
+        }
         match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
@@ -180,92 +183,94 @@ userRouter.put("/:id", upload, verifyUser, async (req, res, next) => {
 
 userRouter.post("/googlelogin", async (req, res) => {
   const { tokenId } = req.body;
-try{
-  const { payload } = await client.verifyIdToken({
-    idToken: tokenId,
-    audience:
-      "250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com",
-  });
-  const { given_name, email, picture, family_name } = payload;
-
-  const user = await User.findOneAndUpdate({email}, {image:picture},{new:true})
-
-  if (user) {
-    const token = await generateToken(user._id);
-    res.status(200).json({
-      token: token,
-      userId: user._id,
-      userRole: user.role,
-      petAdoptionRequests: user.petAdoptionRequests,
+  try {
+    const { payload } = await client.verifyIdToken({
+      idToken: tokenId,
+      audience:
+        "250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com",
     });
-  } else {
-    const user = new User({
-      firstName: given_name,
-      lastName: family_name,
-      email: email,
-      image: picture,
-    });
-    const savedUser = await user.save();
-    if(savedUser){
+    const { given_name, email, picture, family_name } = payload;
 
-      console.log(savedUser)
+    const user = await User.findOneAndUpdate({ email }, { image: picture }, { new: true })
+
+    if (user) {
+      const token = await generateToken(user._id);
+      res.status(200).json({
+        token: token,
+        userId: user._id,
+        userRole: user.role,
+        petAdoptionRequests: user.petAdoptionRequests,
+      });
+    } else {
+      const user = new User({
+        firstName: given_name,
+        lastName: family_name,
+        email: email,
+        image: picture,
+      });
+      const savedUser = await user.save();
+      if (savedUser) {
+
+        console.log(savedUser)
         const token = await generateToken(user._id);
         res.status(200).json({
-            token: token,
-            userId: savedUser._id,
-            userRole: savedUser.role,
-            petAdoptionRequests: savedUser.petAdoptionRequests,
-          });
+          token: token,
+          userId: savedUser._id,
+          userRole: savedUser.role,
+          petAdoptionRequests: savedUser.petAdoptionRequests,
+        });
       }
-  }}catch(error){
-    res.status(500).json({message:error})
+    }
+  } catch (error) {
+    res.status(500).json({ message: error })
   }
 });
 
 userRouter.post("/facebooklogin", async (req, res) => {
   const { accessToken, userID } = req.body;
-  try{
-  const facebookData = await fetch(
-    `https://graph.facebook.com/${userID}?fields=email,name,picture.width(335).height(335)&access_token=${accessToken}`,
-    { method: "get" }
-  )
-  const data = await facebookData.json();
-  const { name, email, picture } = data;
-  let devide = name.split(" ");
+  try {
+    const facebookData = await fetch(
+      `https://graph.facebook.com/${userID}?fields=email,name,picture.width(335).height(335)&access_token=${accessToken}`,
+      { method: "get" }
+    )
+    const data = await facebookData.json();
+    const { name, email, picture } = data;
+    let devide = name.split(" ");
 
-  const user = await User.findOneAndUpdate({email}, {image:picture.data.url},{new:true})
+    const user = await User.findOneAndUpdate({ email }, { image: picture.data.url }, { new: true })
 
-  if (user) {
+    if (user) {
 
-    const token = await generateToken(user._id);
-    res.status(200).json({
-      token: token,
-      userId: user._id,
-      userRole: user.role,
-      petAdoptionRequests: user.petAdoptionRequests,
-    });
-  } else {
-    const user = new User({
-      firstName:devide[0],
-      lastName: devide[devide.length-1],
-      email: email,
-      image:picture.data.url,
-    });
-    const savedUser = await user.save();
-    if(savedUser){
+      const token = await generateToken(user._id);
+      res.status(200).json({
+        token: token,
+        userId: user._id,
+        userRole: user.role,
+        petAdoptionRequests: user.petAdoptionRequests,
+      });
+    } else {
+      const user = new User({
+        firstName: devide[0],
+        lastName: devide[devide.length - 1],
+        email: email,
+        image: picture.data.url,
+      });
+      const savedUser = await user.save();
+      if (savedUser) {
 
-      console.log(savedUser)
+        console.log(savedUser)
         const token = await generateToken(user._id);
         res.status(200).json({
-            token: token,
-            userId: savedUser._id,
-            userRole: savedUser.role,
-            petAdoptionRequests: savedUser.petAdoptionRequests,
-          });
+          token: token,
+          userId: savedUser._id,
+          userRole: savedUser.role,
+          petAdoptionRequests: savedUser.petAdoptionRequests,
+        });
       }
-    }}catch(error){
-      res.status(500).json({message:error})
     }
+  } catch (error) {
+    res.status(500).json({ message: error })
+  }
 });
 
 module.exports = userRouter;
