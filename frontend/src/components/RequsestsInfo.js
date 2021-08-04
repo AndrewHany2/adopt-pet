@@ -40,7 +40,7 @@ function RequestsInfo(props) {
           <td>{calculate_age(props.requests.petId.dateOfBirth)}</td>
           <td>{capitalizeFirstLetter(props.requests.petId.vaccinated)}</td>
           <td>{props.requests.petId.size}</td>
-          <td>{capitalizeFirstLetter(props.requests.petId.status)}</td>
+          <td>{capitalizeFirstLetter(props.requests.status)}</td>
         </tr>}
     </>
   );
