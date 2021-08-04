@@ -12,7 +12,7 @@ function Footer() {
                     <div className="col-md-6">
                         <div className="fcontent">
                             <div className="fheading">
-                                <h3><i className="fa fa-paw" style={{ color: "#f9575c" }}></i> Woof</h3>
+                                <h3><i className="fa fa-paw" style={{ color: "#f9575c" }}></i></h3>
                             </div>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, nesciunt accusamus esse
                                 atque tempore incidunt nam dolores

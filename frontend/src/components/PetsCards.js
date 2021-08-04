@@ -28,39 +28,39 @@ function PetsCards({ pets }) {
     >
       {pets.info
         ? pets.info.list.map((pet) => {
-            return (
-              <div key={pet._id} className="col mb-4 card-animate">
-                <div className="card bg-light-custom border-irregular1">
-                  <img
-                    className="border-irregular1 img-fluid myimg d-block mx-auto"
-                    src={`${pet.image}`}
-                    alt="pet"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{pet.name}</h5>
-                    <div className="card-text">
-                      <div>
-                        <b>gender:</b>
-                        {` ${pet.gender}`}
-                      </div>
-                      <div>
-                        <b>age:</b>
-                        {` ${calculate_age(pet.dateOfBirth)}`}
-                      </div>
-                      <div className="mt-4">
-                        <Link
-                          to={`/pet/${pet._id}`}
-                          className="btn btn-primary px-3 py-2"
-                        >
-                          More Info
-                        </Link>
-                      </div>
+          return (
+            <div key={pet._id} className="col mb-4 card-animate">
+              <div className="card bg-light-custom border-irregular1">
+                <img
+                  className="border-irregular1 img-fluid myimg d-block mx-auto"
+                  src={`${pet.image}`}
+                  alt="pet"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{pet.name}</h5>
+                  <div className="card-text">
+                    <div>
+                      <b>gender:</b>
+                      {` ${pet.gender}`}
+                    </div>
+                    <div>
+                      <b>age:</b>
+                      {` ${calculate_age(pet.dateOfBirth)}`}
+                    </div>
+                    <div className="mt-4">
+                      <Link
+                        to={`/pet/${pet._id}`}
+                        className="btn btn-primary px-3 py-2"
+                      >
+                        More Info
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
-            );
-          })
+            </div>
+          );
+        })
         : null}
     </div>
   );

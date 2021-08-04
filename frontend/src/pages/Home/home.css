@@ -1,0 +1,20 @@
+/* 
+if (window.innerWidth < 768)
+dispatch(getPets("", "", "", "", "", 2));
+else if (window.innerWidth < 992)
+dispatch(getPets("", "", "", "", "", 3));
+else */
+
+@media only screen and (max-width: 992px) {
+    #testA div div:nth-child(4) {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    #testA div div:nth-child(3) {
+        display: none;
+    }
+
+}

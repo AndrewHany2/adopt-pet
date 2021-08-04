@@ -19,7 +19,7 @@ import Messanger from "./pages/messenger/Messenger";
 
 import ContactUs from "./pages/ContactUs/contactUs";
 import SignOut from "./components/SignOut";
-import Home from "./pages/home";
+import Home from "./pages/Home/home";
 import UserAdoptionRequests from "./pages/UserAdoptionRequests/UserAdoptionRequests";
 import Posts from "./pages/Dashboard/posts";
 import AdoptionRequests from "./pages/Dashboard/adoption-requests";

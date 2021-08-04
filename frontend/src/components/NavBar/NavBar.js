@@ -162,7 +162,7 @@ function NavBar() {
                         data-target="#navbarNavAltMarkup"
                         to="/pendingRequests"
                       >
-                        Your Pets Requests
+                        Comming Requests
                       </Link>
                       <Link
                         data-toggle="collapse"

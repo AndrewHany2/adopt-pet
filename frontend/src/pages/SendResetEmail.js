@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import React from "react";
-import { Link } from "react-router-dom";
 import Joi from "joi";
 import { useState } from "react";
 import axios from "axios";
@@ -78,7 +77,7 @@ function SendResetEmail(props) {
                 {errors.response}
               </div>
             )}
-             {success && (
+            {success && (
               <div className="alert alert-primary d-block mt-4 theme-border">
                 {success}
               </div>
