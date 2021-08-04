@@ -19,10 +19,10 @@ userRouter.post("/login", async (req, res, next) => {
   try {
     if (body.email && body.password) {
       const user = await User.findOne({ email: body.email });
-      if (!user) {  return res.status(400).json({ message: "Email Does not Exist" });
-    }
-        if (user.password) {
-        
+      if (!user) {
+        return res.status(400).json({ message: "Email Does not Exist" });
+      }
+      if (user.password) {
         match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
@@ -35,12 +35,14 @@ userRouter.post("/login", async (req, res, next) => {
         } else {
           return res.status(400).json({ message: "password invalid" });
         }
-    }}
+      }
+    } else {
+      return res.status(400).json({ message: "Password and Email are Required" });
+    }
   } catch (error) {
     return next(new Error("server error"));
   }
 });
-
 
 userRouter.post("/register", async (req, res) => {
   const { body } = req;
@@ -189,7 +191,11 @@ userRouter.post("/googlelogin", async (req, res) => {
     });
     const { given_name, email, picture, family_name } = payload;
 
-    const user = await User.findOneAndUpdate({ email }, { image: picture }, { new: true })
+    const user = await User.findOneAndUpdate(
+      { email },
+      { image: picture },
+      { new: true }
+    );
 
     if (user) {
       const token = await generateToken(user._id);
@@ -208,8 +214,7 @@ userRouter.post("/googlelogin", async (req, res) => {
       });
       const savedUser = await user.save();
       if (savedUser) {
-
-        console.log(savedUser)
+        console.log(savedUser);
         const token = await generateToken(user._id);
         res.status(200).json({
           token: token,
@@ -220,7 +225,7 @@ userRouter.post("/googlelogin", async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(500).json({ message: error })
+    res.status(500).json({ message: error });
   }
 });
 
@@ -230,15 +235,18 @@ userRouter.post("/facebooklogin", async (req, res) => {
     const facebookData = await fetch(
       `https://graph.facebook.com/${userID}?fields=email,name,picture.width(335).height(335)&access_token=${accessToken}`,
       { method: "get" }
-    )
+    );
     const data = await facebookData.json();
     const { name, email, picture } = data;
     let devide = name.split(" ");
 
-    const user = await User.findOneAndUpdate({ email }, { image: picture.data.url }, { new: true })
+    const user = await User.findOneAndUpdate(
+      { email },
+      { image: picture.data.url },
+      { new: true }
+    );
 
     if (user) {
-
       const token = await generateToken(user._id);
       res.status(200).json({
         token: token,
@@ -255,8 +263,7 @@ userRouter.post("/facebooklogin", async (req, res) => {
       });
       const savedUser = await user.save();
       if (savedUser) {
-
-        console.log(savedUser)
+        console.log(savedUser);
         const token = await generateToken(user._id);
         res.status(200).json({
           token: token,
@@ -267,7 +274,7 @@ userRouter.post("/facebooklogin", async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(500).json({ message: error })
+    res.status(500).json({ message: error });
   }
 });
 
