@@ -19,10 +19,10 @@ userRouter.post("/login", async (req, res, next) => {
   try {
     if (body.email && body.password) {
       const user = await User.findOne({ email: body.email });
-      if (!user) {  return res.status(400).json({ message: "Email Does not Exist" });
-    }
-        if (user.password) {
-        
+      if (!user) {
+        return res.status(400).json({ message: "Email Does not Exist" });
+      }
+      if (user.password) {
         match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
@@ -35,7 +35,10 @@ userRouter.post("/login", async (req, res, next) => {
         } else {
           return res.status(400).json({ message: "password invalid" });
         }
-    }}
+      }
+    } else {
+      return res.status(400).json({ message: "Password and Email are Required" });
+    }
   } catch (error) {
     return next(new Error("server error"));
   }
