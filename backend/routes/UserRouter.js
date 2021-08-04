@@ -19,10 +19,10 @@ userRouter.post("/login", async (req, res, next) => {
   try {
     if (body.email && body.password) {
       const user = await User.findOne({ email: body.email });
-      if (!user) {
-        if (user.password && user) {
-          return res.status(400).json({ message: "Email Does not Exist" });
-        }
+      if (!user) {  return res.status(400).json({ message: "Email Does not Exist" });
+    }
+        if (user.password) {
+        
         match = await bcrypt.compare(body.password, user.password);
         if (match) {
           const token = await generateToken(user._id);
@@ -35,14 +35,12 @@ userRouter.post("/login", async (req, res, next) => {
         } else {
           return res.status(400).json({ message: "password invalid" });
         }
-      } else {
-        return res.status(404).json({ message: "user invalid" });
-      }
-    }
+    }}
   } catch (error) {
     return next(new Error("server error"));
   }
 });
+
 
 userRouter.post("/register", async (req, res) => {
   const { body } = req;
