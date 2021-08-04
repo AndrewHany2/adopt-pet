@@ -82,6 +82,10 @@ function PetInfo(props) {
                     <h4 className="col-12">
                       <strong>Pet Name:</strong> {props.petInfo.name}
                     </h4>
+                    <h4 className="col-12">
+                      <strong>Post Status:</strong> {props.petInfo.status}
+                    </h4>
+                    
                     <div className="col-sm-6">
                       <ul className="list-unstyled pet-adopt-info">
                         <li className="h7">

@@ -60,7 +60,7 @@ function ContactUs() {
                         <div className="col-12 col-md-6 mb-5">
                             <div className="contact p-5">
                                 <i className="fa fa-envelope"></i>
-                                <h2 className="text-center">Send us a Maessage</h2>
+                                <h2 className="text-center">Send us a Message</h2>
                                 <p className="text-center text-danger ">email@gmail.com</p>
                             </div>
                         </div>

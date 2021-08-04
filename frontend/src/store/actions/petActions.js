@@ -60,9 +60,18 @@ export const getPetInfo = (id) => async (dispatch) => {
 };
 export const adoptpet = (pet) => async (dispatch) => {
   try {
-    // const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    const header = {
+      headers: {
+
+        Authorization: userInfo.token,
+      },
+    };
     dispatch({ type: "PET_ADOPT_REQUEST" });
     const { data } = await axios.post(`${baseURL}`, pet);
+    await axios.put(`/api/user/${userInfo.userId}`, {postedPets:data.petId},header);
+
+    
 
     dispatch({
       type: "PET_ADOPT_SUCCESS",

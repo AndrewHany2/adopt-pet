@@ -128,6 +128,7 @@ export const getProfile =(userId) => async (dispatch) => {
          pets = await axios.get(`/api/pets/userpets/list/?postedpets=${stringData}`,header);
       }
       let petsData = pets.data?pets.data:[]
+      console.log(petsData)
  
 
     dispatch({
