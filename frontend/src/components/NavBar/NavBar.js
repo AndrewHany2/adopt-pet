@@ -133,6 +133,7 @@ function NavBar() {
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
+                      to="#"
                     >
                       Account
                     </Link>

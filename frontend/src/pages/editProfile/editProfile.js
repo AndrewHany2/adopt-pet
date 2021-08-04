@@ -1,10 +1,9 @@
-import { useRef, useState,useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import FormData from "form-data";
 import axios from "axios";
 import "./editProfile.css";
 import Joi from "joi";
-import { getProfile } from "../../store/actions/UserActions";
 
 const EditProfile = () => {
   const uploadedImage = useRef(null);
@@ -13,11 +12,8 @@ const EditProfile = () => {
   const length = url.length;
   const id = url[length - 1];
   const profileData = useSelector((state) => state.profile);
-  const userLogin = useSelector((state) => state.userLogin);
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(getProfile(userLogin.info.userId))
-  })
+
+
   const schema = {
     fname: Joi.string()
       .alphanum()
@@ -70,12 +66,12 @@ const EditProfile = () => {
     validInfo: "",
   });
 
-  const [fname, setFName] = useState(profileData.userInfo?.firstName ?profileData.userInfo.firstName :"");
-  const [lname, setLName] = useState(profileData.userInfo?.lastName?profileData.userInfo.lastName :"");
-  const [email, setEmail] = useState(profileData.userInfo?.email?profileData.userInfo.email :"");
-  const [phone, setPhone] = useState(profileData.userInfo?.phone? profileData.userInfo.phone:"");
-  const [country, setCountry] = useState(profileData.userInfo?.country?profileData.userInfo.country :"");
-  const [city, setCity] = useState(profileData.userInfo?.city?profileData.userInfo.city :"");
+  const [fname, setFName] = useState(profileData.userInfo?.firstName ? profileData.userInfo.firstName : "");
+  const [lname, setLName] = useState(profileData.userInfo?.lastName ? profileData.userInfo.lastName : "");
+  const [email, setEmail] = useState(profileData.userInfo?.email ? profileData.userInfo.email : "");
+  const [phone, setPhone] = useState(profileData.userInfo?.phone ? profileData.userInfo.phone : "");
+  const [country, setCountry] = useState(profileData.userInfo?.country ? profileData.userInfo.country : "");
+  const [city, setCity] = useState(profileData.userInfo?.city ? profileData.userInfo.city : "");
   const [img, setImg] = useState();
   const form_data = new FormData();
   const [emailError, setEmailError] = useState("");
