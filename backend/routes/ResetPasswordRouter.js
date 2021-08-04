@@ -28,9 +28,9 @@ resetPasswordRouter.post("/", async (req, res) => {
         const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token.token}`;
         await sendEmail(user.email, link);
 
-        res.send("password reset link sent to your email account");
+        res.status(200).send("password reset link sent to your email account");
     } catch (error) {
-        res.status(500).json({message:error});
+        res.status(500).send("An error occured");
         console.log(error);
     }
 });
@@ -53,9 +53,9 @@ resetPasswordRouter.post("/:userId/:token", async (req, res) => {
         await user.save();
         await token.delete();
 
-        res.send("password reset sucessfully.");
+        res.status(200).send("password reset sucessfully.");
     } catch (error) {
-        res.send("An error occured");
+        res.status(500).send("An error occured");
         console.log(error);
     }
 });
