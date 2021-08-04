@@ -124,7 +124,7 @@ function PendingRequests(props) {
           </table>
         </div>) : (
         <div className="alert alert-info w-50 my-5 mx-auto text-center p-0" style={{ height: '350px', lineHeight: '350px', fontSize: '22pt' }}>
-          No Pets Requests
+          No Comming Requests
         </div>
       )}
     </>
