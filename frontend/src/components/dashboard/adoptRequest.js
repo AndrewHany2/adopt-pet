@@ -13,7 +13,7 @@ function AdoptRequest(props) {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age_now--;
     }
-    if (age_now > 0) return `${age_now} Hear`;
+    if (age_now > 0) return `${age_now} Year`;
     if (m > 0) return `${m} Month`;
 
     let Difference_In_Time = today.getTime() - birthDate.getTime();

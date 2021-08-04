@@ -45,7 +45,7 @@ function UserAdoptionRequests({ match }) {
   } else {
     return (
       <div className="alert alert-info w-50 my-5 mx-auto text-center display-4 p-0" style={{ height: '350px', lineHeight: '350px' }}>
-        No Adoption Requests Yet
+        No Adoption Requests
       </div>
     );
   }
