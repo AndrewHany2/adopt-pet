@@ -13,7 +13,7 @@ const sendEmail = async (email, text) => {
         await transporter.sendMail({
             from: process.env.USER,
             to: email,
-            subject: "Link to Reset Password For Etbanna",
+            subject: "Link to Reset Password For etbana.herokuapp.com Pet Adoption Platform",
             text: text,
         });
 
