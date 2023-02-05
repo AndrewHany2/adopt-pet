@@ -130,7 +130,7 @@ petRouter.post("/", upload, (req, res) => {
     size: req.body.size,
     description: req.body.description,
     image: `/images/${req.file.filename}`,
-    status: req.body.status,
+    status: "ACCEPTED",
     owner: req.body.owner,
   });
   pet
