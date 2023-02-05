@@ -11,7 +11,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "install": "concurrently \"cd frontend && npm install\" \"cd backend && npm install\"",
         "start": "concurrently \"cd frontend && npm start\" \"cd backend && npm start\"",
-        "build": "cd frontend && npm run build && mv ./build ./../backend/build"
+        "build": "npm install && cd frontend && npm run build && mv ./build ./../backend/build"
     },
     "repository": {
         "type": "git",
